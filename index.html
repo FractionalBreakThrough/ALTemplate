@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guided Adoption for Access Control & Security Platforms</title>
+  <style>
+    /* ── Reset & Base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0b1a2e;
+      --dark:   #112240;
+      --accent: #00b4d8;
+      --accent2:#0077b6;
+      --gold:   #f4a261;
+      --light:  #ccd6f6;
+      --white:  #e6f1ff;
+      --bg:     #0a192f;
+      --card:   rgba(17,34,64,.65);
+      --glow:   0 0 30px rgba(0,180,216,.15);
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--gold); }
+    h1,h2,h3,h4 { color: var(--white); line-height: 1.25; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Utility ────────────────────────────────────────── */
+    .btn {
+      display: inline-block; padding: 14px 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 50px; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,180,216,.35); color: #fff; }
+    .btn--outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn--outline:hover { background: var(--accent); color: #fff; }
+    .section-label {
+      text-transform: uppercase; letter-spacing: 3px; font-size: .8rem;
+      color: var(--accent); font-weight: 700; margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: 18px; }
+    .section-sub { max-width: 680px; margin: 0 auto 48px; color: var(--light); font-size: 1.05rem; text-align: center; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(10,25,47,.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,180,216,.1);
+      transition: box-shadow .3s;
+    }
+    .nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.4); }
+    .nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1140px; margin: 0 auto; padding: 0 24px; height: 70px;
+    }
+    .nav__logo { font-size: 1.25rem; font-weight: 800; color: var(--white); }
+    .nav__logo span { color: var(--accent); }
+    .nav__links { display: flex; gap: 32px; list-style: none; }
+    .nav__links a { color: var(--light); font-size: .9rem; font-weight: 500; }
+    .nav__links a:hover { color: var(--accent); }
+    .nav__cta { padding: 10px 26px; font-size: .85rem; }
+    .nav__toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden; padding: 100px 0 60px;
+    }
+    .hero__bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(0,180,216,.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(0,119,182,.1) 0%, transparent 50%),
+        var(--bg);
+    }
+    .hero__grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,180,216,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,216,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__content { position: relative; z-index: 1; max-width: 720px; }
+    .hero__badge {
+      display: inline-block; padding: 6px 18px; border-radius: 50px;
+      background: rgba(0,180,216,.12); border: 1px solid rgba(0,180,216,.25);
+      font-size: .8rem; font-weight: 600; color: var(--accent);
+      margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero__title {
+      font-size: clamp(2.2rem,5.5vw,3.5rem); font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .hero__title em { font-style: normal; color: var(--accent); }
+    .hero__sub {
+      font-size: 1.15rem; color: var(--light); margin-bottom: 36px;
+      max-width: 600px;
+    }
+    .hero__actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero__stat-row {
+      display: flex; gap: 40px; margin-top: 56px; flex-wrap: wrap;
+    }
+    .hero__stat { text-align: left; }
+    .hero__stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .hero__stat-label { font-size: .85rem; color: var(--light); }
+
+    /* ── Contrast / Problem-Solution ─────────────────────── */
+    .contrast { padding: 100px 0; }
+    .contrast__header { text-align: center; margin-bottom: 56px; }
+    .contrast__grid {
+      display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; align-items: start;
+    }
+    .contrast__col {
+      background: var(--card); border-radius: var(--radius);
+      padding: 40px 32px; backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .contrast__col--old { border-top: 3px solid #e74c3c; }
+    .contrast__col--new { border-top: 3px solid var(--accent); box-shadow: var(--glow); }
+    .contrast__col h3 { font-size: 1.25rem; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .contrast__col h3 .icon-circle {
+      display: inline-flex; width: 36px; height: 36px; border-radius: 50%;
+      align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .contrast__col--old h3 .icon-circle { background: rgba(231,76,60,.15); color: #e74c3c; }
+    .contrast__col--new h3 .icon-circle { background: rgba(0,180,216,.15); color: var(--accent); }
+    .contrast__col ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .contrast__col ul li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: .95rem; line-height: 1.55;
+    }
+    .contrast__col--old ul li::before { content: '✕'; color: #e74c3c; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .contrast__col--new ul li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .contrast__vs {
+      display: flex; align-items: center; justify-content: center;
+      align-self: center;
+    }
+    .contrast__vs span {
+      display: inline-flex; width: 56px; height: 56px;
+      border-radius: 50%; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 800; font-size: .85rem;
+      box-shadow: 0 0 30px rgba(0,180,216,.3);
+    }
+
+    /* ── How It Works ────────────────────────────────────── */
+    .how { padding: 100px 0; background: var(--navy); }
+    .how__header { text-align: center; margin-bottom: 64px; }
+    .how__steps {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+      position: relative;
+    }
+    .how__steps::before {
+      content: ''; position: absolute; top: 40px; left: 12.5%; right: 12.5%;
+      height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: .3;
+    }
+    .step {
+      text-align: center; position: relative; z-index: 1;
+    }
+    .step__num {
+      display: inline-flex; width: 64px; height: 64px; border-radius: 50%;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 800; font-size: 1.3rem;
+      margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,180,216,.2);
+    }
+    .step h4 { font-size: 1.05rem; margin-bottom: 10px; }
+    .step p { font-size: .9rem; color: var(--light); }
+
+    /* ── Capabilities ────────────────────────────────────── */
+    .capabilities { padding: 100px 0; }
+    .capabilities__header { text-align: center; margin-bottom: 56px; }
+    .cap-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+    }
+    .cap-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 36px 28px; border: 1px solid rgba(255,255,255,.05);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .cap-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .cap-card__icon {
+      display: inline-flex; width: 52px; height: 52px; border-radius: 12px;
+      align-items: center; justify-content: center;
+      background: rgba(0,180,216,.1); color: var(--accent);
+      font-size: 1.4rem; margin-bottom: 18px;
+    }
+    .cap-card h4 { font-size: 1.05rem; margin-bottom: 10px; }
+    .cap-card p { font-size: .9rem; color: var(--light); }
+
+    /* ── Results / Stats ─────────────────────────────────── */
+    .results { padding: 100px 0; background: var(--navy); }
+    .results__header { text-align: center; margin-bottom: 56px; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 28px;
+    }
+    .stat-card {
+      text-align: center; background: var(--card); border-radius: var(--radius);
+      padding: 40px 20px; border: 1px solid rgba(255,255,255,.05);
+    }
+    .stat-card__num {
+      font-size: 2.4rem; font-weight: 800; color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .stat-card__label { font-size: .9rem; color: var(--light); }
+
+    /* ── Use Cases ────────────────────────────────────────── */
+    .usecases { padding: 100px 0; }
+    .usecases__header { text-align: center; margin-bottom: 56px; }
+    .uc-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px; }
+    .uc-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 36px 32px; border: 1px solid rgba(255,255,255,.05);
+      display: flex; gap: 20px; align-items: flex-start;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .uc-card:hover { transform: translateY(-3px); box-shadow: var(--glow); }
+    .uc-card__icon {
+      display: inline-flex; width: 48px; height: 48px; min-width: 48px;
+      border-radius: 10px; align-items: center; justify-content: center;
+      background: rgba(0,180,216,.1); color: var(--accent); font-size: 1.3rem;
+    }
+    .uc-card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+    .uc-card p { font-size: .9rem; color: var(--light); }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    .cta {
+      padding: 100px 0; text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(0,180,216,.1) 0%, transparent 65%),
+        var(--bg);
+    }
+    .cta h2 { font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: 16px; }
+    .cta p { max-width: 600px; margin: 0 auto 36px; font-size: 1.05rem; }
+    .cta .btn { font-size: 1.05rem; padding: 16px 44px; }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    .footer {
+      padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+      text-align: center; font-size: .85rem; color: rgba(204,214,246,.5);
+    }
+
+    /* ── Scroll Animations ───────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .cap-grid, .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .how__steps { grid-template-columns: repeat(2,1fr); }
+      .how__steps::before { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .nav__toggle { display: block; }
+      .nav__links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 70px; left: 0; width: 100%;
+        background: var(--dark); padding: 24px; gap: 20px;
+        border-bottom: 1px solid rgba(0,180,216,.1);
+      }
+      .contrast__grid { grid-template-columns: 1fr; gap: 24px; }
+      .contrast__vs { padding: 10px 0; }
+      .contrast__vs span { width: 44px; height: 44px; font-size: .75rem; }
+      .cap-grid, .stats-grid, .how__steps { grid-template-columns: 1fr; }
+      .uc-grid { grid-template-columns: 1fr; }
+      .hero__stat-row { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <div class="nav__logo">Guided<span>Ops</span></div>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
+    </ul>
+    <a href="#cta" class="btn nav__cta">Book a Demo</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__grid"></div>
+  <div class="container hero__content">
+    <span class="hero__badge">Built for Access Control &amp; Security Manufacturers</span>
+    <h1 class="hero__title">
+      Stop Training Users.<br><em>Guide Them While They Work.</em>
+    </h1>
+    <p class="hero__sub">
+      We embed intelligent, step-by-step guidance directly inside your web application &mdash; turning first-time users into confident operators without a single support call.
+    </p>
+    <div class="hero__actions">
+      <a href="#cta" class="btn">Schedule a Demo</a>
+      <a href="#problem" class="btn btn--outline">See the Difference</a>
+    </div>
+    <div class="hero__stat-row">
+      <div class="hero__stat">
+        <div class="hero__stat-num">70%</div>
+        <div class="hero__stat-label">Fewer Support Tickets</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">50%</div>
+        <div class="hero__stat-label">Faster User Onboarding</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">3.4x</div>
+        <div class="hero__stat-label">ROI in Year One</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROBLEM / SOLUTION ════════════════ -->
+<section class="contrast" id="problem">
+  <div class="container">
+    <div class="contrast__header reveal">
+      <p class="section-label">The Core Problem</p>
+      <h2 class="section-title">Traditional Training is Broken</h2>
+      <p class="section-sub">Legacy onboarding forces users to stop working, sit through training, memorize steps, and then attempt to apply what they learned days later. Our approach flips the model entirely.</p>
+    </div>
+    <div class="contrast__grid reveal">
+      <!-- OLD WAY -->
+      <div class="contrast__col contrast__col--old">
+        <h3><span class="icon-circle">&#10007;</span> The Old Way</h3>
+        <ul>
+          <li>Schedule training sessions that pull users away from their work for hours or days</li>
+          <li>Sit through slide decks and video tutorials with no hands-on context</li>
+          <li>Expect users to memorize complex workflows and recall them later under pressure</li>
+          <li>Users get stuck on day one, immediately call tech support for help</li>
+          <li>High support ticket volume during onboarding &mdash; your team becomes a help desk</li>
+          <li>Users plateau at beginner level, never advancing beyond the basics</li>
+          <li>Re-training required every time the software updates or a new feature launches</li>
+          <li>Months to reach competency &mdash; if users don't give up first</li>
+        </ul>
+      </div>
+
+      <!-- VS -->
+      <div class="contrast__vs">
+        <span>VS</span>
+      </div>
+
+      <!-- NEW WAY -->
+      <div class="contrast__col contrast__col--new">
+        <h3><span class="icon-circle">&#10003;</span> The Guided Way</h3>
+        <ul>
+          <li>Interactive overlay appears right inside the application &mdash; no separate training needed</li>
+          <li>Users learn by doing: step-by-step guidance walks them through real tasks as they build</li>
+          <li>Like a hand-holding experience &mdash; curated paths guide each click, field, and decision</li>
+          <li>First-time setup completed independently, without ever contacting support</li>
+          <li>Support call volume drops dramatically within the first month of deployment</li>
+          <li>Progressive guidance elevates users from beginner to confident intermediate operator</li>
+          <li>Guidance updates automatically with your software &mdash; always current, never stale</li>
+          <li>Competency in days, not months &mdash; users build confidence with every task completed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ HOW IT WORKS ════════════════ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how__header reveal">
+      <p class="section-label">The Process</p>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">We study your platform, map the critical user journeys, and deploy an intelligent guidance layer your customers never knew they needed.</p>
+    </div>
+    <div class="how__steps reveal">
+      <div class="step">
+        <div class="step__num">1</div>
+        <h4>Platform Audit</h4>
+        <p>We analyze your web application, map every onboarding workflow, and identify where users get stuck or call for help.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">2</div>
+        <h4>Journey Design</h4>
+        <p>Our team designs guided experiences for first-time setup, key feature adoption, and skill-building paths from beginner to intermediate.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">3</div>
+        <h4>Overlay Deployment</h4>
+        <p>We deploy the interactive guidance layer directly on top of your live application &mdash; no code changes required on your end.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">4</div>
+        <h4>Measure &amp; Optimize</h4>
+        <p>Real-time analytics show completion rates, drop-off points, and support impact &mdash; we continuously refine to maximize results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CAPABILITIES ════════════════ -->
+<section class="capabilities" id="capabilities">
+  <div class="container">
+    <div class="capabilities__header reveal">
+      <p class="section-label">What We Deliver</p>
+      <h2 class="section-title">Capabilities</h2>
+      <p class="section-sub">A full-service guided adoption solution purpose-built for access control and security platforms.</p>
+    </div>
+    <div class="cap-grid reveal">
+      <div class="cap-card">
+        <div class="cap-card__icon">&#9654;</div>
+        <h4>Interactive Walkthroughs</h4>
+        <p>Step-by-step overlays that guide users through real workflows in your live application &mdash; they learn by completing actual tasks, not watching videos.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#9432;</div>
+        <h4>Contextual Tooltips &amp; Smart Tips</h4>
+        <p>Field-level hints and contextual help that appear exactly when and where users need them, reducing data-entry errors and eliminating guesswork.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#9745;</div>
+        <h4>Onboarding Task Lists</h4>
+        <p>Role-based checklists that guide new users through every critical first-time setup step &mdash; from adding doors and readers to configuring access levels.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#128269;</div>
+        <h4>Self-Service Knowledge Base</h4>
+        <p>An in-app help center users can search anytime &mdash; surfacing relevant articles, guides, and walkthroughs without leaving your platform.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#128200;</div>
+        <h4>Adoption Analytics</h4>
+        <p>See exactly how users interact with guidance, where they drop off, which features go unused, and how onboarding impacts support volume.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#128274;</div>
+        <h4>Process Validation</h4>
+        <p>Real-time input validation ensures users configure access rules, schedules, and credentials correctly the first time &mdash; preventing costly security misconfigurations.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#127760;</div>
+        <h4>Multi-Language Support</h4>
+        <p>Guidance content localized across 80+ languages so your global dealer and integrator network gets the same quality onboarding experience.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#128260;</div>
+        <h4>Cross-Application Flows</h4>
+        <p>Guide users through workflows that span multiple tools &mdash; from your access control platform to video management or alarm monitoring systems.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-card__icon">&#9889;</div>
+        <h4>No-Code Content Management</h4>
+        <p>We build and maintain all guidance content. Updates deploy instantly when your platform changes &mdash; no developer resources needed from your team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ RESULTS ════════════════ -->
+<section class="results" id="results">
+  <div class="container">
+    <div class="results__header reveal">
+      <p class="section-label">The Impact</p>
+      <h2 class="section-title">Results That Speak for Themselves</h2>
+      <p class="section-sub">Digital adoption overlays are proven to transform onboarding economics across enterprise software platforms.</p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-card__num">70%</div>
+        <div class="stat-card__label">Reduction in onboarding-related support tickets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">50%</div>
+        <div class="stat-card__label">Faster time-to-competency for new users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">88%</div>
+        <div class="stat-card__label">Support queries resolved via in-app self-help</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num">3.4x</div>
+        <div class="stat-card__label">Return on investment in year one</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ USE CASES ════════════════ -->
+<section class="usecases" id="usecases">
+  <div class="container">
+    <div class="usecases__header reveal">
+      <p class="section-label">Built for Your World</p>
+      <h2 class="section-title">Access Control &amp; Security Use Cases</h2>
+      <p class="section-sub">We understand the workflows that matter to your users and your support team.</p>
+    </div>
+    <div class="uc-grid reveal">
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128682;</div>
+        <div>
+          <h4>First-Time System Setup</h4>
+          <p>Guide new integrators through initial controller configuration, door setup, reader enrollment, and network connectivity &mdash; step by step, inside your app.</p>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128101;</div>
+        <div>
+          <h4>User &amp; Credential Management</h4>
+          <p>Walk end-users through adding cardholders, assigning access levels, creating schedules, and managing credentials without confusion.</p>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128187;</div>
+        <div>
+          <h4>Software Updates &amp; New Features</h4>
+          <p>When you release new functionality, we update the guidance layer so users discover and adopt new features immediately &mdash; no re-training needed.</p>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128200;</div>
+        <div>
+          <h4>Reports &amp; Monitoring</h4>
+          <p>Help users navigate reporting dashboards, set up event notifications, and interpret alarm data &mdash; empowering them to use the platform's full capability.</p>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128736;</div>
+        <div>
+          <h4>Dealer &amp; Integrator Onboarding</h4>
+          <p>Scale your channel partner program by giving every new dealer the same high-quality guided onboarding, regardless of their technical background.</p>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-card__icon">&#128170;</div>
+        <div>
+          <h4>Beginner-to-Intermediate Elevation</h4>
+          <p>Progressive guidance paths that systematically build user competence &mdash; taking them from basic operations to advanced configurations over time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CTA ════════════════ -->
+<section class="cta" id="cta">
+  <div class="container reveal">
+    <p class="section-label">Get Started</p>
+    <h2>Ready to Eliminate Onboarding Support Calls?</h2>
+    <p>See how an interactive guidance overlay can transform your platform's user experience and dramatically reduce your support burden.</p>
+    <a href="#" class="btn" id="ctaBtn">Book Your Demo</a>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 GuidedOps &mdash; Guided Adoption Solutions for Access Control &amp; Security</p>
+  </div>
+</footer>
+
+<!-- ════════════════ JS ════════════════ -->
+<script>
+(function(){
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.addEventListener('click', () => links.classList.remove('open'));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
