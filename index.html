@@ -72,10 +72,11 @@
     .nav__logo { font-size: 1.25rem; font-weight: 800; color: var(--white); }
     .nav__logo span { color: var(--accent); }
     .nav__links { display: flex; gap: 32px; list-style: none; }
+    .nav-mobile-cta-li { display: none; }
     .nav__links a { color: var(--light); font-size: .9rem; font-weight: 500; }
     .nav__links a:hover { color: var(--accent); }
-    .nav__cta { padding: 10px 26px; font-size: .85rem; }
-    .nav__toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+    .nav__cta { padding: 10px 26px; font-size: .85rem; flex-shrink: 0; }
+    .nav__toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 8px; -webkit-tap-highlight-color: transparent; }
 
     /* ── Hero ────────────────────────────────────────────── */
     .hero {
@@ -265,26 +266,152 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── Responsive ───────────────────────────────────────── */
+
+    /* Tablet */
     @media (max-width: 1024px) {
-      .cap-grid, .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .how__steps { grid-template-columns: repeat(2,1fr); }
+      .cap-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .how__steps { grid-template-columns: repeat(2,1fr); gap: 40px 28px; }
       .how__steps::before { display: none; }
     }
+
+    /* Mobile */
     @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+
+      /* ── Nav mobile ── */
+      .nav__inner { height: 62px; padding: 0 16px; }
       .nav__links { display: none; }
+      .nav__cta { display: none; }
       .nav__toggle { display: block; }
       .nav__links.open {
         display: flex; flex-direction: column;
-        position: absolute; top: 70px; left: 0; width: 100%;
-        background: var(--dark); padding: 24px; gap: 20px;
-        border-bottom: 1px solid rgba(0,180,216,.1);
+        position: absolute; top: 62px; left: 0; width: 100%;
+        background: rgba(11,26,46,.97); backdrop-filter: blur(16px);
+        padding: 20px 24px 28px; gap: 0;
+        border-bottom: 1px solid rgba(0,180,216,.15);
+        box-shadow: 0 20px 40px rgba(0,0,0,.4);
       }
-      .contrast__grid { grid-template-columns: 1fr; gap: 24px; }
-      .contrast__vs { padding: 10px 0; }
-      .contrast__vs span { width: 44px; height: 44px; font-size: .75rem; }
-      .cap-grid, .stats-grid, .how__steps { grid-template-columns: 1fr; }
-      .uc-grid { grid-template-columns: 1fr; }
-      .hero__stat-row { gap: 24px; }
+      .nav__links.open li { border-bottom: 1px solid rgba(255,255,255,.05); }
+      .nav__links.open li:last-child { border-bottom: none; }
+      .nav-mobile-cta-li { display: list-item; }
+      .nav__links.open a {
+        display: block; padding: 14px 0; font-size: 1rem;
+      }
+      .nav-mobile-cta-li { border-bottom: none !important; padding-top: 8px; }
+      .nav__cta-mobile {
+        display: block; text-align: center; padding: 14px 24px;
+        font-size: .95rem; width: 100%;
+      }
+
+      /* ── Hero mobile ── */
+      .hero { min-height: auto; padding: 90px 0 56px; align-items: flex-start; }
+      .hero__badge { font-size: .7rem; padding: 5px 14px; margin-bottom: 18px; letter-spacing: .5px; }
+      .hero__title { font-size: clamp(1.7rem,7vw,2.6rem); margin-bottom: 16px; }
+      .hero__sub { font-size: 1rem; margin-bottom: 28px; }
+      .hero__actions { flex-direction: column; gap: 12px; }
+      .hero__actions .btn { text-align: center; width: 100%; padding: 16px 24px; }
+      .hero__stat-row {
+        display: grid; grid-template-columns: repeat(3,1fr);
+        gap: 0; margin-top: 40px;
+        background: var(--card); border-radius: var(--radius);
+        padding: 20px 12px; border: 1px solid rgba(255,255,255,.06);
+      }
+      .hero__stat { text-align: center; }
+      .hero__stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,.08); }
+      .hero__stat-num { font-size: 1.5rem; }
+      .hero__stat-label { font-size: .72rem; line-height: 1.3; }
+
+      /* ── Sections mobile spacing ── */
+      .contrast, .capabilities, .usecases { padding: 64px 0; }
+      .how, .results { padding: 64px 0; }
+      .cta { padding: 64px 0; }
+      .section-title { font-size: clamp(1.5rem,5.5vw,2rem); margin-bottom: 14px; }
+      .section-sub { font-size: .95rem; margin-bottom: 36px; }
+      .contrast__header, .how__header, .capabilities__header,
+      .results__header, .usecases__header { margin-bottom: 36px; }
+
+      /* ── Contrast mobile ── */
+      .contrast__grid { grid-template-columns: 1fr; gap: 0; }
+      .contrast__col { border-radius: 0; padding: 28px 22px; }
+      .contrast__col--old { border-radius: var(--radius) var(--radius) 0 0; }
+      .contrast__col--new { border-radius: 0 0 var(--radius) var(--radius); border-top: none; }
+      .contrast__col h3 { font-size: 1.1rem; margin-bottom: 18px; }
+      .contrast__col ul { gap: 12px; }
+      .contrast__col ul li { font-size: .88rem; }
+      .contrast__vs {
+        padding: 0; position: relative; z-index: 2;
+      }
+      .contrast__vs span {
+        width: 48px; height: 48px; font-size: .8rem;
+        margin: -16px auto; position: relative;
+      }
+
+      /* ── How It Works mobile ── */
+      .how__steps { grid-template-columns: 1fr; gap: 32px; }
+      .step {
+        text-align: left; display: grid;
+        grid-template-columns: 48px 1fr; gap: 0 16px;
+        align-items: start;
+      }
+      .step__num {
+        width: 48px; height: 48px; font-size: 1.1rem; margin-bottom: 0;
+        grid-row: 1 / 3;
+      }
+      .step h4 { align-self: end; }
+      .step p { grid-column: 2; }
+
+      /* ── Capabilities mobile ── */
+      .cap-grid { grid-template-columns: 1fr; gap: 16px; }
+      .cap-card {
+        padding: 24px 22px;
+        display: flex; gap: 16px; align-items: flex-start;
+      }
+      .cap-card__icon {
+        width: 44px; height: 44px; min-width: 44px;
+        border-radius: 10px; font-size: 1.2rem; margin-bottom: 0;
+      }
+      .cap-card h4 { font-size: 1rem; margin-bottom: 4px; }
+      .cap-card p { font-size: .85rem; }
+
+      /* ── Stats mobile ── */
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 16px; }
+      .stat-card { padding: 28px 16px; }
+      .stat-card__num { font-size: 1.9rem; }
+      .stat-card__label { font-size: .8rem; }
+
+      /* ── Use Cases mobile ── */
+      .uc-grid { grid-template-columns: 1fr; gap: 16px; }
+      .uc-card { padding: 24px 20px; gap: 16px; }
+      .uc-card__icon { width: 42px; height: 42px; min-width: 42px; font-size: 1.1rem; }
+      .uc-card h4 { font-size: 1rem; margin-bottom: 4px; }
+      .uc-card p { font-size: .85rem; }
+
+      /* ── CTA mobile ── */
+      .cta h2 { font-size: clamp(1.4rem,5vw,2rem); }
+      .cta p { font-size: .95rem; margin-bottom: 28px; }
+      .cta .btn { width: 100%; text-align: center; padding: 16px 32px; }
+
+      /* ── Footer mobile ── */
+      .footer { padding: 28px 0; font-size: .78rem; }
+    }
+
+    /* Small phones */
+    @media (max-width: 400px) {
+      .container { padding: 0 16px; }
+      .hero { padding: 82px 0 44px; }
+      .hero__title { font-size: 1.55rem; }
+      .hero__sub { font-size: .92rem; }
+      .hero__stat-row { grid-template-columns: 1fr 1fr 1fr; padding: 16px 8px; }
+      .hero__stat-num { font-size: 1.3rem; }
+      .hero__stat-label { font-size: .65rem; }
+      .contrast, .capabilities, .usecases, .how, .results, .cta { padding: 48px 0; }
+      .section-title { font-size: 1.35rem; }
+      .contrast__col { padding: 22px 18px; }
+      .contrast__col ul li { font-size: .84rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-card { padding: 22px 12px; }
+      .stat-card__num { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -300,6 +427,7 @@
       <li><a href="#capabilities">Capabilities</a></li>
       <li><a href="#results">Results</a></li>
       <li><a href="#usecases">Use Cases</a></li>
+      <li class="nav-mobile-cta-li"><a href="#cta" class="btn nav__cta-mobile">Book a Demo</a></li>
     </ul>
     <a href="#cta" class="btn nav__cta">Book a Demo</a>
     <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
@@ -590,8 +718,13 @@
   // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  links.addEventListener('click', () => links.classList.remove('open'));
+  function setToggleIcon() {
+    toggle.innerHTML = links.classList.contains('open') ? '&#10005;' : '&#9776;';
+  }
+  toggle.addEventListener('click', () => { links.classList.toggle('open'); setToggleIcon(); });
+  links.addEventListener('click', (e) => {
+    if(e.target.tagName === 'A') { links.classList.remove('open'); setToggleIcon(); }
+  });
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
