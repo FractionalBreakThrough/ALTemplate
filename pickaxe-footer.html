@@ -1,0 +1,18 @@
+<!-- Scroll reveal script (isolated from Pickaxe React) -->
+<script>
+try {
+  setTimeout(function(){
+    try {
+      var els = document.querySelectorAll('.cd-reveal');
+      if(els.length && typeof IntersectionObserver !== 'undefined'){
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting) e.target.classList.add('cd-visible');
+          });
+        }, {threshold:0.15});
+        els.forEach(function(el){ observer.observe(el); });
+      }
+    } catch(err){}
+  }, 100);
+} catch(err){}
+</script>
