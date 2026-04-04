@@ -33,7 +33,7 @@
   @keyframes fadeFloat { 0%,100%{opacity:0.4;transform:translateY(0)} 50%{opacity:1;transform:translateY(-8px)} }
   @keyframes dashDraw { to{stroke-dashoffset:0} }
   @keyframes nodeGlow { 0%,100%{r:4;opacity:0.6} 50%{r:6;opacity:1} }
-  .cd-stat-num { font-size:clamp(2rem,4vw,3rem); font-weight:900; background:linear-gradient(135deg,#ff6a00,#ff0055); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .cd-stat-num { font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#ff6a00; }
   .cd-timeline-dot { width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,#ff6a00,#ff0055); border:3px solid #fff; box-shadow:0 0 0 3px rgba(255,106,0,0.2); flex-shrink:0; }
   .cd-quote { position:relative; padding-left:24px; border-left:3px solid; border-image:linear-gradient(180deg,#ff6a00,#ff0055) 1; }
 </style>
@@ -223,6 +223,9 @@
       <!-- Animated comparison visual: Generic AI vs Creative AI -->
       <div class="cd-reveal cd-reveal-d3" style="max-width:560px;margin:0 auto;">
         <svg viewBox="0 0 560 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+          <defs>
+            <linearGradient id="cdGrad1b" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff6a00"/><stop offset="100%" stop-color="#ff0055"/></linearGradient>
+          </defs>
           <!-- Left: Generic AI (dull) -->
           <rect x="20" y="20" width="200" height="60" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
           <rect x="40" y="38" width="80" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
@@ -232,13 +235,13 @@
           <path d="M240 50 L280 50" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3"/>
           <text x="260" y="42" text-anchor="middle" font-size="18" fill="rgba(255,255,255,0.3)">&#8594;</text>
           <!-- Right: Creative AI (vibrant) -->
-          <rect x="300" y="15" width="240" height="70" rx="14" fill="rgba(255,106,0,0.08)" stroke="url(#cdGrad1)" stroke-width="1.5"/>
-          <circle cx="330" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="330" y="46" text-anchor="middle" font-size="10">&#9997;&#65039;</text>
-          <circle cx="360" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="360" y="46" text-anchor="middle" font-size="10">&#127912;</text>
-          <circle cx="390" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="390" y="46" text-anchor="middle" font-size="10">&#128200;</text>
-          <circle cx="420" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="420" y="46" text-anchor="middle" font-size="10">&#128269;</text>
-          <circle cx="450" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="450" y="46" text-anchor="middle" font-size="10">&#128161;</text>
-          <circle cx="480" cy="42" r="10" fill="url(#cdGrad1)" opacity="0.2"/><text x="480" y="46" text-anchor="middle" font-size="10">&#128172;</text>
+          <rect x="300" y="15" width="240" height="70" rx="14" fill="rgba(255,106,0,0.08)" stroke="#ff6a00" stroke-width="1.5"/>
+          <circle cx="330" cy="42" r="10" fill="#ff6a00" opacity="0.2"/><text x="330" y="46" text-anchor="middle" font-size="10">&#9997;&#65039;</text>
+          <circle cx="360" cy="42" r="10" fill="#ff4400" opacity="0.2"/><text x="360" y="46" text-anchor="middle" font-size="10">&#127912;</text>
+          <circle cx="390" cy="42" r="10" fill="#ff2200" opacity="0.2"/><text x="390" y="46" text-anchor="middle" font-size="10">&#128200;</text>
+          <circle cx="420" cy="42" r="10" fill="#ff0055" opacity="0.2"/><text x="420" y="46" text-anchor="middle" font-size="10">&#128269;</text>
+          <circle cx="450" cy="42" r="10" fill="#ff3d00" opacity="0.2"/><text x="450" y="46" text-anchor="middle" font-size="10">&#128161;</text>
+          <circle cx="480" cy="42" r="10" fill="#ff6a00" opacity="0.2"/><text x="480" y="46" text-anchor="middle" font-size="10">&#128172;</text>
           <text x="420" y="72" text-anchor="middle" font-size="8" font-family="Roboto,sans-serif" font-weight="700" fill="#ff6a00">A full creative department</text>
           <!-- Glow pulse on right -->
           <rect x="300" y="15" width="240" height="70" rx="14" fill="none" stroke="rgba(255,106,0,0.15)" stroke-width="2"><animate attributeName="stroke-opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/></rect>
