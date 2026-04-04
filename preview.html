@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carpe Diem Creative - Our Story | Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; }
+  /* Force all cd-reveal elements visible for static preview */
+  .cd-reveal { opacity: 1 !important; transform: translateY(0) !important; }
+</style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  .cd-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .cd-reveal.cd-visible { opacity: 1; transform: translateY(0); }
+  .cd-reveal-d1 { transition-delay: 0.1s; }
+  .cd-reveal-d2 { transition-delay: 0.2s; }
+  .cd-reveal-d3 { transition-delay: 0.3s; }
+  .cd-reveal-d4 { transition-delay: 0.35s; }
+  .cd-reveal-d5 { transition-delay: 0.4s; }
+  .cd-card { transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .cd-card:hover { border-color: rgba(255,106,0,0.3) !important; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,106,0,0.15); }
+  @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  @keyframes pulseGlow { 0%,100%{box-shadow:0 0 20px rgba(255,106,0,0.15)} 50%{box-shadow:0 0 40px rgba(255,106,0,0.3)} }
+  @keyframes typewriter { from{width:0} to{width:100%} }
+  .cd-stat-num { font-size:clamp(2rem,4vw,3rem); font-weight:900; background:linear-gradient(135deg,#ff6a00,#ff0055); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .cd-timeline-dot { width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,#ff6a00,#ff0055); border:3px solid #fff; box-shadow:0 0 0 3px rgba(255,106,0,0.2); flex-shrink:0; }
+  .cd-quote { position:relative; padding-left:24px; border-left:3px solid; border-image:linear-gradient(180deg,#ff6a00,#ff0055) 1; }
+</style>
+
+<!-- Top gradient glow line -->
+<div style="height:3px;background:linear-gradient(90deg,#ff0055,#ff6a00,#ff0055,#ff6a00);background-size:300% 100%;animation:gradientShift 6s ease infinite;"></div>
+
+<!-- Hero: The Origin -->
+<div style="text-align:center;padding:100px 0 80px;font-family:'Roboto',sans-serif;background:#fff;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-120px;right:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,0,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,0,85,0.05) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;position:relative;">
+    <div class="cd-reveal" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,106,0,0.08);border:1px solid rgba(255,106,0,0.2);border-radius:100px;padding:8px 20px;font-size:.78rem;font-weight:600;color:#ff6a00;text-transform:uppercase;letter-spacing:.1em;margin-bottom:32px;">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#ff6a00;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+      Our Story
+    </div>
+    <h1 class="cd-reveal cd-reveal-d1" style="font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:900;letter-spacing:-.03em;line-height:1.08;margin-bottom:24px;color:#1a1a1a;">We Built the Creative<br>Department of the Future</h1>
+    <p class="cd-reveal cd-reveal-d2" style="font-size:clamp(1.05rem,2vw,1.25rem);color:#555;max-width:640px;margin:0 auto 48px;line-height:1.7;">What started as one agency's frustration with generic AI became a full department of purpose-built agents&mdash;designed by creatives, for creatives.</p>
+    <div class="cd-reveal cd-reveal-d3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#the-problem" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;background:linear-gradient(135deg,#ff6a00,#ff0055);color:#fff;box-shadow:0 4px 24px rgba(255,106,0,0.25);">
+        Read Our Story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+      <a href="https://agent.carpediemcreative.agency/guest/ai_dept" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;background:transparent;color:#1a1a1a;border:1px solid rgba(0,0,0,0.15);">
+        Meet the Agents
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- The Problem -->
+<div id="the-problem" style="padding:100px 0 80px;font-family:'Roboto',sans-serif;background:#fafafa;scroll-margin-top:20px;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <p class="cd-reveal" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#ff6a00;margin-bottom:12px;">The Problem</p>
+    <h2 class="cd-reveal cd-reveal-d1" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:32px;color:#1a1a1a;line-height:1.15;">Creatives Were Being Left Behind<br>by the AI Revolution</h2>
+
+    <div class="cd-reveal cd-reveal-d2" style="max-width:720px;">
+      <p style="font-size:1.05rem;color:#555;line-height:1.8;margin-bottom:24px;">We saw it happening in real time. Every week, a new AI tool launched promising to "revolutionize creativity." But when our team&mdash;art directors, copywriters, strategists&mdash;actually tried them, the same problems kept surfacing:</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px;">
+      <div class="cd-card cd-reveal cd-reveal-d1" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px 24px;border-left:4px solid #ff6a00;">
+        <div style="font-size:1.6rem;margin-bottom:12px;">&#128566;</div>
+        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#1a1a1a;">Generic Outputs</h3>
+        <p style="font-size:.9rem;color:#666;line-height:1.6;">Every AI gave the same bland, corporate-speak results. Nothing that sounded like a real creative professional wrote it.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d2" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px 24px;border-left:4px solid #ff3d00;">
+        <div style="font-size:1.6rem;margin-bottom:12px;">&#129504;</div>
+        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#1a1a1a;">No Creative Context</h3>
+        <p style="font-size:.9rem;color:#666;line-height:1.6;">Tools built by engineers for engineers. They didn't understand briefs, brand guidelines, or the messy reality of client work.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d3" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:32px 24px;border-left:4px solid #ff0055;">
+        <div style="font-size:1.6rem;margin-bottom:12px;">&#128148;</div>
+        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#1a1a1a;">Creative Burnout</h3>
+        <p style="font-size:.9rem;color:#666;line-height:1.6;">Creatives were drowning in busywork&mdash;research, revisions, admin. The parts that kill inspiration were growing, not shrinking.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- The Moment / Origin Story -->
+<div style="padding:100px 0;font-family:'Roboto',sans-serif;background:#fff;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <p class="cd-reveal" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#ff6a00;margin-bottom:12px;">The Moment</p>
+    <h2 class="cd-reveal cd-reveal-d1" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:40px;color:#1a1a1a;line-height:1.15;">So We Built What We Wished Existed</h2>
+
+    <div class="cd-reveal cd-reveal-d2 cd-quote" style="margin-bottom:48px;">
+      <p style="font-size:1.15rem;color:#333;line-height:1.7;font-style:italic;margin-bottom:8px;">"We didn't set out to build an AI company. We're an ad agency. But after months of trying every tool on the market and watching our team struggle with outputs that felt like they came from a different planet&mdash;we realized nobody was building AI for people like us."</p>
+      <p style="font-size:.85rem;color:#999;font-weight:600;">&#8212; Carpe Diem Creative, Las Vegas</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:36px;">
+      <!-- Timeline item 1 -->
+      <div class="cd-reveal" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+          <div class="cd-timeline-dot"></div>
+          <div style="width:2px;height:100%;min-height:60px;background:linear-gradient(180deg,rgba(255,106,0,0.3),rgba(255,0,85,0.1));"></div>
+        </div>
+        <div>
+          <div style="font-size:.7rem;font-weight:700;color:#ff6a00;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Step One</div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:6px;">We trained AI on how creatives actually think</h3>
+          <p style="font-size:.9rem;color:#666;line-height:1.6;">Not prompt engineering tricks. Real creative frameworks&mdash;how a strategist builds a brief, how a copywriter finds voice, how an art director gives feedback.</p>
+        </div>
+      </div>
+      <!-- Timeline item 2 -->
+      <div class="cd-reveal cd-reveal-d1" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+          <div class="cd-timeline-dot"></div>
+          <div style="width:2px;height:100%;min-height:60px;background:linear-gradient(180deg,rgba(255,106,0,0.2),rgba(255,0,85,0.1));"></div>
+        </div>
+        <div>
+          <div style="font-size:.7rem;font-weight:700;color:#ff6a00;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Step Two</div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:6px;">We gave each agent a distinct personality and specialty</h3>
+          <p style="font-size:.9rem;color:#666;line-height:1.6;">Not one chatbot that does everything poorly. A full department&mdash;strategist, writer, designer, auditor, researcher&mdash;each with deep expertise in their role.</p>
+        </div>
+      </div>
+      <!-- Timeline item 3 -->
+      <div class="cd-reveal cd-reveal-d2" style="display:flex;gap:20px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+          <div class="cd-timeline-dot"></div>
+        </div>
+        <div>
+          <div style="font-size:.7rem;font-weight:700;color:#ff6a00;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Step Three</div>
+          <h3 style="font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:6px;">We made them collaborate&mdash;with you and each other</h3>
+          <p style="font-size:.9rem;color:#666;line-height:1.6;">The agents hand work off between each other. Arthur audits your brand, Max builds a strategy, Paige writes the copy, Crystal gives creative direction. A real workflow, not a chat window.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- What Makes Us Different -->
+<div style="padding:100px 0;font-family:'Roboto',sans-serif;background:linear-gradient(180deg,#1a1a1a 0%,#111 100%);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <p class="cd-reveal" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#ff6a00;margin-bottom:12px;">The Difference</p>
+      <h2 class="cd-reveal cd-reveal-d1" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:16px;line-height:1.15;">Not Another AI Chatbot.<br>A Creative Partner.</h2>
+      <p class="cd-reveal cd-reveal-d2" style="color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto;line-height:1.6;">Here's what separates the Creative Intelligence Department from everything else out there.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+      <div class="cd-card cd-reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 28px;backdrop-filter:blur(8px);">
+        <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,106,0,0.15),rgba(255,0,85,0.15));margin-bottom:20px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#ff6a00;stroke-width:2;"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">They Have Personality</h3>
+        <p style="font-size:.9rem;color:rgba(255,255,255,0.55);line-height:1.6;">Each agent has a name, a role, a voice. They feel like colleagues you'd actually want on your team&mdash;not a sterile text box.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d1" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 28px;backdrop-filter:blur(8px);">
+        <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,106,0,0.15),rgba(255,0,85,0.15));margin-bottom:20px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#ff6a00;stroke-width:2;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Built on Real Craft</h3>
+        <p style="font-size:.9rem;color:rgba(255,255,255,0.55);line-height:1.6;">Trained on decades of advertising frameworks, brand strategy, and creative direction&mdash;not just internet scraping.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d2" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 28px;backdrop-filter:blur(8px);">
+        <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,106,0,0.15),rgba(255,0,85,0.15));margin-bottom:20px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#ff6a00;stroke-width:2;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Human Escalation Built In</h3>
+        <p style="font-size:.9rem;color:rgba(255,255,255,0.55);line-height:1.6;">When a project needs a human touch, it seamlessly hands off to the Carpe Diem creative team. AI + humans, not AI vs. humans.</p>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:32px;margin-top:64px;text-align:center;">
+      <div class="cd-reveal">
+        <div class="cd-stat-num">8</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-weight:500;margin-top:4px;">Specialized Agents</div>
+      </div>
+      <div class="cd-reveal cd-reveal-d1">
+        <div class="cd-stat-num">Free</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-weight:500;margin-top:4px;">To Get Started</div>
+      </div>
+      <div class="cd-reveal cd-reveal-d2">
+        <div class="cd-stat-num">2026</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-weight:500;margin-top:4px;">Webby Nominee</div>
+      </div>
+      <div class="cd-reveal cd-reveal-d3">
+        <div class="cd-stat-num">24/7</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-weight:500;margin-top:4px;">Always Available</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- Who This Is For -->
+<div style="padding:100px 0;font-family:'Roboto',sans-serif;background:#fff;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="cd-reveal" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#ff6a00;margin-bottom:12px;">Who It's For</p>
+      <h2 class="cd-reveal cd-reveal-d1" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin-bottom:16px;color:#1a1a1a;line-height:1.15;">Built for People Who Make Things</h2>
+      <p class="cd-reveal cd-reveal-d2" style="color:#666;max-width:560px;margin:0 auto;line-height:1.6;">Whether you're a solo freelancer or a 50-person agency, these agents scale to your needs.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+      <div class="cd-card cd-reveal" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#127912;</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;color:#1a1a1a;">Creative Agencies</h3>
+        <p style="font-size:.85rem;color:#666;line-height:1.5;">Multiply your team's output without multiplying headcount. Let agents handle research and first drafts.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d1" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#9997;&#65039;</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;color:#1a1a1a;">Freelance Creatives</h3>
+        <p style="font-size:.85rem;color:#666;line-height:1.5;">Get a whole department behind you. Strategy, copy, design feedback&mdash;without the overhead.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d2" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128640;</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;color:#1a1a1a;">Startups & Brands</h3>
+        <p style="font-size:.85rem;color:#666;line-height:1.5;">Agency-quality creative thinking at a fraction of the cost. Audit, strategize, and execute&mdash;fast.</p>
+      </div>
+      <div class="cd-card cd-reveal cd-reveal-d3" style="background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128218;</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;color:#1a1a1a;">Marketing Teams</h3>
+        <p style="font-size:.85rem;color:#666;line-height:1.5;">From case studies to ad copy, content to strategy&mdash;close the gap between idea and execution.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- CTA: Try It -->
+<div style="text-align:center;padding:100px 0;font-family:'Roboto',sans-serif;background:linear-gradient(180deg,#ff0055 0%,#ff2244 30%,#ff4400 70%,#ff6a00 100%);">
+  <div style="max-width:700px;margin:0 auto;padding:0 24px;">
+    <div class="cd-reveal" style="background:rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:56px 40px;">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;font-size:.72rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.1em;margin-bottom:24px;">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Start Free
+      </div>
+      <h2 class="cd-reveal cd-reveal-d1" style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:16px;color:#fff;letter-spacing:-.02em;">Ready to Meet Your New Team?</h2>
+      <p class="cd-reveal cd-reveal-d2" style="color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto 36px;line-height:1.6;">Start with a free audit from Arthur. In minutes, you'll see exactly where AI can amplify your creative output.</p>
+      <div class="cd-reveal cd-reveal-d3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://agent.carpediemcreative.agency/guest/ai_dept" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:16px 36px;border-radius:100px;font-size:1rem;font-weight:700;text-decoration:none;background:#fff;color:#ff4400;box-shadow:0 4px 24px rgba(0,0,0,0.15);">
+          Get Started for Free
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://www.carpediemcreative.agency/aid" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:16px 36px;border-radius:100px;font-size:1rem;font-weight:600;text-decoration:none;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gradient divider -->
+<div style="max-width:600px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.25),rgba(255,0,85,0.25),transparent);"></div>
+
+<!-- Webby Badge -->
+<div class="cd-reveal" style="text-align:center;padding:80px 0;font-family:'Roboto',sans-serif;background:#fff;">
+  <div style="max-width:500px;margin:0 auto;padding:0 24px;">
+    <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69cf109ffcf3f9acd7519a92.jpeg" alt="Webby Award" style="width:auto;max-width:160px;margin:0 auto 20px;display:block;border-radius:8px;" />
+    <div style="display:inline-block;background:rgba(255,106,0,0.08);border:1px solid rgba(255,106,0,0.18);border-radius:100px;padding:6px 18px;font-size:.75rem;font-weight:600;color:#ff6a00;margin-bottom:20px;">Webby Award Nominee 2026</div>
+    <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:10px;color:#1a1a1a;">Recognized for AI Innovation</h3>
+    <p style="color:#666;margin-bottom:28px;line-height:1.6;font-size:.95rem;">The Creative Intelligence Department has been nominated for a 2026 Webby Award in AI Features &amp; Innovation.</p>
+    <a href="https://vote.webbyawards.com/PublicVoting#/2026/ai/ai-features-innovation/experimental-innovation" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:100px;font-size:.9rem;font-weight:600;text-decoration:none;background:linear-gradient(135deg,#ff6a00,#ff0055);color:#fff;box-shadow:0 4px 20px rgba(255,106,0,0.2);">
+      &#11088; Vote for Us
+    </a>
+  </div>
+</div>
+
+<!-- Bottom gradient line -->
+<div style="height:2px;background:linear-gradient(90deg,transparent,rgba(255,106,0,0.2),rgba(255,0,85,0.2),transparent);"></div>
+
+<!-- Footer -->
+<div style="padding:40px 0;text-align:center;font-size:.82rem;color:#999;font-family:'Roboto',sans-serif;background:#fff;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;">
+      <a href="https://www.carpediemcreative.agency/" target="_blank" style="color:#ff6a00;text-decoration:none;">Agency</a>
+      <a href="https://www.carpediemcreative.agency/aid" target="_blank" style="color:#ff6a00;text-decoration:none;">AI Department</a>
+      <a href="https://agent.carpediemcreative.agency/guest/ai_dept" target="_blank" style="color:#ff6a00;text-decoration:none;">Try the Agents</a>
+      <a href="mailto:hello@carpediemcreative.agency" style="color:#ff6a00;text-decoration:none;">Contact</a>
+    </div>
+    <p style="color:#999;">&copy; 2026 Carpe Diem Creative Agency &middot; Las Vegas, NV &middot; <a href="tel:6502079921" style="color:#ff6a00;text-decoration:none;">650-207-9921</a></p>
+  </div>
+</div>
+
+<!-- Scroll reveal script (isolated from Pickaxe React) -->
+<script>
+try {
+  setTimeout(function(){
+    try {
+      var els = document.querySelectorAll('.cd-reveal');
+      if(els.length && typeof IntersectionObserver !== 'undefined'){
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting) e.target.classList.add('cd-visible');
+          });
+        }, {threshold:0.15});
+        els.forEach(function(el){ observer.observe(el); });
+      }
+    } catch(err){}
+  }, 100);
+} catch(err){}
+</script>
+</body></html>
