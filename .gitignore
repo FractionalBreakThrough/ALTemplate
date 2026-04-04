@@ -1,3 +1,4 @@
 # Secrets & config with API keys
 .claude/mcp.json
 .mcp.json
+.nano-banana-config.json
