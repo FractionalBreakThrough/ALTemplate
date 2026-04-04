@@ -5,6 +5,7 @@ try {
     try {
       var els = document.querySelectorAll('.cd-reveal');
       if(els.length && typeof IntersectionObserver !== 'undefined'){
+        document.body.classList.add('cd-anim-ready');
         var observer = new IntersectionObserver(function(entries){
           entries.forEach(function(e){
             if(e.isIntersecting) e.target.classList.add('cd-visible');

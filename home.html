@@ -1,13 +1,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
-  .cd-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .cd-reveal.cd-visible { opacity: 1; transform: translateY(0); }
-  .cd-reveal-d1 { transition-delay: 0.1s; }
-  .cd-reveal-d2 { transition-delay: 0.2s; }
-  .cd-reveal-d3 { transition-delay: 0.3s; }
-  .cd-reveal-d4 { transition-delay: 0.35s; }
-  .cd-reveal-d5 { transition-delay: 0.4s; }
+  /* Default: everything visible. JS adds .cd-anim-ready to enable scroll reveals */
+  .cd-reveal { opacity: 1; transform: translateY(0); }
+  .cd-anim-ready .cd-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .cd-anim-ready .cd-reveal.cd-visible { opacity: 1; transform: translateY(0); }
+  .cd-anim-ready .cd-reveal-d1 { transition-delay: 0.1s; }
+  .cd-anim-ready .cd-reveal-d2 { transition-delay: 0.2s; }
+  .cd-anim-ready .cd-reveal-d3 { transition-delay: 0.3s; }
+  .cd-anim-ready .cd-reveal-d4 { transition-delay: 0.35s; }
+  .cd-anim-ready .cd-reveal-d5 { transition-delay: 0.4s; }
   .cd-card { transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .cd-card:hover { border-color: rgba(255,106,0,0.3) !important; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,106,0,0.15); }
   @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
@@ -384,6 +386,8 @@ try {
     try {
       var els = document.querySelectorAll('.cd-reveal');
       if(els.length && typeof IntersectionObserver !== 'undefined'){
+        /* Enable animations only after JS confirms it can manage them */
+        document.body.classList.add('cd-anim-ready');
         var observer = new IntersectionObserver(function(entries){
           entries.forEach(function(e){
             if(e.isIntersecting) e.target.classList.add('cd-visible');
