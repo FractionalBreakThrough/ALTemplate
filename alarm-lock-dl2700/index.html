@@ -32,6 +32,37 @@
         .badge-glow-3 { animation: turn-glow 8s infinite 4s; }
         .badge-glow-4 { animation: turn-glow 8s infinite 6s; }
         html { scroll-behavior: smooth; }
+
+        /* Badge tooltip popups */
+        .badge-tip { cursor: pointer; user-select: none; }
+        .badge-bubble {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            padding: 14px 16px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            z-index: 50;
+        }
+        .badge-bubble::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid #1e293b;
+        }
+        .badge-tip.active .badge-bubble { display: block; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -71,17 +102,21 @@
                     </h2>
                 </div>
                 <div class="flex flex-row flex-wrap gap-2 shrink-0">
-                    <span class="badge-glow-1 relative bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 shadow-sm">
+                    <span class="badge-glow-1 badge-tip relative bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 shadow-sm" onclick="toggleBadge(this)">
                         <i data-lucide="shield-check" class="w-4 h-4"></i> Grade 1 Strength
+                        <span class="badge-bubble">BHMA/ANSI Grade 1 — the highest commercial security rating. Built to withstand over 800,000 cycles and extreme force, meeting the toughest standards for schools, hospitals, and government facilities.</span>
                     </span>
-                    <span class="badge-glow-2 relative bg-slate-100 text-slate-700 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-slate-200">
+                    <span class="badge-glow-2 badge-tip relative bg-slate-100 text-slate-700 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-slate-200" onclick="toggleBadge(this)">
                         <i data-lucide="pointer" class="w-4 h-4 text-slate-500"></i> Program At Lock
+                        <span class="badge-bubble">No software or computer needed. Add, delete, or modify user codes directly at the keypad. Full programming takes minutes, not hours — perfect for on-site technicians and property managers.</span>
                     </span>
-                    <span class="badge-glow-3 relative bg-amber-100 text-amber-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-amber-200">
+                    <span class="badge-glow-3 badge-tip relative bg-amber-100 text-amber-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-amber-200" onclick="toggleBadge(this)">
                         <i data-lucide="cloud-rain" class="w-4 h-4"></i> All Models Weatherproof
+                        <span class="badge-bubble">Tested from -31°F to +151°F. Every DL2700 model is weatherproof standard — no special ordering required. Ideal for exterior doors, loading docks, rooftop access, and covered walkways.</span>
                     </span>
-                    <span class="badge-glow-4 relative bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-emerald-200">
+                    <span class="badge-glow-4 badge-tip relative bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-emerald-200" onclick="toggleBadge(this)">
                         <i data-lucide="battery-full" class="w-4 h-4"></i> Long Battery Life
+                        <span class="badge-bubble">Up to 200,000 cycles on 5 standard AA batteries — one of the longest battery lives in the industry. Includes a low-battery warning so you're never caught off guard.</span>
                     </span>
                 </div>
             </div>
@@ -298,6 +333,18 @@
     </div>
 
     <script>
+        // Badge tooltip toggle
+        function toggleBadge(el) {
+            const wasActive = el.classList.contains('active');
+            document.querySelectorAll('.badge-tip').forEach(b => b.classList.remove('active'));
+            if (!wasActive) el.classList.add('active');
+        }
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.badge-tip')) {
+                document.querySelectorAll('.badge-tip').forEach(b => b.classList.remove('active'));
+            }
+        });
+
         const models = [
             { 
                 id: 'DL2700', 
