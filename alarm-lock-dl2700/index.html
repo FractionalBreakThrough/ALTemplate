@@ -1,175 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alarm Lock DL2700 - Keyless Digital Lock</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Lock DL2700 | Represented by THE REP Collective</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .transition-content { transition: opacity 0.3s ease-in-out; }
+        .active-card { 
+            border-color: #F47721 !important; 
+            background-color: #fff8f3; 
+            box-shadow: 0 0 0 2px rgba(244, 119, 33, 0.4), 0 4px 6px -1px rgb(0 0 0 / 0.1) !important; 
+        }
+        @keyframes lightning-flash {
+            0%, 85%, 100% { opacity: 0.05; }
+            87% { opacity: 0.25; }
+            89% { opacity: 0.05; }
+            93% { opacity: 0.35; }
+            96% { opacity: 0.05; }
+        }
+        .animate-lightning { animation: lightning-flash 3.5s infinite; }
+        @keyframes turn-glow {
+            0%, 20%, 100% { transform: scale(1); box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); z-index: 1; }
+            10% { transform: scale(1.05); box-shadow: 0 0 20px rgba(244, 119, 33, 0.5); z-index: 10; }
+        }
+        .badge-glow-1 { animation: turn-glow 8s infinite 0s; }
+        .badge-glow-2 { animation: turn-glow 8s infinite 2s; }
+        .badge-glow-3 { animation: turn-glow 8s infinite 4s; }
+        .badge-glow-4 { animation: turn-glow 8s infinite 6s; }
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900">
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <nav class="nav">
-        <a href="#" class="logo">Alarm Lock <span>DL2700</span></a>
-        <ul class="nav-links">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#specs">Specifications</a></li>
-          <li><a href="#programming">Programming</a></li>
-          <li><a href="#support">Support</a></li>
-        </ul>
-        <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-      </nav>
+    <!-- Sticky Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-4">
+                <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock Logo" class="h-8 w-auto object-contain" />
+                <span class="text-slate-400 uppercase tracking-widest font-bold text-[9px] hidden sm:inline">Official Authorized Partner</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#hero" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Overview</a>
+                <a href="#models" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Models</a>
+                <a href="#specs" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Specs</a>
+                <a href="#installs" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Installs</a>
+                <a href="#contact" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Contact</a>
+            </div>
+            <a href="https://therepcollective.biz/" target="_blank" class="flex items-center gap-2">
+                <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-6 w-auto object-contain" />
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-b from-slate-900 to-slate-800 pt-28 pb-16 md:pt-36 md:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-6 mb-10">
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock Logo" class="h-10 md:h-12 w-auto object-contain" />
+                        <span class="text-blue-400 font-bold uppercase tracking-widest text-[10px] border-l border-slate-600 pl-4 h-6 flex items-center">Trilogy® T2 Series</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2 transition-content" id="display-model-id">DL2700</h1>
+                    <h2 class="text-lg md:text-xl font-medium text-slate-300 transition-content" id="display-tagline">
+                        The #1 Standalone Electronic Keyless Access Lock in its Class.
+                    </h2>
+                </div>
+                <div class="flex flex-row flex-wrap gap-2 shrink-0">
+                    <span class="badge-glow-1 relative bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 shadow-sm">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i> Grade 1 Strength
+                    </span>
+                    <span class="badge-glow-2 relative bg-slate-700 text-slate-200 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-slate-600">
+                        <i data-lucide="pointer" class="w-4 h-4 text-slate-400"></i> Program At Lock
+                    </span>
+                    <span class="badge-glow-3 relative bg-amber-100 text-amber-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-amber-200">
+                        <i data-lucide="cloud-rain" class="w-4 h-4"></i> All Models Weatherproof
+                    </span>
+                    <span class="badge-glow-4 relative bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-emerald-200">
+                        <i data-lucide="battery-full" class="w-4 h-4"></i> Long Battery Life
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Display Section -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <!-- Core Advantages -->
+                <div class="transition-content flex flex-col justify-center" id="advantage-section">
+                    <h3 class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-4">Core Advantage: <span id="advantage-title">Standard Access</span></h3>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-medium" id="advantage-desc">
+                        Eliminate the headache of keys. The DL2700 offers heavy-duty security with keypad entry.
+                    </p>
+                    <ul class="space-y-5" id="advantage-bullets"></ul>
+                </div>
+                <!-- Product Image -->
+                <div class="bg-slate-50 rounded-2xl p-6 flex flex-col items-center justify-center border border-slate-200 shadow-inner group">
+                    <div class="w-full h-80 bg-white rounded-xl mb-4 border border-slate-200 flex flex-col items-center justify-center relative overflow-hidden p-4" id="image-placeholder">
+                    </div>
+                    <div class="flex gap-3 justify-center mt-2" id="finish-selector">
+                        <button onclick="changeColor('26D')" class="w-10 h-10 rounded-full border border-slate-300 bg-slate-300 ring-2 ring-offset-2 ring-blue-500 color-btn transition-transform hover:scale-110" data-color="26D" title="Satin Chrome"></button>
+                        <button onclick="changeColor('US3')" class="w-10 h-10 rounded-full border border-slate-300 bg-yellow-600 ring-2 ring-offset-2 ring-transparent color-btn transition-transform hover:scale-110" data-color="US3" title="Polished Brass"></button>
+                        <button onclick="changeColor('10B')" class="w-10 h-10 rounded-full border border-slate-300 bg-slate-800 ring-2 ring-offset-2 ring-transparent color-btn transition-transform hover:scale-110" data-color="10B" title="Oil Rubbed Bronze"></button>
+                        <button onclick="changeColor('US19')" class="w-10 h-10 rounded-full border border-slate-300 bg-black ring-2 ring-offset-2 ring-transparent color-btn transition-transform hover:scale-110" data-color="US19" title="Matte Black"></button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-3 uppercase tracking-widest font-bold text-center" id="finish-label">Select Finish To View</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Selection -->
+    <section id="models" class="bg-slate-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-6">
+                <h3 class="text-2xl font-bold text-slate-800">Model Selection Guide</h3>
+                <div class="flex-1 h-px bg-slate-200"></div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="model-grid"></div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section id="specs" class="bg-slate-900 text-slate-300 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-8">
+                <h3 class="text-2xl font-bold text-white tracking-tight">Technical Specifications</h3>
+                <div class="flex-1 h-px bg-slate-700"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+                <div>
+                    <h4 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2"><i data-lucide="settings-2" class="w-3 h-3"></i> Operation & Handing</h4>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Clutch:</strong> Free-turning outer lever prevents vandalism. Instant inside egress.</p>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Keypad:</strong> Vandal-proof all-metal. Adjustable entry time (5-20s). Mute capable.</p>
+                    <p class="text-sm leading-snug"><strong class="text-white">Handing:</strong> Non-handed (fully reversible).</p>
+                </div>
+                <div>
+                    <h4 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2"><i data-lucide="door-open" class="w-3 h-3"></i> Door Specs</h4>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Prep:</strong> Standard ANSI 161 Series (with added through-bolt holes).</p>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Thickness:</strong> 1-5/8" to 1-7/8" standard.</p>
+                    <p class="text-sm leading-snug"><strong class="text-white">Backset:</strong> 2-3/4" standard (2-3/8" optional).</p>
+                </div>
+                <div>
+                    <h4 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2"><i data-lucide="cpu" class="w-3 h-3"></i> Hardware & Power</h4>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Latchbolt:</strong> 1/2" throw, solid brass deadlocking. T-strike & ASA included.</p>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Power:</strong> 5 AA alkaline batteries (200k cycles). Low battery alert.</p>
+                    <p class="text-sm leading-snug"><strong class="text-white">Motor:</strong> Unique heavy-duty Flex Drive® motor.</p>
+                </div>
+                <div>
+                    <h4 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-2"><i data-lucide="key" class="w-3 h-3"></i> Cylinders & Keying</h4>
+                    <p class="text-sm leading-snug mb-3"><strong class="text-white">Cylinder:</strong> Solid brass 6-pin (SC1 standard). Accepts 6/7-pin IC Cores.</p>
+                    <p class="text-sm leading-snug"><strong class="text-white">IC Core Prep:</strong> Models available for Yale, Medeco, Sargent, Corbin/Russwin, Schlage.</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-slate-700">
+                <h4 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-5">Compliance & Safety Highlights</h4>
+                <div class="flex flex-wrap gap-x-8 gap-y-4">
+                    <div class="flex items-center gap-2 text-sm font-medium text-amber-400">
+                        <i data-lucide="cloud-rain" class="w-4 h-4"></i> Weatherproof Standard (-31°F to +151°F)
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-medium text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> BHMA Grade 1 Certified
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-medium text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> 3-Hour Fire Rated (UL)
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-medium text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> FCC Certified
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-medium text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> ADA Compliant
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary Proposition -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4 uppercase">
+                Best-In-Class <span class="text-blue-600">High-Grade Security</span>
+            </h3>
+            <p class="text-lg md:text-xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
+                Rugged, <strong class="text-slate-900">anti-vandal</strong> design meets <strong class="text-slate-900">effortless installation</strong>. Experience ultra-low maintenance backed by the <strong class="text-slate-900">longest battery life</strong> on the market.
+            </p>
+        </div>
+    </section>
+
+    <!-- Real World Installs -->
+    <section id="installs" class="bg-slate-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-8">
+                <h3 class="text-2xl font-bold text-slate-800 tracking-tight">Real World Installs</h3>
+                <div class="flex-1 h-px bg-slate-200"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all group">
+                    <div class="w-full h-40 bg-slate-100 rounded-lg mb-4 overflow-hidden border border-slate-200">
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4033d3a72b32db33310f.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Retail Bathroom Install" />
+                    </div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">Public Restrooms</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"Perfect solution for our high-traffic restrooms. We eliminated key replacement costs."</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all group">
+                    <div class="w-full h-40 bg-slate-100 rounded-lg mb-4 overflow-hidden border border-slate-200">
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb403353d4f193b3b770b9.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Common Laundry Install" />
+                    </div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">Tenant Laundry</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"Instantly add or delete tenant codes. Built like an absolute tank."</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all group">
+                    <div class="w-full h-40 bg-slate-100 rounded-lg mb-4 overflow-hidden border border-slate-200">
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4033aaac0f2cc97a78aa.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="House of Worship Install" />
+                    </div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">House of Worship</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"Secures our sanctuary during off-hours while allowing volunteers easy access."</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all group">
+                    <div class="w-full h-40 bg-slate-100 rounded-lg mb-4 overflow-hidden border border-slate-200">
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4033aaac0fd4397a78a9.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="School Security Install" />
+                    </div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">School Security</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"Instant classroom control. Heavy-duty clutch stands up to daily student use."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agency Section -->
+    <section id="contact" class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-blue-50 border border-blue-100 flex flex-col justify-between">
+                    <div>
+                        <p class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-blue-700/80 text-sm font-medium mb-6 leading-relaxed">The industry leader in standalone electronic access control.</p>
+                    </div>
+                    <a href="https://alarmlock.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> alarmlock.com
+                    </a>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 text-white shadow-xl flex flex-col justify-between border-b-4 border-[#F47721] relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 animate-lightning">
+                        <i data-lucide="zap" class="w-48 h-48 fill-[#F47721] text-[#F47721]"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for Part questions, demos, and technical support</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400 text-[10px] uppercase tracking-[0.2em] flex flex-col items-center gap-1">
+            <span>&copy; 2026 ALARM LOCK SYSTEMS &bull; A NAPCO DIVISION</span>
+            <span>Promoted By The Rep Collective</span>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-slate-900/90 hidden items-center justify-center p-4 md:p-8 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeModal()">
+        <button onclick="closeModal()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white hover:text-[#F47721] bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <img id="modal-image" src="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl drop-shadow-2xl scale-95 transition-transform duration-300" onclick="event.stopPropagation()" />
     </div>
-  </header>
 
-  <!-- Hero -->
-  <section class="hero" id="overview">
-    <div class="container">
-      <h1>Alarm Lock DL2700</h1>
-      <p class="hero-subtitle">Trilogy Keyless Digital Lock</p>
-      <p class="hero-desc">
-        Standalone access control with PIN-based entry. No wiring, no network required.
-        Ideal for commercial doors, offices, and restricted areas.
-      </p>
-      <a href="#features" class="btn">Explore Features</a>
-    </div>
-  </section>
+    <script>
+        const models = [
+            { 
+                id: 'DL2700', 
+                type: 'Standard', 
+                use: 'General Commercial', 
+                tagline: 'The #1 Standalone Electronic Keyless Access Lock in its Class.',
+                advTitle: 'Standard Access',
+                advDesc: 'Eliminate the headache of keys. The perfect retrofit for schools, offices, and retail.',
+                bullets: [
+                    { title: '100 User Codes', desc: 'Master, Manager, User, and One-Time codes.' },
+                    { title: '200,000 Cycles', desc: 'Superior battery life from 5 standard AA batteries.' },
+                    { title: 'Quick Retrofit', desc: 'Installs in about an hour on standard doors.' },
+                    { title: 'Grade 1 Durability', desc: 'Dependable lockset with rugged clutch mechanism, plus vandal-proof all metal keypad.' }
+                ],
+                icon: 'lock',
+                imageVariations: {
+                    '26D': { label: 'Satin Chrome (26D)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dadd3a72b7bd232f407.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dada37cc2193fefe40b.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad49814b1efea22aa7.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad3147fd8bfc497d1a.png'] },
+                    '10B': { label: 'Oil Rubbed Bronze (10B)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dadd3a72b4efe32f406.webp', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad5cc2fa4a3645b01e.jpg', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb403349814bf808a266f0.jpg'] },
+                    'US3': { label: 'Polished Brass (US3)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad0d06db2e98d0ced1.jpg'] },
+                    'US19': { label: 'Matte Black (US19)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad0d06db1269d0ced2.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3daddac5843e5ddcc7d9.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb44315cc2fa602c465519.jpg'] }
+                },
+                imgLabel: 'DL2700 Standard Cylindrical',
+                imgSub: 'Satin Chrome (26D) Finish'
+            },
+            { 
+                id: 'TL2700', 
+                type: 'Touchscreen', 
+                use: 'Modern Architecture', 
+                tagline: 'Sleek, Modern Touchscreen Keyless Access.',
+                advTitle: 'Touchscreen Interface',
+                advDesc: 'Upgrade your aesthetic with the TL2700. Featuring a durable glass touchscreen.',
+                bullets: [
+                    { title: 'Familiar Operation', desc: 'Same Operation, Programming & Functions as standard DL2700 models.' },
+                    { title: 'EZ Touch Sense Panel', desc: 'New! Sleek panel with illuminating numbers that brighten to touch & go dark after use. Easy clean-plane surface.' },
+                    { title: 'Fingertip Programmable', desc: '100% touchscreen keypad programmable at the lock with a fingertip.' }
+                ],
+                icon: 'smartphone',
+                availableColors: [],
+                images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb446453d4f1b4d2b7d4e8.png'],
+                imgLabel: 'TL2700 Touchscreen',
+                imgSub: 'Modern Flat Interface'
+            },
+            { 
+                id: 'DL2700LD', 
+                type: 'Lockdown', 
+                use: 'Schools & Campus', 
+                tagline: 'Instant Peace of Mind with Keyfob-Activated Lockdown.',
+                advTitle: 'Emergency Lockdown',
+                advDesc: 'Lock down a door from up to 75 feet away.',
+                bullets: [
+                    { title: 'Remote Activation', desc: 'Lockdown up to 4 locks with one keyfob.' },
+                    { title: 'Visual Indicator', desc: 'Bright bar confirms lockdown status.' },
+                    { title: 'Instant Classroom Safety', desc: 'Secure the room quickly and easily without approaching the door, keeping students and staff safe.' }
+                ],
+                icon: 'shield-alert',
+                availableColors: ['26D'],
+                images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dad3ee40830f0638370.png'],
+                imgLabel: 'DL2700LD Lockdown',
+                imgSub: 'Includes Remote Keyfob'
+            },
+            { 
+                id: 'DL1200', 
+                type: 'Narrow Stile', 
+                use: 'Glass Doors', 
+                tagline: 'Sleek Access for Aluminum & Glass Storefronts.',
+                advTitle: 'Narrow Stile Design',
+                advDesc: 'Fits narrow 1-3/4" aluminum door frames.',
+                bullets: [
+                    { title: 'Slim Profile', desc: 'Designed specifically for aluminum stiles.' },
+                    { title: 'Adams Rite Latch', desc: 'Works with standard storefront mechanisms.' },
+                    { title: 'Key Override', desc: 'Mortise cylinder, 1-1/4" supplied (supports 1-1/8" - 1-3/8"). IC cores supported (Corbin/Russwin, Yale, Schlage, Medeco).' },
+                    { title: 'Long-Life Battery', desc: 'Up to 100,000 cycles typical on 2 supplied lithium 3V batteries; includes low battery alert.' },
+                    { title: 'Glass or Exit Doors', desc: 'Specifically designed to add keypad control to aluminum glass storefronts or exit doors.' }
+                ],
+                icon: 'layout',
+                availableColors: ['26D', '10B'],
+                imageVariations: {
+                    '26D': { label: 'Satin Chrome (26D)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dadaaac0f670e7a3e30.png'] },
+                    '10B': { label: 'Oil Rubbed Bronze (10B)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4033aaac0ff1e57a78a8.jpg'] }
+                },
+                imgLabel: 'DL1200 Narrow Stile',
+                imgSub: 'Storefront Solution'
+            },
+            { 
+                id: 'ETDL2700', 
+                type: 'Exit Trim', 
+                use: 'Panic Bars', 
+                tagline: 'Keyless Control for Existing Panic Hardware.',
+                advTitle: 'Exit Trim Retrofit',
+                advDesc: 'Add keypad control to the exterior side of exit devices.',
+                bullets: [
+                    { title: 'Universal Fit', desc: 'Compatible with major brands like Von Duprin.' },
+                    { title: 'Safety First', desc: 'Ensures free egress at all times.' },
+                    { title: 'Device Compatibility', desc: 'Supports most push in style panic exit devices including: Von Duprin 99, Marks USA M9900, Corbin ED5000 & Yale, Dorma 9300, Arrow 3800, Hager 4500, Old Style Sargent, New Style Sargent, Precision 1100, Cal Royal 9800, etc.' },
+                    { title: 'Battery Operated', desc: 'Battery operated; uses 5 AA batteries.' }
+                ],
+                icon: 'external-link',
+                availableColors: ['26D'],
+                images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dada37cc2a195efe40a.jpg'],
+                imgLabel: 'ETDL2700 Exit Trim',
+                imgSub: 'Panic Bar Compatible'
+            },
+            { 
+                id: 'DL2700DB', 
+                type: 'Mortise', 
+                use: 'High Security', 
+                tagline: 'Trilogy Intelligence for High-Security Mortise Prep.',
+                advTitle: 'Mortise Deadbolt',
+                advDesc: 'When standard cylindrical locks aren\'t enough, the DB series brings T2 convenience to high-security mortise door preparations with a rugged deadbolt.',
+                bullets: [
+                    { title: 'High-Security Prep', desc: 'Fits standard mortise lock cutouts.' },
+                    { title: 'Deadbolt Protection', desc: 'Includes a heavy-duty 1" throw deadbolt.' },
+                    { title: 'Heavy Duty', desc: 'Built for the most demanding commercial traffic.' },
+                    { title: 'Mortise Cylinder', desc: '1-3/8" mortise cylinder included.' },
+                    { title: 'Flexible Options', desc: 'Choice of classroom or deadbolt functions & finishes.' }
+                ],
+                icon: 'door-closed',
+                availableColors: ['26D'],
+                imageVariations: {
+                    '26D': { label: 'Satin Chrome (26D)', images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3daddac58496fddcc7da.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dadaaac0fb2237a3e2f.png'] }
+                },
+                images: ['https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3daddac58496fddcc7da.png', 'https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3dadaaac0fb2237a3e2f.png'],
+                imgLabel: 'DL2700DB Mortise',
+                imgSub: 'Deadbolt Configuration'
+            }
+        ];
 
-  <!-- Features -->
-  <section class="section" id="features">
-    <div class="container">
-      <h2 class="section-title">Key Features</h2>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-icon">&#128274;</div>
-          <h3>Keyless Entry</h3>
-          <p>PIN-code access eliminates the need for keys. Supports up to 100 unique user codes.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">&#128276;</div>
-          <h3>Audible Alerts</h3>
-          <p>Built-in buzzer provides feedback for valid entry, invalid attempts, and low-battery warnings.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">&#128267;</div>
-          <h3>Battery Powered</h3>
-          <p>Runs on 5 AA batteries with approximately 80,000 cycles per set. No wiring needed.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">&#128736;</div>
-          <h3>Easy Installation</h3>
-          <p>Standard door prep. Replaces most cylindrical locksets without additional drilling.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">&#128202;</div>
-          <h3>Audit Trail</h3>
-          <p>Stores the last 22,000 events with date/time stamps. Downloadable via optional software.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">&#128737;</div>
-          <h3>Durable Design</h3>
-          <p>Heavy-duty metal construction rated for high-traffic commercial environments.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        let activeId = 'DL2700';
+        let activeColor = '26D';
 
-  <!-- Specifications -->
-  <section class="section section--alt" id="specs">
-    <div class="container">
-      <h2 class="section-title">Technical Specifications</h2>
-      <div class="specs-table-wrap">
-        <table class="specs-table">
-          <tbody>
-            <tr><th>Model</th><td>DL2700 Series</td></tr>
-            <tr><th>Lock Type</th><td>Standalone Keyless PIN Lock</td></tr>
-            <tr><th>User Codes</th><td>Up to 100 unique codes (3-6 digits)</td></tr>
-            <tr><th>Power</th><td>5 AA alkaline batteries</td></tr>
-            <tr><th>Battery Life</th><td>~80,000 cycles</td></tr>
-            <tr><th>Audit Trail</th><td>22,000 events with timestamps</td></tr>
-            <tr><th>Backset</th><td>2-3/4" standard (2-3/8" optional)</td></tr>
-            <tr><th>Door Thickness</th><td>1-3/4" to 2-1/4"</td></tr>
-            <tr><th>Finishes</th><td>Satin Chrome (26D), Polished Brass (3), Dark Bronze (10B)</td></tr>
-            <tr><th>Certifications</th><td>UL Listed, ADA Compliant</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+        window.openModal = function(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            }, 10);
+        };
 
-  <!-- Programming -->
-  <section class="section" id="programming">
-    <div class="container">
-      <h2 class="section-title">Quick Programming Guide</h2>
-      <div class="steps">
-        <div class="step">
-          <span class="step-num">1</span>
-          <div>
-            <h3>Enter Programming Mode</h3>
-            <p>Press <kbd>&#9881;</kbd> (the Alarm Lock button), then enter the master code (default: <code>1 2 3 4 5 6</code>), then press <kbd>&#9881;</kbd> again.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <div>
-            <h3>Add a User Code</h3>
-            <p>Press <kbd>1</kbd>, enter the new user code (3-6 digits), then press <kbd>&#9881;</kbd> to confirm.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <div>
-            <h3>Delete a User Code</h3>
-            <p>Press <kbd>2</kbd>, enter the code to delete, then press <kbd>&#9881;</kbd> to confirm removal.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step-num">4</span>
-          <div>
-            <h3>Exit Programming</h3>
-            <p>Press <kbd>&#9881;</kbd> to exit programming mode. The lock returns to normal operation.</p>
-          </div>
-        </div>
-      </div>
-      <p class="note">Always change the default master code after installation. Refer to the full manual for advanced scheduling and lockout features.</p>
-    </div>
-  </section>
+        window.closeModal = function() {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        };
 
-  <!-- Support -->
-  <section class="section section--alt" id="support">
-    <div class="container">
-      <h2 class="section-title">Support &amp; Resources</h2>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>Installation Manual</h3>
-          <p>Step-by-step wiring diagrams, door prep templates, and mounting instructions.</p>
-        </div>
-        <div class="card">
-          <h3>Programming Reference</h3>
-          <p>Complete guide to user codes, scheduling, lockout modes, and audit trail retrieval.</p>
-        </div>
-        <div class="card">
-          <h3>Troubleshooting</h3>
-          <p>Common issues, battery replacement, factory reset procedures, and error codes.</p>
-        </div>
-        <div class="card">
-          <h3>Contact</h3>
-          <p>Reach Alarm Lock technical support for warranty, parts, and advanced configuration help.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        window.setMainImage = function(src) {
+            const main = document.getElementById('main-product-image');
+            if(main) main.src = src;
+            document.querySelectorAll('.thumbnail-btn').forEach(btn => {
+                btn.classList.toggle('border-blue-500', btn.dataset.src === src);
+                btn.classList.toggle('border-transparent', btn.dataset.src !== src);
+            });
+        };
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Alarm Lock DL2700 Info Page. For reference purposes only.</p>
-    </div>
-  </footer>
+        window.changeColor = function(color) {
+            activeColor = color;
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.toggle('ring-blue-500', btn.dataset.color === color);
+                btn.classList.toggle('ring-transparent', btn.dataset.color !== color);
+            });
+            updateUI(activeId);
+        };
 
-  <script src="js/main.js"></script>
+        function updateUI(id) {
+            const model = models.find(m => m.id === id);
+            if (!model) return;
+            activeId = id;
+            const colors = model.availableColors || ['26D', 'US3', '10B', 'US19'];
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.style.display = colors.includes(btn.dataset.color) ? 'block' : 'none';
+            });
+            if(!colors.includes(activeColor)) activeColor = '26D';
+            document.getElementById('display-model-id').innerText = model.id;
+            document.getElementById('display-tagline').innerText = model.tagline;
+            document.getElementById('advantage-title').innerText = model.advTitle;
+            document.getElementById('advantage-desc').innerText = model.advDesc;
+            document.getElementById('advantage-bullets').innerHTML = model.bullets.map(b => `
+                <li class="flex gap-4">
+                    <div class="mt-1 text-blue-500"><i data-lucide="check" class="w-5 h-5"></i></div>
+                    <div><h4 class="font-bold text-slate-800 text-sm">${b.title}</h4><p class="text-xs text-slate-500">${b.desc}</p></div>
+                </li>
+            `).join('');
+            let displayImgs = model.images || [];
+            let subtext = model.imgSub;
+            if(model.imageVariations && model.imageVariations[activeColor]) {
+                displayImgs = model.imageVariations[activeColor].images;
+                subtext = model.imageVariations[activeColor].label;
+            }
+            const imgArea = document.getElementById('image-placeholder');
+            if(displayImgs.length > 0) {
+                imgArea.innerHTML = `
+                    <div class="h-44 w-full flex justify-center items-center mb-3">
+                        <img id="main-product-image" src="${displayImgs[0]}" class="h-full w-auto object-contain drop-shadow-xl cursor-zoom-in hover:scale-110 transition-transform duration-300" onclick="openModal(this.src)" title="Click to enlarge" />
+                    </div>
+                    <div class="flex gap-1 justify-center w-full overflow-x-auto pb-1">
+                        ${displayImgs.map((img, i) => `
+                            <button onclick="setMainImage('${img}')" data-src="${img}" class="thumbnail-btn w-8 h-8 border-2 ${i===0?'border-blue-500':'border-transparent'} rounded bg-slate-50 flex shrink-0 items-center justify-center p-1">
+                                <img src="${img}" class="max-h-full max-w-full object-contain mix-blend-multiply" />
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p class="text-[9px] uppercase tracking-widest font-bold text-slate-500 mt-2 text-center">${model.imgLabel}</p>
+                    <p class="text-[8px] text-slate-400 mt-1 text-center">${subtext}</p>
+                `;
+            } else {
+                imgArea.innerHTML = `<i data-lucide="${model.icon}" class="w-24 h-24 opacity-10"></i>`;
+            }
+            document.querySelectorAll('.model-card').forEach(c => c.classList.toggle('active-card', c.dataset.id === id));
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            const grid = document.getElementById('model-grid');
+            models.forEach(m => {
+                const card = document.createElement('div');
+                card.dataset.id = m.id;
+                card.className = "model-card border border-slate-200 rounded-xl p-5 cursor-pointer transition-all hover:border-orange-300 bg-white " + (m.id === activeId ? 'active-card' : '');
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-blue-600 font-black text-lg tracking-tight">${m.id}</span>
+                        <span class="text-[10px] font-bold bg-slate-100 px-2 py-0.5 rounded uppercase text-slate-500">${m.type}</span>
+                    </div>
+                    <p class="text-sm font-bold text-slate-700 mb-1">${m.use}</p>
+                    <div class="mt-4 flex items-center text-blue-600 text-[10px] font-bold uppercase tracking-wider">Specs <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i></div>
+                `;
+                card.onclick = () => updateUI(m.id);
+                grid.appendChild(card);
+            });
+            updateUI(activeId);
+        };
+    </script>
 </body>
 </html>
