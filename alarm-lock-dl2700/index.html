@@ -57,7 +57,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="bg-white pt-28 pb-16 md:pt-36 md:pb-24 border-b border-slate-200">
+    <section id="hero" class="bg-white pt-24 pb-10 md:pt-32 md:pb-14 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-6 mb-10">
                 <div>
@@ -89,7 +89,7 @@
     </section>
 
     <!-- Model Selection — Desktop cards (lg+) -->
-    <section id="models" class="bg-slate-50 py-12 lg:py-16 hidden lg:block">
+    <section id="models" class="bg-slate-50 py-10 lg:py-12 hidden lg:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-4 mb-2">
                 <h3 class="text-2xl font-bold text-slate-800">Model Selection Guide</h3>
@@ -111,11 +111,11 @@
     </section>
 
     <!-- Product Display Section -->
-    <section class="bg-white py-10 md:py-20">
+    <section id="product-display" class="bg-slate-50 py-10 md:py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 mb-12">
                 <!-- Core Advantages -->
-                <div class="transition-content flex flex-col justify-center" id="advantage-section">
+                <div class="transition-content flex flex-col justify-center bg-white rounded-2xl p-8 border border-slate-200 shadow-sm" id="advantage-section">
                     <h3 class="text-blue-600 font-bold uppercase tracking-wider text-base md:text-lg mb-4">Core Advantage: <span id="advantage-title">Standard Access</span></h3>
                     <p class="text-xl md:text-2xl leading-relaxed text-slate-700 mb-8 font-medium" id="advantage-desc">
                         Eliminate the headache of keys. The DL2700 offers heavy-duty security with keypad entry.
@@ -123,7 +123,7 @@
                     <ul class="space-y-6" id="advantage-bullets"></ul>
                 </div>
                 <!-- Product Image -->
-                <div class="bg-slate-50 rounded-2xl p-6 flex flex-col items-center justify-center border border-slate-200 shadow-inner group">
+                <div class="bg-white rounded-2xl p-6 flex flex-col items-center justify-center border border-slate-200 shadow-sm group">
                     <div class="w-full h-[400px] md:h-[480px] bg-white rounded-xl mb-4 border border-slate-200 flex flex-col items-center justify-center relative overflow-hidden p-6" id="image-placeholder">
                     </div>
                     <div class="flex gap-3 justify-center mt-2" id="finish-selector">
@@ -534,9 +534,12 @@
                         <span class="text-[10px] font-bold bg-slate-100 px-2 py-0.5 rounded uppercase text-slate-500">${m.type}</span>
                     </div>
                     <p class="text-sm font-bold text-slate-700 mb-1">${m.use}</p>
-                    <div class="mt-4 flex items-center text-blue-600 text-[10px] font-bold uppercase tracking-wider">Specs <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i></div>
+                    <div class="mt-4 flex items-center text-blue-600 text-[10px] font-bold uppercase tracking-wider">View Details <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i></div>
                 `;
-                card.onclick = () => updateUI(m.id);
+                card.onclick = () => {
+                    updateUI(m.id);
+                    document.getElementById('product-display').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
                 grid.appendChild(card);
             });
 
