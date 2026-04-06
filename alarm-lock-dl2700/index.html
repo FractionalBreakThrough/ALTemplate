@@ -35,36 +35,62 @@
 
         /* Badge tooltip popups */
         .badge-tip { cursor: pointer; user-select: none; }
-        .badge-bubble {
+        #badge-overlay {
             display: none;
             position: fixed;
-            bottom: 16px;
-            left: 16px;
-            right: 16px;
-            width: auto;
-            max-width: 400px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 16px;
+        }
+        #badge-overlay.active { display: block; }
+        #badge-overlay-content {
             background: #1e293b;
             color: #e2e8f0;
             font-size: 14px;
             font-weight: 400;
             line-height: 1.6;
-            padding: 16px 20px;
+            padding: 18px 20px;
             border-radius: 14px;
             box-shadow: 0 8px 40px rgba(0,0,0,0.35);
-            z-index: 200;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        #badge-overlay-close {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
         @media (min-width: 1024px) {
-            .badge-bubble {
+            #badge-overlay {
+                display: none !important;
+            }
+            .badge-bubble-lg {
+                display: none;
                 position: absolute;
-                bottom: auto;
                 top: calc(100% + 10px);
                 left: 50%;
-                right: auto;
                 transform: translateX(-50%);
                 width: 300px;
-                max-width: 300px;
+                background: #1e293b;
+                color: #e2e8f0;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 1.5;
+                padding: 14px 16px;
+                border-radius: 10px;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+                z-index: 50;
             }
-            .badge-bubble::before {
+            .badge-bubble-lg::before {
                 content: '';
                 position: absolute;
                 top: -6px;
@@ -74,8 +100,8 @@
                 border-right: 7px solid transparent;
                 border-bottom: 7px solid #1e293b;
             }
+            .badge-tip.active .badge-bubble-lg { display: block; }
         }
-        .badge-tip.active .badge-bubble { display: block; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -115,21 +141,21 @@
                     </h2>
                 </div>
                 <div class="flex flex-row flex-wrap gap-2 shrink-0">
-                    <span class="badge-glow-1 badge-tip relative bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 shadow-sm" onclick="toggleBadge(this)">
+                    <span class="badge-glow-1 badge-tip relative bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 shadow-sm" onclick="toggleBadge(this)" data-tip="BHMA/ANSI Grade 1 — the highest commercial security rating. Built to withstand over 800,000 cycles and extreme force, meeting the toughest standards for schools, hospitals, and government facilities.">
                         <i data-lucide="shield-check" class="w-4 h-4"></i> Grade 1 Strength
-                        <span class="badge-bubble">BHMA/ANSI Grade 1 — the highest commercial security rating. Built to withstand over 800,000 cycles and extreme force, meeting the toughest standards for schools, hospitals, and government facilities.</span>
+                        <span class="badge-bubble-lg">BHMA/ANSI Grade 1 — the highest commercial security rating. Built to withstand over 800,000 cycles and extreme force, meeting the toughest standards for schools, hospitals, and government facilities.</span>
                     </span>
-                    <span class="badge-glow-2 badge-tip relative bg-slate-100 text-slate-700 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-slate-200" onclick="toggleBadge(this)">
+                    <span class="badge-glow-2 badge-tip relative bg-slate-100 text-slate-700 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-slate-200" onclick="toggleBadge(this)" data-tip="No software or computer needed. Add, delete, or modify user codes directly at the keypad. Full programming takes minutes, not hours — perfect for on-site technicians and property managers.">
                         <i data-lucide="pointer" class="w-4 h-4 text-slate-500"></i> Program At Lock
-                        <span class="badge-bubble">No software or computer needed. Add, delete, or modify user codes directly at the keypad. Full programming takes minutes, not hours — perfect for on-site technicians and property managers.</span>
+                        <span class="badge-bubble-lg">No software or computer needed. Add, delete, or modify user codes directly at the keypad. Full programming takes minutes, not hours — perfect for on-site technicians and property managers.</span>
                     </span>
-                    <span class="badge-glow-3 badge-tip relative bg-amber-100 text-amber-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-amber-200" onclick="toggleBadge(this)">
+                    <span class="badge-glow-3 badge-tip relative bg-amber-100 text-amber-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-amber-200" onclick="toggleBadge(this)" data-tip="Tested from -31°F to +151°F. Every DL2700 model is weatherproof standard — no special ordering required. Ideal for exterior doors, loading docks, rooftop access, and covered walkways.">
                         <i data-lucide="cloud-rain" class="w-4 h-4"></i> All Models Weatherproof
-                        <span class="badge-bubble">Tested from -31°F to +151°F. Every DL2700 model is weatherproof standard — no special ordering required. Ideal for exterior doors, loading docks, rooftop access, and covered walkways.</span>
+                        <span class="badge-bubble-lg">Tested from -31°F to +151°F. Every DL2700 model is weatherproof standard — no special ordering required. Ideal for exterior doors, loading docks, rooftop access, and covered walkways.</span>
                     </span>
-                    <span class="badge-glow-4 badge-tip relative bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-emerald-200" onclick="toggleBadge(this)">
+                    <span class="badge-glow-4 badge-tip relative bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded text-sm font-semibold flex items-center gap-2 border border-emerald-200" onclick="toggleBadge(this)" data-tip="Up to 200,000 cycles on 5 standard AA batteries — one of the longest battery lives in the industry. Includes a low-battery warning so you're never caught off guard.">
                         <i data-lucide="battery-full" class="w-4 h-4"></i> Long Battery Life
-                        <span class="badge-bubble">Up to 200,000 cycles on 5 standard AA batteries — one of the longest battery lives in the industry. Includes a low-battery warning so you're never caught off guard.</span>
+                        <span class="badge-bubble-lg">Up to 200,000 cycles on 5 standard AA batteries — one of the longest battery lives in the industry. Includes a low-battery warning so you're never caught off guard.</span>
                     </span>
                 </div>
             </div>
@@ -440,13 +466,30 @@
 
         // Badge tooltip toggle
         function toggleBadge(el) {
-            const wasActive = el.classList.contains('active');
-            document.querySelectorAll('.badge-tip').forEach(b => b.classList.remove('active'));
-            if (!wasActive) el.classList.add('active');
+            var isDesktop = window.innerWidth >= 1024;
+            var wasActive = el.classList.contains('active');
+            document.querySelectorAll('.badge-tip').forEach(function(b) { b.classList.remove('active'); });
+            if (isDesktop) {
+                if (!wasActive) el.classList.add('active');
+            } else {
+                var overlay = document.getElementById('badge-overlay');
+                var text = document.getElementById('badge-overlay-text');
+                if (wasActive) {
+                    closeBadgeOverlay();
+                } else {
+                    el.classList.add('active');
+                    text.textContent = el.getAttribute('data-tip');
+                    overlay.classList.add('active');
+                }
+            }
         }
+        window.closeBadgeOverlay = function() {
+            document.getElementById('badge-overlay').classList.remove('active');
+            document.querySelectorAll('.badge-tip').forEach(function(b) { b.classList.remove('active'); });
+        };
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.badge-tip')) {
-                document.querySelectorAll('.badge-tip').forEach(b => b.classList.remove('active'));
+            if (!e.target.closest('.badge-tip') && !e.target.closest('#badge-overlay')) {
+                closeBadgeOverlay();
             }
         });
 
@@ -705,5 +748,13 @@
             updateUI(activeId);
         };
     </script>
+
+    <!-- Badge tooltip overlay (mobile/tablet) -->
+    <div id="badge-overlay" onclick="closeBadgeOverlay()">
+        <div id="badge-overlay-content" onclick="event.stopPropagation()">
+            <p id="badge-overlay-text"></p>
+            <button id="badge-overlay-close" onclick="closeBadgeOverlay()">Tap to close</button>
+        </div>
+    </div>
 </body>
 </html>
