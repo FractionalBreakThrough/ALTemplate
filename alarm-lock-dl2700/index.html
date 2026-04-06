@@ -37,30 +37,43 @@
         .badge-tip { cursor: pointer; user-select: none; }
         .badge-bubble {
             display: none;
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            width: auto;
+            max-width: 400px;
             background: #1e293b;
             color: #e2e8f0;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 400;
-            line-height: 1.5;
-            padding: 14px 16px;
-            border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-            z-index: 50;
+            line-height: 1.6;
+            padding: 16px 20px;
+            border-radius: 14px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+            z-index: 200;
         }
-        .badge-bubble::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-bottom: 7px solid #1e293b;
+        @media (min-width: 768px) {
+            .badge-bubble {
+                position: absolute;
+                bottom: auto;
+                top: calc(100% + 10px);
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: 300px;
+                max-width: 300px;
+            }
+            .badge-bubble::before {
+                content: '';
+                position: absolute;
+                top: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid #1e293b;
+            }
         }
         .badge-tip.active .badge-bubble { display: block; }
     </style>
@@ -148,9 +161,9 @@
     <!-- Product Display Section -->
     <section id="product-display" class="bg-slate-50 py-10 md:py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 mb-12">
+            <div class="flex flex-col-reverse md:grid md:grid-cols-2 gap-8 md:gap-12 mb-12">
                 <!-- Core Advantages -->
-                <div class="transition-content flex flex-col justify-center bg-white rounded-2xl p-8 border border-slate-200 shadow-[0_4px_24px_rgba(0,0,0,0.08)]" id="advantage-section">
+                <div class="transition-content flex flex-col justify-center bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-[0_4px_24px_rgba(0,0,0,0.08)]" id="advantage-section">
                     <h3 class="text-blue-600 font-bold uppercase tracking-wider text-base md:text-lg mb-4">Core Advantage: <span id="advantage-title">Standard Access</span></h3>
                     <p class="text-xl md:text-2xl leading-relaxed text-slate-700 mb-8 font-medium" id="advantage-desc">
                         Eliminate the headache of keys. The DL2700 offers heavy-duty security with keypad entry.
