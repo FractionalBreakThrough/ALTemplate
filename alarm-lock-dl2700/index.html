@@ -88,8 +88,17 @@
         </div>
     </section>
 
+    <!-- Mobile Model Selector (visible on mobile/tablet only) -->
+    <section class="bg-white pt-6 pb-0 lg:hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <label for="mobile-model-select" class="text-blue-600 font-bold uppercase tracking-wider text-xs mb-2 block">Select Model</label>
+            <select id="mobile-model-select" onchange="updateUI(this.value)" class="w-full border-2 border-slate-200 rounded-xl px-4 py-3.5 text-base font-semibold text-slate-800 bg-white appearance-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M7%207l3%203%203-3%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px;">
+            </select>
+        </div>
+    </section>
+
     <!-- Product Display Section -->
-    <section class="bg-white py-16 md:py-24">
+    <section class="bg-white py-10 md:py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 mb-12">
                 <!-- Core Advantages -->
@@ -116,14 +125,14 @@
         </div>
     </section>
 
-    <!-- Model Selection -->
-    <section id="models" class="bg-slate-50 py-16 md:py-24">
+    <!-- Model Selection (hidden on mobile/tablet, shown on desktop) -->
+    <section id="models" class="bg-slate-50 py-16 md:py-24 hidden lg:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-4 mb-6">
                 <h3 class="text-2xl font-bold text-slate-800">Model Selection Guide</h3>
                 <div class="flex-1 h-px bg-slate-200"></div>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="model-grid"></div>
+            <div class="grid lg:grid-cols-3 gap-4" id="model-grid"></div>
         </div>
     </section>
 
@@ -505,10 +514,13 @@
                 imgArea.innerHTML = `<i data-lucide="${model.icon}" class="w-24 h-24 opacity-10"></i>`;
             }
             document.querySelectorAll('.model-card').forEach(c => c.classList.toggle('active-card', c.dataset.id === id));
+            const mobileSelect = document.getElementById('mobile-model-select');
+            if (mobileSelect) mobileSelect.value = id;
             lucide.createIcons();
         }
 
         window.onload = () => {
+            // Populate desktop card grid
             const grid = document.getElementById('model-grid');
             models.forEach(m => {
                 const card = document.createElement('div');
@@ -525,6 +537,17 @@
                 card.onclick = () => updateUI(m.id);
                 grid.appendChild(card);
             });
+
+            // Populate mobile dropdown
+            const mobileSelect = document.getElementById('mobile-model-select');
+            models.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m.id;
+                opt.textContent = m.id + ' — ' + m.type + ' (' + m.use + ')';
+                if (m.id === activeId) opt.selected = true;
+                mobileSelect.appendChild(opt);
+            });
+
             updateUI(activeId);
         };
     </script>
