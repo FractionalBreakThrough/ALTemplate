@@ -1,0 +1,421 @@
+<!-- ═══ PICKAXE ALL-IN-ONE — Paste into a single "Raw text (HTML)" section ═══ -->
+
+<style>
+  /* ── Base ───────────────────────────────────────────── */
+  .cp-wrap { font-family: 'Georgia','Times New Roman',serif; color: #d4d4d4; line-height: 1.75; }
+  .cp-wrap *, .cp-wrap *::before, .cp-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .cp-wrap a { color: #c9a84c; text-decoration: none; }
+  .cp-wrap a:hover { color: #f0f0f0; }
+  .cp-wrap h1, .cp-wrap h2, .cp-wrap h3, .cp-wrap h4 { color: #f0f0f0; font-weight: 700; line-height: 1.3; }
+  .cp-container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .cp-text-center { text-align: center; }
+
+  /* ── Nav ────────────────────────────────────────────── */
+  .cp-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(17,17,17,.94); backdrop-filter: blur(14px);
+    border-bottom: 1px solid #333;
+  }
+  .cp-nav__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 960px; margin: 0 auto; padding: 0 24px; height: 56px;
+  }
+  .cp-nav__logo { font-size: 1.15rem; font-weight: 800; color: #f0f0f0; letter-spacing: .5px; }
+  .cp-nav__logo span { color: #c9a84c; }
+  .cp-nav__links { display: flex; gap: 24px; list-style: none; }
+  .cp-nav__links a { color: #d4d4d4; font-size: .8rem; font-weight: 500; font-family: sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+  .cp-nav__links a:hover { color: #c9a84c; }
+  .cp-nav__toggle { display: none; background: none; border: none; color: #f0f0f0; font-size: 1.4rem; cursor: pointer; padding: 6px; }
+
+  /* ── Hero ───────────────────────────────────────────── */
+  .cp-hero {
+    padding: 80px 24px 60px; text-align: center; position: relative; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.6) 0%, transparent 50%),
+                #111;
+  }
+  .cp-hero__content { max-width: 680px; margin: 0 auto; }
+  .cp-hero__icon { font-size: 2.5rem; margin-bottom: 16px; opacity: .8; }
+  .cp-hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 16px; letter-spacing: -.5px; }
+  .cp-hero h1 span { color: #c9a84c; }
+  .cp-hero p { font-size: 1.05rem; color: #d4d4d4; margin-bottom: 30px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cp-btn {
+    display: inline-block; padding: 12px 36px;
+    background: linear-gradient(135deg, #c9a84c, #a07c2a);
+    color: #111 !important; font-weight: 700; font-size: .9rem; font-family: sans-serif;
+    border: none; border-radius: 50px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 1px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .cp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,.15); color: #111 !important; }
+
+  /* ── Sections ──────────────────────────────────────── */
+  .cp-section { padding: 60px 0; }
+  .cp-section--alt { background: #111; }
+  .cp-label {
+    text-transform: uppercase; letter-spacing: 3px; font-size: .75rem;
+    color: #c9a84c; font-weight: 700; margin-bottom: 10px; font-family: sans-serif;
+  }
+  .cp-title { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 14px; }
+  .cp-sub { max-width: 640px; margin: 0 auto 40px; color: #888; font-size: .95rem; text-align: center; }
+
+  /* ── Overview Cards ────────────────────────────────── */
+  .cp-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px; margin-top: 32px;
+  }
+  .cp-card {
+    background: #242424; border: 1px solid #333;
+    border-radius: 10px; padding: 28px 24px;
+    transition: transform .2s, border-color .3s;
+  }
+  .cp-card:hover { transform: translateY(-3px); border-color: #c9a84c; }
+  .cp-card__icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .cp-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .cp-card p { font-size: .88rem; color: #888; line-height: 1.65; }
+
+  /* ── Feature Blocks ────────────────────────────────── */
+  .cp-feature {
+    display: flex; align-items: flex-start; gap: 28px;
+    margin-bottom: 36px; padding: 28px;
+    background: #242424; border: 1px solid #333;
+    border-radius: 10px; transition: border-color .3s;
+  }
+  .cp-feature:hover { border-color: #c9a84c; }
+  .cp-feature__num {
+    flex-shrink: 0; width: 42px; height: 42px;
+    background: linear-gradient(135deg, #c9a84c, #a07c2a);
+    color: #111; font-weight: 800; font-size: 1.1rem; font-family: sans-serif;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .cp-feature__body h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .cp-feature__body p { font-size: .88rem; color: #888; line-height: 1.65; }
+  .cp-feature__body ul { margin-top: 8px; padding-left: 18px; }
+  .cp-feature__body li { font-size: .86rem; color: #888; margin-bottom: 5px; line-height: 1.6; }
+  .cp-feature__body li strong { color: #f0f0f0; }
+
+  /* ── Steps Timeline ────────────────────────────────── */
+  .cp-steps { counter-reset: cpstep; max-width: 640px; margin: 0 auto; }
+  .cp-step {
+    counter-increment: cpstep; position: relative;
+    padding: 0 0 36px 58px; border-left: 2px solid #333;
+  }
+  .cp-step:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .cp-step::before {
+    content: counter(cpstep);
+    position: absolute; left: -16px; top: 0;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #c9a84c; color: #111;
+    font-family: sans-serif; font-weight: 800; font-size: .85rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cp-step h3 { font-size: 1rem; margin-bottom: 4px; }
+  .cp-step p { font-size: .88rem; color: #888; line-height: 1.65; }
+  .cp-step code {
+    background: #111; border: 1px solid #333;
+    padding: 2px 7px; border-radius: 4px; font-size: .82rem; color: #c9a84c;
+  }
+
+  /* ── Demo ───────────────────────────────────────────── */
+  .cp-demo {
+    max-width: 720px; margin: 0 auto 32px;
+    background: #242424; border: 1px solid #333;
+    border-radius: 10px; overflow: hidden;
+  }
+  .cp-demo__inner {
+    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px; color: #888; font-family: sans-serif;
+  }
+  .cp-demo__play {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #c9a84c; color: #111;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .cp-demo__play:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(201,168,76,.15); }
+
+  /* ── FAQ ────────────────────────────────────────────── */
+  .cp-faq { max-width: 700px; margin: 0 auto; }
+  .cp-faq__item { border-bottom: 1px solid #333; padding: 18px 0; }
+  .cp-faq__item:first-child { border-top: 1px solid #333; }
+  .cp-faq__q {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; width: 100%; background: none; border: none;
+    color: #f0f0f0; font-size: .95rem; font-family: Georgia, serif;
+    text-align: left; padding: 0; line-height: 1.5;
+  }
+  .cp-faq__q::after {
+    content: '+'; font-size: 1.3rem; color: #c9a84c;
+    flex-shrink: 0; margin-left: 14px; font-family: sans-serif;
+    transition: transform .2s;
+  }
+  .cp-faq__item.open .cp-faq__q::after { content: '\2212'; }
+  .cp-faq__a {
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    color: #888; font-size: .88rem; line-height: 1.7;
+  }
+  .cp-faq__item.open .cp-faq__a { max-height: 400px; padding-top: 10px; }
+
+  /* ── Footer ────────────────────────────────────────── */
+  .cp-footer {
+    padding: 32px 0; text-align: center;
+    border-top: 1px solid #333;
+    color: #888; font-size: .8rem; font-family: sans-serif;
+  }
+  .cp-footer a { color: #c9a84c; }
+
+  /* ── Scroll Reveal ─────────────────────────────────── */
+  .cp-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .cp-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Responsive ────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .cp-nav__links {
+      display: none; flex-direction: column; position: absolute;
+      top: 56px; left: 0; width: 100%;
+      background: rgba(17,17,17,.97); padding: 20px; gap: 16px;
+      border-bottom: 1px solid #333;
+    }
+    .cp-nav__links.open { display: flex; }
+    .cp-nav__toggle { display: block; }
+    .cp-feature { flex-direction: column; gap: 14px; }
+    .cp-hero { padding: 60px 20px 50px; }
+    .cp-section { padding: 48px 0; }
+  }
+</style>
+
+<!-- ═══ PAGE CONTENT ═══ -->
+<div class="cp-wrap">
+
+  <!-- Nav -->
+  <nav class="cp-nav" id="cpNav">
+    <div class="cp-nav__inner">
+      <a href="#" class="cp-nav__logo">Christ<span>Perfect</span></a>
+      <ul class="cp-nav__links" id="cpNavLinks">
+        <li><a href="#cp-overview">Overview</a></li>
+        <li><a href="#cp-tools">Our Tools</a></li>
+        <li><a href="#cp-start">Get Started</a></li>
+        <li><a href="#cp-demo">Demo</a></li>
+        <li><a href="#cp-faq">FAQ</a></li>
+      </ul>
+      <button class="cp-nav__toggle" id="cpNavToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="cp-hero">
+    <div class="cp-hero__content">
+      <div class="cp-hero__icon">&#9769;</div>
+      <h1>Hand-Crafted <span>Biblical AI Tools</span></h1>
+      <p>Learn how to use our suite of AI-powered tools designed to help you dive deeper into Scripture, explore theological questions, and strengthen your faith.</p>
+      <a href="#cp-overview" class="cp-btn">Explore the Tools</a>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <div class="cp-section" id="cp-overview">
+    <div class="cp-container cp-text-center">
+      <p class="cp-label cp-reveal">Overview</p>
+      <h2 class="cp-title cp-reveal">What is Christ Perfect?</h2>
+      <p class="cp-sub cp-reveal">Christ Perfect is a collection of biblical AI tools hosted on Pickaxe, each designed to guide you through different areas of study and spiritual growth. Every tool is grounded in Scripture and built with theological care.</p>
+      <div class="cp-grid">
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#128214;</div>
+          <h3>Exegetical Study Guides</h3>
+          <p>A seminary-trained theological architect that generates in-depth study guides for any Bible passage, covering historical context, original languages, canonical theology, and practical application.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#10013;</div>
+          <h3>Perfection Questions</h3>
+          <p>Explore what it means to pursue Christian perfection. Ask questions about the perfection of Jesus and how believers can walk in holiness in everyday life.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#128161;</div>
+          <h3>Apologetics Trainer</h3>
+          <p>Apologia AI helps you think through challenges to the Christian faith &mdash; the reliability of the Bible, the existence of God, the problem of evil, the resurrection, and more.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Walkthrough -->
+  <div class="cp-section cp-section--alt" id="cp-tools">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Feature Walkthrough</p>
+        <h2 class="cp-title cp-reveal">How Each Tool Works</h2>
+        <p class="cp-sub cp-reveal">Each tool is built to serve a unique purpose. Here's what you can expect from each one.</p>
+      </div>
+      <div class="cp-feature cp-reveal">
+        <div class="cp-feature__num">1</div>
+        <div class="cp-feature__body">
+          <h3>Exegetical Study Guide</h3>
+          <p>Provide a Bible verse or passage and receive a comprehensive study guide. The AI will:</p>
+          <ul>
+            <li><strong>Excavate historical and cultural context</strong> that shaped the original audience</li>
+            <li><strong>Analyze the original languages</strong> (Koine Greek and Biblical Hebrew) with lexical precision</li>
+            <li><strong>Synthesize canonical theology</strong> showing how your passage connects across all of Scripture</li>
+            <li><strong>Apply the text practically</strong> to individual believers, families, and leaders</li>
+            <li><strong>Cross-reference proprietary theological resources</strong> from its knowledge base</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cp-feature cp-reveal">
+        <div class="cp-feature__num">2</div>
+        <div class="cp-feature__body">
+          <h3>Perfection Questions</h3>
+          <p>This tool is focused on the doctrine of Christian perfection. Use it to explore questions like:</p>
+          <ul>
+            <li><strong>How can Christians become perfect?</strong> &mdash; What does Scripture actually teach?</li>
+            <li><strong>Was Jesus able to sin?</strong> &mdash; The impeccability debate examined</li>
+            <li><strong>What does holiness look like in daily life?</strong> &mdash; Practical sanctification explored</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cp-feature cp-reveal">
+        <div class="cp-feature__num">3</div>
+        <div class="cp-feature__body">
+          <h3>Apologetics Trainer</h3>
+          <p>Apologia AI helps you engage with the toughest questions about the faith. Topics include:</p>
+          <ul>
+            <li><strong>Reliability of the Bible</strong> &mdash; manuscript evidence, transmission, and canon</li>
+            <li><strong>Existence of God</strong> &mdash; cosmological, teleological, and moral arguments</li>
+            <li><strong>Problem of evil</strong> &mdash; theodicy and the free will defense</li>
+            <li><strong>Resurrection of Jesus</strong> &mdash; historical evidence and alternative theories</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Getting Started -->
+  <div class="cp-section" id="cp-start">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Getting Started</p>
+        <h2 class="cp-title cp-reveal">How to Use the Tools</h2>
+        <p class="cp-sub cp-reveal">Getting started is simple. Follow these steps to begin your study.</p>
+      </div>
+      <div class="cp-steps">
+        <div class="cp-step cp-reveal">
+          <h3>Visit Christ Perfect</h3>
+          <p>Head to the Christ Perfect page on Pickaxe. You'll see a welcome screen with the option to browse and select a tool.</p>
+        </div>
+        <div class="cp-step cp-reveal">
+          <h3>Choose Your Tool</h3>
+          <p>Select the AI tool that fits your study goal &mdash; whether it's deep exegesis, questions about perfection, or defending the faith.</p>
+        </div>
+        <div class="cp-step cp-reveal">
+          <h3>Ask Your Question</h3>
+          <p>Type a Bible reference like <code>Romans 3:21-26</code> or <code>Psalm 23</code>, or ask a specific theological question you're wrestling with.</p>
+        </div>
+        <div class="cp-step cp-reveal">
+          <h3>Receive Your Study Guide</h3>
+          <p>The AI will generate a detailed, scripture-grounded response. You can continue the conversation to dig deeper into any area of the study.</p>
+        </div>
+        <div class="cp-step cp-reveal">
+          <h3>Explore Further</h3>
+          <p>Switch between tools anytime. Use the Exegetical Guide for a passage, then bring a tough question to the Apologetics Trainer. Each tool builds on the others.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo -->
+  <div class="cp-section cp-section--alt" id="cp-demo">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Demo</p>
+        <h2 class="cp-title cp-reveal">See It in Action</h2>
+        <p class="cp-sub cp-reveal">Watch a walkthrough of the tools or try them out yourself below.</p>
+      </div>
+      <div class="cp-demo cp-reveal">
+        <div class="cp-demo__inner">
+          <div class="cp-demo__play">&#9654;</div>
+          <p>Video walkthrough coming soon</p>
+        </div>
+      </div>
+      <div class="cp-text-center cp-reveal">
+        <a href="https://learn.christperfect.com/" class="cp-btn" target="_blank" rel="noopener">Try Free on Pickaxe</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="cp-section" id="cp-faq">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">FAQ</p>
+        <h2 class="cp-title cp-reveal">Frequently Asked Questions</h2>
+        <p class="cp-sub cp-reveal">Common questions about using the Christ Perfect tools.</p>
+      </div>
+      <div class="cp-faq">
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">Is it free to use?</button>
+          <div class="cp-faq__a">Yes! The tools are available on a Free+ plan on Pickaxe. You can start exploring immediately without any payment.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">What Bible translations does the Exegetical Guide use?</button>
+          <div class="cp-faq__a">The Exegetical Study Guide works directly from the original languages (Koine Greek and Biblical Hebrew) and references multiple translations to provide the most accurate analysis. You can ask about any verse in any translation.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">Does the AI speculate or make things up?</button>
+          <div class="cp-faq__a">No. The tools are designed to avoid speculation, anachronistic interpretation, and unfounded claims. Every assertion is grounded in the canonical text and verifiable scholarship.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">Can I ask follow-up questions?</button>
+          <div class="cp-faq__a">Absolutely. Each tool supports conversational follow-ups. After receiving a study guide or answer, simply ask another question to dig deeper into any part of the response.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">How is this different from other Bible AI tools?</button>
+          <div class="cp-faq__a">Christ Perfect tools are built with seminary-level theological rigor. They analyze original languages, synthesize canonical theology, and cross-reference proprietary theological resources &mdash; not just surface-level summaries.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">What should I try first?</button>
+          <div class="cp-faq__a">Start with the Exegetical Study Guide. Pick a favorite passage &mdash; like John 1:1-14 or Romans 8:28-30 &mdash; and see the depth of analysis it produces. From there, explore the other tools based on what interests you.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="cp-footer">
+    <div class="cp-container">
+      <p>&copy; 2026 Christ Perfect. Built with care on <a href="https://pickaxe.co" target="_blank" rel="noopener">Pickaxe</a>.</p>
+    </div>
+  </div>
+
+</div><!-- end .cp-wrap -->
+
+<script>
+(function(){
+  // Mobile menu toggle
+  var toggle = document.getElementById('cpNavToggle');
+  var links = document.getElementById('cpNavLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ links.classList.remove('open'); });
+    });
+  }
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.cp-reveal');
+  if (reveals.length) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el){ observer.observe(el); });
+  }
+  // FAQ accordion
+  document.querySelectorAll('.cp-faq__q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement;
+      document.querySelectorAll('.cp-faq__item').forEach(function(i){ if(i!==item) i.classList.remove('open'); });
+      item.classList.toggle('open');
+    });
+  });
+})();
+</script>
