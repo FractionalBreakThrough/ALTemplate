@@ -189,9 +189,10 @@
   }
   .cp-footer a { color: var(--accent); }
 
-  /* ── Scroll Reveal ──────────────────────────────────── */
-  .cp-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-  .cp-reveal.visible { opacity: 1; transform: translateY(0); }
+  /* ── Scroll Reveal (JS-enhanced, visible by default) ── */
+  .cp-reveal { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+  .cp-reveal-ready .cp-reveal { opacity: 0; transform: translateY(24px); }
+  .cp-reveal-ready .cp-reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── Responsive ─────────────────────────────────────── */
   @media (max-width: 768px) {

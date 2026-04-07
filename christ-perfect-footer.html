@@ -21,9 +21,14 @@
       });
     }
 
-    // Scroll reveal
+    // Scroll reveal - only activate animations if JS is running
     var reveals = document.querySelectorAll('.cp-reveal');
     if (reveals.length) {
+      // Find the wrapper and enable animations
+      var wrap = document.querySelector('.cp-nav');
+      if (wrap) wrap.closest('div').classList.add('cp-reveal-ready');
+      document.body.classList.add('cp-reveal-ready');
+
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
           if (e.isIntersecting) {
