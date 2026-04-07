@@ -1,0 +1,49 @@
+<!-- ═══ PICKAXE FOOTER — Paste into the FOOTER field ═══ -->
+<!-- This is injected before the closing </body> tag -->
+
+<script>
+  // Nav scroll effect
+  (function() {
+    var nav = document.getElementById('cpNav');
+    if (nav) {
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 30);
+      });
+    }
+
+    // Mobile menu toggle
+    var toggle = document.getElementById('cpNavToggle');
+    var links = document.getElementById('cpNavLinks');
+    if (toggle && links) {
+      toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { links.classList.remove('open'); });
+      });
+    }
+
+    // Scroll reveal
+    var reveals = document.querySelectorAll('.cp-reveal');
+    if (reveals.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.cp-faq__q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.parentElement;
+        document.querySelectorAll('.cp-faq__item').forEach(function(i) {
+          if (i !== item) i.classList.remove('open');
+        });
+        item.classList.toggle('open');
+      });
+    });
+  })();
+</script>
