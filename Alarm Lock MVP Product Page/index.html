@@ -255,6 +255,19 @@ img {
     margin: 0 auto;
 }
 
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    right: 5%;
+    bottom: -10%;
+    background: linear-gradient(135deg, rgba(232,87,42,0.35), rgba(232,67,130,0.35));
+    border-radius: 24px;
+    filter: blur(40px);
+    z-index: -1;
+}
+
 /* ===== Dashboard Mockup ===== */
 .dashboard-mockup {
     background: #fff;
