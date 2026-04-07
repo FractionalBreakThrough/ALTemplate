@@ -7,6 +7,19 @@
     background: #1a1a1a !important;
   }
 
+  /* ── Remove Pickaxe container box styling ──────────── */
+  [class*="card"], [class*="Card"], [class*="block"], [class*="Block"], [class*="container"], [class*="Container"], [class*="panel"], [class*="Panel"], [class*="box"], [class*="Box"] {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  /* Restore our own card styles */
+  .cp-card { background: var(--bg-card) !important; border: 1px solid var(--border) !important; border-radius: var(--radius) !important; }
+  .cp-feature { background: var(--bg-card) !important; border: 1px solid var(--border) !important; border-radius: var(--radius) !important; }
+  .cp-demo { background: var(--bg-card) !important; border: 1px solid var(--border) !important; border-radius: var(--radius) !important; }
+  .cp-nav { background: rgba(17,17,17,.92) !important; border-bottom: 1px solid var(--border) !important; }
+
   /* ── Reset & Base ───────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
