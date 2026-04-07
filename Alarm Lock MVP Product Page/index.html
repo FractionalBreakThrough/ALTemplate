@@ -13,8 +13,10 @@
 }
 
 :root {
-    --orange: #ff4500;
-    --orange-light: #ff6a33;
+    --orange: #e8572a;
+    --orange-light: #f06640;
+    --pink: #e84382;
+    --gradient: linear-gradient(135deg, #e8572a, #e84382);
     --dark: #1a1a2e;
     --text: #333;
     --text-light: #666;
@@ -73,14 +75,14 @@ img {
 }
 
 .btn-primary {
-    background: var(--orange);
+    background: var(--gradient);
     color: #fff;
-    border-color: var(--orange);
+    border-color: transparent;
 }
 
 .btn-primary:hover {
-    background: var(--orange-light);
-    border-color: var(--orange-light);
+    opacity: 0.9;
+    border-color: transparent;
 }
 
 .btn-outline {
@@ -111,7 +113,10 @@ img {
 }
 
 .text-orange {
-    color: var(--orange);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .badge {
@@ -527,7 +532,10 @@ img {
 .stat-number {
     font-size: 3rem;
     font-weight: 800;
-    color: var(--orange);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .stat-desc {
@@ -819,7 +827,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--orange);
+    background: var(--gradient);
     border-radius: 24px;
     transition: 0.3s;
 }
@@ -905,9 +913,9 @@ img {
 
 /* Popular card */
 .pricing-card.popular {
-    background: var(--orange);
+    background: var(--gradient);
     color: #fff;
-    border-color: var(--orange);
+    border-color: transparent;
     transform: scale(1.03);
 }
 
