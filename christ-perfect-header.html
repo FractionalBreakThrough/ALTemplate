@@ -8,11 +8,23 @@
   }
 
   /* ── Remove Pickaxe container box styling ──────────── */
-  [class*="card"], [class*="Card"], [class*="block"], [class*="Block"], [class*="container"], [class*="Container"], [class*="panel"], [class*="Panel"], [class*="box"], [class*="Box"] {
+  [class*="card"], [class*="Card"], [class*="block"], [class*="Block"], [class*="container"], [class*="Container"], [class*="panel"], [class*="Panel"], [class*="box"], [class*="Box"],
+  .cp-hero > *, .cp-hero div:not(.cp-hero__content):not([class^="cp-"]) {
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+  }
+  /* Nuclear option: strip ALL descendant styling inside hero except our own */
+  .cp-hero * {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .cp-hero .cp-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent2)) !important;
+    border-radius: 50px !important;
   }
   /* Restore our own card styles */
   .cp-card { background: var(--bg-card) !important; border: 1px solid var(--border) !important; border-radius: var(--radius) !important; }
