@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAPCO MVP Access Ecosystem | The Rep Collective</title>
+    <meta name="description" content="NAPCO MVP Access Control — cloud-hosted access control for every door. Compare MVP EZ and MVP Access platforms, explore Alarm Lock hardware, and design your system.">
+    <meta name="keywords" content="NAPCO MVP, MVP Access, MVP EZ, Alarm Lock, Trilogy Networx, ArchiTech, Marks USA, access control, cloud access control, ACaaS">
+    <meta property="og:title" content="NAPCO MVP Access Ecosystem — Cloud Access Control for Every Door">
+    <meta property="og:description" content="Compare MVP EZ and MVP Access platforms. Explore Alarm Lock Trilogy, ArchiTech, Marks USA locks, and NA-Series panels.">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        .platform-tab { transition: all 0.2s ease; }
+        .platform-tab.active { border-color: #c8102e; color: #c8102e; background: #fff5f5; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-white text-sm font-medium">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-white text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-mvpdark pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-red-400 blur-[100px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+                    <span class="text-mvpred font-bold text-xs uppercase tracking-wider">Cloud Access Control</span>
+                    <span class="text-white/40">|</span>
+                    <span class="text-white/70 text-xs">by NAPCO Security Technologies</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight mb-6 leading-tight">
+                    One Cloud Platform.<br><span class="text-mvpred">Every Door.</span> Every Credential.
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    From a single smartphone-managed door to a 50,000+ door enterprise campus. MVP Access is the unified cloud ecosystem that scales with your business — no rip-and-replace, no database migrations.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#platforms" class="gradient-red text-white font-bold px-8 py-3.5 rounded-lg text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-red-500/25 transition-all">Compare Platforms</a>
+                    <a href="#ecosystem" class="bg-white/10 border border-white/20 text-white font-bold px-8 py-3.5 rounded-lg text-sm uppercase tracking-wider hover:bg-white/20 transition-all">Explore Hardware</a>
+                </div>
+            </div>
+            <!-- Stats row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-3xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black text-white">50K+</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Doors Supported</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black text-white">900ft</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Wireless Range</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black text-white">10s</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Global Lockdown</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black text-white">5yr</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Battery Life</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Comparison -->
+    <section id="platforms" class="bg-slate-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Choose Your Platform</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">Two Tiers. One Ecosystem.</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Both platforms share the same hardware and database. Start with MVP EZ and upgrade to MVP Access anytime — no hardware swaps, no data migration.</p>
+            </div>
+
+            <!-- Platform Cards -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <!-- MVP EZ -->
+                <div class="bg-white rounded-2xl border-2 border-slate-200 p-8 relative overflow-hidden hover:border-mvpred/30 transition-colors">
+                    <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-bl-xl">Best for SMB</div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-200">
+                            <span class="text-mvpred font-black text-lg">EZ</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black text-slate-900">MVP EZ</h3>
+                            <p class="text-slate-400 text-xs font-medium uppercase tracking-wider">Mobile-First Management</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Configure, command, and control your entire access system exclusively from the MVP EZ smartphone app. Perfect for retail, small offices, and multi-tenant properties.</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600">Up to <strong class="text-slate-800">50 doors</strong> and <strong class="text-slate-800">50 users</strong></span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">200 badges</strong> + 200 BLE credentials</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">Scan2Enroll</strong> QR code provisioning</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">8 access groups</strong>, 4 time schedules</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">60-day</strong> event history</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i><span class="text-slate-600">App-based <strong class="text-slate-800">manual lockdown</strong></span></li>
+                    </ul>
+                    <div class="pt-4 border-t border-slate-100">
+                        <p class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Flat-Rate Per-Door Pricing • No Annual Contracts</p>
+                    </div>
+                </div>
+
+                <!-- MVP Access -->
+                <div class="bg-white rounded-2xl border-2 border-mvpred/30 p-8 relative overflow-hidden shadow-lg shadow-red-500/5">
+                    <div class="absolute top-0 right-0 gradient-red text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-bl-xl">Enterprise</div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-14 h-14 gradient-red rounded-xl flex items-center justify-center">
+                            <span class="text-white font-black text-sm">MVP</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black text-slate-900">MVP Access</h3>
+                            <p class="text-slate-400 text-xs font-medium uppercase tracking-wider">Full Enterprise Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Desktop browser dashboards, PC client, and MVP Access Pro mobile app. Built for large commercial campuses, healthcare, and global multi-site deployments.</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">Unlimited users</strong>, <strong class="text-slate-800">50,000+ doors</strong></span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">Unlimited</strong> badges, BLE, NFC, biometrics</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">30,000 access groups</strong>, 254 schedules/panel</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">Geofencing</strong>, threat levels, anti-passback</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">6+ month</strong> event retention, custom reports</span></li>
+                        <li class="flex gap-3 text-sm"><i data-lucide="check" class="w-4 h-4 text-mvpred mt-0.5 shrink-0"></i><span class="text-slate-600"><strong class="text-slate-800">VMS, elevator, visitor</strong> integrations</span></li>
+                    </ul>
+                    <div class="pt-4 border-t border-slate-100">
+                        <p class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Flat-Rate Per-Door Pricing • No Annual Contracts</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Table (Desktop) -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hidden md:block">
+                <div class="grid grid-cols-3 bg-slate-900 text-white">
+                    <div class="p-4 text-sm font-bold uppercase tracking-wider">Specification</div>
+                    <div class="p-4 text-sm font-bold uppercase tracking-wider text-center border-l border-white/10">MVP EZ</div>
+                    <div class="p-4 text-sm font-bold uppercase tracking-wider text-center border-l border-white/10 bg-mvpred/20">MVP Access</div>
+                </div>
+                <div class="divide-y divide-slate-100">
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Deployment Target</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">SMBs, Retail</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">Large Commercial, Campus, Multi-site</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Admin Interface</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">Mobile App Only</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">Web Browser, PC Client, Pro App</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Door / User Scale</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">50 doors, 50 users</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">50,000+ doors, unlimited users</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Credentials</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">200 badges, 200 BLE</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">Unlimited (badges, BLE, NFC, biometrics)</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Access Groups / Schedules</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">8 groups, 4 schedules</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">30,000 groups, 254 schedules/panel</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Security Features</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">Manual lockdown via app</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">Geofencing, threat levels, anti-passback</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Event Retention</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">60 days</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">6+ months (custom reports)</div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div class="p-4 text-sm font-medium text-slate-700">Integrations</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100">Native hardware only</div>
+                        <div class="p-4 text-sm text-slate-500 text-center border-l border-slate-100 bg-red-50/30">VMS, elevator, visitor management</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hardware Ecosystem Cards -->
+    <section id="ecosystem" class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Hardware Ecosystem</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">Purpose-Built for Every Opening</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">From wireless Grade 1 locksets to hardwired panel controllers — every device connects to the same MVP cloud.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Trilogy Networx -->
+                <a href="trilogy-networx.html" class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-mvpred/5"></div>
+                        <div class="text-center relative z-10">
+                            <i data-lucide="lock" class="w-12 h-12 text-white/40 mx-auto mb-2"></i>
+                            <span class="text-white/30 text-xs uppercase tracking-widest font-bold">Product Image</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Trilogy Networx</h3>
+                            <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Wireless</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Industrial-grade 900MHz wireless locks. Grade 1 certified, 5-year battery life, 10-second global lockdown.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            Explore Models <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ArchiTech -->
+                <a href="architech.html" class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-amber-800 to-amber-950 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-mvpred/5"></div>
+                        <div class="text-center relative z-10">
+                            <i data-lucide="palette" class="w-12 h-12 text-white/40 mx-auto mb-2"></i>
+                            <span class="text-white/30 text-xs uppercase tracking-widest font-bold">Product Image</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">ArchiTech Series</h3>
+                            <span class="text-[10px] font-bold bg-amber-100 text-amber-700 px-2 py-0.5 rounded uppercase">Designer</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">300+ architectural trims and finishes. Same Networx wireless tech in a designer package. Part number configurator included.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            Configure Yours <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Marks USA -->
+                <a href="marks-usa.html" class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-mvpred/5"></div>
+                        <div class="text-center relative z-10">
+                            <i data-lucide="home" class="w-12 h-12 text-white/40 mx-auto mb-2"></i>
+                            <span class="text-white/30 text-xs uppercase tracking-widest font-bold">Product Image</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Marks USA</h3>
+                            <span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded uppercase">Multi-Tenant</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Smart deadbolts for apartments and multi-family. Pick-proof, bump-proof, with MobileLink offline sync technology.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            View Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- NA Panels -->
+                <a href="na-panels.html" class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-indigo-800 to-indigo-950 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-mvpred/5"></div>
+                        <div class="text-center relative z-10">
+                            <i data-lucide="circuit-board" class="w-12 h-12 text-white/40 mx-auto mb-2"></i>
+                            <span class="text-white/30 text-xs uppercase tracking-widest font-bold">Product Image</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">NA-Series Panels</h3>
+                            <span class="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded uppercase">Hardwired</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Cloud-ready controllers for mag locks, strikes, gates, and elevators. Full local logic engine — zero downtime during outages.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            Compare Panels <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Infrastructure -->
+                <a href="infrastructure.html" class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-teal-700 to-teal-900 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-mvpred/5"></div>
+                        <div class="text-center relative z-10">
+                            <i data-lucide="radio-tower" class="w-12 h-12 text-white/40 mx-auto mb-2"></i>
+                            <span class="text-white/30 text-xs uppercase tracking-widest font-bold">Product Image</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Infrastructure</h3>
+                            <span class="text-[10px] font-bold bg-teal-100 text-teal-700 px-2 py-0.5 rounded uppercase">Networking</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Gateways, expanders, credentials, keyfobs, and site survey tools. Everything to build the 900MHz mesh network.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            View Catalog <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Deployment -->
+                <a href="deployment.html" class="card-lift bg-white rounded-2xl border-2 border-mvpred/20 overflow-hidden group relative">
+                    <div class="h-48 gradient-red flex items-center justify-center relative">
+                        <div class="text-center relative z-10">
+                            <i data-lucide="rocket" class="w-12 h-12 text-white/60 mx-auto mb-2"></i>
+                            <span class="text-white/50 text-xs uppercase tracking-widest font-bold">Step-by-Step Guide</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Deployment Guide</h3>
+                            <span class="text-[10px] font-bold bg-red-100 text-mvpred px-2 py-0.5 rounded uppercase">4 EZ Steps</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">From site survey to commissioning. The complete integrator playbook for deploying MVP Access systems profitably.</p>
+                        <div class="flex items-center text-mvpred text-xs font-bold uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                            Start Deploying <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why MVP -->
+    <section class="bg-mvpdark py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">The MVP Advantage</p>
+                <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-4">Why Dealers and Integrators Choose MVP</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <i data-lucide="dollar-sign" class="w-8 h-8 text-mvpred mb-4"></i>
+                    <h4 class="text-white font-bold mb-2">Recurring Revenue</h4>
+                    <p class="text-slate-400 text-sm">Flat-rate per-door pricing creates predictable monthly recurring revenue. No annual contracts to chase.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <i data-lucide="zap" class="w-8 h-8 text-mvpred mb-4"></i>
+                    <h4 class="text-white font-bold mb-2">Scan2Enroll</h4>
+                    <p class="text-slate-400 text-sm">QR code provisioning eliminates IP configuration, MAC entry, and firewall headaches. Point, scan, done.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <i data-lucide="trending-up" class="w-8 h-8 text-mvpred mb-4"></i>
+                    <h4 class="text-white font-bold mb-2">Elastic Scaling</h4>
+                    <p class="text-slate-400 text-sm">Start with one door on MVP EZ and grow to 50,000+ on MVP Access. Same hardware. Zero migration.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <i data-lucide="wifi-off" class="w-8 h-8 text-mvpred mb-4"></i>
+                    <h4 class="text-white font-bold mb-2">Offline Resilience</h4>
+                    <p class="text-slate-400 text-sm">Every lock and panel retains full logic locally. Zero feature shutdown during network outages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
