@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilogy Networx — Industrial Wireless Access Locks | MVP Access Ecosystem</title>
+    <meta name="description" content="Alarm Lock Trilogy Networx — Grade 1 wireless locks with 900MHz range, 5-year battery life, and 10-second global lockdown. Explore all form factors.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-white text-sm font-medium">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-white text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-blue-500 blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-2 text-sm text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                <span class="text-white">Trilogy Networx</span>
+            </div>
+            <div class="max-w-3xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-blue-400 font-bold uppercase tracking-widest text-[10px] border border-blue-400/30 rounded-full px-3 py-1">Wireless • 900MHz</span>
+                    <span class="text-emerald-400 font-bold uppercase tracking-widest text-[10px] border border-emerald-400/30 rounded-full px-3 py-1">Grade 1</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+                    Alarm Lock<br>Trilogy <span class="text-mvpred">Networx</span>
+                </h1>
+                <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">
+                    Industrial-grade wireless access locks with an integral 900MHz bidirectional transceiver. Grade 1 certified, 5-year battery life, and 10-second global lockdown across your entire campus.
+                </p>
+            </div>
+            <!-- Hero Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-3xl">
+                <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                    <div class="text-2xl font-black text-white">900ft</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Clear-Field Range</div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                    <div class="text-2xl font-black text-white">5yr</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Battery Life</div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                    <div class="text-2xl font-black text-white">40K</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Buffered Events</div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                    <div class="text-2xl font-black text-white">10s</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-1">Global Lockdown</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why 900MHz -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Wireless Technology</p>
+                    <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-6">Why 900MHz Beats Wi-Fi</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">Standard 2.4GHz Wi-Fi struggles to penetrate commercial building materials. The Trilogy Networx 900MHz transceiver cuts through reinforced concrete, steel studs, and elevator shafts — delivering reliable communication up to 900 feet in clear field.</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+                                <i data-lucide="radio-tower" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Superior Penetration</h4>
+                                <p class="text-xs text-slate-500">Lower frequency signals pass through concrete, steel, and brick far better than 2.4GHz or 5GHz Wi-Fi.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+                                <i data-lucide="shield" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">No IT Network Dependency</h4>
+                                <p class="text-xs text-slate-500">The 900MHz mesh operates independently of your building's Wi-Fi. No IP conflicts, no firewall rules, no IT friction.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+                                <i data-lucide="battery-charging" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Power-Saver Radio</h4>
+                                <p class="text-xs text-slate-500">Advanced dormancy circuit manages radio sleep cycles, achieving up to 500,000 cycles on standard C-cell batteries.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Placeholder for 900MHz vs WiFi infographic -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl h-80 flex items-center justify-center">
+                    <div class="text-center">
+                        <i data-lucide="radio-tower" class="w-16 h-16 text-slate-300 mx-auto mb-3"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">900MHz vs Wi-Fi Infographic</p>
+                        <p class="text-slate-300 text-xs mt-1">Image Placeholder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Decentralized Intelligence -->
+    <section class="bg-slate-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Decentralized Intelligence</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-4">Every Lock Thinks for Itself</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Each Trilogy Networx lock stores all programming, schedules, and user data locally. If the network goes down, every door keeps working — and buffers up to 40,000 events until connectivity restores.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
+                        <i data-lucide="database" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Local Logic Engine</h4>
+                    <p class="text-sm text-slate-500">All access rules, time schedules, and user credentials are stored on the lock's internal board. No cloud dependency for door decisions.</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
+                        <i data-lucide="hard-drive" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">40,000 Event Buffer</h4>
+                    <p class="text-sm text-slate-500">Every access event is logged locally with time/date stamps. When the network reconnects, the full audit trail auto-syncs to the cloud.</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
+                        <i data-lucide="refresh-cw" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Auto Cloud Sync</h4>
+                    <p class="text-sm text-slate-500">Schedule changes, firmware updates, and new credentials pushed from MVP are automatically applied when the lock checks in wirelessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Lockdown -->
+    <section class="bg-mvpdark py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Placeholder for lockdown animation -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl h-72 flex items-center justify-center order-2 md:order-1">
+                    <div class="text-center">
+                        <i data-lucide="shield-alert" class="w-16 h-16 text-mvpred/40 mx-auto mb-3"></i>
+                        <p class="text-white/30 text-xs uppercase tracking-widest font-bold">Lockdown Animation</p>
+                        <p class="text-white/20 text-xs mt-1">Image Placeholder</p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Emergency Response</p>
+                    <h2 class="text-3xl font-black text-white tracking-tight mb-6">10-Second Global Lockdown</h2>
+                    <p class="text-slate-300 leading-relaxed mb-6">A single command from the cloud, a mobile device, or an RR-4BKEYFOB wireless keyfob propagates across the entire 900MHz mesh network — securing every door on campus in under 10 seconds.</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-3 items-start">
+                            <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="smartphone" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">From Any Device</h4>
+                                <p class="text-slate-400 text-xs">Initiate from the MVP cloud dashboard, mobile app, or wireless keyfob.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="eye" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Visual Confirmation</h4>
+                                <p class="text-slate-400 text-xs">A flashing indicator on the inside of the door reassures occupants the perimeter is secured.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="door-open" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Safe Egress Maintained</h4>
+                                <p class="text-slate-400 text-xs">Interior egress remains instant and unrestricted during lockdown — compliant with life-safety codes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Factor Guide -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-wider text-xs mb-3">Form Factor Guide</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-4">Choose Your Chassis</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Five form factors engineered for specific architectural openings. Click any model to learn more.</p>
+            </div>
+
+            <div class="space-y-4" id="chassis-cards">
+                <!-- Standard Cylindrical -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="toggleChassis(this)">
+                    <div class="flex items-center gap-4 p-5">
+                        <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="lock" class="w-7 h-7 text-slate-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-bold text-slate-900">Standard Cylindrical</h3>
+                                <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Most Popular</span>
+                            </div>
+                            <p class="text-sm text-slate-500">P/DL6200, DL6100</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 shrink-0 chassis-arrow transition-transform"></i>
+                    </div>
+                    <div class="chassis-detail hidden border-t border-slate-100 bg-slate-50 p-5">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">Fits door thicknesses of 1-5/8" to 1-7/8" with a 2-3/4" backset. DL features an all-metal 12-button keypad; PDL integrates an HID proximity reader. PDL8200 upgrades to iClass support.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Standard 2-1/8" bore prep</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Keypad (DL) or Prox Reader (PDL) options</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>iClass upgrade available (PDL8200)</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Grade 1 rated for high-traffic commercial</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl h-48 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="lock" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+                                    <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Product Image</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Heavy-Duty Mortise -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="toggleChassis(this)">
+                    <div class="flex items-center gap-4 p-5">
+                        <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="door-closed" class="w-7 h-7 text-slate-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-slate-900 mb-1">Heavy-Duty Mortise</h3>
+                            <p class="text-sm text-slate-500">P/DL6600, P/DL8600</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 shrink-0 chassis-arrow transition-transform"></i>
+                    </div>
+                    <div class="chassis-detail hidden border-t border-slate-100 bg-slate-50 p-5">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">Engineered for mortise pocket installations. Includes a 1-3/8" mortise cylinder, integrated door position switch (DPS), and request-to-exit (REX) monitoring logic.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Integrated DPS and REX monitoring</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>1-3/8" mortise cylinder included</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Superior kick-in resistance</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Best for heavy solid-core doors</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl h-48 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="door-closed" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+                                    <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Product Image</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dual-Verification -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="toggleChassis(this)">
+                    <div class="flex items-center gap-4 p-5">
+                        <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="scan" class="w-7 h-7 text-slate-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-slate-900 mb-1">Dual-Verification Cylindrical</h3>
+                            <p class="text-sm text-slate-500">PDL6300</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 shrink-0 chassis-arrow transition-transform"></i>
+                    </div>
+                    <div class="chassis-detail hidden border-t border-slate-100 bg-slate-50 p-5">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">Features keypads and proximity readers on both the secure and unsecure sides of the door, mandating credential verification for both ingress and egress tracking.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Readers on both sides of the door</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Full ingress and egress audit trail</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Ideal for server rooms and pharmacies</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Supports anti-passback logic</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl h-48 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="scan" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+                                    <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Product Image</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Glass Storefront -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="toggleChassis(this)">
+                    <div class="flex items-center gap-4 p-5">
+                        <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="layout" class="w-7 h-7 text-slate-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-slate-900 mb-1">Glass Storefront Narrow Stile</h3>
+                            <p class="text-sm text-slate-500">P/DL1300NW</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 shrink-0 chassis-arrow transition-transform"></i>
+                    </div>
+                    <div class="chassis-detail hidden border-t border-slate-100 bg-slate-50 p-5">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">Specifically designed to retrofit aluminum glass storefront doors equipped with Adams Rite 1850/1950/4710 series latch locks.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Fits narrow aluminum stile frames</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Adams Rite latch compatible</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Perfect for retail glass entries</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Wireless retrofit — no door modification</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl h-48 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="layout" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+                                    <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Product Image</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panic Exit Trim -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="toggleChassis(this)">
+                    <div class="flex items-center gap-4 p-5">
+                        <div class="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="external-link" class="w-7 h-7 text-slate-400"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-slate-900 mb-1">Panic Exit Trim</h3>
+                            <p class="text-sm text-slate-500">ETDLN, ETPDN</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 shrink-0 chassis-arrow transition-transform"></i>
+                    </div>
+                    <div class="chassis-detail hidden border-t border-slate-100 bg-slate-50 p-5">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">Adapts mechanical panic exit bars into intelligent wireless access points. Compatible with Von Duprin, Corbin, Sargent, and Marks M9900 exit devices.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Universal panic bar compatibility</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Free egress always maintained</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Keypad (ETDLN) or Prox (ETPDN) options</li>
+                                    <li class="flex gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>Retrofit existing exit hardware wirelessly</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl h-48 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="external-link" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+                                    <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Product Image</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Ready to Specify?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Get Expert Help Choosing Your Locks</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">From form factor selection to wireless site surveys — we'll help you design the right Trilogy Networx system for every door.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-white text-xs">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Accordion toggle for Form Factor chassis cards
+        function toggleChassis(el) {
+            var detail = el.querySelector('.chassis-detail');
+            var arrow = el.querySelector('.chassis-arrow');
+            var isOpen = !detail.classList.contains('hidden');
+
+            // Close all other open cards first
+            document.querySelectorAll('.chassis-detail').forEach(function(d) {
+                d.classList.add('hidden');
+            });
+            document.querySelectorAll('.chassis-arrow').forEach(function(a) {
+                a.style.transform = 'rotate(0deg)';
+            });
+
+            // Toggle the clicked card
+            if (!isOpen) {
+                detail.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
