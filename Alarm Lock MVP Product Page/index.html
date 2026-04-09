@@ -503,7 +503,7 @@ img {
 
 /* ===== Trusted Bar ===== */
 .trusted-bar {
-    padding: 32px 0;
+    padding: 48px 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -535,13 +535,10 @@ img {
     white-space: nowrap;
 }
 
-/* ===== Stats Section ===== */
-.stats-section {
-    padding: 60px 0;
-    background: var(--bg-white);
-}
-
 .stats-grid {
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 1px solid #eee;
     display: flex;
     align-items: center;
     gap: 48px;
@@ -1648,11 +1645,11 @@ img {
         </div>
     </section>
 
-    <!-- Trusted By / Logos Bar -->
+    <!-- Trusted By + Stats Section -->
     <section class="trusted-bar">
         <div class="container">
-            <p class="trusted-label">Trusted by Top<br>Security Companies</p>
             <div class="logo-scroll">
+                <p class="trusted-label">Trusted by Top<br>Security Companies</p>
                 <div class="partner-logo">&#9670; bluebyte</div>
                 <div class="partner-logo">&#9673; Nexcore</div>
                 <div class="partner-logo">&#10006; Connect</div>
@@ -1660,27 +1657,23 @@ img {
                 <div class="partner-logo">&#9632; datatech</div>
                 <div class="partner-logo">&#9830; TechFusion</div>
             </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container stats-grid">
-            <div class="stat-block">
-                <div class="stat-number">20%</div>
-                <div class="stat-desc">Growth in Online Sales</div>
-            </div>
-            <div class="stat-block">
-                <div class="stat-number">15%</div>
-                <div class="stat-desc">Reduction in Cost/Acquisition</div>
-            </div>
-            <div class="stat-block">
-                <div class="stat-number">40%</div>
-                <div class="stat-desc">Website Traffic Increase</div>
-            </div>
-            <div class="stat-cta">
-                <p>Want to find out more about<br>Our Full Success Metrics?</p>
-                <a href="#" class="btn btn-outline">View More</a>
+            <div class="stats-grid">
+                <div class="stat-block">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-desc">Growth in Online Sales</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-desc">Reduction in Cost/Acquisition</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-desc">Website Traffic Increase</div>
+                </div>
+                <div class="stat-cta">
+                    <p>Want to find out more about<br>Our Full Success Metrics?</p>
+                    <a href="#" class="btn btn-outline">View More</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1706,44 +1699,6 @@ img {
                     <div class="problem-card-icon">&#128148;</div>
                     <h3>Creative Burnout</h3>
                     <p>Instead of saving time, AI added more work: endless prompting, constant editing, and the demoralizing feeling that the tool was fighting you instead of helping you.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Moment / Origin Story Section -->
-    <section class="moment-section">
-        <div class="container">
-            <span class="badge">THE MOMENT</span>
-            <h2>So We Built What We Wished Existed</h2>
-            <div class="moment-blockquote">
-                <p>"We were tired of AI that treated creativity like a factory line. We needed something that understood the mess, the magic, and the midnight breakthroughs that define real creative work."</p>
-                <cite>&#8212; Carpe Diem Creative, Las Vegas</cite>
-            </div>
-            <div class="moment-steps">
-                <div class="moment-step">
-                    <div class="moment-dot"></div>
-                    <div class="moment-step-content">
-                        <div class="moment-step-label">STEP ONE</div>
-                        <div class="moment-step-title">We trained AI on how creatives actually think</div>
-                        <div class="moment-step-desc">Not just what they produce, but how they get there: the briefs, the iterations, the gut instincts that data alone can't capture.</div>
-                    </div>
-                </div>
-                <div class="moment-step">
-                    <div class="moment-dot"></div>
-                    <div class="moment-step-content">
-                        <div class="moment-step-label">STEP TWO</div>
-                        <div class="moment-step-title">We gave each agent a distinct personality and specialty</div>
-                        <div class="moment-step-desc">From a sharp-witted copywriter to a detail-obsessed strategist, each AI agent brings a unique perspective to the table, just like a real creative team.</div>
-                    </div>
-                </div>
-                <div class="moment-step">
-                    <div class="moment-dot"></div>
-                    <div class="moment-step-content">
-                        <div class="moment-step-label">STEP THREE</div>
-                        <div class="moment-step-title">We made them collaborate&#8212;with you and each other</div>
-                        <div class="moment-step-desc">Our agents don't just respond to prompts. They build on each other's ideas, challenge assumptions, and push the work forward like a real creative partnership.</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1825,79 +1780,6 @@ img {
         </div>
     </section>
 
-    <!-- Who It's For Section -->
-    <section class="who-section">
-        <div class="container">
-            <span class="badge">WHO IT'S FOR</span>
-            <h2>Built for People Who Make Things</h2>
-            <p class="who-subtitle">Whether you're a solo freelancer or a full-service agency, our AI creative agents adapt to how you work and what you need.</p>
-            <div class="who-grid">
-                <div class="who-card">
-                    <div class="who-card-icon">&#127912;</div>
-                    <h3>Creative Agencies</h3>
-                    <p>Scale your creative output without scaling your headcount. Our agents handle the heavy lifting so your team can focus on big ideas.</p>
-                </div>
-                <div class="who-card">
-                    <div class="who-card-icon">&#9999;&#65039;</div>
-                    <h3>Freelance Creatives</h3>
-                    <p>Get the firepower of a full creative team as a solo operator. From brainstorming to execution, you're never working alone.</p>
-                </div>
-                <div class="who-card">
-                    <div class="who-card-icon">&#128640;</div>
-                    <h3>Startups &amp; Brands</h3>
-                    <p>Move fast without sacrificing quality. Launch campaigns, build brand assets, and iterate at startup speed with AI-powered creative support.</p>
-                </div>
-                <div class="who-card">
-                    <div class="who-card-icon">&#128200;</div>
-                    <h3>Marketing Teams</h3>
-                    <p>Bridge the gap between strategy and execution. Our agents turn marketing briefs into polished creative assets in a fraction of the time.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <div class="container">
-            <span class="badge">&#10024; Unleashing Success</span>
-            <h2>How It Works</h2>
-            <p class="section-subtitle">Watch our presentation video to see how unlocking<br>security for your property is just a click away.</p>
-            <div class="laptop-mockup">
-                <div class="laptop-screen">
-                    <div class="laptop-content">
-                        <!-- Reuse dashboard mockup as the laptop screen content -->
-                        <div class="dashboard-mockup small">
-                            <div class="dashboard-sidebar">
-                                <div class="sidebar-logo">
-                                    <span class="logo-icon-sm">&#9889;</span>
-                                    <span>alarm lock</span>
-                                </div>
-                                <div class="sidebar-menu">
-                                    <div class="menu-item active"><span class="menu-icon">&#127968;</span> Dashboard</div>
-                                    <div class="menu-item"><span class="menu-icon">&#128226;</span> Monitoring</div>
-                                    <div class="menu-item"><span class="menu-icon">&#128200;</span> Analytics</div>
-                                    <div class="menu-item"><span class="menu-icon">&#128101;</span> Properties</div>
-                                </div>
-                            </div>
-                            <div class="dashboard-main">
-                                <div class="dashboard-stats">
-                                    <div class="stat-card"><div class="stat-value">3.3M</div></div>
-                                    <div class="stat-card"><div class="stat-value">$ 40K</div></div>
-                                    <div class="stat-card"><div class="stat-value">$ 188K</div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Play button overlay -->
-                        <div class="play-overlay">
-                            <div class="play-button">&#9654;</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="laptop-base"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Integrations Section -->
     <section class="integrations-section">
         <div class="container">
@@ -1916,18 +1798,6 @@ img {
             </div>
             <h2>Seamless Integrations</h2>
             <a href="#" class="btn btn-outline">Documentation</a>
-        </div>
-    </section>
-
-    <!-- Webby Award Section -->
-    <section class="webby-section">
-        <div class="container">
-            <div class="webby-logo">THE WEBBY AWARDS</div>
-            <br>
-            <span class="webby-pill">Webby Award Nominee 2026</span>
-            <h2>Recognized for AI Innovation</h2>
-            <p class="webby-desc">We're honored to be nominated for a Webby Award in the AI &amp; Machine Learning category, recognized alongside the world's best digital experiences.</p>
-            <a href="#" class="btn-vote">&#11088; Vote for Us</a>
         </div>
     </section>
 
