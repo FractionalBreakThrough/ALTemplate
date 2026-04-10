@@ -717,11 +717,75 @@ img {
     margin-bottom: 16px;
 }
 
+.integrations-intro {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
 .integrations-visual {
     position: relative;
     width: 500px;
     height: 500px;
-    margin: 0 auto 32px;
+    margin: 0 auto 48px;
+}
+
+.integrations-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    text-align: left;
+}
+
+.integrations-benefit {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.integrations-benefit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(232,87,42,0.12);
+}
+
+.integrations-benefit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+}
+
+.integrations-benefit h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.integrations-benefit p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .integrations-benefits {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+    }
 }
 
 .center-icon {
@@ -1783,6 +1847,9 @@ img {
     <!-- Integrations Section -->
     <section class="integrations-section">
         <div class="container">
+            <span class="badge">&#10024; Powered by Every Model. Made Different by Us.</span>
+            <h2>The Best of Every AI,<br>Shaped by Real Creative Craft</h2>
+            <p class="integrations-intro">Our agents tap into every major AI model available &mdash; GPT, Claude, Gemini, and more &mdash; routing each task to the engine best suited for the job. But the models aren't what make them special. What sets our department apart is the hand-crafted skills, the personality, and how effortlessly anyone on your team can put them to work.</p>
             <div class="integrations-visual">
                 <div class="center-icon">
                     <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d47f21fa2dde9742998d14.png" alt="Center Logo" style="width:64px; height:64px; object-fit:contain; border-radius:50%;">
@@ -1794,10 +1861,25 @@ img {
                     <div class="orbit-icon" style="--angle: 216deg; --distance: 195px;"><img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d4893984c045c274b1ee13.png" alt="Integration 4" style="width:40px; height:40px; object-fit:contain;"></div>
                     <div class="orbit-icon" style="--angle: 288deg; --distance: 195px;"><img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d489393d829c73b28f85c9.png" alt="Integration 5" style="width:40px; height:40px; object-fit:contain;"></div>
                 </div>
-                <!-- Connecting lines drawn via CSS -->
             </div>
-            <h2>Seamless Integrations</h2>
-            <a href="#" class="btn btn-outline">Documentation</a>
+            <div class="integrations-benefits">
+                <div class="integrations-benefit">
+                    <div class="integrations-benefit-icon">&#9889;</div>
+                    <h3>Every Model, One Team</h3>
+                    <p>Our agents draw on all the leading AI models &mdash; GPT, Claude, Gemini, and more &mdash; automatically using the right engine for the right task. You never have to pick, prompt, or juggle.</p>
+                </div>
+                <div class="integrations-benefit">
+                    <div class="integrations-benefit-icon">&#9999;&#65039;</div>
+                    <h3>Hand-Crafted Skills &amp; Personality</h3>
+                    <p>Each agent is built by real creatives with real frameworks, a distinct voice, and a point of view. They don't just generate &mdash; they collaborate, push back, and bring craft to every brief.</p>
+                </div>
+                <div class="integrations-benefit">
+                    <div class="integrations-benefit-icon">&#128172;</div>
+                    <h3>Effortless for Everyone</h3>
+                    <p>No prompt engineering, no onboarding marathon. If you can have a conversation, you can work with the department. Anyone on your team can jump in and get to great work fast.</p>
+                </div>
+            </div>
+            <a href="#" class="btn btn-outline">See How It Works</a>
         </div>
     </section>
 
