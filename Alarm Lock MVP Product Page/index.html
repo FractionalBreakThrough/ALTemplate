@@ -516,29 +516,27 @@ img {
 
 /* ===== Trusted Bar ===== */
 .trusted-bar {
-    padding: 48px 0;
+    padding: 56px 0;
     border-bottom: 1px solid #eee;
 }
 
-.trusted-bar .container {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
 .trusted-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--text);
-    min-width: 120px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 24px;
 }
 
 .logo-scroll {
     display: flex;
-    gap: 40px;
+    justify-content: center;
     align-items: center;
-    overflow-x: auto;
-    flex: 1;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+    margin-bottom: 48px;
 }
 
 .partner-logo {
@@ -549,16 +547,16 @@ img {
 }
 
 .stats-grid {
-    margin-top: 36px;
-    padding-top: 36px;
+    padding-top: 40px;
     border-top: 1px solid #eee;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
     align-items: center;
-    gap: 48px;
+    gap: 32px;
 }
 
 .stat-block {
-    flex: 1;
+    text-align: center;
 }
 
 .stat-number {
@@ -568,17 +566,21 @@ img {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 8px;
 }
 
 .stat-desc {
     font-size: 0.95rem;
     color: var(--text-light);
-    margin-top: 4px;
+    margin-top: 0;
 }
 
 .stat-cta {
     text-align: center;
-    min-width: 220px;
+    min-width: 200px;
+    padding-left: 32px;
+    border-left: 1px solid #eee;
 }
 
 .stat-cta p {
@@ -1171,12 +1173,17 @@ img {
     }
 
     .stats-grid {
-        flex-wrap: wrap;
+        grid-template-columns: repeat(3, 1fr);
         gap: 32px;
     }
 
-    .stat-block {
-        flex: 1 1 140px;
+    .stat-cta {
+        grid-column: 1 / -1;
+        border-left: none;
+        border-top: 1px solid #eee;
+        padding-left: 0;
+        padding-top: 32px;
+        margin-top: 8px;
     }
 
     .footer-grid {
@@ -1210,20 +1217,30 @@ img {
         display: none;
     }
 
-    .trusted-bar .container {
-        flex-direction: column;
-        text-align: center;
+    .logo-scroll {
+        gap: 12px 24px;
+        margin-bottom: 40px;
     }
 
-    .logo-scroll {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
+    .partner-logo {
+        font-size: 0.9rem;
     }
 
     .stats-grid {
-        flex-direction: column;
-        text-align: center;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .stat-cta {
+        grid-column: auto;
+        border-left: none;
+        border-top: 1px solid #eee;
+        padding-left: 0;
+        padding-top: 32px;
+    }
+
+    .stat-number {
+        font-size: 2.6rem;
     }
 
     .integrations-visual {
@@ -1764,8 +1781,8 @@ img {
     <!-- Trusted By + Stats Section -->
     <section class="trusted-bar">
         <div class="container">
+            <p class="trusted-label">Trusted by Creative Teams</p>
             <div class="logo-scroll">
-                <p class="trusted-label">Trusted by<br>Creative Teams</p>
                 <div class="partner-logo">&#9670; Agencies</div>
                 <div class="partner-logo">&#9673; Freelancers</div>
                 <div class="partner-logo">&#10006; Startups</div>
