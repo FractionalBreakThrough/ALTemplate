@@ -1227,20 +1227,26 @@ img {
     }
 
     .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
     }
 
     .stat-cta {
-        grid-column: auto;
+        grid-column: 1 / -1;
         border-left: none;
         border-top: 1px solid #eee;
         padding-left: 0;
-        padding-top: 32px;
+        padding-top: 28px;
+        margin-top: 8px;
     }
 
     .stat-number {
-        font-size: 2.6rem;
+        font-size: 2rem;
+    }
+
+    .stat-desc {
+        font-size: 0.8rem;
+        line-height: 1.3;
     }
 
     .integrations-visual {
