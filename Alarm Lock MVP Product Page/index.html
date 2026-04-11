@@ -583,7 +583,7 @@ img {
 }
 
 .stat-number {
-    font-size: 2.4rem;
+    font-size: clamp(1.5rem, 2.1vw, 2.1rem);
     font-weight: 800;
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -591,6 +591,13 @@ img {
     background-clip: text;
     line-height: 1.1;
     margin-bottom: 10px;
+    word-break: keep-all;
+}
+
+.stat-unit {
+    font-size: 0.6em;
+    font-weight: 700;
+    opacity: 0.85;
 }
 
 .stat-desc {
@@ -598,6 +605,7 @@ img {
     color: var(--text-light);
     margin-top: 0;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 /* ===== Features Section ===== */
@@ -1231,7 +1239,7 @@ img {
     }
 
     .stat-number {
-        font-size: 1.6rem;
+        font-size: 1.35rem;
     }
 
     .stat-desc {
@@ -1812,20 +1820,20 @@ img {
             </div>
             <div class="stats-grid">
                 <div class="stat-block">
-                    <div class="stat-number">Monday</div>
-                    <div class="stat-desc">You're Overwhelmed</div>
+                    <div class="stat-number">Zero</div>
+                    <div class="stat-desc">Complicated Prompting</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">Tuesday</div>
-                    <div class="stat-desc">You Meet Your Team</div>
+                    <div class="stat-number">15 Minutes</div>
+                    <div class="stat-desc">To Replace Your Agency</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">Friday</div>
-                    <div class="stat-desc">You're Fully Caught Up</div>
+                    <div class="stat-number">$25,000<span class="stat-unit">/month</span></div>
+                    <div class="stat-desc">What You're NOT Paying</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">Forever</div>
-                    <div class="stat-desc">You Stay That Way</div>
+                    <div class="stat-number">Zero</div>
+                    <div class="stat-desc">"Sounds Like AI" Complaints</div>
                 </div>
             </div>
         </div>
