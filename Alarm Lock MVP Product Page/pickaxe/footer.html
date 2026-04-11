@@ -1,0 +1,82 @@
+<script>
+(function() {
+    const init = () => {
+        const root = document.querySelector('.cd-wrapper');
+        if (!root) return;
+
+        // FAQ Accordion
+        root.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isOpen = item.classList.contains('open');
+                // Close all
+                root.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                // Toggle clicked
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // Pricing Toggle
+        const toggle = root.querySelector('#pricing-toggle');
+        const labels = root.querySelectorAll('.toggle-label');
+
+        if (toggle) {
+            toggle.addEventListener('change', () => {
+                const isYearly = toggle.checked;
+                labels.forEach(l => l.classList.remove('active'));
+                labels[isYearly ? 1 : 0].classList.add('active');
+
+                root.querySelectorAll('.price span').forEach(el => {
+                    const monthly = el.getAttribute('data-monthly');
+                    const yearly = el.getAttribute('data-yearly');
+                    if (monthly && yearly) {
+                        el.textContent = isYearly ? yearly : monthly;
+                    }
+                });
+            });
+        }
+
+        // Mobile Menu Toggle
+        const menuBtn = root.querySelector('.mobile-menu-btn');
+        const navLinks = root.querySelector('.nav-links');
+
+        if (menuBtn && navLinks) {
+            menuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '64px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = '#fff';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '16px 24px';
+                navLinks.style.gap = '16px';
+                navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            });
+        }
+
+        // Smooth scroll for nav links (scoped to cd-wrapper)
+        root.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                const href = anchor.getAttribute('href');
+                if (href === '#' || href.length < 2) return;
+                const target = root.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768 && navLinks) {
+                        navLinks.style.display = 'none';
+                    }
+                }
+            });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
