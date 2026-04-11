@@ -555,42 +555,42 @@ img {
     padding-top: 40px;
     border-top: 1px solid #eee;
     display: grid;
-    grid-template-columns: repeat(3, 1fr) auto;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     gap: 32px;
 }
 
 .stat-block {
     text-align: center;
+    position: relative;
+}
+
+.stat-block:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: #eee;
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 800;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.1;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .stat-desc {
     font-size: 0.95rem;
     color: var(--text-light);
     margin-top: 0;
-}
-
-.stat-cta {
-    text-align: center;
-    min-width: 200px;
-    padding-left: 32px;
-    border-left: 1px solid #eee;
-}
-
-.stat-cta p {
-    font-size: 0.95rem;
-    margin-bottom: 16px;
     font-weight: 500;
 }
 
@@ -1175,17 +1175,12 @@ img {
     }
 
     .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 24px;
     }
 
-    .stat-cta {
-        grid-column: 1 / -1;
-        border-left: none;
-        border-top: 1px solid #eee;
-        padding-left: 0;
-        padding-top: 32px;
-        margin-top: 8px;
+    .stat-block:nth-child(2)::after {
+        display: none;
     }
 
     .footer-grid {
@@ -1228,21 +1223,16 @@ img {
     }
 
     .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 16px;
     }
 
-    .stat-cta {
-        grid-column: 1 / -1;
-        border-left: none;
-        border-top: 1px solid #eee;
-        padding-left: 0;
-        padding-top: 28px;
-        margin-top: 8px;
+    .stat-block::after {
+        display: none;
     }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .stat-desc {
@@ -1824,20 +1814,20 @@ img {
             </div>
             <div class="stats-grid">
                 <div class="stat-block">
-                    <div class="stat-number">8</div>
-                    <div class="stat-desc">Specialized AI Agents</div>
+                    <div class="stat-number">Monday</div>
+                    <div class="stat-desc">You're Overwhelmed</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">10x</div>
-                    <div class="stat-desc">Faster Creative Output</div>
+                    <div class="stat-number">Tuesday</div>
+                    <div class="stat-desc">You Meet Your Team</div>
                 </div>
                 <div class="stat-block">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-desc">Always Available</div>
+                    <div class="stat-number">Friday</div>
+                    <div class="stat-desc">You're Fully Caught Up</div>
                 </div>
-                <div class="stat-cta">
-                    <p>Want to see the agents<br>in action?</p>
-                    <a href="#" class="btn btn-outline">Watch Demo</a>
+                <div class="stat-block">
+                    <div class="stat-number">Forever</div>
+                    <div class="stat-desc">You Stay That Way</div>
                 </div>
             </div>
         </div>
