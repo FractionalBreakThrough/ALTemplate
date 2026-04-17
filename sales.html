@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinylessence - Pre-Order the Smart LED Vinyl Slipmat</title>
+    <meta name="description" content="The first Smart LED slipmat that lights up your vinyl records and reacts to music. 364% funded on Kickstarter. Pre-order now $99 (reg. $129).">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        ::selection { background-color: #E8C100; color: black; }
+        html { scroll-behavior: smooth; }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        .glitch-text:hover { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; color: #E8C100; }
+
+        @keyframes sound-reactive {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(232,193,0,0)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(232,193,0,0.6)); }
+        }
+        .animate-sound-reactive { animation: sound-reactive 0.8s ease-in-out infinite; }
+
+        .static-yellow-border { border-color: #E8C100 !important; box-shadow: 0 0 15px rgba(232,193,0,0.15); }
+
+        @keyframes flash-cycle {
+            0%, 20% { opacity: 1; transform: scaleY(1.15); filter: brightness(1.2); box-shadow: 0 0 8px currentColor; }
+            40%, 100% { opacity: 0.3; transform: scaleY(1); filter: brightness(1); box-shadow: none; }
+        }
+        .animate-flash-1 { animation: flash-cycle 1.5s infinite 0s; }
+        .animate-flash-2 { animation: flash-cycle 1.5s infinite 0.5s; }
+        .animate-flash-3 { animation: flash-cycle 1.5s infinite 1s; }
+
+        @keyframes urgency-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .animate-urgency { animation: urgency-pulse 1.5s ease-in-out infinite; }
+
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-in { animation: slide-in 0.6s ease-out both; }
+
+        .text-nexus-gold { color: #E8C100; }
+        .bg-nexus-gold { background-color: #E8C100; }
+        .border-nexus-gold { border-color: #E8C100; }
+
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-black">
+
+    <!-- URGENCY BANNER -->
+    <div class="bg-[#E8C100] text-black py-2 px-4 text-center text-sm font-bold tracking-wide relative z-50">
+        <span class="animate-urgency inline-block mr-2">●</span>
+        KICKSTARTER SOLD OUT — LIMITED PRE-ORDERS NOW LIVE · SAVE $30
+    </div>
+
+    <!-- NAV -->
+    <nav id="navbar" class="sticky top-0 w-full z-40 transition-all duration-300 bg-black/90 backdrop-blur-md border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center py-3">
+            <a href="#" class="block">
+                <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+                     alt="Vinylessence" class="h-12 w-auto object-contain rounded-full" />
+            </a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                <a href="#features" class="hover:text-[#E8C100] transition-colors">Features</a>
+                <a href="#how" class="hover:text-[#E8C100] transition-colors">How It Works</a>
+                <a href="#offer" class="hover:text-[#E8C100] transition-colors">Offer</a>
+                <a href="#faq" class="hover:text-[#E8C100] transition-colors">FAQ</a>
+            </div>
+            <a href="[GHL_PRODUCT_URL]" class="bg-[#E8C100] hover:bg-[#c2a100] text-black px-5 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(232,193,0,0.3)]">
+                Pre-Order $99
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative w-full bg-black flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-16 pb-20">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E8C100] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20"></div>
+
+        <div class="relative z-20 flex flex-col items-center max-w-4xl w-full">
+            <!-- Kickstarter badge -->
+            <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#00AE42]/10 border border-[#00AE42]/40 text-[#00AE42] text-xs font-bold tracking-widest uppercase mb-6">
+                <span class="w-2 h-2 bg-[#00AE42] rounded-full animate-pulse"></span>
+                364% Funded on Kickstarter
+            </span>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tighter mb-6 leading-[0.95]">
+                The First <span class="text-[#E8C100] glitch-text cursor-default inline-block">Smart LED Slipmat</span><br/>
+                That Makes Your Vinyl <span class="italic">Glow</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed">
+                Backed by <strong class="text-white">374 music lovers</strong> who raised <strong class="text-[#E8C100]">$36,423</strong> on Kickstarter. Now available for pre-order — <strong class="text-white">save $30 off retail</strong> while supplies last.
+            </p>
+
+            <!-- VIDEO -->
+            <div class="relative z-10 w-full max-w-3xl mb-10 group">
+                <div class="relative w-full overflow-hidden rounded-2xl shadow-[0_0_40px_rgba(232,193,0,0.2)] border border-[#E8C100]/30 bg-black" style="padding-top: 56.25%;">
+                    <iframe class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/QoS8mLcO6LA?si=5RwacjtTzAhy6pb6"
+                        title="Vinylessence Demo" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- PRICE + CTA -->
+            <div class="w-full max-w-md">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <span class="text-gray-500 text-xl line-through">$129</span>
+                    <span class="text-5xl font-extrabold text-[#E8C100]">$99</span>
+                    <span class="bg-[#E8C100]/20 text-[#E8C100] border border-[#E8C100]/40 px-3 py-1 rounded-full text-xs font-bold">SAVE $30</span>
+                </div>
+
+                <a href="[GHL_PRODUCT_URL]"
+                   class="block w-full bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-2xl py-5 px-8 rounded-2xl transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(232,193,0,0.4)] text-center mb-3">
+                    Pre-Order Now →
+                </a>
+                <p class="text-sm text-gray-400 font-medium">
+                    <span class="animate-urgency inline-block mr-1">●</span>
+                    Limited pre-order inventory · Ships when production completes
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- SOCIAL PROOF BAR -->
+    <section class="bg-gradient-to-b from-black to-[#0a0a0a] border-y border-gray-900 py-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-center text-xs uppercase tracking-[0.3em] text-gray-500 mb-8">As Successfully Funded On</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="border-r border-gray-800 last:border-r-0 md:border-r">
+                    <div class="text-4xl md:text-5xl font-extrabold text-[#E8C100] mb-1">364%</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Funded</div>
+                </div>
+                <div class="border-r-0 md:border-r border-gray-800">
+                    <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">$36,423</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Raised</div>
+                </div>
+                <div class="border-r border-gray-800 last:border-r-0 md:border-r">
+                    <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">374</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Backers</div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-[#00AE42] mb-1">#1</div>
+                    <div class="text-xs uppercase tracking-wider text-gray-400">Smart Slipmat</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-24 bg-[#f9f9f9] text-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">Engineered for Music Lovers</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Not Just a Light — a Whole New Way to Experience Vinyl</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    First-of-its-kind, patent-pending design crafted to deliver smooth diffused lighting, long battery life, and zero-setup convenience — all within the slim form-factor of a slipmat.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Battery -->
+                <div class="lg:col-span-2 bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="h-64 bg-black flex items-center justify-center relative overflow-hidden gap-4">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-black"></div>
+                        <svg class="text-[#E8C100] relative z-10 animate-pulse" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <svg class="text-[#E8C100] relative z-10 animate-pulse" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><line x1="6" y1="11" x2="6" y2="13"></line><line x1="10" y1="11" x2="10" y2="13"></line><line x1="14" y1="11" x2="14" y2="13"></line></svg>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">13+ Hours on a Single Charge</h3>
+                        <ul class="text-gray-600 space-y-2 list-disc list-inside">
+                            <li>Fast USB-C charging</li>
+                            <li>13–16 hours of continuous use</li>
+                            <li>Built to last — premium components</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Diffusion -->
+                <div class="bg-black text-white rounded-3xl overflow-hidden shadow-sm flex flex-col justify-between static-yellow-border">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 text-[#E8C100]">Evenly Diffused Lighting</h3>
+                        <p class="text-gray-400">Multi-layer diffusion spreads light evenly through the vinyl surface and around the edges — no hot spots, just a perfect glow.</p>
+                    </div>
+                    <div class="h-48 bg-gray-900 flex items-center justify-center border-t border-gray-800">
+                        <div class="w-16 h-16 rounded-full border-4 border-[#E8C100] flex items-center justify-center animate-pulse">
+                            <div class="w-2 h-2 bg-[#E8C100] rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio reactive -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="text-[#E8C100] animate-sound-reactive" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Audio-Reactive Modes</h3>
+                        <p class="text-gray-600 text-sm">Watch your setup come alive as the built-in microphone syncs lighting to your music in real-time.</p>
+                    </div>
+                </div>
+
+                <!-- App -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="p-8">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Mobile App Control</h3>
+                        <p class="text-gray-600 text-sm">Dial in colors, brightness, and reactive patterns right from your phone. No remotes to lose.</p>
+                    </div>
+                </div>
+
+                <!-- Multi color -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex items-center static-yellow-border">
+                    <div class="p-8 w-full">
+                        <h3 class="text-xl font-bold mb-1">250+ Color Presets</h3>
+                        <p class="text-gray-600 text-sm">High-efficiency RGB LEDs with full-spectrum color and 250+ custom animations ready to go.</p>
+                    </div>
+                    <div class="h-full w-32 bg-black flex items-center justify-center">
+                        <div class="flex gap-1.5">
+                            <div class="w-2 h-8 bg-red-500 rounded-full animate-flash-1 opacity-30 text-red-500"></div>
+                            <div class="w-2 h-8 bg-blue-500 rounded-full animate-flash-2 opacity-30 text-blue-500"></div>
+                            <div class="w-2 h-8 bg-[#E8C100] rounded-full animate-flash-3 opacity-30 text-[#E8C100]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="py-24 bg-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">Zero Setup</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Up and Glowing in 60 Seconds</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">No tools, no wiring, no complicated calibration. Drop it on, turn it on, done.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 border border-gray-800 hover:border-[#E8C100]/50 transition-all">
+                    <div class="text-6xl font-extrabold text-[#E8C100]/30 mb-4">01</div>
+                    <h3 class="text-2xl font-bold mb-3">Place</h3>
+                    <p class="text-gray-400">Set the Vinylessence slipmat on your turntable — fits standard 12" platters perfectly.</p>
+                </div>
+                <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 border border-gray-800 hover:border-[#E8C100]/50 transition-all">
+                    <div class="text-6xl font-extrabold text-[#E8C100]/30 mb-4">02</div>
+                    <h3 class="text-2xl font-bold mb-3">Power</h3>
+                    <p class="text-gray-400">Tap the touch sensor to power on. Pair with the mobile app to pick a mode, color, or animation.</p>
+                </div>
+                <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 border border-gray-800 hover:border-[#E8C100]/50 transition-all">
+                    <div class="text-6xl font-extrabold text-[#E8C100]/30 mb-4">03</div>
+                    <h3 class="text-2xl font-bold mb-3">Play</h3>
+                    <p class="text-gray-400">Drop the needle. Watch your vinyl glow and pulse to every beat, for up to 16 hours on a charge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 bg-[#f9f9f9] text-gray-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">From 374 Kickstarter Backers</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Music Lovers Can't Stop Talking About It</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="flex gap-1 text-[#E8C100] mb-4">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        "[REPLACE] Absolutely transformed my listening room. The diffusion is cleaner than anything I've seen on a DIY setup. Ships fast too."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#E8C100] to-yellow-600 rounded-full flex items-center justify-center font-bold text-black">M</div>
+                        <div>
+                            <div class="font-bold text-sm">[Backer Name]</div>
+                            <div class="text-xs text-gray-500">Kickstarter Backer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="flex gap-1 text-[#E8C100] mb-4">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        "[REPLACE] The audio-reactive mode is magic. Every track feels like a live show. Battery lasts way longer than I expected."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#E8C100] to-yellow-600 rounded-full flex items-center justify-center font-bold text-black">J</div>
+                        <div>
+                            <div class="font-bold text-sm">[Backer Name]</div>
+                            <div class="text-xs text-gray-500">Kickstarter Backer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 static-yellow-border">
+                    <div class="flex gap-1 text-[#E8C100] mb-4">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        "[REPLACE] I bought one for my home and one for my studio. The app is easy, the colors are vivid, and my friends are obsessed."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#E8C100] to-yellow-600 rounded-full flex items-center justify-center font-bold text-black">S</div>
+                        <div>
+                            <div class="font-bold text-sm">[Backer Name]</div>
+                            <div class="text-xs text-gray-500">Kickstarter Backer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFER / VALUE STACK -->
+    <section id="offer" class="py-24 bg-black text-white relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#E8C100] rounded-full mix-blend-multiply filter blur-[140px] opacity-10"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">Limited Pre-Order Offer</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Lock In Your Kickstarter Price — $30 Off Retail</h2>
+                <p class="text-xl text-gray-400">Pre-order pricing ends when production inventory sells through.</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl border-2 border-[#E8C100] shadow-[0_0_60px_rgba(232,193,0,0.25)] overflow-hidden">
+                <!-- Header -->
+                <div class="bg-[#E8C100] text-black text-center py-3 font-extrabold tracking-widest text-sm uppercase">
+                    ★ Best Value — Pre-Order Bundle ★
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <!-- What's included -->
+                    <h3 class="text-2xl font-bold mb-6 text-center">Everything You Get</h3>
+                    <ul class="space-y-4 mb-8 max-w-xl mx-auto">
+                        <li class="flex items-start gap-3">
+                            <svg class="text-[#E8C100] flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong class="text-white">1 × Vinylessence Smart LED Slipmat</strong> <span class="text-gray-500">($129 value)</span></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="text-[#E8C100] flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong class="text-white">USB-C fast-charging cable</strong> <span class="text-gray-500">(included)</span></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="text-[#E8C100] flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong class="text-white">Mobile app access</strong> — 250+ animation presets</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="text-[#E8C100] flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong class="text-white">Early-backer pricing</strong> — save $30 off retail</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="text-[#E8C100] flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong class="text-white">Priority production slot</strong> — ship ahead of retail launch</span>
+                        </li>
+                    </ul>
+
+                    <!-- Price -->
+                    <div class="bg-black/50 rounded-2xl p-6 mb-6 border border-gray-800">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Retail Price</span>
+                            <span class="text-gray-400 line-through">$129.00</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Pre-Order Discount</span>
+                            <span class="text-[#00AE42] font-bold">− $30.00</span>
+                        </div>
+                        <div class="border-t border-gray-700 pt-3 flex items-center justify-between">
+                            <span class="font-bold text-lg">Your Price Today</span>
+                            <span class="text-4xl font-extrabold text-[#E8C100]">$99.00</span>
+                        </div>
+                    </div>
+
+                    <a href="[GHL_PRODUCT_URL]"
+                       class="block w-full bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-2xl py-5 px-8 rounded-2xl transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(232,193,0,0.4)] text-center mb-4">
+                        Claim Your Pre-Order — $99
+                    </a>
+
+                    <!-- Trust badges -->
+                    <div class="grid grid-cols-3 gap-3 text-center text-xs text-gray-400">
+                        <div class="flex flex-col items-center gap-1">
+                            <svg class="text-[#E8C100]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Secure Checkout
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <svg class="text-[#E8C100]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path></svg>
+                            30-Day Guarantee
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <svg class="text-[#E8C100]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"></path><path d="M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"></path><path d="M10 12h4"></path></svg>
+                            Ships Worldwide
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH SPECS -->
+    <section id="specs" class="py-24 bg-white text-gray-900">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">Tech Specs</span>
+                <h2 class="text-4xl font-bold">Built With Premium Components</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="py-4 px-6 text-gray-400 font-medium uppercase text-xs tracking-wider">Feature</th>
+                            <th class="py-4 px-6 font-bold text-lg text-black bg-gray-50 rounded-t-lg">Vinylessence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Battery</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">4000 mAh · 13–16 hrs use</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Charging</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">USB-C fast charging</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Lighting</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">Full RGB · High-efficiency LEDs</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Modes</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">Static, music-reactive, 250+ animation presets</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Control</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">Touch sensor + Mobile app</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-medium text-gray-900">Compatibility</td>
+                            <td class="py-4 px-6 text-[#E8C100] font-bold bg-gray-50/50">Standard 12" turntable platters</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-[#f9f9f9] text-gray-900">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="inline-block text-xs uppercase tracking-[0.3em] text-[#E8C100] font-bold mb-4">Still Have Questions?</span>
+                <h2 class="text-4xl font-bold">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        When will my Vinylessence ship?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Pre-orders ship alongside our first full production run. [REPLACE with exact estimated ship window, e.g. "Expected to ship in Q2 2026."]
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        Will it fit my turntable?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Vinylessence is designed to fit any standard 12" turntable platter. That includes Audio-Technica, Pro-Ject, Rega, Technics, Pioneer, and most other mainstream and entry-level decks.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        Does it affect playback or sound quality?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        No — the slim form-factor and friction surface preserve full playback quality. Your records play exactly as they would on a standard slipmat.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        How is this different from Kickstarter pricing?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Our Kickstarter sold out after hitting 364% funding ($36,423 raised from 374 backers). To extend that early-backer offer, we're honoring the same $99 pre-order price — a $30 savings off the $129 retail price — while pre-order inventory lasts.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        What if I don't love it?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Every Vinylessence is backed by a 30-day satisfaction guarantee. If it's not a fit, contact us for a return. [REPLACE with exact return policy details.]
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-200 p-6 cursor-pointer hover:border-[#E8C100] transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                        Do you ship internationally?
+                        <span class="text-[#E8C100] text-2xl group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Yes — we ship worldwide. [REPLACE with specifics on shipping fees / regions.]
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-24 bg-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#E8C100] rounded-full mix-blend-multiply filter blur-[180px] opacity-10"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <div class="relative w-full max-w-3xl mx-auto mb-12 group">
+                <div class="absolute inset-0 bg-[#E8C100] blur-3xl opacity-15 rounded-full"></div>
+                <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/697450acd4fb90af5d7e1a6c.png"
+                     alt="Vinylessence Product" class="w-full h-auto drop-shadow-2xl rounded-xl relative z-10" />
+            </div>
+
+            <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-[#E8C100] text-xs font-bold tracking-widest uppercase mb-6">
+                Last Chance for Pre-Order Pricing
+            </span>
+            <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
+                Make Your Vinyl <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E8C100] to-yellow-200">Come Alive</span>
+            </h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                Join 374+ backers who already said yes. Save $30 off retail and secure your priority production slot today.
+            </p>
+
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <span class="text-gray-500 text-lg line-through">$129</span>
+                <span class="text-5xl font-extrabold text-[#E8C100]">$99</span>
+            </div>
+
+            <a href="[GHL_PRODUCT_URL]"
+               class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-xl transition-all shadow-lg hover:shadow-yellow-500/30 rounded-2xl transform hover:scale-105">
+                Pre-Order Now — $99
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <p class="text-sm text-gray-500 mt-4">30-day satisfaction guarantee · Secure checkout · Ships worldwide</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-gray-500 py-12 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <h4 class="text-white font-bold mb-4">Product</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#features" class="hover:text-[#E8C100]">Features</a></li>
+                    <li><a href="#specs" class="hover:text-[#E8C100]">Tech Specs</a></li>
+                    <li><a href="#offer" class="hover:text-[#E8C100]">Pre-Order</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Support</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#faq" class="hover:text-[#E8C100]">FAQ</a></li>
+                    <li><a href="#" class="hover:text-[#E8C100]">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-span-2 md:col-span-2">
+                <h4 class="text-white font-bold mb-4">Subscribe for Updates</h4>
+                <p class="text-sm mb-4">Get production updates and exclusive offers.</p>
+                <form id="footer-signup-form" class="flex gap-2">
+                    <input id="footer-email-input" type="email" placeholder="Email address" class="bg-gray-900 border border-gray-800 rounded px-4 py-2 text-white text-sm w-full outline-none focus:border-[#E8C100]" required />
+                    <button id="footer-submit-btn" type="submit" class="bg-[#E8C100] text-black px-4 py-2 rounded text-sm font-bold">GO</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs">
+            <p>© Charg3d LLC</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY CTA -->
+    <div class="sticky-cta md:hidden bg-black/95 backdrop-blur-md border-t border-[#E8C100]/30 p-3 flex items-center justify-between gap-3">
+        <div class="flex items-baseline gap-2">
+            <span class="text-gray-500 text-sm line-through">$129</span>
+            <span class="text-2xl font-extrabold text-[#E8C100]">$99</span>
+        </div>
+        <a href="[GHL_PRODUCT_URL]"
+           class="flex-1 bg-[#E8C100] hover:bg-[#c2a100] text-black font-bold py-3 px-5 rounded-xl text-center text-sm shadow-[0_0_15px_rgba(232,193,0,0.3)]">
+            Pre-Order Now →
+        </a>
+    </div>
+
+    <script>
+        const MAKE_WEBHOOK_URL = "https://hook.integrator.boost.space/3n6p6dlg38bvwg6bccaxg7waipg26s5f";
+
+        const footerForm = document.getElementById('footer-signup-form');
+        const footerEmailInput = document.getElementById('footer-email-input');
+        const footerSubmitBtn = document.getElementById('footer-submit-btn');
+
+        async function handleWebhookSubmit(e, emailVal, btnElement) {
+            e.preventDefault();
+            if (!emailVal) return;
+
+            const originalText = btnElement.innerText;
+            btnElement.innerText = "Sending...";
+            btnElement.disabled = true;
+
+            try {
+                await fetch(MAKE_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: emailVal,
+                        source: "Vinylessence Sales Page",
+                        pageUrl: window.location.href,
+                        date: new Date().toISOString()
+                    })
+                });
+                btnElement.innerText = "You are in!";
+            } catch (error) {
+                btnElement.innerText = "You are in!";
+            }
+
+            setTimeout(() => {
+                btnElement.innerText = originalText;
+                btnElement.disabled = false;
+                footerEmailInput.value = '';
+            }, 3000);
+        }
+
+        if (footerForm) {
+            footerForm.addEventListener('submit', (e) => {
+                handleWebhookSubmit(e, footerEmailInput.value, footerSubmitBtn);
+            });
+        }
+    </script>
+</body>
+</html>
