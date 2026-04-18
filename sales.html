@@ -88,7 +88,7 @@
                 <a href="#offer" class="hover:text-[#E8C100] transition-colors">Offer</a>
                 <a href="#faq" class="hover:text-[#E8C100] transition-colors">FAQ</a>
             </div>
-            <a href="#order" data-open-order="true" class="bg-[#E8C100] hover:bg-[#c2a100] text-black px-5 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(232,193,0,0.3)]">
+            <a href="[ORDER_STEP_URL]" class="bg-[#E8C100] hover:bg-[#c2a100] text-black px-5 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(232,193,0,0.3)]">
                 Pre-Order $99
             </a>
         </div>
@@ -134,7 +134,7 @@
                     <span class="bg-[#E8C100]/20 text-[#E8C100] border border-[#E8C100]/40 px-3 py-1 rounded-full text-xs font-bold">SAVE $30</span>
                 </div>
 
-                <a href="#order" data-open-order="true"
+                <a href="[ORDER_STEP_URL]"
                    class="block w-full bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-2xl py-5 px-8 rounded-2xl transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(232,193,0,0.4)] text-center mb-3">
                     Pre-Order Now →
                 </a>
@@ -401,7 +401,7 @@
                         </div>
                     </div>
 
-                    <a href="#order" data-open-order="true"
+                    <a href="[ORDER_STEP_URL]"
                        class="block w-full bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-2xl py-5 px-8 rounded-2xl transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(232,193,0,0.4)] text-center mb-4">
                         Claim Your Pre-Order — $99
                     </a>
@@ -572,7 +572,7 @@
                 <span class="text-5xl font-extrabold text-[#E8C100]">$99</span>
             </div>
 
-            <a href="#order" data-open-order="true"
+            <a href="[ORDER_STEP_URL]"
                class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#E8C100] hover:bg-[#c2a100] text-black font-extrabold text-xl transition-all shadow-lg hover:shadow-yellow-500/30 rounded-2xl transform hover:scale-105">
                 Pre-Order Now — $99
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -623,44 +623,11 @@
             <span class="text-gray-500 text-sm line-through">$129</span>
             <span class="text-2xl font-extrabold text-[#E8C100]">$99</span>
         </div>
-        <a href="#order" data-open-order="true"
+        <a href="[ORDER_STEP_URL]"
            class="flex-1 bg-[#E8C100] hover:bg-[#c2a100] text-black font-bold py-3 px-5 rounded-xl text-center text-sm shadow-[0_0_15px_rgba(232,193,0,0.3)]">
             Pre-Order Now →
         </a>
     </div>
-
-    <!-- ORDER FORM MODAL -->
-    <div id="order-modal" class="hidden fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md items-center justify-center p-4 overflow-y-auto">
-        <div class="relative w-full max-w-2xl bg-gradient-to-br from-gray-900 to-black rounded-3xl border-2 border-[#E8C100] shadow-[0_0_60px_rgba(232,193,0,0.3)] overflow-hidden my-8">
-            <div class="bg-[#E8C100] text-black text-center py-3 px-12 font-extrabold tracking-widest text-sm uppercase relative">
-                ★ Complete Your Pre-Order — $99 ★
-                <button id="order-modal-close" type="button" aria-label="Close"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-black hover:bg-black/10 rounded-full text-2xl font-bold leading-none transition-colors">
-                    ×
-                </button>
-            </div>
-            <div class="p-4 md:p-6 bg-white">
-                <iframe
-                    src="https://site.fractionalbreakthrough.com/widget/form/hBzXqJzfDARB3Rgd9xw1"
-                    style="width:100%;min-height:520px;border:none;border-radius:8px"
-                    id="inline-hBzXqJzfDARB3Rgd9xw1"
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-trigger-value=""
-                    data-activation-type="alwaysActivated"
-                    data-activation-value=""
-                    data-deactivation-type="neverDeactivate"
-                    data-deactivation-value=""
-                    data-form-name="Form 1"
-                    data-height="433"
-                    data-layout-iframe-id="inline-hBzXqJzfDARB3Rgd9xw1"
-                    data-form-id="hBzXqJzfDARB3Rgd9xw1"
-                    title="Form 1">
-                </iframe>
-            </div>
-        </div>
-    </div>
-    <script src="https://site.fractionalbreakthrough.com/js/form_embed.js"></script>
 
     <script>
         const MAKE_WEBHOOK_URL = "https://hook.integrator.boost.space/3n6p6dlg38bvwg6bccaxg7waipg26s5f";
@@ -705,36 +672,6 @@
                 handleWebhookSubmit(e, footerEmailInput.value, footerSubmitBtn);
             });
         }
-
-        // --- Order Modal ---
-        const orderModal = document.getElementById('order-modal');
-        const orderModalClose = document.getElementById('order-modal-close');
-
-        function openOrderModal() {
-            orderModal.classList.remove('hidden');
-            orderModal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeOrderModal() {
-            orderModal.classList.add('hidden');
-            orderModal.classList.remove('flex');
-            document.body.style.overflow = '';
-        }
-
-        document.querySelectorAll('[data-open-order]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openOrderModal();
-            });
-        });
-
-        orderModalClose.addEventListener('click', closeOrderModal);
-        orderModal.addEventListener('click', (e) => {
-            if (e.target === orderModal) closeOrderModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !orderModal.classList.contains('hidden')) closeOrderModal();
-        });
     </script>
 </body>
 </html>
