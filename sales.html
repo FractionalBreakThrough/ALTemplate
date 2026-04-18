@@ -44,6 +44,16 @@
         }
         .animate-urgency { animation: urgency-pulse 1.5s ease-in-out infinite; }
 
+        @keyframes color-blink {
+            0%   { color: #E8C100; text-shadow: 0 0 8px rgba(232,193,0,0.7); }
+            20%  { color: #ef4444; text-shadow: 0 0 8px rgba(239,68,68,0.7); }
+            40%  { color: #00AE42; text-shadow: 0 0 8px rgba(0,174,66,0.7); }
+            60%  { color: #3b82f6; text-shadow: 0 0 8px rgba(59,130,246,0.7); }
+            80%  { color: #a855f7; text-shadow: 0 0 8px rgba(168,85,247,0.7); }
+            100% { color: #E8C100; text-shadow: 0 0 8px rgba(232,193,0,0.7); }
+        }
+        .animate-color-blink { animation: color-blink 3s ease-in-out infinite; display: inline-block; }
+
         @keyframes slide-in {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -129,7 +139,7 @@
                     Pre-Order Now →
                 </a>
                 <p class="text-sm text-gray-400 font-medium">
-                    <span class="animate-urgency inline-block mr-1">●</span>
+                    <span class="animate-color-blink mr-1">●</span>
                     Limited pre-order inventory · Ships when production completes
                 </p>
             </div>
