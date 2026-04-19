@@ -157,38 +157,24 @@
     font-size: inherit !important;
   }
 
-  /* ===== Quantity label ===== */
+  /* ===== Quantity label — keep it on one line without changing parent layout ===== */
   label[for*="quantity"],
   [class*="quantity-label"],
-  [class*="quantity-title"],
-  [class*="quantity"] label,
-  [class*="quantity"] > span:first-child {
+  [class*="quantity-title"] {
     color: #9ca3af !important;
     font-size: 0.875rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
     font-weight: 600 !important;
     margin-bottom: 0.5rem !important;
-    display: block !important;
     white-space: nowrap !important;
-    width: 100% !important;
-    min-width: 120px !important;
-    max-width: none !important;
-    flex: 0 0 100% !important;
     word-break: keep-all !important;
     overflow-wrap: normal !important;
-    text-wrap: nowrap !important;
-    overflow: visible !important;
-  }
-
-  /* Force quantity wrapper to stack label above controls */
-  [class*="quantity-wrapper"],
-  [class*="quantity-container"],
-  [class*="quantity-section"] {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
+    hyphens: none !important;
     width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    overflow: visible !important;
   }
 
   /* ===== Quantity wrapper — reset unwanted pill backgrounds ===== */
@@ -348,26 +334,45 @@
     backdrop-filter: blur(8px) !important;
   }
 
-  /* ===== Product description area ===== */
+  /* ===== Product description + expandable "Show More" area ===== */
   [class*="product-description"],
   [class*="description-wrapper"],
   [class*="description-content"],
   [class*="description-container"],
   [class*="product-details-description"],
-  [class*="product-info-description"] {
+  [class*="product-info-description"],
+  [class*="show-more-content"],
+  [class*="show-less-content"],
+  [class*="expandable-content"],
+  [class*="expandable"],
+  [class*="collapse-content"],
+  [class*="collapsible"],
+  [class*="expanded-content"],
+  [class*="read-more-content"],
+  [class*="extended-description"],
+  [class*="product-full-description"] {
     background: transparent !important;
+    background-color: transparent !important;
     color: #d1d5db !important;
-    padding: 16px 0 !important;
+    padding: 0 !important;
     border: none !important;
+    box-shadow: none !important;
   }
 
-  /* Every text element inside the description stays light on dark */
+  /* Aggressively transparent-ize every descendant inside description wrappers */
   [class*="product-description"] *,
   [class*="description-wrapper"] *,
   [class*="description-content"] *,
-  [class*="description-container"] * {
+  [class*="description-container"] *,
+  [class*="show-more-content"] *,
+  [class*="expandable"] *,
+  [class*="collapse-content"] *,
+  [class*="expanded-content"] *,
+  [class*="read-more-content"] * {
     background: transparent !important;
+    background-color: transparent !important;
     color: #d1d5db !important;
+    border-color: transparent !important;
   }
 
   /* Description headings stay white */
