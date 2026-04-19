@@ -284,11 +284,11 @@
       </div>
 
       <span style="display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(232,193,0,0.1);border:1px solid rgba(232,193,0,0.4);color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:20px;animation:fade-up 0.5s 0.2s both;">
-        Pre-Order Confirmed
+        Pre-Order<span class="ve-merge"> #{{order.order_id}}</span> Confirmed
       </span>
 
       <h1 style="color:#fff;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin:0 0 16px;animation:fade-up 0.5s 0.3s both;">
-        Thank You
+        Thank You<span class="ve-merge">, <span style="color:#E8C100;">{{contact.name}}</span></span>
       </h1>
 
       <p style="color:#9ca3af;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.6;margin:0 auto 28px;max-width:560px;animation:fade-up 0.5s 0.4s both;">
@@ -297,10 +297,33 @@
 
       <!-- Quick stats row -->
       <div style="display:inline-flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fade-up 0.5s 0.5s both;">
+        <div class="ve-merge-pill" style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Order:</span> <strong style="color:#fff;">#{{order.order_id}}</strong>
+        </div>
+        <div class="ve-merge-pill" style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Product:</span> <strong style="color:#fff;">{{order.product}}</strong>
+        </div>
+        <div class="ve-merge-pill" style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Total:</span> <strong style="color:#E8C100;">{{order.total}}</strong>
+        </div>
         <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
           <span style="color:#6b7280;">Ships:</span> <strong style="color:#fff;">December 2026</strong>
         </div>
       </div>
+
+      <!-- Fallback guard: strip any merge tags GHL didn't resolve so
+           literal {{...}} text never reaches the customer. -->
+      <script>
+        (function () {
+          var hasLiteral = function (el) { return /\{\{[^}]+\}\}/.test(el.textContent); };
+          document.querySelectorAll('.ve-merge').forEach(function (el) {
+            if (hasLiteral(el)) el.remove();
+          });
+          document.querySelectorAll('.ve-merge-pill').forEach(function (el) {
+            if (hasLiteral(el)) el.style.display = 'none';
+          });
+        })();
+      </script>
     </div>
   </section>
 </div>
