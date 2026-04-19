@@ -137,15 +137,19 @@
     color: #fff !important;
   }
 
-  /* ===== Continue Shopping + Download buttons (exact classes) ===== */
+  /* ===== Hide the Continue Shopping button ===== */
   button.thankyou-action-btn,
   .thankyou-action-btn,
+  button.thankyou-action-btn.truncate-text,
+  [class*="thankyou-action-btn"],
+  [class*="continue-shopping"] {
+    display: none !important;
+  }
+
+  /* ===== Download button (exact classes) ===== */
   button.download-btn,
   .download-btn,
   button.download-btn.truncate-text,
-  button.thankyou-action-btn.truncate-text,
-  [class*="thankyou-action-btn"],
-  [class*="continue-shopping"],
   [class*="download-btn"] {
     background: transparent !important;
     background-color: transparent !important;
@@ -179,8 +183,6 @@
     box-shadow: none !important;
   }
 
-  button.thankyou-action-btn:hover,
-  .thankyou-action-btn:hover,
   button.download-btn:hover,
   .download-btn:hover,
   html body button.download-btn:hover {
@@ -190,8 +192,7 @@
     transform: translateY(-1px) !important;
   }
 
-  /* Inline SVG arrow in Continue Shopping button */
-  .thankyou-action-btn svg,
+  /* Inline SVG arrow in Download button */
   .download-btn svg {
     color: currentColor !important;
     stroke: currentColor !important;
