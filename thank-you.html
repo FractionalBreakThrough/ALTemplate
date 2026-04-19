@@ -1,0 +1,390 @@
+<!--
+================================================================
+  VINYLESSENCE — THANK YOU / ORDER CONFIRMATION PAGE (GHL Store)
+================================================================
+
+  Three copy-paste blocks for the order confirmation page.
+
+    1. SECTION 1 — Custom CSS
+       → Page Settings → Advanced → Custom CSS
+
+    2. SECTION 2 — Custom Code ABOVE the order summary widget
+       (or as the only element if you don't want a widget)
+       → Drag a "Custom JS/HTML" element, paste Section 2
+
+    3. SECTION 3 — Custom Code BELOW the order summary widget
+       → Drag a "Custom JS/HTML" element, paste Section 3
+
+  ASSUMPTIONS (replace if wrong):
+    - Ship window: December 2026 (mentioned twice — search "December")
+    - Social links: use placeholders [INSTAGRAM_URL], [YOUTUBE_URL],
+      [TIKTOK_URL], [DISCORD_URL]
+    - Newsletter uses the existing Make.com webhook
+    - GHL merge tags: {{contact.first_name}}, {{contact.email}},
+      {{order.id}}, {{order.total}} — verify these are valid in
+      your GHL version. If any don't render, replace with static
+      text or the correct merge tag for your GHL build.
+================================================================
+-->
+
+
+<!-- ================================================================ -->
+<!-- SECTION 1 — CUSTOM CSS                                            -->
+<!-- Paste into: Page Settings → Advanced → Custom CSS                 -->
+<!-- ================================================================ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+  body, html {
+    background: #000 !important;
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .main-section, .c-section, .c-row, .c-col,
+  .hl_page-wrapper, .hl_section, .hl_row, .hl_col,
+  [class*="hl_section"], [class*="hl_row"], [class*="hl_col"],
+  [class*="section-container"], [class*="row-wrapper"], [class*="col-wrapper"] {
+    background: transparent !important;
+  }
+
+  ::selection { background-color: #E8C100; color: #000; }
+
+  /* Style any native GHL order-summary widget if kept */
+  [class*="order-summary"],
+  [class*="order-confirmation"],
+  [class*="confirmation-details"] {
+    background: linear-gradient(135deg, #0a0a0a, #000) !important;
+    border: 1px solid rgba(232,193,0,0.2) !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 20px !important;
+    box-shadow: 0 0 30px rgba(232,193,0,0.08) !important;
+  }
+  [class*="order-summary"] *,
+  [class*="order-confirmation"] *,
+  [class*="confirmation-details"] * {
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+
+  /* Animations */
+  @keyframes check-pop {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes confetti-float {
+    0%   { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-400px) rotate(720deg); opacity: 0; }
+  }
+  @keyframes ve-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+</style>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 2 — CUSTOM CODE ABOVE THE CONFIRMATION WIDGET             -->
+<!-- Drop a Custom JS/HTML element here (or use it alone).             -->
+<!-- ================================================================ -->
+<div id="ve-thankyou-above" style="font-family:'Inter',sans-serif;">
+
+  <!-- Success banner -->
+  <div style="background:#00AE42;color:#fff;padding:10px 16px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.05em;">
+    <span style="display:inline-block;width:8px;height:8px;background:#fff;border-radius:50%;margin-right:8px;vertical-align:middle;animation:ve-pulse 1.5s ease-in-out infinite;"></span>
+    ORDER CONFIRMED — YOU'RE IN
+  </div>
+
+  <!-- Brand bar -->
+  <div style="background:#000;border-bottom:1px solid #1a1a1a;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;">
+    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+           alt="Vinylessence" style="height:40px;width:auto;border-radius:50%;" />
+    </a>
+    <a href="/" style="color:#9ca3af;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;"
+       onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#9ca3af'">
+      ← Back to Home
+    </a>
+  </div>
+
+  <!-- HERO — confirmation -->
+  <section style="background:#000;padding:64px 16px 32px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:#E8C100;border-radius:50%;filter:blur(180px);opacity:0.08;pointer-events:none;"></div>
+
+    <div style="position:relative;z-index:1;max-width:720px;margin:0 auto;">
+
+      <!-- Success checkmark -->
+      <div style="width:96px;height:96px;margin:0 auto 24px;background:rgba(0,174,66,0.15);border:2px solid #00AE42;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:check-pop 0.6s cubic-bezier(.2,.9,.3,1.3) both;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#00AE42" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <span style="display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(232,193,0,0.1);border:1px solid rgba(232,193,0,0.4);color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:20px;animation:fade-up 0.5s 0.2s both;">
+        Pre-Order #{{order.id}} Confirmed
+      </span>
+
+      <h1 style="color:#fff;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin:0 0 16px;animation:fade-up 0.5s 0.3s both;">
+        Thank You, <span style="color:#E8C100;">{{contact.first_name}}</span>
+      </h1>
+
+      <p style="color:#9ca3af;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.6;margin:0 auto 28px;max-width:560px;animation:fade-up 0.5s 0.4s both;">
+        Welcome to the Vinylessence family. You're now part of the 375+ music lovers bringing their vinyl to life. A confirmation email is on its way to <strong style="color:#fff;">{{contact.email}}</strong>.
+      </p>
+
+      <!-- Quick stats row -->
+      <div style="display:inline-flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fade-up 0.5s 0.5s both;">
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Order:</span> <strong style="color:#fff;">#{{order.id}}</strong>
+        </div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Total:</span> <strong style="color:#E8C100;">{{order.total}}</strong>
+        </div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
+          <span style="color:#6b7280;">Ships:</span> <strong style="color:#fff;">December 2026</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 3 — CUSTOM CODE BELOW THE CONFIRMATION WIDGET             -->
+<!-- ================================================================ -->
+<div id="ve-thankyou-below" style="font-family:'Inter',sans-serif;">
+
+  <!-- WHAT HAPPENS NEXT — timeline -->
+  <section style="background:#000;padding:48px 16px;">
+    <div style="max-width:800px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <span style="display:inline-block;color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:10px;">Your Pre-Order Journey</span>
+        <h2 style="color:#fff;font-size:clamp(1.5rem,3.5vw,2.25rem);font-weight:800;margin:0;">
+          What Happens Next
+        </h2>
+      </div>
+
+      <!-- Timeline -->
+      <div style="position:relative;padding-left:32px;">
+        <!-- Vertical line -->
+        <div style="position:absolute;left:15px;top:14px;bottom:14px;width:2px;background:linear-gradient(180deg,#00AE42 0%,#E8C100 33%,#E8C100 66%,#374151 100%);"></div>
+
+        <!-- Step 1 -->
+        <div style="position:relative;margin-bottom:28px;">
+          <div style="position:absolute;left:-32px;top:0;width:32px;height:32px;background:#00AE42;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px #000, 0 0 15px rgba(0,174,66,0.4);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #00AE42;border-radius:16px;padding:18px 22px;margin-left:12px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <strong style="color:#00AE42;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Done · Today</strong>
+            </div>
+            <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0 0 4px;">Order Received</h3>
+            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">Your pre-order is locked in. Confirmation email sent to {{contact.email}}.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="position:relative;margin-bottom:28px;">
+          <div style="position:absolute;left:-32px;top:0;width:32px;height:32px;background:#0a0a0a;border:2px solid #E8C100;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px #000;animation:ve-pulse 2s ease-in-out infinite;">
+            <div style="width:8px;height:8px;background:#E8C100;border-radius:50%;"></div>
+          </div>
+          <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid rgba(232,193,0,0.3);border-radius:16px;padding:18px 22px;margin-left:12px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <strong style="color:#E8C100;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">In Progress · Now</strong>
+            </div>
+            <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0 0 4px;">Production Ramp-Up</h3>
+            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">We're working with our manufacturing partner on your launch shipment. Expect behind-the-scenes updates in your inbox along the way.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="position:relative;margin-bottom:28px;">
+          <div style="position:absolute;left:-32px;top:0;width:32px;height:32px;background:#0a0a0a;border:2px solid #374151;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px #000;">
+            <div style="width:8px;height:8px;background:#374151;border-radius:50%;"></div>
+          </div>
+          <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:16px;padding:18px 22px;margin-left:12px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <strong style="color:#6b7280;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Upcoming · December 2026</strong>
+            </div>
+            <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0 0 4px;">Shipping & Tracking</h3>
+            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">Your Vinylessence ships in December 2026. You'll get a tracking number the moment your package is on its way.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="position:relative;">
+          <div style="position:absolute;left:-32px;top:0;width:32px;height:32px;background:#0a0a0a;border:2px solid #374151;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px #000;">
+            <div style="width:8px;height:8px;background:#374151;border-radius:50%;"></div>
+          </div>
+          <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:16px;padding:18px 22px;margin-left:12px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <strong style="color:#6b7280;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Final Step</strong>
+            </div>
+            <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0 0 4px;">Let the Records Glow</h3>
+            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">Drop it on, power it up, press play. Don't forget to tag us when you do — we'd love to see your setup.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAY IN THE LOOP (newsletter) -->
+  <section style="background:linear-gradient(135deg,#0a0a0a,#000);padding:48px 16px;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(232,193,0,0.1);border:1px solid rgba(232,193,0,0.3);color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;">
+        <span style="width:6px;height:6px;background:#E8C100;border-radius:50%;"></span>
+        Stay in the Loop
+      </div>
+      <h2 style="color:#fff;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:800;margin:0 0 10px;">
+        Get Production Updates Every Step of the Way
+      </h2>
+      <p style="color:#9ca3af;font-size:0.95rem;line-height:1.5;margin:0 0 24px;">
+        Behind-the-scenes photos, manufacturing milestones, and a heads-up the moment your order ships.
+      </p>
+      <form id="ty-signup-form" style="display:flex;gap:8px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+        <input id="ty-email-input" type="email" required placeholder="{{contact.email}}"
+               style="flex:1 1 240px;background:#000;border:1px solid #2a2a2a;border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;outline:none;" />
+        <button id="ty-submit-btn" type="submit"
+                style="background:linear-gradient(135deg,#E8C100,#c2a100);color:#000;border:none;border-radius:10px;padding:12px 22px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;box-shadow:0 0 20px rgba(232,193,0,0.3);">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOLLOW + SHARE -->
+  <section style="background:#000;padding:48px 16px;">
+    <div style="max-width:880px;margin:0 auto;text-align:center;">
+      <span style="display:inline-block;color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:10px;">Join the Community</span>
+      <h2 style="color:#fff;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:800;margin:0 0 24px;">
+        Follow Us While You Wait
+      </h2>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:640px;margin:0 auto 32px;">
+        <a href="[INSTAGRAM_URL]" target="_blank" rel="noopener"
+           style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.borderColor='#E8C100';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#1a1a1a';this.style.transform='translateY(0)';">
+          <div style="color:#E8C100;font-size:20px;margin-bottom:4px;">IG</div>
+          <div style="color:#fff;font-size:13px;font-weight:700;">Instagram</div>
+        </a>
+        <a href="[YOUTUBE_URL]" target="_blank" rel="noopener"
+           style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.borderColor='#E8C100';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#1a1a1a';this.style.transform='translateY(0)';">
+          <div style="color:#E8C100;font-size:20px;margin-bottom:4px;">▶</div>
+          <div style="color:#fff;font-size:13px;font-weight:700;">YouTube</div>
+        </a>
+        <a href="[TIKTOK_URL]" target="_blank" rel="noopener"
+           style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.borderColor='#E8C100';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#1a1a1a';this.style.transform='translateY(0)';">
+          <div style="color:#E8C100;font-size:20px;margin-bottom:4px;">♪</div>
+          <div style="color:#fff;font-size:13px;font-weight:700;">TikTok</div>
+        </a>
+        <a href="[DISCORD_URL]" target="_blank" rel="noopener"
+           style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.borderColor='#E8C100';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#1a1a1a';this.style.transform='translateY(0)';">
+          <div style="color:#E8C100;font-size:20px;margin-bottom:4px;">◎</div>
+          <div style="color:#fff;font-size:13px;font-weight:700;">Discord</div>
+        </a>
+      </div>
+
+      <!-- Share CTA -->
+      <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px dashed rgba(232,193,0,0.4);border-radius:16px;padding:24px;max-width:520px;margin:0 auto;">
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin:0 0 6px;">Know someone who'd love this?</h3>
+        <p style="color:#9ca3af;font-size:0.9rem;margin:0 0 14px;">Send them the link — they'll thank you later.</p>
+        <button onclick="navigator.clipboard?.writeText('https://vinyl-essence.com');this.innerText='Link Copied ✓';this.style.background='#00AE42';this.style.color='#fff';"
+                style="background:transparent;border:1px solid #E8C100;color:#E8C100;border-radius:10px;padding:10px 20px;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.2s;">
+          Copy Share Link
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASSURANCE -->
+  <section style="background:#0a0a0a;padding:40px 16px;border-top:1px solid #1a1a1a;">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+      <div style="background:#000;border:1px solid #1a1a1a;border-radius:12px;padding:18px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="color:#E8C100;font-size:22px;flex-shrink:0;">🛡</span>
+        <div>
+          <div style="color:#fff;font-weight:700;font-size:14px;">30-Day Guarantee</div>
+          <div style="color:#9ca3af;font-size:12px;margin-top:2px;">From the day it arrives. Love it or return it.</div>
+        </div>
+      </div>
+      <div style="background:#000;border:1px solid #1a1a1a;border-radius:12px;padding:18px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="color:#E8C100;font-size:22px;flex-shrink:0;">✉</span>
+        <div>
+          <div style="color:#fff;font-weight:700;font-size:14px;">Real Human Support</div>
+          <div style="color:#9ca3af;font-size:12px;margin-top:2px;">Questions? Reply to your confirmation email anytime.</div>
+        </div>
+      </div>
+      <div style="background:#000;border:1px solid #1a1a1a;border-radius:12px;padding:18px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="color:#E8C100;font-size:22px;flex-shrink:0;">📦</span>
+        <div>
+          <div style="color:#fff;font-weight:700;font-size:14px;">Tracked Delivery</div>
+          <div style="color:#9ca3af;font-size:12px;margin-top:2px;">Full tracking the moment your order ships.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#000;border-top:1px solid #1a1a1a;padding:24px 16px;color:#6b7280;font-size:12px;text-align:center;">
+    <div style="max-width:900px;margin:0 auto;">
+      <p style="margin:0 0 6px;">© Charg3d LLC · Vinylessence is a product of Charg3d LLC</p>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+        <a href="/" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Home</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Privacy Policy</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Terms of Service</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Newsletter submit (reuses your existing Make.com webhook) -->
+  <script>
+    (function () {
+      const WEBHOOK = "https://hook.integrator.boost.space/3n6p6dlg38bvwg6bccaxg7waipg26s5f";
+      const form = document.getElementById('ty-signup-form');
+      const input = document.getElementById('ty-email-input');
+      const btn = document.getElementById('ty-submit-btn');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!input.value) return;
+        const original = btn.innerText;
+        btn.innerText = 'Sending...';
+        btn.disabled = true;
+        try {
+          await fetch(WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: input.value,
+              source: 'Vinylessence Thank You Page',
+              pageUrl: window.location.href,
+              date: new Date().toISOString()
+            })
+          });
+        } catch (_) {}
+        btn.innerText = "You're in ✓";
+        btn.style.background = '#00AE42';
+        btn.style.color = '#fff';
+        setTimeout(() => {
+          btn.innerText = original;
+          btn.disabled = false;
+          btn.style.background = 'linear-gradient(135deg,#E8C100,#c2a100)';
+          btn.style.color = '#000';
+          input.value = '';
+        }, 3000);
+      });
+    })();
+  </script>
+
+</div>
