@@ -68,6 +68,115 @@
     background-color: transparent !important;
   }
 
+  /* ===== Hide the native widget's redundant thank-you + email line =====
+     Our custom hero already says this more prominently. */
+  [class*="thank-you-title"],
+  [class*="thankyou-title"],
+  [class*="confirmation-title"],
+  [class*="confirmation-header"],
+  [class*="confirmation-greeting"],
+  [class*="email-confirmation-text"],
+  [class*="confirmation-email-msg"],
+  [class*="confirmation-message"] {
+    display: none !important;
+  }
+
+  /* ===== Shipping address card → match dark theme ===== */
+  [class*="shipping-address"],
+  [class*="address-card"],
+  [class*="shipping-info"],
+  [class*="address-box"],
+  [class*="billing-address"] {
+    background: #000 !important;
+    background-color: #000 !important;
+    border: 1px solid #1a1a1a !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    padding: 16px !important;
+  }
+  [class*="shipping-address"] *,
+  [class*="address-card"] *,
+  [class*="shipping-info"] *,
+  [class*="address-box"] *,
+  [class*="billing-address"] * {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #d1d5db !important;
+  }
+  [class*="shipping-address"] h1,
+  [class*="shipping-address"] h2,
+  [class*="shipping-address"] h3,
+  [class*="shipping-address"] h4,
+  [class*="shipping-address"] strong,
+  [class*="address-card"] h3,
+  [class*="address-card"] strong {
+    color: #fff !important;
+  }
+
+  /* ===== Continue Shopping + Download + other widget buttons → gold outline ===== */
+  [class*="continue-shopping"],
+  a[class*="continue-shopping"],
+  button[class*="continue-shopping"],
+  [class*="download-btn"],
+  button[class*="download"],
+  a[class*="download"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #E8C100 !important;
+    border: 1px solid #E8C100 !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 8px 18px !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+    transition: all 0.2s !important;
+  }
+  [class*="continue-shopping"]:hover,
+  [class*="download-btn"]:hover,
+  button[class*="download"]:hover {
+    background: #E8C100 !important;
+    color: #000 !important;
+  }
+
+  /* Svg arrows inside Continue Shopping */
+  [class*="continue-shopping"] svg,
+  [class*="download"] svg {
+    color: currentColor !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+
+  /* Order items table — subdivide with gold-tinted border */
+  [class*="order-items"] table,
+  [class*="cart-items"] table,
+  [class*="order-table"] {
+    background: transparent !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+  [class*="order-items"] th,
+  [class*="cart-items"] th {
+    color: #9ca3af !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    border-bottom: 1px solid rgba(232,193,0,0.2) !important;
+    padding: 12px 8px !important;
+  }
+  [class*="order-items"] td,
+  [class*="cart-items"] td {
+    color: #fff !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    padding: 12px 8px !important;
+  }
+  [class*="order-items"] tr:last-child td,
+  [class*="cart-items"] tr:last-child td {
+    border-bottom: none !important;
+  }
+
   /* Animations */
   @keyframes check-pop {
     0% { transform: scale(0); opacity: 0; }
