@@ -132,12 +132,24 @@
     background: #0f0f0f !important;
   }
 
-  /* GHL selects need the gold caret + dropdown styling too */
+  /* GHL selects — exact match + color-scheme forces Chrome dark render */
   select.hl-checkout-input,
   select.form-input,
-  select.input {
+  select.input,
+  select[name="country"],
+  select[name="state"],
+  select[aria-label="Select country"],
+  select[aria-label="Select state"],
+  select.form-input.input.hl-checkout-input {
+    color-scheme: dark !important;
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 1px solid #2a2a2a !important;
     appearance: none !important;
     -webkit-appearance: none !important;
+    -moz-appearance: none !important;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%23E8C100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
     background-repeat: no-repeat !important;
     background-position: right 14px center !important;
@@ -438,6 +450,35 @@
     border: 1px solid #2a2a2a !important;
     border-radius: 10px !important;
     min-height: 80px !important;
+  }
+
+  /* ===== Stripe Payment Element (best-effort; some bits are controlled by Stripe's theme API) ===== */
+  .p-TabContainer,
+  .p-PaymentMethodSelector {
+    background: transparent !important;
+    gap: 8px !important;
+  }
+  .p-Tab {
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 10px !important;
+    color: #d1d5db !important;
+    transition: all 0.2s !important;
+  }
+  .p-Tab:hover {
+    border-color: rgba(232,193,0,0.5) !important;
+    background: #111 !important;
+  }
+  .p-Tab--selected,
+  .p-Tab.p-Tab--selected {
+    border-color: #E8C100 !important;
+    background: rgba(232,193,0,0.08) !important;
+    color: #E8C100 !important;
+    box-shadow: 0 0 0 1px #E8C100 !important;
+  }
+  .p-TabLabel, .p-TabIcon {
+    color: inherit !important;
   }
 
   /* ===== Chat widget positioning fallback ===== */
