@@ -41,29 +41,48 @@
     font-family: 'Inter', sans-serif !important;
   }
 
-  /* Kill any default white page wrappers GHL injects */
-  .main-section, .c-section, .c-row, .c-col {
+  /* Force every GHL wrapper to be transparent so the black shows through */
+  .main-section, .c-section, .c-row, .c-col,
+  .hl_page-wrapper, .hl_section, .hl_row, .hl_col,
+  [class*="hl_section"], [class*="hl_row"], [class*="hl_col"],
+  [class*="section-container"], [class*="row-wrapper"], [class*="col-wrapper"] {
     background: transparent !important;
   }
 
   ::selection { background-color: #E8C100; color: #000; }
 
-  /* ===== Product widget wrapper ===== */
+  /* ===== AGGRESSIVE WIDGET OVERRIDES ===== */
+  /* Force the ENTIRE store product container + everything inside to be black/white */
   [class*="product-detail"],
   [class*="product-wrapper"],
   [class*="product-view"],
-  .c-product-view {
-    background: transparent !important;
+  [class*="hl-product"],
+  [class*="ecommerce"],
+  [class*="store-product"],
+  .c-product-view,
+  .c-product-detail {
+    background: #000 !important;
     color: #fff !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
     padding: 2rem 1rem !important;
   }
 
+  /* Every text node inside the widget defaults to white */
+  [class*="product-detail"] *,
+  [class*="product-wrapper"] *,
+  [class*="hl-product"] *,
+  [class*="ecommerce"] * {
+    color: #fff;
+  }
+
   /* ===== Product title ===== */
   [class*="product-name"],
   [class*="product-title"],
-  .product-name {
+  [class*="hl-product-detail-product-title"],
+  .product-name,
+  h1[class*="product"],
+  h2[class*="product"] {
     color: #fff !important;
     font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
     font-weight: 800 !important;
@@ -74,6 +93,7 @@
 
   /* ===== Price ===== */
   [class*="product-price"]:not([class*="compare"]),
+  [class*="hl-product-detail-product-price"]:not([class*="compare"]),
   .product-price {
     color: #E8C100 !important;
     font-size: clamp(2rem, 5vw, 3rem) !important;
@@ -81,37 +101,53 @@
     letter-spacing: -0.02em !important;
   }
 
+  /* ===== Compare price (strike-through) ===== */
   [class*="compare-price"],
+  [class*="compareAtPrice"],
+  [class*="compare_at_price"],
   .product-compare-price {
-    color: #6b7280 !important;
+    color: #9ca3af !important;
     text-decoration: line-through !important;
     font-weight: 500 !important;
+    font-size: 1.125rem !important;
+    margin-left: 0.5rem !important;
+    opacity: 1 !important;
+    display: inline !important;
   }
 
+  /* ===== Discount badge ===== */
   [class*="discount"],
-  [class*="percent-off"] {
+  [class*="percent-off"],
+  [class*="off-label"],
+  [class*="savings"] {
     color: #00AE42 !important;
-    font-weight: 700 !important;
     background: rgba(0,174,66,0.1) !important;
+    font-weight: 700 !important;
     padding: 0.25rem 0.75rem !important;
     border-radius: 999px !important;
     border: 1px solid rgba(0,174,66,0.3) !important;
     font-size: 0.875rem !important;
     display: inline-block !important;
     margin-left: 0.5rem !important;
+    width: auto !important;
+    height: auto !important;
+    vertical-align: middle !important;
   }
 
-  /* ===== Quantity ===== */
+  /* ===== Quantity label ===== */
   label[for*="quantity"],
-  [class*="quantity-label"] {
+  [class*="quantity-label"],
+  [class*="quantity-title"] {
     color: #9ca3af !important;
     font-size: 0.875rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
     font-weight: 600 !important;
     margin-bottom: 0.5rem !important;
+    display: block !important;
   }
 
+  /* ===== Quantity input ===== */
   [class*="quantity"] input,
   .quantity-input,
   input[type="number"] {
@@ -136,12 +172,18 @@
     border-color: #E8C100 !important;
   }
 
-  /* ===== Buy Now button ===== */
+  /* ===== BUY NOW BUTTON — aggressive override ===== */
   button[class*="buy-now"],
+  button[class*="buynow"],
+  button[class*="BuyNow"],
   [class*="buynow"] button,
+  [class*="buy-now"] button,
   .buy-now-btn,
   .hl_button-primary,
-  button[type="submit"] {
+  button[type="submit"],
+  button:where(.buy-now, [aria-label*="Buy" i]),
+  [class*="product-detail"] button:not([class*="quantity"]):not([class*="gallery"]):not([class*="arrow"]),
+  [class*="hl-product"] button:not([class*="quantity"]):not([class*="gallery"]):not([class*="arrow"]) {
     background: #E8C100 !important;
     background-image: linear-gradient(135deg, #E8C100, #c2a100) !important;
     color: #000 !important;
@@ -159,7 +201,9 @@
   }
 
   button[class*="buy-now"]:hover,
+  button[class*="buynow"]:hover,
   [class*="buynow"] button:hover,
+  [class*="buy-now"] button:hover,
   .buy-now-btn:hover,
   .hl_button-primary:hover,
   button[type="submit"]:hover {
