@@ -67,17 +67,17 @@
     border-bottom: 1px solid rgba(232,193,0,0.2) !important;
   }
 
-  /* ===== Form labels ===== */
-  [class*="checkout"] label,
+  /* ===== Form labels (global) ===== */
+  form label,
   [class*="form-label"],
   [class*="field-label"],
   [class*="input-label"],
-  label[for] {
+  label[for],
+  label {
     color: #d1d5db !important;
     font-weight: 600 !important;
     font-size: 0.875rem !important;
     margin-bottom: 0.5rem !important;
-    display: block !important;
   }
 
   /* Required-asterisk red mark stays red */
@@ -88,19 +88,21 @@
     color: #ef4444 !important;
   }
 
-  /* ===== Inputs / textareas / selects ===== */
-  [class*="checkout"] input[type="text"],
-  [class*="checkout"] input[type="email"],
-  [class*="checkout"] input[type="tel"],
-  [class*="checkout"] input[type="number"],
-  [class*="checkout"] input[type="search"],
-  [class*="checkout"] textarea,
-  [class*="checkout"] select,
+  /* ===== Inputs / textareas / selects (globally scoped) ===== */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  input[type="password"],
+  textarea,
+  select,
   input.form-control,
   input.input-field,
   textarea.form-control,
   select.form-control {
     background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
     color: #fff !important;
     border: 1px solid #2a2a2a !important;
     border-radius: 10px !important;
@@ -110,26 +112,36 @@
     transition: all 0.2s !important;
     width: 100% !important;
     box-shadow: none !important;
+    -webkit-text-fill-color: #fff !important;
   }
 
-  [class*="checkout"] input::placeholder,
-  [class*="checkout"] textarea::placeholder,
-  input.form-control::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     color: #4b5563 !important;
+    opacity: 1 !important;
   }
 
-  [class*="checkout"] input:focus,
-  [class*="checkout"] textarea:focus,
-  [class*="checkout"] select:focus,
-  input.form-control:focus {
+  input:focus,
+  textarea:focus,
+  select:focus {
     outline: none !important;
     border-color: #E8C100 !important;
     box-shadow: 0 0 0 3px rgba(232,193,0,0.15) !important;
     background: #0f0f0f !important;
   }
 
+  /* Defeat browser autofill yellow background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #0a0a0a inset !important;
+    -webkit-text-fill-color: #fff !important;
+    caret-color: #fff !important;
+  }
+
   /* Select dropdown arrow */
-  [class*="checkout"] select {
+  select {
     appearance: none !important;
     -webkit-appearance: none !important;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%23E8C100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
@@ -137,6 +149,12 @@
     background-position: right 14px center !important;
     background-size: 12px !important;
     padding-right: 36px !important;
+  }
+
+  /* Native select option list (browser-controlled, but we try) */
+  select option {
+    background: #0a0a0a !important;
+    color: #fff !important;
   }
 
   /* ===== Checkboxes (gold tick) ===== */
@@ -159,7 +177,12 @@
   [class*="payment-method"],
   [class*="payment-tab"],
   [class*="payment-option"],
-  [class*="payment-selector"] {
+  [class*="payment-selector"],
+  [class*="payment-button"],
+  [class*="payment-type"],
+  [class*="paymentMethod"],
+  div[role="tab"],
+  button[role="tab"] {
     background: #0a0a0a !important;
     border: 1px solid #2a2a2a !important;
     border-radius: 10px !important;
@@ -169,7 +192,9 @@
 
   [class*="payment-method"]:hover,
   [class*="payment-tab"]:hover,
-  [class*="payment-option"]:hover {
+  [class*="payment-option"]:hover,
+  div[role="tab"]:hover,
+  button[role="tab"]:hover {
     border-color: rgba(232,193,0,0.5) !important;
     background: #111 !important;
   }
@@ -179,11 +204,53 @@
   [class*="payment-tab"][class*="active"],
   [class*="payment-tab"][class*="selected"],
   [class*="payment-option"][class*="active"],
-  [class*="payment-option"][class*="selected"] {
+  [class*="payment-option"][class*="selected"],
+  div[role="tab"][aria-selected="true"],
+  button[role="tab"][aria-selected="true"] {
     border-color: #E8C100 !important;
     background: rgba(232,193,0,0.08) !important;
     color: #E8C100 !important;
     box-shadow: 0 0 0 1px #E8C100 !important;
+  }
+
+  /* ===== Shipping method options (USPS Ground / Priority / FedEx) ===== */
+  [class*="shipping-method"],
+  [class*="shipping-option"],
+  [class*="shipping-rate"],
+  [class*="delivery-option"] {
+    background: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    padding: 14px 16px !important;
+    margin-bottom: 8px !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+  }
+
+  [class*="shipping-method"]:hover,
+  [class*="shipping-option"]:hover {
+    border-color: rgba(232,193,0,0.5) !important;
+    background: #111 !important;
+  }
+
+  [class*="shipping-method"][class*="active"],
+  [class*="shipping-method"][class*="selected"],
+  [class*="shipping-option"][class*="active"],
+  [class*="shipping-option"][class*="selected"],
+  [class*="shipping-method"]:has(input[type="radio"]:checked),
+  [class*="shipping-option"]:has(input[type="radio"]:checked) {
+    border-color: #E8C100 !important;
+    background: rgba(232,193,0,0.08) !important;
+    box-shadow: 0 0 0 1px #E8C100 !important;
+  }
+
+  /* Radio buttons gold accent */
+  input[type="radio"] {
+    accent-color: #E8C100 !important;
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer !important;
   }
 
   /* ===== Cart summary panel (right side) ===== */
@@ -254,16 +321,24 @@
     color: #000 !important;
   }
 
-  /* ===== CONTINUE / Place Order button ===== */
+  /* ===== CONTINUE / Place Order button (broadly catch all primary submit buttons) ===== */
   button[class*="continue"],
+  button[class*="Continue"],
   button[class*="checkout-btn"],
   button[class*="place-order"],
   button[class*="submit-order"],
-  button[type="submit"]:not([class*="apply"]),
+  button[class*="primary"],
+  button[class*="next-step"],
+  button[class*="proceed"],
+  button[id*="continue" i],
+  button[type="submit"]:not([class*="apply"]):not([class*="coupon"]),
   .btn-primary,
-  .hl_button-primary {
+  .hl_button-primary,
+  .checkout-button,
+  form button:not([class*="apply"]):not([class*="coupon"]):not([class*="quantity"]):not([class*="remove"]):not([class*="edit"]) {
     background: linear-gradient(135deg, #E8C100, #c2a100) !important;
     background-color: #E8C100 !important;
+    background-image: linear-gradient(135deg, #E8C100, #c2a100) !important;
     color: #000 !important;
     border: none !important;
     font-weight: 800 !important;
@@ -279,21 +354,26 @@
   }
 
   button[class*="continue"]:hover,
-  button[class*="checkout-btn"]:hover,
-  button[class*="place-order"]:hover,
-  button[class*="submit-order"]:hover,
-  button[type="submit"]:not([class*="apply"]):hover,
-  .btn-primary:hover {
+  button[type="submit"]:not([class*="apply"]):not([class*="coupon"]):hover,
+  .btn-primary:hover,
+  .hl_button-primary:hover,
+  .checkout-button:hover,
+  form button:not([class*="apply"]):not([class*="coupon"]):not([class*="quantity"]):not([class*="remove"]):not([class*="edit"]):hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 0 40px rgba(232,193,0,0.5) !important;
     filter: brightness(1.05) !important;
   }
 
-  /* Hide GHL's cart-icon emoji or replace its color */
+  /* Force the cart icon inside the Continue button to black */
   button[class*="continue"] svg,
-  button[class*="continue"] i {
+  button[class*="continue"] i,
+  button[type="submit"] svg,
+  button[type="submit"] i,
+  .checkout-button svg,
+  .checkout-button i {
     color: #000 !important;
     fill: #000 !important;
+    stroke: #000 !important;
   }
 
   /* "100% Secure & Safe Payments" subtext */
