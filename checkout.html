@@ -88,7 +88,7 @@
     color: #ef4444 !important;
   }
 
-  /* ===== Inputs / textareas / selects (globally scoped) ===== */
+  /* ===== Inputs / textareas / selects (globally scoped + exact GHL classes) ===== */
   input[type="text"],
   input[type="email"],
   input[type="tel"],
@@ -100,7 +100,13 @@
   input.form-control,
   input.input-field,
   textarea.form-control,
-  select.form-control {
+  select.form-control,
+  .hl-checkout-input,
+  .form-input,
+  input.input,
+  select.input,
+  select.form-input,
+  select.hl-checkout-input {
     background: #0a0a0a !important;
     background-color: #0a0a0a !important;
     color: #fff !important;
@@ -113,6 +119,30 @@
     width: 100% !important;
     box-shadow: none !important;
     -webkit-text-fill-color: #fff !important;
+  }
+
+  /* Focus state for GHL-specific classes too */
+  .hl-checkout-input:focus,
+  .form-input:focus,
+  select.hl-checkout-input:focus,
+  select.form-input:focus {
+    outline: none !important;
+    border-color: #E8C100 !important;
+    box-shadow: 0 0 0 3px rgba(232,193,0,0.15) !important;
+    background: #0f0f0f !important;
+  }
+
+  /* GHL selects need the gold caret + dropdown styling too */
+  select.hl-checkout-input,
+  select.form-input,
+  select.input {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%23E8C100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 12px !important;
+    padding-right: 36px !important;
   }
 
   input::placeholder,
@@ -321,7 +351,10 @@
     color: #000 !important;
   }
 
-  /* ===== CONTINUE / Place Order button (narrowly scoped — must match a checkout-specific class) ===== */
+  /* ===== CONTINUE / Place Order button — exact GHL checkout button ===== */
+  button#make-payment,
+  button.form-btn.payment-btn,
+  button.payment-btn,
   button[class*="continue"],
   button[class*="Continue"],
   button[class*="checkout-btn"],
@@ -331,9 +364,7 @@
   button[class*="proceed-to"],
   button[id*="continue" i],
   button[id*="checkout" i],
-  .checkout-button,
-  .hl_button-primary.hl_btn-checkout,
-  [class*="checkout"] button[type="submit"]:not([class*="apply"]):not([class*="coupon"]) {
+  .checkout-button {
     background: linear-gradient(135deg, #E8C100, #c2a100) !important;
     background-color: #E8C100 !important;
     background-image: linear-gradient(135deg, #E8C100, #c2a100) !important;
@@ -351,23 +382,32 @@
     width: 100% !important;
   }
 
+  button#make-payment:hover,
+  button.form-btn.payment-btn:hover,
+  button.payment-btn:hover,
   button[class*="continue"]:hover,
   button[class*="Continue"]:hover,
   button[class*="checkout-btn"]:hover,
   button[class*="place-order"]:hover,
   button[class*="submit-order"]:hover,
-  .checkout-button:hover,
-  [class*="checkout"] button[type="submit"]:not([class*="apply"]):not([class*="coupon"]):hover {
+  .checkout-button:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 0 40px rgba(232,193,0,0.5) !important;
     filter: brightness(1.05) !important;
   }
 
-  /* Force the cart icon inside the Continue button to black */
-  button[class*="continue"] svg,
-  button[class*="continue"] i,
-  .checkout-button svg,
-  .checkout-button i {
+  /* Main text span + cart icon inside Continue button */
+  button#make-payment .main-text,
+  button.payment-btn .main-text {
+    color: #000 !important;
+    font-weight: 800 !important;
+  }
+  button#make-payment .cart-icon,
+  button.payment-btn .cart-icon,
+  button#make-payment i,
+  button.payment-btn i,
+  button#make-payment svg,
+  button.payment-btn svg {
     color: #000 !important;
     fill: #000 !important;
     stroke: #000 !important;
