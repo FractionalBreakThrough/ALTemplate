@@ -1,0 +1,467 @@
+<!--
+================================================================
+  VINYLESSENCE — CHECKOUT PAGE CUSTOMIZATION (GHL Store)
+================================================================
+
+  Three copy-paste blocks for the checkout page (the page after Buy Now):
+
+    1. SECTION 1 — Custom CSS
+       → Page Settings → Advanced → Custom CSS
+
+    2. SECTION 2 — Custom Code ABOVE the checkout widget
+       → Drag a "Custom JS/HTML" element ABOVE the checkout
+       → Paste Section 2 HTML
+
+    3. SECTION 3 — Custom Code BELOW the checkout widget
+       → Drag a "Custom JS/HTML" element BELOW the checkout
+       → Paste Section 3 HTML
+
+  Notes:
+    - DO NOT try to style inside the Stripe / payment iframe — those
+      are cross-origin and locked. We only style the wrapping form.
+    - If a stubborn element won't restyle, inspect it in DevTools,
+      copy its class, and add a rule to "ADD CUSTOM OVERRIDES HERE"
+      at the bottom of the CSS block.
+================================================================
+-->
+
+
+<!-- ================================================================ -->
+<!-- SECTION 1 — CUSTOM CSS                                            -->
+<!-- Paste into: Page Settings → Advanced → Custom CSS                 -->
+<!-- ================================================================ -->
+<style>
+  /* ===== Base page ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+  body, html {
+    background: #000 !important;
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .main-section, .c-section, .c-row, .c-col,
+  .hl_page-wrapper, .hl_section, .hl_row, .hl_col,
+  [class*="hl_section"], [class*="hl_row"], [class*="hl_col"],
+  [class*="section-container"], [class*="row-wrapper"], [class*="col-wrapper"] {
+    background: transparent !important;
+  }
+
+  ::selection { background-color: #E8C100; color: #000; }
+
+  /* ===== Form section headings (Contact, Shipping Details, Payment) ===== */
+  [class*="checkout"] h1,
+  [class*="checkout"] h2,
+  [class*="checkout"] h3,
+  [class*="checkout"] h4,
+  [class*="section-title"],
+  [class*="form-section-title"],
+  [class*="section-heading"] {
+    color: #fff !important;
+    font-weight: 800 !important;
+    font-size: 1.125rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 1px solid rgba(232,193,0,0.2) !important;
+  }
+
+  /* ===== Form labels ===== */
+  [class*="checkout"] label,
+  [class*="form-label"],
+  [class*="field-label"],
+  [class*="input-label"],
+  label[for] {
+    color: #d1d5db !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+  }
+
+  /* Required-asterisk red mark stays red */
+  [class*="required"],
+  [class*="asterisk"],
+  label sup,
+  label .required-mark {
+    color: #ef4444 !important;
+  }
+
+  /* ===== Inputs / textareas / selects ===== */
+  [class*="checkout"] input[type="text"],
+  [class*="checkout"] input[type="email"],
+  [class*="checkout"] input[type="tel"],
+  [class*="checkout"] input[type="number"],
+  [class*="checkout"] input[type="search"],
+  [class*="checkout"] textarea,
+  [class*="checkout"] select,
+  input.form-control,
+  input.input-field,
+  textarea.form-control,
+  select.form-control {
+    background: #0a0a0a !important;
+    color: #fff !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    font-family: 'Inter', sans-serif !important;
+    transition: all 0.2s !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  [class*="checkout"] input::placeholder,
+  [class*="checkout"] textarea::placeholder,
+  input.form-control::placeholder {
+    color: #4b5563 !important;
+  }
+
+  [class*="checkout"] input:focus,
+  [class*="checkout"] textarea:focus,
+  [class*="checkout"] select:focus,
+  input.form-control:focus {
+    outline: none !important;
+    border-color: #E8C100 !important;
+    box-shadow: 0 0 0 3px rgba(232,193,0,0.15) !important;
+    background: #0f0f0f !important;
+  }
+
+  /* Select dropdown arrow */
+  [class*="checkout"] select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%23E8C100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 12px !important;
+    padding-right: 36px !important;
+  }
+
+  /* ===== Checkboxes (gold tick) ===== */
+  [class*="checkout"] input[type="checkbox"],
+  input[type="checkbox"].form-checkbox {
+    accent-color: #E8C100 !important;
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer !important;
+  }
+
+  [class*="checkout"] input[type="checkbox"] + label,
+  [class*="checkout"] label:has(input[type="checkbox"]) {
+    color: #d1d5db !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+  }
+
+  /* ===== Payment method tabs (Card / Google Pay / Afterpay / etc.) ===== */
+  [class*="payment-method"],
+  [class*="payment-tab"],
+  [class*="payment-option"],
+  [class*="payment-selector"] {
+    background: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 10px !important;
+    color: #d1d5db !important;
+    transition: all 0.2s !important;
+  }
+
+  [class*="payment-method"]:hover,
+  [class*="payment-tab"]:hover,
+  [class*="payment-option"]:hover {
+    border-color: rgba(232,193,0,0.5) !important;
+    background: #111 !important;
+  }
+
+  [class*="payment-method"][class*="active"],
+  [class*="payment-method"][class*="selected"],
+  [class*="payment-tab"][class*="active"],
+  [class*="payment-tab"][class*="selected"],
+  [class*="payment-option"][class*="active"],
+  [class*="payment-option"][class*="selected"] {
+    border-color: #E8C100 !important;
+    background: rgba(232,193,0,0.08) !important;
+    color: #E8C100 !important;
+    box-shadow: 0 0 0 1px #E8C100 !important;
+  }
+
+  /* ===== Cart summary panel (right side) ===== */
+  [class*="cart-summary"],
+  [class*="order-summary"],
+  [class*="summary-card"],
+  [class*="checkout-summary"] {
+    background: linear-gradient(135deg, #0a0a0a, #000) !important;
+    border: 1px solid rgba(232,193,0,0.2) !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 20px !important;
+    box-shadow: 0 0 30px rgba(232,193,0,0.08) !important;
+  }
+
+  [class*="cart-summary"] *,
+  [class*="order-summary"] *,
+  [class*="summary-card"] *,
+  [class*="checkout-summary"] * {
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+
+  /* Totals row pop */
+  [class*="cart-summary"] [class*="total"]:not([class*="subtotal"]),
+  [class*="order-summary"] [class*="total"]:not([class*="subtotal"]),
+  [class*="summary"] [class*="grand-total"] {
+    color: #E8C100 !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+  }
+
+  /* Edit Cart link */
+  [class*="edit-cart"],
+  a[class*="edit"] {
+    color: #E8C100 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+  [class*="edit-cart"]:hover { color: #c2a100 !important; text-decoration: underline !important; }
+
+  /* Coupon input + Apply button */
+  [class*="coupon"] input,
+  input[placeholder*="Coupon" i],
+  input[placeholder*="coupon" i] {
+    background: #0a0a0a !important;
+    border: 1px solid #2a2a2a !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+  }
+
+  [class*="coupon"] button,
+  button[class*="apply"] {
+    background: transparent !important;
+    border: 1px solid #E8C100 !important;
+    color: #E8C100 !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 10px 18px !important;
+    transition: all 0.2s !important;
+  }
+  [class*="coupon"] button:hover,
+  button[class*="apply"]:hover {
+    background: #E8C100 !important;
+    color: #000 !important;
+  }
+
+  /* ===== CONTINUE / Place Order button ===== */
+  button[class*="continue"],
+  button[class*="checkout-btn"],
+  button[class*="place-order"],
+  button[class*="submit-order"],
+  button[type="submit"]:not([class*="apply"]),
+  .btn-primary,
+  .hl_button-primary {
+    background: linear-gradient(135deg, #E8C100, #c2a100) !important;
+    background-color: #E8C100 !important;
+    color: #000 !important;
+    border: none !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 12px !important;
+    padding: 1.15rem 2rem !important;
+    font-size: 1.125rem !important;
+    box-shadow: 0 0 30px rgba(232,193,0,0.3) !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+    width: 100% !important;
+  }
+
+  button[class*="continue"]:hover,
+  button[class*="checkout-btn"]:hover,
+  button[class*="place-order"]:hover,
+  button[class*="submit-order"]:hover,
+  button[type="submit"]:not([class*="apply"]):hover,
+  .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 40px rgba(232,193,0,0.5) !important;
+    filter: brightness(1.05) !important;
+  }
+
+  /* Hide GHL's cart-icon emoji or replace its color */
+  button[class*="continue"] svg,
+  button[class*="continue"] i {
+    color: #000 !important;
+    fill: #000 !important;
+  }
+
+  /* "100% Secure & Safe Payments" subtext */
+  [class*="secure-payment"],
+  [class*="secure-text"],
+  [class*="payment-disclaimer"] {
+    color: #6b7280 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* ===== Dividers/borders inside the form ===== */
+  [class*="checkout"] hr,
+  [class*="form-divider"],
+  [class*="section-divider"] {
+    border-color: rgba(232,193,0,0.15) !important;
+    margin: 24px 0 !important;
+  }
+
+  /* ===== Add notes textarea ===== */
+  [class*="add-notes"] textarea,
+  [class*="order-notes"] textarea {
+    background: #0a0a0a !important;
+    color: #fff !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 10px !important;
+    min-height: 80px !important;
+  }
+
+  /* ===== Chat widget positioning fallback ===== */
+  #lc_chat_launcher { z-index: 50 !important; }
+
+  /* ===== ADD CUSTOM OVERRIDES HERE ===== */
+  /* Inspect any stubborn element → copy its class → add a rule below.
+     Example:
+       .your-class-name { background: transparent !important; color: #fff !important; }
+  */
+
+</style>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 2 — CUSTOM CODE ABOVE THE CHECKOUT WIDGET                 -->
+<!-- Drop a Custom JS/HTML element ABOVE the checkout, paste here.     -->
+<!-- ================================================================ -->
+<div id="ve-checkout-above" style="font-family:'Inter',sans-serif;">
+
+  <!-- Urgency banner -->
+  <div style="background:#E8C100;color:#000;padding:10px 16px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.05em;">
+    <span style="display:inline-block;width:8px;height:8px;background:#000;border-radius:50%;margin-right:8px;vertical-align:middle;animation:ve-pulse 1.5s ease-in-out infinite;"></span>
+    PRE-ORDER DISCOUNT APPLIED · YOU'RE SAVING $30
+  </div>
+
+  <!-- Brand bar -->
+  <div style="background:#000;border-bottom:1px solid #1a1a1a;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;">
+    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+           alt="Vinylessence" style="height:40px;width:auto;border-radius:50%;" />
+    </a>
+    <a href="/buy-now" style="color:#9ca3af;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;"
+       onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#9ca3af'">
+      ← Back to Product
+    </a>
+  </div>
+
+  <!-- Progress indicator + headline -->
+  <div style="background:#000;padding:32px 16px 24px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:#E8C100;border-radius:50%;filter:blur(160px);opacity:0.06;pointer-events:none;"></div>
+
+    <div style="position:relative;z-index:1;max-width:680px;margin:0 auto;">
+      <!-- Progress -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#6b7280;flex-wrap:wrap;">
+        <span style="color:#00AE42;">✓ Cart</span>
+        <span style="color:#374151;">━━</span>
+        <span style="color:#E8C100;">● Checkout</span>
+        <span style="color:#374151;">━━</span>
+        <span style="color:#374151;">○ Confirmation</span>
+      </div>
+
+      <h1 style="color:#fff;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin:0 0 10px;">
+        Almost There — <span style="color:#E8C100;">Secure Your Pre-Order</span>
+      </h1>
+      <p style="color:#9ca3af;font-size:0.95rem;line-height:1.5;margin:0 auto;max-width:520px;">
+        Your $30 pre-order discount is locked in. Complete your details below to reserve your Smart LED Slipmat.
+      </p>
+    </div>
+  </div>
+
+  <!-- Trust strip -->
+  <div style="background:#0a0a0a;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:14px 16px;font-family:'Inter',sans-serif;">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;text-align:center;font-size:12px;">
+      <div style="color:#9ca3af;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <span style="color:#E8C100;">🔒</span> 256-bit SSL Encrypted
+      </div>
+      <div style="color:#9ca3af;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <span style="color:#E8C100;">✓</span> 30-Day Guarantee
+      </div>
+      <div style="color:#9ca3af;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <span style="color:#E8C100;">✈</span> Live Shipping Rates
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes ve-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  </style>
+</div>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 3 — CUSTOM CODE BELOW THE CHECKOUT WIDGET                 -->
+<!-- Drop a Custom JS/HTML element BELOW the checkout, paste here.     -->
+<!-- ================================================================ -->
+<div id="ve-checkout-below" style="font-family:'Inter',sans-serif;">
+
+  <!-- Reassurance / guarantee block -->
+  <section style="background:#000;padding:48px 16px 24px;">
+    <div style="max-width:760px;margin:0 auto;text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(0,174,66,0.1);border:1px solid rgba(0,174,66,0.3);color:#00AE42;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;">
+        <span style="width:6px;height:6px;background:#00AE42;border-radius:50%;"></span>
+        Risk-Free Pre-Order
+      </div>
+      <h2 style="color:#fff;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:800;line-height:1.2;margin:0 0 12px;">
+        Your Order is Backed by Our 30-Day Guarantee
+      </h2>
+      <p style="color:#9ca3af;font-size:0.95rem;line-height:1.6;margin:0 auto;max-width:560px;">
+        If your Vinylessence isn't everything you hoped for, contact us within 30 days of receiving your order for a full refund. No hassle, no questions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust badges row -->
+  <section style="background:#000;padding:24px 16px 48px;">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+      <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#E8C100;font-size:24px;margin-bottom:6px;">🔒</div>
+        <div style="color:#fff;font-weight:700;font-size:13px;">Secure Checkout</div>
+        <div style="color:#6b7280;font-size:11px;margin-top:2px;">PCI-compliant payments</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#E8C100;font-size:24px;margin-bottom:6px;">📦</div>
+        <div style="color:#fff;font-weight:700;font-size:13px;">Tracked Shipping</div>
+        <div style="color:#6b7280;font-size:11px;margin-top:2px;">Updates every step</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#E8C100;font-size:24px;margin-bottom:6px;">✉</div>
+        <div style="color:#fff;font-weight:700;font-size:13px;">Real Human Support</div>
+        <div style="color:#6b7280;font-size:11px;margin-top:2px;">We answer within 24 hrs</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0a0a0a,#000);border:1px solid #1a1a1a;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#E8C100;font-size:24px;margin-bottom:6px;">★</div>
+        <div style="color:#fff;font-weight:700;font-size:13px;">374 Backers Trust Us</div>
+        <div style="color:#6b7280;font-size:11px;margin-top:2px;">Funded 364% on Kickstarter</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#000;border-top:1px solid #1a1a1a;padding:24px 16px;color:#6b7280;font-size:12px;text-align:center;">
+    <div style="max-width:900px;margin:0 auto;">
+      <p style="margin:0 0 6px;">© Charg3d LLC · Vinylessence is a product of Charg3d LLC</p>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+        <a href="/" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Home</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Privacy Policy</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Terms of Service</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
