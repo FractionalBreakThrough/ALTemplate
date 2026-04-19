@@ -1,0 +1,440 @@
+<!--
+================================================================
+  VINYLESSENCE — BUY NOW PAGE CUSTOMIZATION (GHL Store)
+================================================================
+
+  This file contains THREE copy-paste blocks for your GHL page.
+
+  HOW TO INSTALL (in the GHL page editor for /buy-now):
+
+    1. SECTION 1 — Custom CSS
+       → Page Settings → Advanced → Custom CSS
+       → Paste everything inside the <style> tags (without the
+         <style> and </style> lines themselves).
+
+    2. SECTION 2 — Custom Code ABOVE the store widget
+       → Drag a "Custom JS/HTML" element ABOVE the product widget
+       → Paste the Section 2 HTML block
+
+    3. SECTION 3 — Custom Code BELOW the store widget
+       → Drag a "Custom JS/HTML" element BELOW the product widget
+       → Paste the Section 3 HTML block
+
+  If any CSS selector doesn't take effect, right-click the stubborn
+  element → Inspect → copy its class name → add it to the CSS list
+  at the bottom (the "ADD CUSTOM OVERRIDES HERE" area).
+================================================================
+-->
+
+
+<!-- ================================================================ -->
+<!-- SECTION 1 — CUSTOM CSS                                            -->
+<!-- Paste into: Page Settings → Advanced → Custom CSS                 -->
+<!-- ================================================================ -->
+<style>
+  /* ===== Base page ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+  body, html {
+    background: #000 !important;
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  /* Kill any default white page wrappers GHL injects */
+  .main-section, .c-section, .c-row, .c-col {
+    background: transparent !important;
+  }
+
+  ::selection { background-color: #E8C100; color: #000; }
+
+  /* ===== Product widget wrapper ===== */
+  [class*="product-detail"],
+  [class*="product-wrapper"],
+  [class*="product-view"],
+  .c-product-view {
+    background: transparent !important;
+    color: #fff !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1rem !important;
+  }
+
+  /* ===== Product title ===== */
+  [class*="product-name"],
+  [class*="product-title"],
+  .product-name {
+    color: #fff !important;
+    font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* ===== Price ===== */
+  [class*="product-price"]:not([class*="compare"]),
+  .product-price {
+    color: #E8C100 !important;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  [class*="compare-price"],
+  .product-compare-price {
+    color: #6b7280 !important;
+    text-decoration: line-through !important;
+    font-weight: 500 !important;
+  }
+
+  [class*="discount"],
+  [class*="percent-off"] {
+    color: #00AE42 !important;
+    font-weight: 700 !important;
+    background: rgba(0,174,66,0.1) !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(0,174,66,0.3) !important;
+    font-size: 0.875rem !important;
+    display: inline-block !important;
+    margin-left: 0.5rem !important;
+  }
+
+  /* ===== Quantity ===== */
+  label[for*="quantity"],
+  [class*="quantity-label"] {
+    color: #9ca3af !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  [class*="quantity"] input,
+  .quantity-input,
+  input[type="number"] {
+    background: #111 !important;
+    color: #fff !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+  }
+
+  [class*="quantity"] button {
+    background: #111 !important;
+    color: #E8C100 !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    transition: all 0.2s !important;
+  }
+
+  [class*="quantity"] button:hover {
+    background: #E8C100 !important;
+    color: #000 !important;
+    border-color: #E8C100 !important;
+  }
+
+  /* ===== Buy Now button ===== */
+  button[class*="buy-now"],
+  [class*="buynow"] button,
+  .buy-now-btn,
+  .hl_button-primary,
+  button[type="submit"] {
+    background: #E8C100 !important;
+    background-image: linear-gradient(135deg, #E8C100, #c2a100) !important;
+    color: #000 !important;
+    border: none !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 12px !important;
+    padding: 1.15rem 2rem !important;
+    font-size: 1.125rem !important;
+    box-shadow: 0 0 30px rgba(232,193,0,0.3) !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+    width: 100% !important;
+  }
+
+  button[class*="buy-now"]:hover,
+  [class*="buynow"] button:hover,
+  .buy-now-btn:hover,
+  .hl_button-primary:hover,
+  button[type="submit"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 40px rgba(232,193,0,0.5) !important;
+    filter: brightness(1.05) !important;
+  }
+
+  /* ===== Product image + gallery ===== */
+  [class*="product-image"],
+  [class*="image-gallery"],
+  [class*="product-gallery"] img {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(232,193,0,0.2) !important;
+    box-shadow: 0 0 30px rgba(232,193,0,0.1) !important;
+  }
+
+  /* Gallery thumbnails */
+  [class*="thumbnail"] {
+    border: 2px solid transparent !important;
+    border-radius: 8px !important;
+    transition: all 0.2s !important;
+  }
+  [class*="thumbnail"]:hover,
+  [class*="thumbnail"][class*="active"],
+  [class*="thumbnail"][class*="selected"] {
+    border-color: #E8C100 !important;
+    box-shadow: 0 0 15px rgba(232,193,0,0.3) !important;
+  }
+
+  /* Gallery nav arrows */
+  [class*="slick-arrow"],
+  [class*="gallery-nav"],
+  [class*="carousel-arrow"] {
+    background: rgba(232,193,0,0.15) !important;
+    border: 1px solid rgba(232,193,0,0.4) !important;
+    color: #E8C100 !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  /* ===== Chat widget positioning fallback ===== */
+  #lc_chat_launcher { z-index: 50 !important; }
+
+  /* ===== ADD CUSTOM OVERRIDES HERE ===== */
+  /* If anything still looks off, inspect the element in your browser,
+     copy its class name, and add a rule below. Example:
+       .your-class-name { color: #fff !important; }
+  */
+
+</style>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 2 — CUSTOM CODE ABOVE THE WIDGET                         -->
+<!-- Drop a Custom JS/HTML element ABOVE the product widget, paste.   -->
+<!-- ================================================================ -->
+<div id="ve-above-widget">
+
+  <!-- Urgency banner -->
+  <div style="background:#E8C100;color:#000;padding:10px 16px;text-align:center;font-size:13px;font-weight:700;letter-spacing:0.05em;font-family:'Inter',sans-serif;">
+    <span style="display:inline-block;width:8px;height:8px;background:#000;border-radius:50%;margin-right:8px;vertical-align:middle;animation:ve-pulse 1.5s ease-in-out infinite;"></span>
+    KICKSTARTER SOLD OUT — LIMITED PRE-ORDERS NOW LIVE · SAVE $30
+  </div>
+
+  <!-- Brand bar + back link -->
+  <div style="background:#000;border-bottom:1px solid #1a1a1a;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;">
+    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+           alt="Vinylessence" style="height:40px;width:auto;border-radius:50%;" />
+    </a>
+    <a href="/" style="color:#9ca3af;text-decoration:none;font-size:14px;font-family:'Inter',sans-serif;font-weight:500;transition:color 0.2s;"
+       onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#9ca3af'">
+      ← Back to Home
+    </a>
+  </div>
+
+  <!-- Hero strip -->
+  <div style="background:#000;padding:40px 16px 20px;text-align:center;font-family:'Inter',sans-serif;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:#E8C100;border-radius:50%;filter:blur(160px);opacity:0.08;pointer-events:none;"></div>
+
+    <div style="position:relative;z-index:1;max-width:720px;margin:0 auto;">
+      <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:rgba(0,174,66,0.1);border:1px solid rgba(0,174,66,0.4);color:#00AE42;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;">
+        <span style="width:6px;height:6px;background:#00AE42;border-radius:50%;"></span>
+        364% Funded on Kickstarter
+      </span>
+
+      <h1 style="color:#fff;font-size:clamp(1.75rem,4.5vw,2.75rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin:0 0 12px;">
+        Complete Your <span style="color:#E8C100;">Pre-Order</span>
+      </h1>
+      <p style="color:#9ca3af;font-size:clamp(1rem,2vw,1.125rem);line-height:1.5;margin:0 auto;max-width:540px;">
+        Join 374+ music lovers. Secure your Smart LED Slipmat at the pre-order price before we go to full retail.
+      </p>
+    </div>
+  </div>
+
+  <!-- Trust bar -->
+  <div style="background:#0a0a0a;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:20px 16px;font-family:'Inter',sans-serif;">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;text-align:center;">
+      <div>
+        <div style="color:#E8C100;font-size:1.5rem;font-weight:900;">364%</div>
+        <div style="color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;">Funded</div>
+      </div>
+      <div>
+        <div style="color:#fff;font-size:1.5rem;font-weight:900;">$36,423</div>
+        <div style="color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;">Raised</div>
+      </div>
+      <div>
+        <div style="color:#fff;font-size:1.5rem;font-weight:900;">374</div>
+        <div style="color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;">Backers</div>
+      </div>
+      <div>
+        <div style="color:#00AE42;font-size:1.5rem;font-weight:900;">30-Day</div>
+        <div style="color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;">Guarantee</div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes ve-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  </style>
+</div>
+
+
+<!-- ================================================================ -->
+<!-- SECTION 3 — CUSTOM CODE BELOW THE WIDGET                         -->
+<!-- Drop a Custom JS/HTML element BELOW the product widget, paste.   -->
+<!-- ================================================================ -->
+<div id="ve-below-widget" style="font-family:'Inter',sans-serif;">
+
+  <!-- What's included -->
+  <section style="background:#000;padding:48px 16px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <h2 style="color:#fff;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;text-align:center;margin:0 0 32px;">
+        What's in the Box
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+        <div style="background:linear-gradient(135deg,#111,#0a0a0a);border:1px solid rgba(232,193,0,0.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:#E8C100;font-weight:900;font-size:18px;line-height:1;">✓</span>
+          <div>
+            <div style="color:#fff;font-weight:700;margin-bottom:4px;">Vinylessence Smart LED Slipmat</div>
+            <div style="color:#9ca3af;font-size:13px;">Patent-pending design, slim form-factor</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#111,#0a0a0a);border:1px solid rgba(232,193,0,0.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:#E8C100;font-weight:900;font-size:18px;line-height:1;">✓</span>
+          <div>
+            <div style="color:#fff;font-weight:700;margin-bottom:4px;">USB-C Fast Charging Cable</div>
+            <div style="color:#9ca3af;font-size:13px;">13–16 hrs of use per charge</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#111,#0a0a0a);border:1px solid rgba(232,193,0,0.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:#E8C100;font-weight:900;font-size:18px;line-height:1;">✓</span>
+          <div>
+            <div style="color:#fff;font-weight:700;margin-bottom:4px;">Mobile App Access</div>
+            <div style="color:#9ca3af;font-size:13px;">250+ animation presets</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#111,#0a0a0a);border:1px solid rgba(232,193,0,0.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:#E8C100;font-weight:900;font-size:18px;line-height:1;">✓</span>
+          <div>
+            <div style="color:#fff;font-weight:700;margin-bottom:4px;">Priority Production Slot</div>
+            <div style="color:#9ca3af;font-size:13px;">Ships ahead of retail launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust row -->
+  <section style="background:#0a0a0a;padding:32px 16px;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;text-align:center;">
+      <div>
+        <div style="color:#E8C100;font-size:28px;margin-bottom:6px;">🔒</div>
+        <div style="color:#fff;font-weight:700;font-size:14px;">Secure Checkout</div>
+        <div style="color:#6b7280;font-size:12px;">256-bit SSL encryption</div>
+      </div>
+      <div>
+        <div style="color:#E8C100;font-size:28px;margin-bottom:6px;">✓</div>
+        <div style="color:#fff;font-weight:700;font-size:14px;">30-Day Guarantee</div>
+        <div style="color:#6b7280;font-size:12px;">Love it or return it</div>
+      </div>
+      <div>
+        <div style="color:#E8C100;font-size:28px;margin-bottom:6px;">✈</div>
+        <div style="color:#fff;font-weight:700;font-size:14px;">Ships Worldwide</div>
+        <div style="color:#6b7280;font-size:12px;">Live shipping rates at checkout</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini testimonials -->
+  <section style="background:#000;padding:48px 16px;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p style="text-align:center;color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 8px;">From Our Backers</p>
+      <h2 style="color:#fff;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;text-align:center;margin:0 0 32px;">
+        Music Lovers Can't Stop Talking About It
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;padding:24px;">
+          <div style="color:#E8C100;margin-bottom:12px;letter-spacing:2px;">★★★★★</div>
+          <p style="color:#d1d5db;font-size:14px;line-height:1.6;margin:0 0 16px;">"[REPLACE] Absolutely transformed my listening room. The diffusion is cleaner than anything I've seen on a DIY setup."</p>
+          <div style="color:#6b7280;font-size:12px;">— [Backer Name] · Kickstarter Backer</div>
+        </div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;padding:24px;">
+          <div style="color:#E8C100;margin-bottom:12px;letter-spacing:2px;">★★★★★</div>
+          <p style="color:#d1d5db;font-size:14px;line-height:1.6;margin:0 0 16px;">"[REPLACE] The audio-reactive mode is magic. Every track feels like a live show. Battery lasts way longer than expected."</p>
+          <div style="color:#6b7280;font-size:12px;">— [Backer Name] · Kickstarter Backer</div>
+        </div>
+        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;padding:24px;">
+          <div style="color:#E8C100;margin-bottom:12px;letter-spacing:2px;">★★★★★</div>
+          <p style="color:#d1d5db;font-size:14px;line-height:1.6;margin:0 0 16px;">"[REPLACE] Bought one for home and one for the studio. The app is easy, the colors are vivid, and my friends are obsessed."</p>
+          <div style="color:#6b7280;font-size:12px;">— [Backer Name] · Kickstarter Backer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:#0a0a0a;padding:48px 16px;border-top:1px solid #1a1a1a;">
+    <div style="max-width:760px;margin:0 auto;">
+      <h2 style="color:#fff;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;text-align:center;margin:0 0 32px;">
+        Ordering Questions
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <details style="background:#111;border:1px solid #222;border-radius:12px;padding:18px 20px;cursor:pointer;">
+          <summary style="color:#fff;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            When will my order ship?
+            <span style="color:#E8C100;font-size:20px;">+</span>
+          </summary>
+          <p style="color:#9ca3af;font-size:14px;line-height:1.6;margin:12px 0 0;">
+            Pre-orders ship with our first full production run. [REPLACE with exact shipping window.]
+          </p>
+        </details>
+        <details style="background:#111;border:1px solid #222;border-radius:12px;padding:18px 20px;cursor:pointer;">
+          <summary style="color:#fff;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            How much is shipping?
+            <span style="color:#E8C100;font-size:20px;">+</span>
+          </summary>
+          <p style="color:#9ca3af;font-size:14px;line-height:1.6;margin:12px 0 0;">
+            Shipping is calculated at checkout based on your location. Enter your address to see live rates.
+          </p>
+        </details>
+        <details style="background:#111;border:1px solid #222;border-radius:12px;padding:18px 20px;cursor:pointer;">
+          <summary style="color:#fff;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            What's your return policy?
+            <span style="color:#E8C100;font-size:20px;">+</span>
+          </summary>
+          <p style="color:#9ca3af;font-size:14px;line-height:1.6;margin:12px 0 0;">
+            Every Vinylessence is backed by a 30-day satisfaction guarantee. If it's not a fit, contact us for a return. [REPLACE with exact policy.]
+          </p>
+        </details>
+        <details style="background:#111;border:1px solid #222;border-radius:12px;padding:18px 20px;cursor:pointer;">
+          <summary style="color:#fff;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+            Is my payment secure?
+            <span style="color:#E8C100;font-size:20px;">+</span>
+          </summary>
+          <p style="color:#9ca3af;font-size:14px;line-height:1.6;margin:12px 0 0;">
+            Yes — all transactions are processed through secure, PCI-compliant payment infrastructure with 256-bit SSL encryption.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#000;border-top:1px solid #1a1a1a;padding:32px 16px;color:#6b7280;font-size:13px;text-align:center;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p style="margin:0 0 8px;">© Charg3d LLC · Vinylessence is a product of Charg3d LLC</p>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <a href="/" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Home</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Privacy Policy</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Terms of Service</a>
+        <a href="#" style="color:#6b7280;text-decoration:none;" onmouseover="this.style.color='#E8C100'" onmouseout="this.style.color='#6b7280'">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
