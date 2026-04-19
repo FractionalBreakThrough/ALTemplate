@@ -86,7 +86,10 @@
   /* Also hide the green check icon that sits beside .hl-thankyou-headline */
   .hl-thankyou-headline + svg,
   .hl-thankyou-headline ~ svg,
-  svg + .hl-thankyou-headline {
+  svg + .hl-thankyou-headline,
+  svg.ecom-check-icon,
+  .ecom-check-icon,
+  svg.stroke-white.ecom-check-icon {
     display: none !important;
   }
 
@@ -139,6 +142,8 @@
   .thankyou-action-btn,
   button.download-btn,
   .download-btn,
+  button.download-btn.truncate-text,
+  button.thankyou-action-btn.truncate-text,
   [class*="thankyou-action-btn"],
   [class*="continue-shopping"],
   [class*="download-btn"] {
@@ -159,13 +164,28 @@
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
+    box-shadow: none !important;
+  }
+
+  /* Extra specificity bump for the Download button (blue kept winning) */
+  html body button.download-btn,
+  html body button.download-btn.truncate-text,
+  body .download-btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: #E8C100 !important;
+    border: 1px solid #E8C100 !important;
+    box-shadow: none !important;
   }
 
   button.thankyou-action-btn:hover,
   .thankyou-action-btn:hover,
   button.download-btn:hover,
-  .download-btn:hover {
+  .download-btn:hover,
+  html body button.download-btn:hover {
     background: #E8C100 !important;
+    background-color: #E8C100 !important;
     color: #000 !important;
     transform: translateY(-1px) !important;
   }
