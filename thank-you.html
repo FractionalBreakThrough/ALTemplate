@@ -20,10 +20,9 @@
     - Social links: use placeholders [INSTAGRAM_URL], [YOUTUBE_URL],
       [TIKTOK_URL], [DISCORD_URL]
     - Newsletter uses the existing Make.com webhook
-    - GHL merge tags: {{contact.first_name}}, {{contact.email}},
-      {{order.id}}, {{order.total}} — verify these are valid in
-      your GHL version. If any don't render, replace with static
-      text or the correct merge tag for your GHL build.
+    - No GHL merge tags are used in the custom sections; personalized
+      order details (name, order #, total, line items) are rendered by
+      the native GHL order-confirmation widget between sections 2 and 3.
 ================================================================
 -->
 
@@ -285,25 +284,19 @@
       </div>
 
       <span style="display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(232,193,0,0.1);border:1px solid rgba(232,193,0,0.4);color:#E8C100;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:20px;animation:fade-up 0.5s 0.2s both;">
-        Pre-Order #{{order.id}} Confirmed
+        Pre-Order Confirmed
       </span>
 
       <h1 style="color:#fff;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin:0 0 16px;animation:fade-up 0.5s 0.3s both;">
-        Thank You, <span style="color:#E8C100;">{{contact.first_name}}</span>
+        Thank You
       </h1>
 
       <p style="color:#9ca3af;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.6;margin:0 auto 28px;max-width:560px;animation:fade-up 0.5s 0.4s both;">
-        Welcome to the Vinylessence family. You're now part of the 375+ music lovers bringing their vinyl to life. A confirmation email is on its way to <strong style="color:#fff;">{{contact.email}}</strong>.
+        Welcome to the Vinylessence family. You're now part of the 375+ music lovers bringing their vinyl to life. A confirmation email is on its way to your inbox.
       </p>
 
       <!-- Quick stats row -->
       <div style="display:inline-flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fade-up 0.5s 0.5s both;">
-        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
-          <span style="color:#6b7280;">Order:</span> <strong style="color:#fff;">#{{order.id}}</strong>
-        </div>
-        <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
-          <span style="color:#6b7280;">Total:</span> <strong style="color:#E8C100;">{{order.total}}</strong>
-        </div>
         <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;font-size:13px;color:#d1d5db;">
           <span style="color:#6b7280;">Ships:</span> <strong style="color:#fff;">December 2026</strong>
         </div>
@@ -343,7 +336,7 @@
               <strong style="color:#00AE42;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Done · Today</strong>
             </div>
             <h3 style="color:#fff;font-size:1.05rem;font-weight:700;margin:0 0 4px;">Order Received</h3>
-            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">Your pre-order is locked in. Confirmation email sent to {{contact.email}}.</p>
+            <p style="color:#9ca3af;font-size:0.9rem;line-height:1.55;margin:0;">Your pre-order is locked in. Confirmation email is on the way.</p>
           </div>
         </div>
 
@@ -406,7 +399,7 @@
         Behind-the-scenes photos, manufacturing milestones, and a heads-up the moment your order ships.
       </p>
       <form id="ty-signup-form" style="display:flex;gap:8px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
-        <input id="ty-email-input" type="email" required placeholder="{{contact.email}}"
+        <input id="ty-email-input" type="email" required placeholder="you@example.com"
                style="flex:1 1 240px;background:#000;border:1px solid #2a2a2a;border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;outline:none;" />
         <button id="ty-submit-btn" type="submit"
                 style="background:linear-gradient(135deg,#E8C100,#c2a100);color:#000;border:none;border-radius:10px;padding:12px 22px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;box-shadow:0 0 20px rgba(232,193,0,0.3);">
