@@ -411,6 +411,31 @@
   <style>
     @keyframes ve-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
   </style>
+
+  <!-- Replace GHL's auto-calculated "24% off" with "$30 off" -->
+  <script>
+    (function () {
+      const DISCOUNT_TEXT = '$30 off';
+      const SELECTORS = [
+        '[class*="discount"]',
+        '[class*="percent-off"]',
+        '[class*="off-label"]',
+        '[class*="savings"]'
+      ];
+
+      function swapDiscount() {
+        document.querySelectorAll(SELECTORS.join(',')).forEach(el => {
+          const t = (el.textContent || '').trim();
+          if (t && t !== DISCOUNT_TEXT && (/%/.test(t) || /off/i.test(t))) {
+            el.textContent = DISCOUNT_TEXT;
+          }
+        });
+      }
+
+      swapDiscount();
+      new MutationObserver(swapDiscount).observe(document.body, { childList: true, subtree: true, characterData: true });
+    })();
+  </script>
 </div>
 
 
