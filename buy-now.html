@@ -342,6 +342,12 @@
   }
 
   /* ===== Product description + expandable "Show More" area ===== */
+  /* Exact GHL description container + all ancestors/sibling variants */
+  #description,
+  .description,
+  .description-truncated,
+  .description-full,
+  .description-expanded,
   [class*="product-description"],
   [class*="description-wrapper"],
   [class*="description-content"],
@@ -366,7 +372,11 @@
     box-shadow: none !important;
   }
 
-  /* Aggressively transparent-ize every descendant inside description wrappers */
+  /* Kill inline background/color on every descendant of #description */
+  #description *,
+  .description *,
+  .description-truncated *,
+  .description-full *,
   [class*="product-description"] *,
   [class*="description-wrapper"] *,
   [class*="description-content"] *,
@@ -380,6 +390,19 @@
     background-color: transparent !important;
     color: #d1d5db !important;
     border-color: transparent !important;
+  }
+
+  /* Keep strong/b/headings a cleaner white */
+  #description strong,
+  #description b,
+  #description h1,
+  #description h2,
+  #description h3,
+  #description h4,
+  .description strong,
+  .description b {
+    color: #fff !important;
+    font-weight: 700 !important;
   }
 
   /* Description headings stay white */
