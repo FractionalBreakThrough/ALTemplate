@@ -123,15 +123,23 @@
     color: #00AE42 !important;
     background: rgba(0,174,66,0.1) !important;
     font-weight: 700 !important;
-    padding: 0.25rem 0.75rem !important;
+    padding: 4px 12px !important;
     border-radius: 999px !important;
     border: 1px solid rgba(0,174,66,0.3) !important;
     font-size: 0.875rem !important;
-    display: inline-block !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin-left: 0.5rem !important;
     width: auto !important;
+    min-width: 0 !important;
+    max-width: fit-content !important;
     height: auto !important;
+    min-height: 0 !important;
     vertical-align: middle !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
   }
 
   /* ===== Quantity label ===== */
@@ -147,23 +155,57 @@
     display: block !important;
   }
 
-  /* ===== Quantity input ===== */
+  /* ===== Quantity wrapper — reset unwanted pill backgrounds ===== */
+  [class*="quantity-wrapper"],
+  [class*="quantity-container"],
+  [class*="quantity-selector"],
+  [class*="quantity-input-wrap"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    max-width: fit-content !important;
+  }
+
+  /* Quantity input box */
   [class*="quantity"] input,
   .quantity-input,
   input[type="number"] {
+    width: 60px !important;
+    height: 44px !important;
     background: #111 !important;
     color: #fff !important;
     border: 1px solid #333 !important;
     border-radius: 8px !important;
     text-align: center !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
+  /* Quantity +/- buttons */
   [class*="quantity"] button {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
     background: #111 !important;
     color: #E8C100 !important;
     border: 1px solid #333 !important;
     border-radius: 8px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
     transition: all 0.2s !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
   }
 
   [class*="quantity"] button:hover {
@@ -212,27 +254,52 @@
     filter: brightness(1.05) !important;
   }
 
-  /* ===== Product image + gallery ===== */
-  [class*="product-image"],
-  [class*="image-gallery"],
-  [class*="product-gallery"] img {
+  /* ===== Main product image (scoped so it doesn't hit thumbnail wrappers) ===== */
+  [class*="product-gallery"] > img,
+  [class*="main-image"],
+  [class*="hero-image"],
+  [class*="primary-image"],
+  [class*="product-image"]:not([class*="thumb"]):not([class*="list"]):not([class*="strip"]) {
     border-radius: 16px !important;
     overflow: hidden !important;
     border: 1px solid rgba(232,193,0,0.2) !important;
     box-shadow: 0 0 30px rgba(232,193,0,0.1) !important;
   }
 
-  /* Gallery thumbnails */
-  [class*="thumbnail"] {
+  /* Gallery thumbnail strip — no wrapper border, fit content */
+  [class*="thumbnails"],
+  [class*="thumbnail-list"],
+  [class*="thumbnail-strip"],
+  [class*="thumb-list"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: fit-content !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin-top: 12px !important;
+  }
+
+  /* Individual thumbnails */
+  [class*="thumbnail"]:not([class*="list"]):not([class*="strip"]) {
     border: 2px solid transparent !important;
     border-radius: 8px !important;
     transition: all 0.2s !important;
+    background: transparent !important;
   }
-  [class*="thumbnail"]:hover,
+  [class*="thumbnail"]:not([class*="list"]):not([class*="strip"]):hover,
   [class*="thumbnail"][class*="active"],
   [class*="thumbnail"][class*="selected"] {
     border-color: #E8C100 !important;
     box-shadow: 0 0 15px rgba(232,193,0,0.3) !important;
+  }
+
+  /* Hide empty/placeholder thumbnails */
+  [class*="thumbnail"]:empty,
+  [class*="thumbnail"]:not(:has(img)):not(:has(video)) {
+    display: none !important;
   }
 
   /* Gallery nav arrows */
