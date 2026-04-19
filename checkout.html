@@ -321,21 +321,19 @@
     color: #000 !important;
   }
 
-  /* ===== CONTINUE / Place Order button (broadly catch all primary submit buttons) ===== */
+  /* ===== CONTINUE / Place Order button (narrowly scoped — must match a checkout-specific class) ===== */
   button[class*="continue"],
   button[class*="Continue"],
   button[class*="checkout-btn"],
   button[class*="place-order"],
   button[class*="submit-order"],
-  button[class*="primary"],
   button[class*="next-step"],
-  button[class*="proceed"],
+  button[class*="proceed-to"],
   button[id*="continue" i],
-  button[type="submit"]:not([class*="apply"]):not([class*="coupon"]),
-  .btn-primary,
-  .hl_button-primary,
+  button[id*="checkout" i],
   .checkout-button,
-  form button:not([class*="apply"]):not([class*="coupon"]):not([class*="quantity"]):not([class*="remove"]):not([class*="edit"]) {
+  .hl_button-primary.hl_btn-checkout,
+  [class*="checkout"] button[type="submit"]:not([class*="apply"]):not([class*="coupon"]) {
     background: linear-gradient(135deg, #E8C100, #c2a100) !important;
     background-color: #E8C100 !important;
     background-image: linear-gradient(135deg, #E8C100, #c2a100) !important;
@@ -354,11 +352,12 @@
   }
 
   button[class*="continue"]:hover,
-  button[type="submit"]:not([class*="apply"]):not([class*="coupon"]):hover,
-  .btn-primary:hover,
-  .hl_button-primary:hover,
+  button[class*="Continue"]:hover,
+  button[class*="checkout-btn"]:hover,
+  button[class*="place-order"]:hover,
+  button[class*="submit-order"]:hover,
   .checkout-button:hover,
-  form button:not([class*="apply"]):not([class*="coupon"]):not([class*="quantity"]):not([class*="remove"]):not([class*="edit"]):hover {
+  [class*="checkout"] button[type="submit"]:not([class*="apply"]):not([class*="coupon"]):hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 0 40px rgba(232,193,0,0.5) !important;
     filter: brightness(1.05) !important;
@@ -367,8 +366,6 @@
   /* Force the cart icon inside the Continue button to black */
   button[class*="continue"] svg,
   button[class*="continue"] i,
-  button[type="submit"] svg,
-  button[type="submit"] i,
   .checkout-button svg,
   .checkout-button i {
     color: #000 !important;
