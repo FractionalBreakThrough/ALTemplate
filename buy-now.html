@@ -157,7 +157,10 @@
     font-size: inherit !important;
   }
 
-  /* ===== Quantity label — keep it on one line without changing parent layout ===== */
+  /* ===== Quantity / variant label (targets exact GHL class) ===== */
+  p.variant-heading,
+  p.hl-product-detail-selectors,
+  .variant-heading.hl-product-detail-selectors,
   label[for*="quantity"],
   [class*="quantity-label"],
   [class*="quantity-title"] {
@@ -166,15 +169,19 @@
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
     font-weight: 600 !important;
-    margin-bottom: 0.5rem !important;
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 !important;
+    display: block !important;
     white-space: nowrap !important;
     word-break: keep-all !important;
     overflow-wrap: normal !important;
     hyphens: none !important;
+    text-wrap: nowrap !important;
     width: auto !important;
     min-width: max-content !important;
     max-width: none !important;
     overflow: visible !important;
+    line-height: 1.5 !important;
   }
 
   /* ===== Quantity wrapper — reset unwanted pill backgrounds ===== */
