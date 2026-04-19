@@ -70,6 +70,8 @@
 
   /* ===== Hide the native widget's redundant thank-you + email line =====
      Our custom hero already says this more prominently. */
+  .hl-thankyou-headline,
+  .sub-headline,
   [class*="thank-you-title"],
   [class*="thankyou-title"],
   [class*="confirmation-title"],
@@ -81,7 +83,26 @@
     display: none !important;
   }
 
+  /* Also hide the green check icon that sits beside .hl-thankyou-headline */
+  .hl-thankyou-headline + svg,
+  .hl-thankyou-headline ~ svg,
+  svg + .hl-thankyou-headline {
+    display: none !important;
+  }
+
   /* ===== Shipping address card → match dark theme ===== */
+  /* The heading itself has .text-black — force it white */
+  .shipping-details-heading,
+  .shipping-details-heading.text-black,
+  [class*="shipping-details-heading"] {
+    color: #fff !important;
+    background: transparent !important;
+    font-weight: 700 !important;
+  }
+
+  /* The parent container of the shipping heading (the white-ish box) */
+  div:has(> .shipping-details-heading),
+  [class*="shipping-details"],
   [class*="shipping-address"],
   [class*="address-card"],
   [class*="shipping-info"],
@@ -94,6 +115,8 @@
     color: #fff !important;
     padding: 16px !important;
   }
+  div:has(> .shipping-details-heading) *,
+  [class*="shipping-details"] *,
   [class*="shipping-address"] *,
   [class*="address-card"] *,
   [class*="shipping-info"] *,
@@ -103,49 +126,56 @@
     background-color: transparent !important;
     color: #d1d5db !important;
   }
-  [class*="shipping-address"] h1,
-  [class*="shipping-address"] h2,
-  [class*="shipping-address"] h3,
-  [class*="shipping-address"] h4,
+  .shipping-details-heading,
+  [class*="shipping-details"] strong,
   [class*="shipping-address"] strong,
-  [class*="address-card"] h3,
-  [class*="address-card"] strong {
+  [class*="address-card"] strong,
+  [class*="shipping-info"] strong {
     color: #fff !important;
   }
 
-  /* ===== Continue Shopping + Download + other widget buttons → gold outline ===== */
+  /* ===== Continue Shopping + Download buttons (exact classes) ===== */
+  button.thankyou-action-btn,
+  .thankyou-action-btn,
+  button.download-btn,
+  .download-btn,
+  [class*="thankyou-action-btn"],
   [class*="continue-shopping"],
-  a[class*="continue-shopping"],
-  button[class*="continue-shopping"],
-  [class*="download-btn"],
-  button[class*="download"],
-  a[class*="download"] {
+  [class*="download-btn"] {
     background: transparent !important;
     background-color: transparent !important;
+    background-image: none !important;
     color: #E8C100 !important;
     border: 1px solid #E8C100 !important;
     border-radius: 10px !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
-    padding: 8px 18px !important;
+    padding: 10px 20px !important;
     font-size: 13px !important;
     text-decoration: none !important;
     transition: all 0.2s !important;
-  }
-  [class*="continue-shopping"]:hover,
-  [class*="download-btn"]:hover,
-  button[class*="download"]:hover {
-    background: #E8C100 !important;
-    color: #000 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
   }
 
-  /* Svg arrows inside Continue Shopping */
-  [class*="continue-shopping"] svg,
-  [class*="download"] svg {
+  button.thankyou-action-btn:hover,
+  .thankyou-action-btn:hover,
+  button.download-btn:hover,
+  .download-btn:hover {
+    background: #E8C100 !important;
+    color: #000 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Inline SVG arrow in Continue Shopping button */
+  .thankyou-action-btn svg,
+  .download-btn svg {
     color: currentColor !important;
-    fill: currentColor !important;
     stroke: currentColor !important;
+    fill: none !important;
   }
 
   /* Order items table — subdivide with gold-tinted border */
