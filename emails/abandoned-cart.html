@@ -1,0 +1,179 @@
+<!--
+  ================================================================
+  VINYLESSENCE™ — ABANDONED CART EMAIL (GoHighLevel)
+  ================================================================
+  Paste the <div>...</div> block below into a "Code" element in the
+  GHL email template editor. The surrounding GHL template will
+  provide the outer <html>/<body>, unsubscribe link, and any
+  additional cart-item widgets you want to stack above/below this
+  HTML block.
+
+  Subject line options:
+    • Your Vinylessence™ pre-order is waiting
+    • You left the first Smart LED slipmat behind
+    • Don't miss $30 off your Vinylessence™
+
+  Preheader (first 80-100 chars, shows in the inbox preview):
+    Complete your pre-order while supplies last. $99 (save $30 off retail).
+
+  Notes on merge tags:
+    • {{contact.first_name}} — resolves in GHL email context when the
+      recipient has a first name on file. Falls back to an empty string
+      if blank, so the greeting reads naturally either way.
+    • {{unsubscribe_url}} — adjust to whatever tag GHL injects for
+      unsubscribe in your build (some accounts use {{unsubscribe_link}}
+      or a footer auto-injected by GHL).
+  ================================================================
+-->
+
+<!-- Hidden preheader (shows as inbox preview text) -->
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#000000;opacity:0;mso-hide:all;">
+  Complete your pre-order while supplies last. $99 pre-order price (save $30 off retail).
+</div>
+
+<!-- Outer wrapper -->
+<div style="background-color:#000000;padding:24px 12px;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;overflow:hidden;">
+
+    <!-- Logo -->
+    <tr>
+      <td align="center" style="padding:32px 24px 12px;">
+        <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+             alt="Vinylessence™"
+             width="56" height="56"
+             style="display:block;width:56px;height:56px;border-radius:50%;border:0;outline:none;text-decoration:none;" />
+      </td>
+    </tr>
+
+    <!-- Badge -->
+    <tr>
+      <td align="center" style="padding:0 24px 16px;">
+        <span style="display:inline-block;padding:6px 14px;border-radius:999px;background-color:#1a1500;border:1px solid #E8C100;color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;">
+          You Left Something Behind
+        </span>
+      </td>
+    </tr>
+
+    <!-- Headline -->
+    <tr>
+      <td align="center" style="padding:0 24px 14px;">
+        <h1 style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin:0;">
+          Your <span style="color:#E8C100;">Vinylessence&trade;</span> is waiting
+        </h1>
+      </td>
+    </tr>
+
+    <!-- Body copy -->
+    <tr>
+      <td align="center" style="padding:0 32px 24px;">
+        <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;margin:0;">
+          Hi {{contact.first_name}}, you started checking out the first Smart LED Slipmat that makes your vinyl glow.
+          Your pre-order price of <strong style="color:#E8C100;">$99</strong> (save $30 off retail) is still locked in,
+          but pre-order inventory is limited and first shipments go out December 2026.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Primary CTA -->
+    <tr>
+      <td align="center" style="padding:0 24px 28px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+            <td align="center" bgcolor="#E8C100" style="background-color:#E8C100;border-radius:12px;">
+              <a href="https://vinyl-essence.com/buy-now"
+                 style="display:inline-block;padding:16px 36px;color:#000000;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:12px;">
+                Complete Your Pre-Order
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Divider -->
+    <tr>
+      <td style="padding:0 32px;">
+        <div style="border-top:1px solid #1a1a1a;font-size:0;line-height:0;">&nbsp;</div>
+      </td>
+    </tr>
+
+    <!-- Social proof row -->
+    <tr>
+      <td align="center" style="padding:24px 24px 8px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+            <td align="center" style="padding:0 14px;">
+              <div style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:800;">364%</div>
+              <div style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-top:2px;">Funded</div>
+            </td>
+            <td align="center" style="padding:0 14px;">
+              <div style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:800;">374</div>
+              <div style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-top:2px;">Backers</div>
+            </td>
+            <td align="center" style="padding:0 14px;">
+              <div style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:800;">Dec 2026</div>
+              <div style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-top:2px;">First Ships</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Why it matters (short bullets) -->
+    <tr>
+      <td style="padding:16px 32px 8px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.7;">
+              <span style="color:#E8C100;font-weight:800;">&#10003;</span>&nbsp;&nbsp;Smart LED slipmat with app-controlled colors &amp; animations<br />
+              <span style="color:#E8C100;font-weight:800;">&#10003;</span>&nbsp;&nbsp;Fits standard 11-12" platters on most turntables<br />
+              <span style="color:#E8C100;font-weight:800;">&#10003;</span>&nbsp;&nbsp;13-16 hours of use per USB-C charge<br />
+              <span style="color:#E8C100;font-weight:800;">&#10003;</span>&nbsp;&nbsp;30-day satisfaction guarantee
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Secondary CTA link -->
+    <tr>
+      <td align="center" style="padding:16px 24px 32px;">
+        <a href="https://vinyl-essence.com/buy-now"
+           style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid #E8C100;padding-bottom:2px;">
+          Or view the product page
+        </a>
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td align="center" style="background-color:#000000;border-top:1px solid #1a1a1a;padding:24px;">
+        <!-- Socials -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 14px;">
+          <tr>
+            <td style="padding:0 10px;">
+              <a href="https://www.instagram.com/vinylessenceofficial" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">INSTAGRAM</a>
+            </td>
+            <td style="color:#374151;">&middot;</td>
+            <td style="padding:0 10px;">
+              <a href="https://www.youtube.com/@OfficialVinylessence" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">YOUTUBE</a>
+            </td>
+            <td style="color:#374151;">&middot;</td>
+            <td style="padding:0 10px;">
+              <a href="https://www.tiktok.com/@vinylessenceofficial" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">TIKTOK</a>
+            </td>
+          </tr>
+        </table>
+
+        <p style="color:#6b7280;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.5;margin:0 0 6px;">
+          &copy; Charg3d LLC &middot; Vinylessence&trade; is a product of Charg3d LLC
+        </p>
+        <p style="color:#6b7280;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.5;margin:0;">
+          You're receiving this because you started checking out on vinyl-essence.com.
+          &nbsp;<a href="{{unsubscribe_url}}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
+        </p>
+      </td>
+    </tr>
+
+  </table>
+</div>
