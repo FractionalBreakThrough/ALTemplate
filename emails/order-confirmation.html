@@ -48,13 +48,27 @@
      SECTION A — goes ABOVE the GHL native Shopping Cart element
      ============================================================= -->
 
+<!-- Responsive rules (used by Section A and Section B). Safe to paste
+     into both Code elements — redeclaring the same style block is
+     harmless. -->
+<style>
+  @media only screen and (max-width: 600px) {
+    .ve-container { width: 100% !important; max-width: 100% !important; }
+    .ve-pad      { padding-left: 20px !important; padding-right: 20px !important; }
+    .ve-pad-sm   { padding-left: 16px !important; padding-right: 16px !important; }
+    .ve-h1       { font-size: 26px !important; line-height: 1.2 !important; }
+    .ve-stack    { display: block !important; width: 100% !important; padding: 0 0 12px 0 !important; }
+    .ve-stack:last-child { padding-bottom: 0 !important; }
+  }
+</style>
+
 <!-- Hidden preheader -->
 <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#000000;opacity:0;mso-hide:all;">
   Your Vinylessence&trade; pre-order is locked in. First shipments start as early as August 2026.
 </div>
 
 <div style="background-color:#000000;padding:24px 12px 0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
-  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px 16px 0 0;overflow:hidden;">
+  <table role="presentation" class="ve-container" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px 16px 0 0;overflow:hidden;">
 
     <!-- Logo -->
     <tr>
@@ -92,7 +106,7 @@
     <!-- Headline -->
     <tr>
       <td align="center" style="padding:0 24px 14px;">
-        <h1 style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin:0;">
+        <h1 class="ve-h1" style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin:0;">
           Thank you, <span style="color:#E8C100;">{{order.customer.name}}</span>
         </h1>
       </td>
@@ -100,7 +114,7 @@
 
     <!-- Body copy -->
     <tr>
-      <td align="center" style="padding:0 32px 24px;">
+      <td align="center" class="ve-pad" style="padding:0 32px 24px;">
         <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.65;margin:0;">
           Welcome to the Vinylessence&trade; family! Your pre-order is locked in and we're already working to get
           it shipped to you. First shipments start going out as early as <strong style="color:#E8C100;">August 2026</strong>.
@@ -172,8 +186,20 @@
      SECTION B — goes BELOW the GHL native Shopping Cart element
      ============================================================= -->
 
+<!-- Responsive rules (same block as Section A; safe to redeclare). -->
+<style>
+  @media only screen and (max-width: 600px) {
+    .ve-container { width: 100% !important; max-width: 100% !important; }
+    .ve-pad      { padding-left: 20px !important; padding-right: 20px !important; }
+    .ve-pad-sm   { padding-left: 16px !important; padding-right: 16px !important; }
+    .ve-h1       { font-size: 26px !important; line-height: 1.2 !important; }
+    .ve-stack    { display: block !important; width: 100% !important; padding: 0 0 12px 0 !important; }
+    .ve-stack:last-child { padding-bottom: 0 !important; }
+  }
+</style>
+
 <div style="background-color:#000000;padding:0 12px 24px;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
-  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-top:none;border-radius:0 0 16px 16px;overflow:hidden;">
+  <table role="presentation" class="ve-container" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-top:none;border-radius:0 0 16px 16px;overflow:hidden;">
 
     <!-- Totals -->
     <tr>
@@ -230,7 +256,7 @@
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <!-- Shipping -->
-            <td width="50%" valign="top" style="padding-right:8px;">
+            <td class="ve-stack" width="50%" valign="top" style="padding-right:8px;">
               <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:12px;padding:16px;">
                 <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;margin:0 0 8px;">Shipping Address</p>
                 <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">
@@ -242,7 +268,7 @@
               </div>
             </td>
             <!-- Billing -->
-            <td width="50%" valign="top" style="padding-left:8px;">
+            <td class="ve-stack" width="50%" valign="top" style="padding-left:8px;">
               <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:12px;padding:16px;">
                 <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;margin:0 0 8px;">Billing Address</p>
                 <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">

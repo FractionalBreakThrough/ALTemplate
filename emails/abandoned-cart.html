@@ -26,6 +26,15 @@
   ================================================================
 -->
 
+<!-- Responsive rules -->
+<style>
+  @media only screen and (max-width: 600px) {
+    .ve-container { width: 100% !important; max-width: 100% !important; }
+    .ve-pad      { padding-left: 20px !important; padding-right: 20px !important; }
+    .ve-h1       { font-size: 26px !important; line-height: 1.2 !important; }
+  }
+</style>
+
 <!-- Hidden preheader (shows as inbox preview text) -->
 <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#000000;opacity:0;mso-hide:all;">
   Complete your pre-order while supplies last. $99 pre-order price (save $30 off retail).
@@ -33,7 +42,7 @@
 
 <!-- Outer wrapper -->
 <div style="background-color:#000000;padding:24px 12px;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
-  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;overflow:hidden;">
+  <table role="presentation" class="ve-container" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px;overflow:hidden;">
 
     <!-- Logo -->
     <tr>
@@ -57,7 +66,7 @@
     <!-- Headline -->
     <tr>
       <td align="center" style="padding:0 24px 14px;">
-        <h1 style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin:0;">
+        <h1 class="ve-h1" style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin:0;">
           Your <span style="color:#E8C100;">Vinylessence&trade;</span> is waiting
         </h1>
       </td>
@@ -65,7 +74,7 @@
 
     <!-- Body copy -->
     <tr>
-      <td align="center" style="padding:0 32px 24px;">
+      <td align="center" class="ve-pad" style="padding:0 32px 24px;">
         <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;margin:0;">
           Hi {{contact.first_name}}, you started checking out the first Smart LED Slipmat that makes your vinyl glow.
           Your pre-order price of <strong style="color:#E8C100;">$99</strong> (save $30 off retail) is still locked in,
