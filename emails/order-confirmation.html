@@ -1,0 +1,342 @@
+<!--
+  ================================================================
+  VINYLESSENCE™ — ORDER CONFIRMATION EMAIL (GoHighLevel)
+  ================================================================
+  Subject line options:
+    • Order confirmed — welcome to Vinylessence™
+    • You're in! Your Vinylessence™ pre-order is locked
+    • Thanks {{order.customer.name}} — order received
+
+  Preheader:
+    Your Vinylessence™ pre-order is locked in. First shipments start
+    as early as August 2026.
+
+  ---------------- HOW TO USE IN GHL ----------------
+  The email has three pieces:
+
+    1. SECTION A — paste into a Code element ABOVE the GHL native
+       "Shopping Cart" element (logo, badge, headline, body copy,
+       View Order CTA).
+
+    2. GHL NATIVE "Shopping Cart" ELEMENT — keep the default one
+       in the middle so line items iterate automatically.
+
+    3. SECTION B — paste into a Code element BELOW the Shopping
+       Cart element (totals, shipping + billing addresses, what's
+       next timeline, support prompt, socials, legal footer).
+
+  If you ever want a single-product email without the dynamic
+  cart widget, the line-item placeholder inside section A can be
+  uncommented and hard-coded.
+  ---------------- MERGE TAGS USED ----------------
+    {{store.name}}
+    {{order.customer.name}}
+    {{order.customer.full_address}}, .city, .postal_code, .state, .country
+    {{order.billing_address.fullName}}, .address1, .city,
+      .postalCode, .state, .country
+    {{order.currency_symbol}}
+    {{order.total_cart_price}}
+    {{order.total_tax}}
+    {{order.total_shipping_price}}
+    {{order.total_discount}}
+    {{order.total_price}}
+  ================================================================
+-->
+
+
+<!-- =============================================================
+     SECTION A — goes ABOVE the GHL native Shopping Cart element
+     ============================================================= -->
+
+<!-- Hidden preheader -->
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#000000;opacity:0;mso-hide:all;">
+  Your Vinylessence&trade; pre-order is locked in. First shipments start as early as August 2026.
+</div>
+
+<div style="background-color:#000000;padding:24px 12px 0;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-radius:16px 16px 0 0;overflow:hidden;">
+
+    <!-- Logo -->
+    <tr>
+      <td align="center" style="padding:32px 24px 8px;">
+        <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png"
+             alt="Vinylessence™"
+             height="56"
+             style="display:block;height:56px;width:auto;max-width:240px;border:0;outline:none;text-decoration:none;" />
+      </td>
+    </tr>
+
+    <!-- Success check -->
+    <tr>
+      <td align="center" style="padding:16px 24px 8px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+            <td align="center" width="72" height="72"
+                style="background-color:#062d13;border:2px solid #00AE42;border-radius:36px;width:72px;height:72px;line-height:72px;color:#00AE42;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:40px;font-weight:800;">
+              &#10003;
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Badge -->
+    <tr>
+      <td align="center" style="padding:16px 24px 12px;">
+        <span style="display:inline-block;padding:6px 14px;border-radius:999px;background-color:#1a1500;border:1px solid #E8C100;color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;">
+          Pre-Order Confirmed
+        </span>
+      </td>
+    </tr>
+
+    <!-- Headline -->
+    <tr>
+      <td align="center" style="padding:0 24px 14px;">
+        <h1 style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin:0;">
+          Thank you, <span style="color:#E8C100;">{{order.customer.name}}</span>
+        </h1>
+      </td>
+    </tr>
+
+    <!-- Body copy -->
+    <tr>
+      <td align="center" style="padding:0 32px 24px;">
+        <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.65;margin:0;">
+          Welcome to the Vinylessence&trade; family! Your pre-order is locked in and we're already working to get
+          it shipped to you. First shipments start going out as early as <strong style="color:#E8C100;">August 2026</strong>.
+          You'll receive another email with a tracking number the moment your slipmat is on its way.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Order summary pills -->
+    <tr>
+      <td align="center" style="padding:0 24px 24px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+            <td style="padding:0 6px;">
+              <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;white-space:nowrap;">
+                <span style="color:#6b7280;">Store:</span>
+                <strong style="color:#ffffff;"> {{store.name}}</strong>
+              </div>
+            </td>
+            <td style="padding:0 6px;">
+              <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:999px;padding:8px 16px;color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;white-space:nowrap;">
+                <span style="color:#6b7280;">Ships from:</span>
+                <strong style="color:#ffffff;"> Aug 2026</strong>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Primary CTA -->
+    <tr>
+      <td align="center" style="padding:0 24px 28px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+          <tr>
+            <td align="center" bgcolor="#E8C100" style="background-color:#E8C100;border-radius:12px;">
+              <a href="https://vinyl-essence.com"
+                 style="display:inline-block;padding:14px 32px;color:#000000;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:12px;">
+                View Order
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Section header: Items -->
+    <tr>
+      <td style="padding:0 32px 8px;border-top:1px solid #1a1a1a;">
+        <p style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin:18px 0 0;">
+          Items in your order
+        </p>
+      </td>
+    </tr>
+
+  </table>
+</div>
+
+<!-- ==============================================================
+     GHL NATIVE "Shopping Cart" ELEMENT GOES HERE
+     Drop the built-in Shopping Cart widget between SECTION A and
+     SECTION B so the line items render dynamically. The widget
+     brings its own row background — it will sit flush against the
+     blocks above and below on send.
+     ============================================================== -->
+
+
+<!-- =============================================================
+     SECTION B — goes BELOW the GHL native Shopping Cart element
+     ============================================================= -->
+
+<div style="background-color:#000000;padding:0 12px 24px;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;margin:0 auto;background-color:#0a0a0a;border:1px solid #1a1a1a;border-top:none;border-radius:0 0 16px 16px;overflow:hidden;">
+
+    <!-- Totals -->
+    <tr>
+      <td style="padding:24px 32px 8px;border-top:1px solid #1a1a1a;">
+        <p style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 14px;">
+          Order Totals
+        </p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">Subtotal</td>
+            <td align="right" style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">
+              {{order.currency_symbol}}{{order.total_cart_price}}
+            </td>
+          </tr>
+          <tr>
+            <td style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">Shipping</td>
+            <td align="right" style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">
+              {{order.currency_symbol}}{{order.total_shipping_price}}
+            </td>
+          </tr>
+          <tr>
+            <td style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">Tax</td>
+            <td align="right" style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">
+              {{order.currency_symbol}}{{order.total_tax}}
+            </td>
+          </tr>
+          <tr>
+            <td style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">Discount</td>
+            <td align="right" style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;padding:6px 0;">
+              &minus;{{order.currency_symbol}}{{order.total_discount}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding:4px 0;">
+              <div style="border-top:1px solid #1a1a1a;font-size:0;line-height:0;">&nbsp;</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;font-weight:800;padding:10px 0 6px;">Total</td>
+            <td align="right" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:20px;font-weight:800;padding:10px 0 6px;">
+              {{order.currency_symbol}}{{order.total_price}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Address cards (Shipping + Billing) -->
+    <tr>
+      <td style="padding:24px 32px 8px;">
+        <p style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 14px;">
+          Where we're shipping it
+        </p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <!-- Shipping -->
+            <td width="50%" valign="top" style="padding-right:8px;">
+              <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:12px;padding:16px;">
+                <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;margin:0 0 8px;">Shipping Address</p>
+                <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">
+                  {{order.customer.name}}<br />
+                  {{order.customer.full_address}}<br />
+                  {{order.customer.city}}, {{order.customer.state}} {{order.customer.postal_code}}<br />
+                  {{order.customer.country}}
+                </p>
+              </div>
+            </td>
+            <!-- Billing -->
+            <td width="50%" valign="top" style="padding-left:8px;">
+              <div style="background-color:#000000;border:1px solid #1a1a1a;border-radius:12px;padding:16px;">
+                <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;margin:0 0 8px;">Billing Address</p>
+                <p style="color:#d1d5db;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">
+                  {{order.billing_address.fullName}}<br />
+                  {{order.billing_address.address1}}<br />
+                  {{order.billing_address.city}}, {{order.billing_address.state}} {{order.billing_address.postalCode}}<br />
+                  {{order.billing_address.country}}
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- What's next -->
+    <tr>
+      <td style="padding:28px 32px 8px;">
+        <p style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 16px;">
+          What happens next
+        </p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="32" valign="top" style="padding-right:12px;">
+              <div style="width:28px;height:28px;line-height:28px;background-color:#00AE42;color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:800;border-radius:14px;text-align:center;">&#10003;</div>
+            </td>
+            <td valign="top" style="padding-bottom:14px;">
+              <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;margin:0 0 2px;">Order received</p>
+              <p style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">Payment captured and your slot in the production queue is locked in.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="32" valign="top" style="padding-right:12px;">
+              <div style="width:28px;height:28px;line-height:28px;background-color:#1a1500;color:#E8C100;border:1px solid #E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:800;border-radius:14px;text-align:center;">2</div>
+            </td>
+            <td valign="top" style="padding-bottom:14px;">
+              <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;margin:0 0 2px;">Production updates</p>
+              <p style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">Expect occasional behind-the-scenes emails with manufacturing milestones.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="32" valign="top" style="padding-right:12px;">
+              <div style="width:28px;height:28px;line-height:28px;background-color:#1a1500;color:#E8C100;border:1px solid #E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:800;border-radius:14px;text-align:center;">3</div>
+            </td>
+            <td valign="top" style="padding-bottom:6px;">
+              <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;margin:0 0 2px;">Your Vinylessence&trade; ships</p>
+              <p style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">Shipments begin as early as August 2026. You'll get a tracking number the moment yours is on its way.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Support prompt -->
+    <tr>
+      <td align="center" style="padding:16px 32px 32px;">
+        <div style="background:linear-gradient(135deg,#0a0a0a,#000000);border:1px dashed rgba(232,193,0,0.4);border-radius:14px;padding:18px 22px;">
+          <p style="color:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;margin:0 0 4px;">Need anything?</p>
+          <p style="color:#9ca3af;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;margin:0;">
+            Just reply to this email and a real human will get back to you.
+          </p>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td align="center" style="background-color:#000000;border-top:1px solid #1a1a1a;padding:24px;">
+        <!-- Socials -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 14px;">
+          <tr>
+            <td style="padding:0 10px;">
+              <a href="https://www.instagram.com/vinylessenceofficial" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">INSTAGRAM</a>
+            </td>
+            <td style="color:#374151;">&middot;</td>
+            <td style="padding:0 10px;">
+              <a href="https://www.youtube.com/@OfficialVinylessence" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">YOUTUBE</a>
+            </td>
+            <td style="color:#374151;">&middot;</td>
+            <td style="padding:0 10px;">
+              <a href="https://www.tiktok.com/@vinylessenceofficial" style="color:#E8C100;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">TIKTOK</a>
+            </td>
+          </tr>
+        </table>
+
+        <p style="color:#6b7280;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.5;margin:0 0 6px;">
+          &copy; Charg3d LLC &middot; Vinylessence&trade; is a product of Charg3d LLC
+        </p>
+        <p style="color:#6b7280;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.5;margin:0;">
+          You're receiving this because you placed an order on vinyl-essence.com.
+          &nbsp;<a href="{{unsubscribe_url}}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
+        </p>
+      </td>
+    </tr>
+
+  </table>
+</div>
