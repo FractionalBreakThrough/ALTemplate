@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiTech Designer Series — Wireless Architectural Locks | MVP Access Ecosystem</title>
+    <meta name="description" content="Alarm Lock ArchiTech Series — designer-grade wireless access locks (N90/N95) with ANSI Grade 1 durability. Configure your part number with levers, roses, finishes, and credential tech.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+        .config-opt { transition: all 0.18s ease; }
+        .config-opt.active { border-color: #c8102e; background: #fff5f5; color: #c8102e; }
+        .config-opt:hover:not(.active) { border-color: #94a3b8; background: #f8fafc; }
+        .finish-swatch { transition: all 0.2s ease; cursor: pointer; }
+        .finish-swatch:hover { transform: scale(1.05); }
+        .finish-swatch.active { outline: 3px solid #c8102e; outline-offset: 3px; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-white text-sm font-medium">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-white text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-amber-500 blur-[120px]"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-slate-400">Hardware</span>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-white">ArchiTech Designer Series</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-amber-400 font-bold uppercase tracking-widest text-[10px] mb-4">Alarm Lock ArchiTech</p>
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                        Designer Aesthetics.<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-mvpred">Wireless Intelligence.</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        Where architectural style meets ANSI Grade 1 wireless access control. Specify your finish, lever, rose, and credential technology — build a door solution that matches your design vision without compromising security.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#configurator" class="bg-mvpred hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2">
+                            <i data-lucide="settings" class="w-4 h-4"></i> Configure Part Number
+                        </a>
+                        <a href="#compare" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2 border border-white/20">
+                            <i data-lucide="git-compare" class="w-4 h-4"></i> N90 vs N95
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-amber-400 text-2xl md:text-3xl font-black">2</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Series: N90 / N95</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-amber-400 text-2xl md:text-3xl font-black">Grade 1</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">ANSI/BHMA Rated</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-amber-400 text-2xl md:text-3xl font-black">9+</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Finish Options</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-amber-400 text-2xl md:text-3xl font-black">Prox<br/><span class="text-lg">+ Keypad</span></p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Credential Options</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Designer Meets Wireless -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Where Design Meets Function</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Architectural Hardware That Runs On MVP</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">ArchiTech brings the premium look of traditional commercial hardware to the cloud-managed, wireless Trilogy Networx ecosystem — no wires, no cylinders, no compromise.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Premium Finishes</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Satin chrome, bright brass, oil-rubbed bronze, antique brass, and more — matched to architectural specifications and coordinated with adjacent mechanical hardware.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="shapes" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mix &amp; Match Trim</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Independent lever and rose design options let spec writers coordinate ArchiTech hardware with passage, privacy, and mechanical locks throughout the building.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="radio" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Networx-Ready</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Same 900MHz wireless backbone as Trilogy. Global lockdown, 5-year battery, 40,000 event audit trail, and full MVP Access cloud management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- N90 vs N95 Comparison -->
+    <section id="compare" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Choose Your Series</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">N90 Keypad vs N95 Prox</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Same designer chassis, same finishes — pick the credential technology that fits your access model.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- N90 Card -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl">Keypad Entry</div>
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center shrink-0 border border-amber-200">
+                            <i data-lucide="lock-keyhole" class="w-7 h-7 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black">N90 Series</h3>
+                            <p class="text-slate-500 text-sm font-medium">PIN Code Entry</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6 leading-relaxed">Backlit keypad with up to 2,000 user PIN codes. Ideal for facilities where credential cards aren't practical — shift changes, contractors, tenants who rotate frequently.</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>2,000 users</strong> with unique 3-6 digit PINs</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Backlit keys</strong> for low-light visibility</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>No cards required</strong> — reduce credential costs</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Scheduled codes</strong> — time-based PIN activation</span></li>
+                    </ul>
+                </div>
+
+                <!-- N95 Card -->
+                <div class="bg-white rounded-2xl border-2 border-mvpred p-8 shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-mvpred text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl">Prox + Keypad</div>
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center shrink-0 border border-red-200">
+                            <i data-lucide="contactless" class="w-7 h-7 text-mvpred"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black">N95 Series</h3>
+                            <p class="text-slate-500 text-sm font-medium">Prox Card + PIN Entry</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6 leading-relaxed">HID Prox / MIFARE / DESFire card reader with fallback keypad. Ideal for corporate, healthcare, and multi-tenant facilities with an existing credential population.</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>5,000 users</strong> with card + optional PIN</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Multi-tech reader</strong> — HID Prox, iClass, MIFARE, DESFire</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Dual-verification mode</strong> — card + PIN for high-security doors</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Leverages existing cards</strong> — no re-badging</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shared Specs Row -->
+            <div class="mt-10 bg-mvpdark rounded-2xl p-8 text-white">
+                <p class="text-amber-400 font-bold uppercase tracking-widest text-[10px] mb-4 text-center">Shared Across Both Series</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">ANSI Grade 1</p>
+                        <p class="text-slate-400 text-xs">Heavy commercial</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="battery-full" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">5-Year Battery</p>
+                        <p class="text-slate-400 text-xs">4 AA alkaline</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="radio" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">900MHz Networx</p>
+                        <p class="text-slate-400 text-xs">Wireless mesh</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="list" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">40K Event Log</p>
+                        <p class="text-slate-400 text-xs">Local audit trail</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Part Number Configurator -->
+    <section id="configurator" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Build Your Part Number</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">ArchiTech Configurator</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Step through each selection — your part number builds in real time. Copy and paste into your spec sheet or email us for a formal quote.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Configuration Panel (2/3 width) -->
+                <div class="lg:col-span-2 space-y-6">
+
+                    <!-- Step 1: Series -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-mvpred text-white font-black text-sm flex items-center justify-center">1</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Series &amp; Credential</h3>
+                                <p class="text-slate-500 text-xs">Pick how users present at the door</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3" data-group="series">
+                            <button class="config-opt active border-2 border-slate-200 rounded-xl p-4 text-left font-semibold text-sm bg-white" data-value="N90" data-label="N90 Keypad">
+                                <div class="font-black mb-1">N90</div>
+                                <div class="text-xs font-normal text-slate-500">Keypad / PIN only</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-4 text-left font-semibold text-sm bg-white" data-value="N95" data-label="N95 Prox + Keypad">
+                                <div class="font-black mb-1">N95</div>
+                                <div class="text-xs font-normal text-slate-500">Prox card + Keypad</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Chassis -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-mvpred text-white font-black text-sm flex items-center justify-center">2</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Chassis / Lock Function</h3>
+                                <p class="text-slate-500 text-xs">Matches ANSI F-series function codes</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" data-group="function">
+                            <button class="config-opt active border-2 border-slate-200 rounded-xl p-3 text-center font-semibold text-sm bg-white" data-value="CYL" data-label="Cylindrical">
+                                <i data-lucide="circle" class="w-5 h-5 mx-auto mb-1"></i>
+                                <div class="text-xs">Cylindrical</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center font-semibold text-sm bg-white" data-value="MOR" data-label="Mortise">
+                                <i data-lucide="square" class="w-5 h-5 mx-auto mb-1"></i>
+                                <div class="text-xs">Mortise</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center font-semibold text-sm bg-white" data-value="DB" data-label="Mortise w/ Deadbolt">
+                                <i data-lucide="lock" class="w-5 h-5 mx-auto mb-1"></i>
+                                <div class="text-xs">Mortise + DB</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center font-semibold text-sm bg-white" data-value="EXT" data-label="Exit Trim">
+                                <i data-lucide="external-link" class="w-5 h-5 mx-auto mb-1"></i>
+                                <div class="text-xs">Exit Trim</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Lever Design -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-mvpred text-white font-black text-sm flex items-center justify-center">3</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Lever Design</h3>
+                                <p class="text-slate-500 text-xs">Coordinate with adjacent mechanical hardware</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" data-group="lever">
+                            <button class="config-opt active border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="L1" data-label="Straight">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-12 h-2 bg-slate-400 rounded"></div></div>
+                                <div class="text-xs font-semibold">L1 Straight</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="L2" data-label="Curved Return">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-10 h-2 bg-slate-400 rounded-tr-full rounded-br-full"></div></div>
+                                <div class="text-xs font-semibold">L2 Curved</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="L3" data-label="ADA Wishbone">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-10 h-2 bg-slate-400 rounded"></div></div>
+                                <div class="text-xs font-semibold">L3 Wishbone</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="L4" data-label="Contemporary">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-8 h-2 bg-slate-400"></div></div>
+                                <div class="text-xs font-semibold">L4 Contemporary</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Rose Design -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-mvpred text-white font-black text-sm flex items-center justify-center">4</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Rose / Escutcheon</h3>
+                                <p class="text-slate-500 text-xs">Round, square, or decorative trim</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3" data-group="rose">
+                            <button class="config-opt active border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="R1" data-label="Round">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-8 h-8 bg-slate-300 rounded-full"></div></div>
+                                <div class="text-xs font-semibold">R1 Round</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="R2" data-label="Square">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-8 h-8 bg-slate-300"></div></div>
+                                <div class="text-xs font-semibold">R2 Square</div>
+                            </button>
+                            <button class="config-opt border-2 border-slate-200 rounded-xl p-3 text-center bg-white" data-value="R3" data-label="Decorative">
+                                <div class="h-10 flex items-center justify-center mb-1"><div class="w-8 h-8 bg-slate-300 rounded"></div></div>
+                                <div class="text-xs font-semibold">R3 Decorative</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Finish -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-mvpred text-white font-black text-sm flex items-center justify-center">5</span>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Finish</h3>
+                                <p class="text-slate-500 text-xs">BHMA finish codes — coordinate with building spec</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4" data-group="finish">
+                            <div class="text-center">
+                                <div class="finish-swatch active w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #d4d4d4, #a3a3a3);" data-value="US26D" data-label="Satin Chrome (US26D)"></div>
+                                <div class="text-[10px] font-bold">US26D</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #e5e5e5, #c0c0c0);" data-value="US26" data-label="Bright Chrome (US26)"></div>
+                                <div class="text-[10px] font-bold">US26</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #f4c430, #b8860b);" data-value="US3" data-label="Bright Brass (US3)"></div>
+                                <div class="text-[10px] font-bold">US3</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #c9a96e, #8b6f3e);" data-value="US4" data-label="Satin Brass (US4)"></div>
+                                <div class="text-[10px] font-bold">US4</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #3d2817, #1a0f08);" data-value="US10B" data-label="Oil-Rubbed Bronze (US10B)"></div>
+                                <div class="text-[10px] font-bold">US10B</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #6b5738, #3e3320);" data-value="US10" data-label="Satin Bronze (US10)"></div>
+                                <div class="text-[10px] font-bold">US10</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #8b6f3e, #5d4a2a);" data-value="US5" data-label="Antique Brass (US5)"></div>
+                                <div class="text-[10px] font-bold">US5</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #2d2d2d, #000);" data-value="US19" data-label="Matte Black (US19)"></div>
+                                <div class="text-[10px] font-bold">US19</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="finish-swatch w-14 h-14 rounded-full mx-auto mb-1" style="background: linear-gradient(135deg, #e8e8e8, #b8b8b8);" data-value="US32D" data-label="Satin Stainless (US32D)"></div>
+                                <div class="text-[10px] font-bold">US32D</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Summary Panel (1/3 width, sticky) -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-20 bg-mvpdark rounded-2xl p-6 text-white shadow-xl border-b-4 border-mvpred">
+                        <p class="text-amber-400 font-bold uppercase tracking-widest text-[10px] mb-3">Your Part Number</p>
+                        <div id="partNumber" class="font-mono text-2xl md:text-3xl font-black bg-black/30 rounded-lg px-4 py-4 mb-4 break-all leading-tight">AL-N90-CYL-L1-R1-US26D</div>
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex justify-between py-1 border-b border-white/10">
+                                <span class="text-slate-400">Series:</span>
+                                <span id="summary-series" class="font-bold text-right">N90 Keypad</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-white/10">
+                                <span class="text-slate-400">Chassis:</span>
+                                <span id="summary-function" class="font-bold text-right">Cylindrical</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-white/10">
+                                <span class="text-slate-400">Lever:</span>
+                                <span id="summary-lever" class="font-bold text-right">L1 Straight</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-white/10">
+                                <span class="text-slate-400">Rose:</span>
+                                <span id="summary-rose" class="font-bold text-right">R1 Round</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-400">Finish:</span>
+                                <span id="summary-finish" class="font-bold text-right">Satin Chrome</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <button onclick="copyPartNumber()" class="bg-mvpred hover:bg-red-700 text-white font-bold px-4 py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="copy" class="w-4 h-4"></i> <span id="copyBtnText">Copy Part Number</span>
+                            </button>
+                            <a href="mailto:Support@therepcollective.biz?subject=ArchiTech Quote Request" id="quoteLink" class="bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2 border border-white/20">
+                                <i data-lucide="mail" class="w-4 h-4"></i> Request Quote
+                            </a>
+                        </div>
+                        <p class="text-slate-400 text-xs mt-4 text-center leading-relaxed">Part number format is illustrative. Final SKU confirmed at quote.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Spotlights -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Where ArchiTech Belongs</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Specified By Design Professionals</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">ArchiTech is the choice when aesthetics matter as much as access control — specified by architects, interior designers, and facility executives.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="building-2" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Class A Office</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Tenant suite entries, executive floors, conference rooms — finishes that match the brass and bronze package throughout the building.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="hotel" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Boutique Hospitality</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Back-of-house, spa, fitness, and amenity doors where electronic locks must blend with the interior design language.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="graduation-cap" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Higher Education</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Deans' suites, faculty offices, research labs — architect-specified finishes on Ivy-league and modern campus builds.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="heart-pulse" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Healthcare Executive</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">C-suite offices, administrative wings, and patient-facing spaces needing electronic control with warm, welcoming aesthetics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Deep Dive -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Built The Right Way</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Grade 1 Inside, Designer Outside</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="bg-slate-100 rounded-2xl h-80 flex items-center justify-center border border-slate-200">
+                    <div class="text-center">
+                        <i data-lucide="image" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">ArchiTech Exploded View</p>
+                    </div>
+                </div>
+                <div>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                                <i data-lucide="shield" class="w-5 h-5 text-mvpred"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">ANSI/BHMA A156.13 Grade 1</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Passes 1,000,000 operating cycles — rated for the heaviest commercial traffic loads.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                                <i data-lucide="drafting-compass" class="w-5 h-5 text-mvpred"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Standard ANSI Prep</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Fits standard 2-1/8" cross-bore and 161 strike prep. Replaces existing mechanical hardware without door modifications.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                                <i data-lucide="accessibility" class="w-5 h-5 text-mvpred"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">ADA Compliant Levers</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">All lever options meet ADA requirements for operable-force and accessible actuation — no tight grasping, pinching, or twisting.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                                <i data-lucide="fire-extinguisher" class="w-5 h-5 text-mvpred"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">UL 3-Hour Fire Rated</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">UL listed for use on 3-hour fire-rated door assemblies. Code-compliant for corridors, stairwells, and fire-barrier walls.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                                <i data-lucide="key-round" class="w-5 h-5 text-mvpred"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Mechanical Key Override</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Standard keyway accepts your existing small-format IC core or standard cylinder — master key integration with existing mechanical systems.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Ready to Specify?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Get Expert Help With Your ArchiTech Spec</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Submit your configured part number and we'll return a formal quote, CSI spec language, and finish samples within one business day.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-white text-xs">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Configurator state
+        var config = {
+            series:   { value: 'N90',   label: 'N90 Keypad' },
+            function: { value: 'CYL',   label: 'Cylindrical' },
+            lever:    { value: 'L1',    label: 'L1 Straight' },
+            rose:     { value: 'R1',    label: 'R1 Round' },
+            finish:   { value: 'US26D', label: 'Satin Chrome' }
+        };
+
+        function renderConfig() {
+            var pn = 'AL-' + config.series.value + '-' + config.function.value + '-' +
+                     config.lever.value + '-' + config.rose.value + '-' + config.finish.value;
+            document.getElementById('partNumber').textContent = pn;
+            document.getElementById('summary-series').textContent = config.series.label;
+            document.getElementById('summary-function').textContent = config.function.label;
+            document.getElementById('summary-lever').textContent = config.lever.label;
+            document.getElementById('summary-rose').textContent = config.rose.label;
+            document.getElementById('summary-finish').textContent = config.finish.label;
+            document.getElementById('quoteLink').href =
+                'mailto:Support@therepcollective.biz?subject=ArchiTech Quote Request - ' + pn +
+                '&body=Please quote ArchiTech part number: ' + pn + '%0A%0ASeries: ' + config.series.label +
+                '%0AChassis: ' + config.function.label + '%0ALever: ' + config.lever.label +
+                '%0ARose: ' + config.rose.label + '%0AFinish: ' + config.finish.label;
+        }
+
+        // Wire up buttons
+        document.querySelectorAll('[data-group]').forEach(function(group) {
+            var groupName = group.getAttribute('data-group');
+            group.querySelectorAll('[data-value]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    group.querySelectorAll('[data-value]').forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    config[groupName] = {
+                        value: btn.getAttribute('data-value'),
+                        label: btn.getAttribute('data-label')
+                    };
+                    renderConfig();
+                });
+            });
+        });
+
+        // Copy-to-clipboard
+        function copyPartNumber() {
+            var pn = document.getElementById('partNumber').textContent;
+            navigator.clipboard.writeText(pn).then(function() {
+                var btnText = document.getElementById('copyBtnText');
+                var orig = btnText.textContent;
+                btnText.textContent = 'Copied!';
+                setTimeout(function() { btnText.textContent = orig; }, 1600);
+            });
+        }
+
+        // Initial render
+        renderConfig();
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
