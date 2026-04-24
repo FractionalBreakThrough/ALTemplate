@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks USA Smart Deadbolts — NDB/NIC Series | MVP Access Ecosystem</title>
+    <meta name="description" content="Marks USA NDB & NIC Series smart deadbolts — pick-proof, one-motion egress, MobileLink phone sync. Commercial-grade security with residential aesthetics.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                        marksblue: '#1e3a8a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .gradient-blue { background: linear-gradient(135deg, #1e3a8a, #0c1e5c); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+        .flow-step { transition: all 0.3s ease; }
+        .flow-step.active { border-color: #1e3a8a; background: #eff6ff; transform: scale(1.02); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.15); }
+        .flow-step.active .flow-number { background: #1e3a8a; color: white; }
+        .flow-step.done .flow-number { background: #10b981; color: white; }
+        .flow-connector { transition: background 0.3s ease; }
+        .flow-connector.done { background: #10b981; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-white text-sm font-medium">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-white text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-blue-500 blur-[120px]"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-slate-400">Hardware</span>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-white">Marks USA Smart Deadbolts</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-4">Marks USA &bull; NDB / NIC Series</p>
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                        Pick-Proof Protection.<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-mvpred">Phone-Paired Access.</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        Smart deadbolts engineered like commercial hardware — pick-proof, bump-proof, one-motion egress. Sync credentials to your phone with MobileLink and manage every door through MVP.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#mobilelink" class="bg-marksblue hover:bg-blue-900 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i> See MobileLink Sync
+                        </a>
+                        <a href="#compare" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2 border border-white/20">
+                            <i data-lucide="git-compare" class="w-4 h-4"></i> NDB vs NIC
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-blue-400 text-2xl md:text-3xl font-black">Pick<br/><span class="text-lg">Proof</span></p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Anti-Pick / Anti-Bump</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-blue-400 text-2xl md:text-3xl font-black">1-Motion</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Code-Compliant Egress</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-blue-400 text-2xl md:text-3xl font-black">BLE</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">MobileLink Sync</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-blue-400 text-2xl md:text-3xl font-black">Grade 2</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">ANSI/BHMA Rated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro / Why Marks USA -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">A Different Kind Of Smart Deadbolt</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Commercial Security. Residential Aesthetics.</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Where consumer smart locks trade security for style, Marks USA is engineered in the commercial tradition — then wrapped in a finish that fits the front door of a luxury rental or the back door of a retail shop.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-marksblue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pick-Proof Cylinder</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Patented anti-pick / anti-bump cylinder defeats the most common attack vectors on residential and commercial deadbolts.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="door-open" class="w-6 h-6 text-marksblue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">One-Motion Egress</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Turn the interior lever and the deadbolt retracts in a single motion — satisfying IBC life-safety code for commercial exit doors.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-marksblue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">MobileLink Phone Sync</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Pair an authorized smartphone via Bluetooth. Users unlock with proximity — no card, no fob, no PIN to memorize.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NDB vs NIC Comparison -->
+    <section id="compare" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Choose Your Series</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">NDB Keypad vs NIC iButton</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Same pick-proof chassis, same one-motion egress — pick the credential model that fits your tenants.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- NDB Card -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-marksblue text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl">Keypad + BLE</div>
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center shrink-0 border border-blue-200">
+                            <i data-lucide="lock-keyhole" class="w-7 h-7 text-marksblue"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black">NDB Series</h3>
+                            <p class="text-slate-500 text-sm font-medium">PIN Codes + MobileLink</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6 leading-relaxed">The flagship smart deadbolt. Backlit keypad for guests and service users, plus Bluetooth pairing for regular tenants via MobileLink.</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Up to 100 users</strong> — PINs + BLE phones combined</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Backlit numeric keypad</strong> — weatherproof tactile keys</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>MobileLink BLE</strong> — hands-free proximity unlock</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Remote PIN issuance</strong> via MVP cloud</span></li>
+                    </ul>
+                </div>
+
+                <!-- NIC Card -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-slate-700 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-bl-xl">iButton + BLE</div>
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center shrink-0 border border-slate-200">
+                            <i data-lucide="fingerprint" class="w-7 h-7 text-slate-700"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black">NIC Series</h3>
+                            <p class="text-slate-500 text-sm font-medium">iButton Contact + MobileLink</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 mb-6 leading-relaxed">iButton contact-key deadbolt. Purpose-built for storage, utility, server rooms, and unstaffed facilities where a physical touch-credential is preferred over a keypad.</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Up to 100 users</strong> — iButton + BLE phones</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>iButton contact</strong> — extreme weather tolerant</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Low profile</strong> — smaller escutcheon, cleaner look</span></li>
+                        <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Ideal for storage</strong> — no keypad to vandalize</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shared Specs -->
+            <div class="mt-10 bg-mvpdark rounded-2xl p-8 text-white">
+                <p class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-4 text-center">Shared Across Both Series</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <i data-lucide="shield" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">Pick-Proof Cyl.</p>
+                        <p class="text-slate-400 text-xs">Anti-pick / anti-bump</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="door-open" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">One-Motion Egress</p>
+                        <p class="text-slate-400 text-xs">IBC code compliant</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="battery-full" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">2-Year Battery</p>
+                        <p class="text-slate-400 text-xs">4 AA alkaline</p>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="cloud" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+                        <p class="font-bold text-white text-sm">MVP Managed</p>
+                        <p class="text-slate-400 text-xs">Cloud credentials</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pick-Proof Design Deep Dive -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-marksblue font-bold uppercase tracking-widest text-[10px] mb-3">Patented Design</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">Why "Pick-Proof" Isn't Marketing.</h2>
+                    <p class="text-slate-600 text-base mb-6 leading-relaxed">Standard deadbolt cylinders can be defeated in under 60 seconds by a locksmith with a pick set — or by an intruder with a $10 bump-key kit. Marks USA engineers the cylinder differently.</p>
+                    <ul class="space-y-5">
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0 border border-marksblue/20">
+                                <i data-lucide="shield-alert" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Anti-Pick Side-Bar Mechanism</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Spring-loaded side bar prevents conventional picking tools from setting the pins — a lockpicker's signature attack is defeated.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0 border border-marksblue/20">
+                                <i data-lucide="hammer" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Anti-Bump Pin Stack</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Security pins with modified geometry prevent bump-key attacks. No kinetic transfer, no bypass.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0 border border-marksblue/20">
+                                <i data-lucide="drill" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Hardened Drill Plate</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Case-hardened steel inserts resist drilling attacks against the cylinder housing and the deadbolt throw.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0 border border-marksblue/20">
+                                <i data-lucide="key-round" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Restricted Keyway</h4>
+                                <p class="text-slate-600 text-sm leading-relaxed">Patented keyway profile — blanks aren't available at big-box stores. Key duplication controlled by the property manager.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-slate-100 rounded-2xl h-96 flex items-center justify-center border border-slate-200">
+                    <div class="text-center">
+                        <i data-lucide="key-square" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Cylinder Cutaway Image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- One-Motion Egress -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white rounded-2xl h-96 flex items-center justify-center border border-slate-200 order-2 md:order-1">
+                    <div class="text-center">
+                        <i data-lucide="door-open" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Interior Lever / Egress Diagram</p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <p class="text-marksblue font-bold uppercase tracking-widest text-[10px] mb-3">IBC Section 1010.1.9</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">Single-Motion Egress, Every Time.</h2>
+                    <p class="text-slate-600 text-base mb-6 leading-relaxed">Life-safety code requires that occupants be able to exit through any commercial door with a single motion — no secondary unlatching, no thumb-turn, no fumbling in an emergency.</p>
+                    <div class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="check" class="w-5 h-5 text-emerald-600"></i>
+                            </div>
+                            <h4 class="font-bold">Marks USA Behavior</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Turn the interior lever &rarr; deadbolt retracts &rarr; latch retracts &rarr; door opens. All in one continuous motion.</p>
+                    </div>
+                    <div class="bg-red-50 rounded-xl border border-red-200 p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="x" class="w-5 h-5 text-red-600"></i>
+                            </div>
+                            <h4 class="font-bold">Typical Smart Deadbolt</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Turn thumb-turn to retract deadbolt &rarr; turn interior knob to retract latch &rarr; door opens. <strong>Two motions = code violation on commercial doors.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MobileLink Phone Sync Flowchart -->
+    <section id="mobilelink" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">MobileLink Phone Sync</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">How Users Pair Their Phone</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">MVP sends an enrollment invite. The user accepts, pairs, and unlocks — in under a minute. Click each step to follow the flow.</p>
+            </div>
+
+            <!-- Interactive Flowchart -->
+            <div class="grid md:grid-cols-4 gap-4 md:gap-2 items-stretch">
+                <!-- Step 1 -->
+                <div class="flow-step active border-2 border-slate-200 rounded-2xl p-6 bg-white cursor-pointer" data-step="1" onclick="setFlowStep(1)">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flow-number w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-sm">1</div>
+                        <p class="font-black text-slate-900 text-sm uppercase tracking-wide">Invite</p>
+                    </div>
+                    <i data-lucide="mail" class="w-10 h-10 text-marksblue mb-3"></i>
+                    <h4 class="font-bold mb-2">Property Manager Invites User</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">From MVP, the manager enters the tenant's email and assigns door access. MVP generates a secure enrollment link.</p>
+                </div>
+
+                <!-- Connector 1→2 -->
+                <div class="hidden md:flex items-center justify-center">
+                    <div class="flow-connector w-full h-1 bg-slate-200 rounded"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step border-2 border-slate-200 rounded-2xl p-6 bg-white cursor-pointer" data-step="2" onclick="setFlowStep(2)">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flow-number w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-sm">2</div>
+                        <p class="font-black text-slate-900 text-sm uppercase tracking-wide">Install</p>
+                    </div>
+                    <i data-lucide="smartphone" class="w-10 h-10 text-marksblue mb-3"></i>
+                    <h4 class="font-bold mb-2">User Installs MobileLink App</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">The tenant gets an email, installs MobileLink (iOS/Android), and taps the enrollment link — the app opens and logs them in.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-4 md:gap-2 items-stretch mt-4 md:mt-2">
+                <!-- Step 3 -->
+                <div class="flow-step border-2 border-slate-200 rounded-2xl p-6 bg-white cursor-pointer" data-step="3" onclick="setFlowStep(3)">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flow-number w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-sm">3</div>
+                        <p class="font-black text-slate-900 text-sm uppercase tracking-wide">Pair</p>
+                    </div>
+                    <i data-lucide="bluetooth" class="w-10 h-10 text-marksblue mb-3"></i>
+                    <h4 class="font-bold mb-2">Phone Pairs via BLE</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Tenant approaches the door — MobileLink handshakes with the Marks USA lock over Bluetooth Low Energy. Encrypted credential is written to the lock.</p>
+                </div>
+
+                <!-- Connector 3→4 -->
+                <div class="hidden md:flex items-center justify-center">
+                    <div class="flow-connector w-full h-1 bg-slate-200 rounded"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step border-2 border-slate-200 rounded-2xl p-6 bg-white cursor-pointer" data-step="4" onclick="setFlowStep(4)">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flow-number w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-sm">4</div>
+                        <p class="font-black text-slate-900 text-sm uppercase tracking-wide">Unlock</p>
+                    </div>
+                    <i data-lucide="unlock" class="w-10 h-10 text-marksblue mb-3"></i>
+                    <h4 class="font-bold mb-2">Proximity Unlock</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">From now on, tenant approaches the door with the phone in pocket and taps the lever or MobileLink button — door unlocks instantly.</p>
+                </div>
+            </div>
+
+            <!-- Step Controls -->
+            <div class="flex items-center justify-center gap-4 mt-10">
+                <button onclick="prevFlowStep()" class="bg-white border-2 border-slate-200 hover:border-marksblue text-slate-700 font-bold px-5 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                </button>
+                <span class="text-slate-500 text-sm font-medium">Step <span id="currentStepNum" class="font-black text-marksblue">1</span> of 4</span>
+                <button onclick="nextFlowStep()" class="bg-marksblue hover:bg-blue-900 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2">
+                    Next <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Revocation Callout -->
+            <div class="mt-12 bg-slate-900 rounded-2xl p-8 text-white grid md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2">
+                    <p class="text-red-400 font-bold uppercase tracking-widest text-[10px] mb-3">Instant Revocation</p>
+                    <h3 class="text-2xl font-black mb-3">Tenant moves out? Pull the credential in one click.</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">When the property manager deactivates a user in MVP, the credential is revoked on the lock at next sync — typically within seconds. No lock change, no rekey, no lost keys.</p>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-24 h-24 bg-red-500/20 rounded-full flex items-center justify-center border-4 border-red-500/40">
+                        <i data-lucide="user-x" class="w-12 h-12 text-red-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Where It Fits -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Where Marks USA Fits</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Built For Rotating-Tenant Doors</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Anywhere tenants come and go — and you can't afford to rekey each time.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="building" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Multi-Family Rentals</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Apartment unit doors. Issue a new tenant credential in MVP, old tenant's phone instantly deactivates. Zero rekey costs.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="container" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Self-Storage</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Individual storage unit doors. NIC iButton series is the go-to — no keypad to weather-damage, tenants tap an iButton fob.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="store" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Retail &amp; Office Back-of-House</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Stockrooms, supply closets, janitor rooms — shift workers unlock via phone without carrying keys that can be lost or copied.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden card-lift">
+                    <div class="bg-slate-100 h-40 flex items-center justify-center">
+                        <i data-lucide="warehouse" class="w-16 h-16 text-slate-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold mb-2">Short-Term Rentals</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Airbnb / vacation rentals. Auto-generate a time-bound PIN at check-in, auto-expire at check-out. No key handoff, no lockouts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Retrofit -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-marksblue font-bold uppercase tracking-widest text-[10px] mb-3">Drop-In Retrofit</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">Replaces Any Standard Deadbolt</h2>
+                    <p class="text-slate-600 text-base mb-6 leading-relaxed">Marks USA deadbolts ship with an adjustable latch (2-3/8" to 2-3/4" backset) and fit a standard 2-1/8" cross-bore. If your door currently has a deadbolt, Marks USA drops in — no carpentry, no frame modifications.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i data-lucide="ruler" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Adjustable Backset</p>
+                                <p class="text-slate-500 text-xs">2-3/8" and 2-3/4" — covers 99% of existing door prep.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i data-lucide="timer" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">~15 Minute Install</p>
+                                <p class="text-slate-500 text-xs">Screwdriver and a level. No wiring, no low-voltage trade required.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="w-10 h-10 bg-marksblue/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i data-lucide="scan-line" class="w-5 h-5 text-marksblue"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">Scan2Enroll QR Commissioning</p>
+                                <p class="text-slate-500 text-xs">Scan the lock's QR with MVP — the door is provisioned in 10 seconds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 rounded-2xl h-96 flex items-center justify-center border border-slate-200">
+                    <div class="text-center">
+                        <i data-lucide="wrench" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Retrofit Installation Photo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Ready To Deploy?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Let's Spec The Right Deadbolt For Your Doors</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Share your door count, door prep, and tenant turnover patterns — we'll match you with NDB or NIC, issue quantities, and bundle with the right MVP subscription.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">Marks USA is a division of NAPCO Security Technologies — American-made architectural hardware for commercial and multi-family applications.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-white text-xs">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // MobileLink flowchart stepper
+        var currentStep = 1;
+        var totalSteps = 4;
+
+        function setFlowStep(n) {
+            currentStep = n;
+            var steps = document.querySelectorAll('.flow-step');
+            steps.forEach(function(s) {
+                var sn = parseInt(s.getAttribute('data-step'));
+                s.classList.remove('active', 'done');
+                if (sn < currentStep) s.classList.add('done');
+                if (sn === currentStep) s.classList.add('active');
+            });
+            var connectors = document.querySelectorAll('.flow-connector');
+            connectors.forEach(function(c, i) {
+                c.classList.remove('done');
+                if (i + 1 < currentStep) c.classList.add('done');
+            });
+            document.getElementById('currentStepNum').textContent = currentStep;
+        }
+
+        function nextFlowStep() {
+            if (currentStep < totalSteps) setFlowStep(currentStep + 1);
+        }
+
+        function prevFlowStep() {
+            if (currentStep > 1) setFlowStep(currentStep - 1);
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
