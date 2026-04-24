@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NA-Series Hardwired Panels — NA-1, NA-2, CA-2 | MVP Access Ecosystem</title>
+    <meta name="description" content="NAPCO NA-Series hardwired access control panels — NA-1 single door, NA-2 two door, CA-2 elevator/gate controller. Compare specs, wiring, and MVP cloud integration.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                        panelgreen: '#0d9488',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .gradient-teal { background: linear-gradient(135deg, #0d9488, #065f56); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+        .panel-tab { transition: all 0.2s ease; cursor: pointer; }
+        .panel-tab.active { border-color: #0d9488; background: #f0fdfa; color: #0d9488; }
+        .panel-tab:hover:not(.active) { border-color: #94a3b8; background: #f8fafc; }
+        .panel-detail { display: none; }
+        .panel-detail.active { display: block; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-white text-sm font-medium">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-white text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-teal-500 blur-[120px]"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-slate-400">Hardware</span>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-white">NA-Series Hardwired Panels</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-teal-400 font-bold uppercase tracking-widest text-[10px] mb-4">NAPCO NA-Series</p>
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                        Hardwired Control.<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-mvpred">Cloud Managed.</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        When the door demands hardwired reliability — mag-locks, electric strikes, turnstiles, elevators, and gates — NA-Series panels deliver supervised I/O with full MVP cloud management.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#compare" class="bg-panelgreen hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2">
+                            <i data-lucide="columns-3" class="w-4 h-4"></i> Compare All Panels
+                        </a>
+                        <a href="#when" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2 border border-white/20">
+                            <i data-lucide="help-circle" class="w-4 h-4"></i> When Hardwired?
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-teal-400 text-2xl md:text-3xl font-black">3</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Panel Models</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-teal-400 text-2xl md:text-3xl font-black">2-Door</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Max Per Panel</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-teal-400 text-2xl md:text-3xl font-black">PoE</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Power Over Ethernet</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-teal-400 text-2xl md:text-3xl font-black">MVP</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Cloud Managed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- When Hardwired Beats Wireless -->
+    <section id="when" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Wireless vs Hardwired</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">When Should You Go Hardwired?</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Trilogy Networx wireless locks cover most doors. But some openings need hardwired panels. Here's when to specify an NA-Series controller.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="magnet" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Mag-Lock Doors</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Electromagnetic locks need continuous power and supervised wiring. NA panels deliver 12/24V output, door-position monitoring, and request-to-exit inputs.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Electric Strikes</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Fail-safe and fail-secure electric strikes require relay-switched power and fire-alarm integration that only a hardwired panel provides.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="arrow-up-down" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Elevators &amp; Gates</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">The CA-2 controller manages elevator floor-select relays and gate operators — openings that have no door leaf for a wireless lock.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="rotate-cw" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Turnstiles &amp; Barriers</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Full-height and waist-high turnstiles, optical barriers, and mantrap interlocks — all require relay I/O that wireless locks can't supply.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="flame" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Fire-Alarm Tie-In</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">NA panels have supervised fire-alarm inputs. When the FACP triggers, the panel releases all mag-locks for emergency egress — code-mandated behavior.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 card-lift">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="camera" class="w-6 h-6 text-panelgreen"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Auxiliary I/O Integration</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Need to trigger a camera preset, activate a strobe, unlock a secondary door, or interlock two openings? NA panels provide the relay outputs and supervised inputs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Comparison Matrix -->
+    <section id="compare" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Side-By-Side Comparison</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Choose Your Panel</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Three controllers, three use cases. Pick the one that matches your opening.</p>
+            </div>
+
+            <!-- 3-Panel Cards -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <!-- NA-1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="bg-panelgreen p-6 text-white text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="square" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-black">NA-1</h3>
+                        <p class="text-teal-200 text-sm font-medium">Single-Door Controller</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>1 door</strong> controlled</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>1 reader input</strong> (Wiegand / OSDP)</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>1 lock relay</strong> output</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>REX + door contact</strong> inputs</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Fire alarm</strong> supervised input</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>PoE or 12VDC</strong> power</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Compact form factor</span></li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t border-slate-100">
+                            <p class="text-panelgreen font-bold text-sm mb-1">Best For</p>
+                            <p class="text-slate-500 text-xs">Single perimeter doors, remote gate entries, or standalone mag-lock openings where one reader per panel is sufficient.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NA-2 -->
+                <div class="bg-white rounded-2xl border-2 border-panelgreen overflow-hidden shadow-lg relative">
+                    <div class="absolute top-4 right-4 bg-mvpred text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full z-10">Most Popular</div>
+                    <div class="gradient-teal p-6 text-white text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="columns-2" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-black">NA-2</h3>
+                        <p class="text-teal-200 text-sm font-medium">Two-Door Controller</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>2 doors</strong> controlled</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>2 reader inputs</strong> (Wiegand / OSDP)</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>2 lock relays</strong> + 2 aux outputs</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>2 REX + 2 door contacts</strong></span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Fire alarm</strong> supervised input</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>PoE or 12VDC</strong> power</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Anti-passback</strong> between doors</span></li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t border-slate-100">
+                            <p class="text-panelgreen font-bold text-sm mb-1">Best For</p>
+                            <p class="text-slate-500 text-xs">Double-door vestibules, mantrap interlocks, paired entries (front + loading dock), or anywhere two doors share a closet run.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CA-2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="bg-slate-700 p-6 text-white text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="arrow-up-down" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-black">CA-2</h3>
+                        <p class="text-slate-300 text-sm font-medium">Elevator / Gate Controller</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Elevator floor-select</strong> relay matrix</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Gate operator</strong> relay control</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>1 reader input</strong> (Wiegand / OSDP)</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Floor-based scheduling</strong></span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Fire service recall</strong> integration</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>PoE or 12VDC</strong> power</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Expandable floor count</span></li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t border-slate-100">
+                            <p class="text-panelgreen font-bold text-sm mb-1">Best For</p>
+                            <p class="text-slate-500 text-xs">Elevator cab card readers (floor access by credential), parking gate control, and vehicle barrier integration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Spec Comparison Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="p-6 border-b border-slate-100">
+                    <h3 class="font-black text-lg">Full Specification Comparison</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-slate-50">
+                                <th class="text-left px-6 py-3 text-slate-500 font-bold text-xs uppercase tracking-wider">Specification</th>
+                                <th class="text-center px-6 py-3 text-panelgreen font-bold text-xs uppercase tracking-wider">NA-1</th>
+                                <th class="text-center px-6 py-3 text-panelgreen font-bold text-xs uppercase tracking-wider">NA-2</th>
+                                <th class="text-center px-6 py-3 text-slate-700 font-bold text-xs uppercase tracking-wider">CA-2</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-3 font-medium">Doors Controlled</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                                <td class="px-6 py-3 text-center font-bold text-panelgreen">2</td>
+                                <td class="px-6 py-3 text-center">—</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-3 font-medium">Reader Inputs</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                                <td class="px-6 py-3 text-center">2</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-3 font-medium">Reader Protocol</td>
+                                <td class="px-6 py-3 text-center">Wiegand / OSDP</td>
+                                <td class="px-6 py-3 text-center">Wiegand / OSDP</td>
+                                <td class="px-6 py-3 text-center">Wiegand / OSDP</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-3 font-medium">Lock Relay Outputs</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                                <td class="px-6 py-3 text-center font-bold text-panelgreen">2 + 2 Aux</td>
+                                <td class="px-6 py-3 text-center">Floor matrix</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-3 font-medium">REX Inputs</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                                <td class="px-6 py-3 text-center">2</td>
+                                <td class="px-6 py-3 text-center">—</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-3 font-medium">Door Contact Inputs</td>
+                                <td class="px-6 py-3 text-center">1</td>
+                                <td class="px-6 py-3 text-center">2</td>
+                                <td class="px-6 py-3 text-center">—</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-3 font-medium">Fire Alarm Input</td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-3 font-medium">Anti-Passback</td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="minus" class="w-4 h-4 text-slate-300 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="minus" class="w-4 h-4 text-slate-300 inline"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-3 font-medium">Elevator Floor Control</td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="minus" class="w-4 h-4 text-slate-300 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="minus" class="w-4 h-4 text-slate-300 inline"></i></td>
+                                <td class="px-6 py-3 text-center font-bold text-panelgreen"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-3 font-medium">Power Options</td>
+                                <td class="px-6 py-3 text-center">PoE / 12VDC</td>
+                                <td class="px-6 py-3 text-center">PoE / 12VDC</td>
+                                <td class="px-6 py-3 text-center">PoE / 12VDC</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-3 font-medium">MVP Cloud Managed</td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                                <td class="px-6 py-3 text-center"><i data-lucide="check" class="w-4 h-4 text-emerald-500 inline"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabbed Panel Deep Dives -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Deep Dive</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Explore Each Panel</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Select a panel to see its wiring topology, mounting details, and real-world deployment scenarios.</p>
+            </div>
+
+            <!-- Tab Selector -->
+            <div class="flex justify-center gap-3 mb-10">
+                <button class="panel-tab active border-2 border-slate-200 rounded-xl px-6 py-3 font-bold text-sm" data-panel="na1">NA-1</button>
+                <button class="panel-tab border-2 border-slate-200 rounded-xl px-6 py-3 font-bold text-sm" data-panel="na2">NA-2</button>
+                <button class="panel-tab border-2 border-slate-200 rounded-xl px-6 py-3 font-bold text-sm" data-panel="ca2">CA-2</button>
+            </div>
+
+            <!-- NA-1 Detail -->
+            <div class="panel-detail active" id="panel-na1">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-panelgreen/10 rounded-xl flex items-center justify-center border border-panelgreen/20">
+                                <i data-lucide="square" class="w-6 h-6 text-panelgreen"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">NA-1 Single-Door Controller</h3>
+                                <p class="text-slate-500 text-sm">The entry-level hardwired panel</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">The NA-1 is the smallest footprint in the NA-Series — purpose-built for standalone mag-lock doors, remote gates, and individual perimeter openings where you need one reader, one lock relay, and full MVP cloud control.</p>
+                        <div class="space-y-4">
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="layout-grid" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Compact Enclosure</p>
+                                    <p class="text-slate-500 text-xs">Mounts in a single-gang backbox, door frame, or above-ceiling. Minimal closet space required.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="wifi" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">PoE Powered</p>
+                                    <p class="text-slate-500 text-xs">Pull one Ethernet cable for both data and power. No local power supply, no electrician.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Supervised Inputs</p>
+                                    <p class="text-slate-500 text-xs">Door contact and REX are end-of-line supervised — tamper and fault conditions reported to MVP in real time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-80 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="circuit-board" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">NA-1 Wiring Diagram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NA-2 Detail -->
+            <div class="panel-detail" id="panel-na2">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-panelgreen/10 rounded-xl flex items-center justify-center border border-panelgreen/20">
+                                <i data-lucide="columns-2" class="w-6 h-6 text-panelgreen"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">NA-2 Two-Door Controller</h3>
+                                <p class="text-slate-500 text-sm">The most-specified NA panel</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">The NA-2 controls two doors from a single panel — perfect for vestibules, mantrap interlocks, paired entries, and buildings where closet space is shared between two openings. Anti-passback logic prevents tailgating between paired doors.</p>
+                        <div class="space-y-4">
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="lock" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Mantrap / Interlock Logic</p>
+                                    <p class="text-slate-500 text-xs">Door 1 must close before Door 2 can open. Hardware-enforced interlock for security vestibules.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="users" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Anti-Passback</p>
+                                    <p class="text-slate-500 text-xs">Credential must badge both in and out. Prevents tailgating and ensures accurate occupancy counts.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="split" class="w-5 h-5 text-panelgreen shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">2 Auxiliary Outputs</p>
+                                    <p class="text-slate-500 text-xs">Trigger camera presets, strobes, secondary locks, or signage — fully programmable from MVP.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-80 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="circuit-board" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">NA-2 Wiring Diagram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CA-2 Detail -->
+            <div class="panel-detail" id="panel-ca2">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center border border-slate-300">
+                                <i data-lucide="arrow-up-down" class="w-6 h-6 text-slate-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">CA-2 Elevator / Gate Controller</h3>
+                                <p class="text-slate-500 text-sm">Specialized vertical & vehicle access</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">The CA-2 turns elevator cabs and parking gates into credentialed access points. In elevator mode, the reader controls which floors a user can select. In gate mode, it triggers the gate operator relay on valid credential presentation.</p>
+                        <div class="space-y-4">
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="building" class="w-5 h-5 text-slate-700 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Floor-Select Matrix</p>
+                                    <p class="text-slate-500 text-xs">Assign floor access per credential. Tenants see only their authorized floors. Visitors restricted to lobby.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="car" class="w-5 h-5 text-slate-700 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Gate Operator Integration</p>
+                                    <p class="text-slate-500 text-xs">Dry-contact relay triggers barrier arm, swing gate, or roll-up door. Long-range reader support via OSDP.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <i data-lucide="flame" class="w-5 h-5 text-slate-700 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <p class="font-bold text-sm">Fire Service Recall</p>
+                                    <p class="text-slate-500 text-xs">Supervised fire-alarm input triggers elevator recall to lobby per ASME A17.1 and local fire code.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-80 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="circuit-board" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">CA-2 Wiring Diagram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MVP Cloud Integration -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Cloud-First Architecture</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Same MVP Platform. Every Panel.</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">NA-Series panels connect to the same MVP cloud as your wireless Trilogy locks — one platform, one credential database, one dashboard.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                            <i data-lucide="cloud" class="w-6 h-6 text-mvpred"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Unified Credential Management</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Issue a card once in MVP — it works on wireless Trilogy locks AND hardwired NA panel readers. No duplicate databases, no sync headaches.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                            <i data-lucide="bell-ring" class="w-6 h-6 text-mvpred"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Real-Time Event Monitoring</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Door-forced-open, door-held-open, REX activations, fire-alarm triggers, and tamper events stream to the MVP dashboard in real time.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                            <i data-lucide="clock" class="w-6 h-6 text-mvpred"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Time-Based Scheduling</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Auto-unlock doors during business hours, restrict after-hours access, and schedule holiday lockouts — all from the MVP calendar.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-mvpred/10 rounded-lg flex items-center justify-center shrink-0 border border-mvpred/20">
+                            <i data-lucide="alert-triangle" class="w-6 h-6 text-mvpred"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-1">Global Lockdown</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">One-button lockdown locks wireless Trilogy doors AND secures NA-panel-controlled openings simultaneously. Mixed environments, unified response.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-mvpdark rounded-2xl p-8 text-white">
+                    <p class="text-teal-400 font-bold uppercase tracking-widest text-[10px] mb-6">Typical Hybrid Deployment</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                            <i data-lucide="radio" class="w-5 h-5 text-teal-400 shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-sm">Interior Doors</p>
+                                <p class="text-slate-400 text-xs">Trilogy Networx wireless locks</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i data-lucide="arrow-down" class="w-5 h-5 text-slate-500"></i>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                            <i data-lucide="square" class="w-5 h-5 text-teal-400 shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-sm">Perimeter Doors</p>
+                                <p class="text-slate-400 text-xs">NA-1/NA-2 with mag-locks or strikes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i data-lucide="arrow-down" class="w-5 h-5 text-slate-500"></i>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                            <i data-lucide="arrow-up-down" class="w-5 h-5 text-teal-400 shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-sm">Elevators &amp; Gates</p>
+                                <p class="text-slate-400 text-xs">CA-2 floor/gate controllers</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i data-lucide="arrow-down" class="w-5 h-5 text-slate-500"></i>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-mvpred/20 rounded-lg border border-mvpred/30">
+                            <i data-lucide="cloud" class="w-5 h-5 text-mvpred shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-sm text-mvpred">MVP Cloud Platform</p>
+                                <p class="text-slate-400 text-xs">One dashboard — all doors, all panels, all locks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Need A Panel Layout?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">We'll Spec Your Hardwired Openings</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Send us your door schedule and we'll recommend NA-1, NA-2, or CA-2 for each opening — plus reader placement, wiring runs, and power requirements.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-white text-xs">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Panel tab switcher
+        document.querySelectorAll('.panel-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.panel-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.panel-detail').forEach(function(d) { d.classList.remove('active'); });
+                tab.classList.add('active');
+                var panelId = 'panel-' + tab.getAttribute('data-panel');
+                document.getElementById(panelId).classList.add('active');
+            });
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
