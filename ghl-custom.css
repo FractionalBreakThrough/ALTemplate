@@ -35,6 +35,9 @@
   --brand-text-muted: rgba(255, 255, 255, 0.72); /* Secondary text       */
   --brand-radius:     10px;      /* Corner radius on cards/buttons       */
   --brand-font:       'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Login page hero image — swap the URL to change the background      */
+  --brand-login-bg:   url('https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/6842389ae142b672ea473c18.png');
 }
 
 
@@ -114,12 +117,19 @@ button.n-button--primary-type:hover {
    (Set the same custom CSS under Settings → Company → Custom CSS so
     it applies on the login screen of your white-labeled domain.)
    --------------------------------------------------------------------- */
+body.bt-on-login,
 .login-container,
 .auth-page {
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(48, 188, 255, 0.14) 0%, transparent 60%),
+    /* dark overlay so the form stays readable */
+    linear-gradient(180deg, rgba(11, 22, 34, 0.72) 0%, rgba(11, 22, 34, 0.88) 100%),
+    /* subtle brand-color glow */
+    radial-gradient(ellipse at 30% 20%, rgba(48, 188, 255, 0.18) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 80%, rgba(255, 193, 7, 0.08) 0%, transparent 55%),
+    /* hero image */
+    var(--brand-login-bg) center / cover no-repeat,
     var(--brand-bg) !important;
+  background-attachment: fixed !important;
 }
 .login-container .card,
 .auth-page form {
