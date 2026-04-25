@@ -26,13 +26,14 @@
    1. Brand tokens — edit these, the rest of the file inherits from them
    --------------------------------------------------------------------- */
 :root {
-  --brand-primary:    #0b1a2e;   /* main brand color (sidebar, headers) */
-  --brand-accent:     #00b4d8;   /* CTA buttons, active states         */
-  --brand-accent-2:   #0077b6;   /* hover states, gradients            */
-  --brand-bg:         #0a192f;   /* page background (dark themes)      */
-  --brand-text:       #e6f1ff;   /* primary text on dark backgrounds   */
-  --brand-text-muted: #ccd6f6;   /* secondary text                     */
-  --brand-radius:     10px;      /* corner radius on cards/buttons     */
+  --brand-primary:    #0B1622;   /* Deep Space — sidebar, dark surfaces  */
+  --brand-accent:     #30BCFF;   /* Electric Blue — CTAs, active states  */
+  --brand-accent-2:   #1A8DC4;   /* Darker blue — gradient stop / hover  */
+  --brand-gold:       #FFC107;   /* Breakthrough Gold — highlights, AI   */
+  --brand-bg:         #0B1622;   /* Page background                      */
+  --brand-text:       #FFFFFF;   /* Primary text on dark backgrounds     */
+  --brand-text-muted: rgba(255, 255, 255, 0.72); /* Secondary text       */
+  --brand-radius:     10px;      /* Corner radius on cards/buttons       */
   --brand-font:       'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
@@ -62,6 +63,7 @@ aside[class*="sidebar"] a:hover {
 aside[class*="sidebar"] a.router-link-active {
   background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-2)) !important;
   color: #fff !important;
+  box-shadow: inset 3px 0 0 var(--brand-gold);
 }
 
 
@@ -80,10 +82,10 @@ main[class*="dashboard"] {
 .hl_card,
 .dashboard-card,
 [class*="WidgetCard"] {
-  background: rgba(17, 34, 64, 0.65) !important;
-  border: 1px solid rgba(0, 180, 216, 0.12) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(48, 188, 255, 0.14) !important;
   border-radius: var(--brand-radius) !important;
-  box-shadow: 0 0 30px rgba(0, 180, 216, 0.08);
+  box-shadow: 0 0 30px rgba(48, 188, 255, 0.08);
 }
 
 
@@ -103,7 +105,7 @@ button[type="submit"]:not(.btn-secondary) {
 .btn-primary:hover,
 button.n-button--primary-type:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 180, 216, 0.35);
+  box-shadow: 0 8px 24px rgba(48, 188, 255, 0.35);
 }
 
 
@@ -115,15 +117,15 @@ button.n-button--primary-type:hover {
 .login-container,
 .auth-page {
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(0, 119, 182, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 20%, rgba(48, 188, 255, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 193, 7, 0.08) 0%, transparent 55%),
     var(--brand-bg) !important;
 }
 .login-container .card,
 .auth-page form {
-  background: rgba(17, 34, 64, 0.85) !important;
+  background: rgba(11, 22, 34, 0.88) !important;
   border-radius: var(--brand-radius) !important;
-  border: 1px solid rgba(0, 180, 216, 0.18) !important;
+  border: 1px solid rgba(48, 188, 255, 0.22) !important;
   backdrop-filter: blur(12px);
 }
 
