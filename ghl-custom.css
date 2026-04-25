@@ -1,0 +1,168 @@
+/* =====================================================================
+   GoHighLevel — Custom CSS Starter
+   ---------------------------------------------------------------------
+   How to install:
+     1. Log in to your GHL Agency account.
+     2. Settings  →  Company Billing / Branding  →  "Custom CSS"
+        (Agency-level CSS applies across the white-labeled platform.)
+        For a single sub-account: Sub-Account → Settings → "Custom CSS".
+     3. Paste the contents of this file into the Custom CSS field.
+     4. Click Save, then hard-refresh (Ctrl/Cmd + Shift + R).
+
+   Notes:
+     - GHL ships React components with class names that change between
+       releases. The selectors below target the most stable hooks
+       (data-* attributes, aria labels, ids) where possible. If a rule
+       stops working after a GHL update, inspect the element and update
+       the selector.
+     - Keep selectors specific. Avoid styling raw tags (div, button) at
+       the document root — it will break the builder UI.
+     - All colors are driven by the CSS variables in the :root block
+       below. Change those once and the whole theme follows.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Brand tokens — edit these, the rest of the file inherits from them
+   --------------------------------------------------------------------- */
+:root {
+  --brand-primary:    #0b1a2e;   /* main brand color (sidebar, headers) */
+  --brand-accent:     #00b4d8;   /* CTA buttons, active states         */
+  --brand-accent-2:   #0077b6;   /* hover states, gradients            */
+  --brand-bg:         #0a192f;   /* page background (dark themes)      */
+  --brand-text:       #e6f1ff;   /* primary text on dark backgrounds   */
+  --brand-text-muted: #ccd6f6;   /* secondary text                     */
+  --brand-radius:     10px;      /* corner radius on cards/buttons     */
+  --brand-font:       'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Agency-level: sidebar / top nav
+   --------------------------------------------------------------------- */
+/* Main left sidebar background */
+#sidebar-v2,
+.hl_nav-header,
+aside[class*="sidebar"] {
+  background: var(--brand-primary) !important;
+}
+
+/* Sidebar links — default + hover + active */
+#sidebar-v2 a,
+aside[class*="sidebar"] a {
+  color: var(--brand-text-muted) !important;
+  border-radius: var(--brand-radius);
+}
+#sidebar-v2 a:hover,
+aside[class*="sidebar"] a:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--brand-text) !important;
+}
+#sidebar-v2 a.active,
+aside[class*="sidebar"] a.router-link-active {
+  background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-2)) !important;
+  color: #fff !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. Sub-account (location) dashboard
+   --------------------------------------------------------------------- */
+/* Page background */
+.hl_page-content,
+main[class*="dashboard"] {
+  background: var(--brand-bg) !important;
+  color: var(--brand-text) !important;
+  font-family: var(--brand-font) !important;
+}
+
+/* Cards / widgets */
+.hl_card,
+.dashboard-card,
+[class*="WidgetCard"] {
+  background: rgba(17, 34, 64, 0.65) !important;
+  border: 1px solid rgba(0, 180, 216, 0.12) !important;
+  border-radius: var(--brand-radius) !important;
+  box-shadow: 0 0 30px rgba(0, 180, 216, 0.08);
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Buttons (primary CTAs across the platform)
+   --------------------------------------------------------------------- */
+.btn-primary,
+button.n-button--primary-type,
+button[type="submit"]:not(.btn-secondary) {
+  background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-2)) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover,
+button.n-button--primary-type:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 180, 216, 0.35);
+}
+
+
+/* ---------------------------------------------------------------------
+   5. White-label login page
+   (Set the same custom CSS under Settings → Company → Custom CSS so
+    it applies on the login screen of your white-labeled domain.)
+   --------------------------------------------------------------------- */
+.login-container,
+.auth-page {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(0, 119, 182, 0.10) 0%, transparent 50%),
+    var(--brand-bg) !important;
+}
+.login-container .card,
+.auth-page form {
+  background: rgba(17, 34, 64, 0.85) !important;
+  border-radius: var(--brand-radius) !important;
+  border: 1px solid rgba(0, 180, 216, 0.18) !important;
+  backdrop-filter: blur(12px);
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Client portal / membership area
+   --------------------------------------------------------------------- */
+.client-portal,
+.membership-page,
+[class*="ClientPortal"] {
+  background: var(--brand-bg) !important;
+  color: var(--brand-text) !important;
+  font-family: var(--brand-font) !important;
+}
+.client-portal h1,
+.client-portal h2,
+.membership-page h1,
+.membership-page h2 {
+  color: var(--brand-text) !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. Hide elements you don't want clients to see
+   (Uncomment any block to activate. Inspect the element first to
+    confirm the selector still matches in your account.)
+   --------------------------------------------------------------------- */
+/* Hide "Upgrade" / billing prompts inside sub-accounts */
+/*
+[data-tooltip="Upgrade"],
+a[href*="billing"] {
+  display: none !important;
+}
+*/
+
+/* Hide the GHL "Help" floating widget */
+/*
+#launcher,
+iframe[title*="Help"] {
+  display: none !important;
+}
+*/
