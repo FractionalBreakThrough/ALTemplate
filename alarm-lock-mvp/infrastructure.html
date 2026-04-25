@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure — Gateways, Expanders, Credentials | MVP Access Ecosystem</title>
+    <meta name="description" content="MVP Access infrastructure — 900MHz gateways, network expanders, HID/MIFARE credentials, keyfobs, and site survey tools. Everything behind the locks.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                        infrapurple: '#7c3aed',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .gradient-purple { background: linear-gradient(135deg, #7c3aed, #4c1d95); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+        .infra-tab { transition: all 0.2s ease; cursor: pointer; }
+        .infra-tab.active { border-color: #7c3aed; background: #f5f3ff; color: #7c3aed; }
+        .infra-tab:hover:not(.active) { border-color: #94a3b8; background: #f8fafc; }
+        .infra-detail { display: none; }
+        .infra-detail.active { display: block; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-white text-sm font-medium">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-white text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-slate-400 text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-violet-500 blur-[120px]"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-white">Infrastructure &amp; Accessories</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-violet-400 font-bold uppercase tracking-widest text-[10px] mb-4">Behind The Locks</p>
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                        Gateways. Credentials.<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-mvpred">The Invisible Network.</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        Every wireless lock needs a gateway to reach the cloud. Every user needs a credential. This is the infrastructure layer that makes MVP Access work — the pieces you spec but never see.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#gateways" class="bg-infrapurple hover:bg-violet-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2">
+                            <i data-lucide="router" class="w-4 h-4"></i> Gateways
+                        </a>
+                        <a href="#credentials" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2 border border-white/20">
+                            <i data-lucide="credit-card" class="w-4 h-4"></i> Credentials
+                        </a>
+                        <a href="#survey" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors flex items-center gap-2 border border-white/20">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i> Site Survey
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-violet-400 text-2xl md:text-3xl font-black">900ft</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Gateway Range</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-violet-400 text-2xl md:text-3xl font-black">64</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Locks Per Gateway</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-violet-400 text-2xl md:text-3xl font-black">Wi-Fi<br/><span class="text-lg">+ PoE</span></p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Gateway Options</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-violet-400 text-2xl md:text-3xl font-black">HID<br/><span class="text-lg">+ MIFARE</span></p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Credential Types</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gateways Section -->
+    <section id="gateways" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">The Bridge To The Cloud</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">900MHz Gateways</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Gateways bridge the 900MHz wireless locks to the MVP cloud. Each gateway covers up to 64 locks within a 900-foot radius. Choose Wi-Fi or hardwired PoE based on your site.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <!-- Wi-Fi Gateway -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="gradient-purple p-6 text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xl font-black">AL-IM3-80211</h3>
+                                <p class="text-violet-200 text-sm font-medium">Wi-Fi Gateway</p>
+                            </div>
+                            <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="wifi" class="w-7 h-7 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 text-sm mb-5 leading-relaxed">Connects to the building's existing Wi-Fi network — no Ethernet run required. Ideal for retrofit projects, distributed buildings, and locations where pulling cable isn't practical.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>802.11 b/g/n</strong> — connects to any standard Wi-Fi network</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Up to 64 locks</strong> per gateway</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>900ft range</strong> — 900MHz penetrates walls and floors</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Wall or ceiling mount</strong> — compact form factor</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Plug-in power adapter</strong> — standard outlet</span></li>
+                        </ul>
+                        <div class="mt-5 pt-4 border-t border-slate-100">
+                            <p class="text-infrapurple font-bold text-xs mb-1">Best For</p>
+                            <p class="text-slate-500 text-xs">Retrofit sites, multi-building campuses, and locations where Ethernet isn't available near the lock cluster.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PoE Gateway -->
+                <div class="bg-white rounded-2xl border-2 border-infrapurple overflow-hidden shadow-lg relative">
+                    <div class="absolute top-4 right-4 bg-mvpred text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full z-10">Recommended</div>
+                    <div class="gradient-purple p-6 text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xl font-black">AL-IM3-POE</h3>
+                                <p class="text-violet-200 text-sm font-medium">PoE Gateway</p>
+                            </div>
+                            <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="ethernet-port" class="w-7 h-7 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 text-sm mb-5 leading-relaxed">Hardwired Ethernet with PoE power — one cable for data and power. The most reliable option for new construction, IDF closets, and IT-managed environments.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>PoE (802.3af)</strong> — one cable, no outlet needed</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>Up to 64 locks</strong> per gateway</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>900ft range</strong> — same 900MHz radio</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>No Wi-Fi dependency</strong> — dedicated wired connection</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span><strong>UPS protected</strong> — PoE switch on battery = gateway stays up</span></li>
+                        </ul>
+                        <div class="mt-5 pt-4 border-t border-slate-100">
+                            <p class="text-infrapurple font-bold text-xs mb-1">Best For</p>
+                            <p class="text-slate-500 text-xs">New construction, IT-managed buildings, and any site where uptime and reliability are paramount.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gateway Coverage Visual -->
+            <div class="bg-mvpdark rounded-2xl p-8 text-white">
+                <p class="text-violet-400 font-bold uppercase tracking-widest text-[10px] mb-4 text-center">How Gateway Coverage Works</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-violet-500/40">
+                            <i data-lucide="radio-tower" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm mb-1">Place Gateway Centrally</p>
+                        <p class="text-slate-400 text-xs">Mount in a closet, ceiling, or wall — centered among the locks it will serve. 900MHz signal covers ~900ft radius through walls.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-violet-500/40">
+                            <i data-lucide="lock" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm mb-1">Locks Auto-Discover</p>
+                        <p class="text-slate-400 text-xs">Trilogy Networx locks find the nearest gateway automatically. No manual frequency programming or channel assignment.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-violet-500/40">
+                            <i data-lucide="cloud" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm mb-1">Cloud Connected</p>
+                        <p class="text-slate-400 text-xs">Gateway relays credentials, events, and lockdown commands between locks and MVP — encrypted, real-time, bidirectional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Expanders -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-infrapurple font-bold uppercase tracking-widest text-[10px] mb-3">Extended Coverage</p>
+                    <h2 class="text-3xl md:text-4xl font-black mb-6">Need More Range? Add Expanders.</h2>
+                    <p class="text-slate-600 text-base mb-6 leading-relaxed">For large campuses, multi-story buildings, or structures with heavy concrete, 900MHz signal expanders extend the gateway's reach without adding another internet connection.</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-4 bg-white rounded-xl border border-slate-200">
+                            <i data-lucide="signal" class="w-5 h-5 text-infrapurple shrink-0 mt-0.5"></i>
+                            <div>
+                                <p class="font-bold text-sm">900MHz Repeater</p>
+                                <p class="text-slate-500 text-xs">Receives the gateway signal and rebroadcasts it. Each expander adds another ~900ft of reach in the chain.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-white rounded-xl border border-slate-200">
+                            <i data-lucide="git-branch" class="w-5 h-5 text-infrapurple shrink-0 mt-0.5"></i>
+                            <div>
+                                <p class="font-bold text-sm">Mesh Topology</p>
+                                <p class="text-slate-500 text-xs">Expanders form a mesh — if one path is blocked, traffic routes through an alternate expander. Self-healing coverage.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-white rounded-xl border border-slate-200">
+                            <i data-lucide="plug" class="w-5 h-5 text-infrapurple shrink-0 mt-0.5"></i>
+                            <div>
+                                <p class="font-bold text-sm">Plug-and-Play</p>
+                                <p class="text-slate-500 text-xs">Power it on, it finds the gateway. No IP configuration, no channel programming, no IT involvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl h-80 flex items-center justify-center border border-slate-200">
+                    <div class="text-center">
+                        <i data-lucide="radio-tower" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Expander Coverage Map</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials & Keyfobs -->
+    <section id="credentials" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">What Users Carry</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Credentials &amp; Keyfobs</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">MVP supports a wide range of credential technologies. Match the right form factor and protocol to your user population.</p>
+            </div>
+
+            <!-- Credential Type Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button class="infra-tab active border-2 border-slate-200 rounded-xl px-5 py-2.5 font-bold text-sm" data-cred="prox">HID Prox</button>
+                <button class="infra-tab border-2 border-slate-200 rounded-xl px-5 py-2.5 font-bold text-sm" data-cred="mifare">MIFARE / DESFire</button>
+                <button class="infra-tab border-2 border-slate-200 rounded-xl px-5 py-2.5 font-bold text-sm" data-cred="keyfob">Keyfobs</button>
+                <button class="infra-tab border-2 border-slate-200 rounded-xl px-5 py-2.5 font-bold text-sm" data-cred="mobile">Mobile Credentials</button>
+            </div>
+
+            <!-- HID Prox -->
+            <div class="infra-detail active" id="cred-prox">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center border border-infrapurple/20">
+                                <i data-lucide="credit-card" class="w-6 h-6 text-infrapurple"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">HID Prox Cards &amp; Clamshells</h3>
+                                <p class="text-slate-500 text-sm">125kHz proximity</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-5 leading-relaxed">The most widely deployed access credential in the industry. If your building already has HID Prox cards, Trilogy Networx and ArchiTech N95 locks read them natively — no re-badging.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>ISO card, clamshell, and keyfob form factors</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Compatible with all major brand readers</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>26-bit Wiegand standard format</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Photo-ID printable ISO cards available</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-64 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="credit-card" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">HID Prox Cards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIFARE / DESFire -->
+            <div class="infra-detail" id="cred-mifare">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center border border-infrapurple/20">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-infrapurple"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">MIFARE &amp; DESFire</h3>
+                                <p class="text-slate-500 text-sm">13.56MHz smart cards</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-5 leading-relaxed">Higher-security encrypted credentials for facilities that require mutual authentication between card and reader. Prevents cloning and replay attacks that 125kHz prox is vulnerable to.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>AES-128 encrypted communication</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Clone-proof mutual authentication</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Multi-application (access + vending + parking)</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Required by GSA, DoD, and FICAM standards</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-64 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="shield-check" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">MIFARE DESFire Cards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keyfobs -->
+            <div class="infra-detail" id="cred-keyfob">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center border border-infrapurple/20">
+                                <i data-lucide="key-round" class="w-6 h-6 text-infrapurple"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">Keyfobs</h3>
+                                <p class="text-slate-500 text-sm">Compact proximity tokens</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-5 leading-relaxed">For users who don't want to carry a card — keyfobs clip to a keychain and present at the reader like a standard card. Available in HID Prox, iClass, and multi-tech formats.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Keychain-sized — fits with car keys</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Durable polycarbonate shell</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Same credential format as cards — interchangeable</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Popular for multi-family &amp; residential tenants</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-64 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="key-round" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Proximity Keyfobs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Credentials -->
+            <div class="infra-detail" id="cred-mobile">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center border border-infrapurple/20">
+                                <i data-lucide="smartphone" class="w-6 h-6 text-infrapurple"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black">Mobile Credentials</h3>
+                                <p class="text-slate-500 text-sm">BLE / NFC phone-based access</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-5 leading-relaxed">Turn authorized smartphones into access credentials. Users unlock via Bluetooth proximity or NFC tap — no physical card to lose, issue, or replace. Provisioned through MVP cloud, revoked instantly.</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>iOS and Android support</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>BLE proximity + NFC tap modes</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Zero credential cost — no cards to purchase</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i><span>Instant issuance &amp; revocation from MVP</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl h-64 flex items-center justify-center border border-slate-200">
+                        <div class="text-center">
+                            <i data-lucide="smartphone" class="w-16 h-16 text-slate-300 mx-auto mb-2"></i>
+                            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Mobile App Credential</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Survey Tools -->
+    <section id="survey" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Before You Install</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Site Survey &amp; Planning Tools</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">A successful wireless deployment starts with a site survey. These tools help you validate 900MHz coverage, plan gateway placement, and identify potential dead zones before a single lock goes on a door.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 card-lift">
+                    <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center mb-4 border border-infrapurple/20">
+                        <i data-lucide="radar" class="w-6 h-6 text-infrapurple"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">900MHz Signal Tester</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Handheld tool that measures received signal strength from a gateway. Walk the building and map coverage zones — green/yellow/red readings at every door location.</p>
+                    <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+                        <p class="text-xs text-slate-500"><strong class="text-slate-700">Pro tip:</strong> Test at peak hours with doors closed. Metal fire doors and elevator shafts are the most common signal blockers.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 card-lift">
+                    <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center mb-4 border border-infrapurple/20">
+                        <i data-lucide="map" class="w-6 h-6 text-infrapurple"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Coverage Planning Worksheet</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Floor-plan template for plotting gateway locations, lock positions, and expander placements. Mark distances and wall types to estimate signal attenuation before testing.</p>
+                    <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+                        <p class="text-xs text-slate-500"><strong class="text-slate-700">Rule of thumb:</strong> One gateway per floor for standard drywall construction. Add expanders for concrete/CMU buildings.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 card-lift">
+                    <div class="w-12 h-12 bg-infrapurple/10 rounded-xl flex items-center justify-center mb-4 border border-infrapurple/20">
+                        <i data-lucide="clipboard-check" class="w-6 h-6 text-infrapurple"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Door Schedule Audit</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Checklist for each door: prep type, door thickness, handing, existing hardware, frame material, fire rating, and ADA compliance. Determines which Trilogy or NA-panel product fits each opening.</p>
+                    <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+                        <p class="text-xs text-slate-500"><strong class="text-slate-700">We'll help:</strong> Send us your door schedule and floor plans — we'll return gateway placement, product recommendations, and a BOM.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It All Connects -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">The Full Picture</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">How It All Connects</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">From credential to cloud — every component in the MVP infrastructure stack and how data flows between them.</p>
+            </div>
+            <div class="bg-mvpdark rounded-2xl p-8 md:p-12 text-white">
+                <div class="grid md:grid-cols-5 gap-4 items-center">
+                    <!-- User / Credential -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-violet-500/30">
+                            <i data-lucide="user" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm">User</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest">Card / Phone / PIN</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="flex items-center gap-1">
+                            <div class="w-full h-0.5 bg-violet-500/40"></div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-violet-400 shrink-0"></i>
+                        </div>
+                    </div>
+                    <!-- Lock -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-violet-500/30">
+                            <i data-lucide="lock" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm">Wireless Lock</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest">Trilogy / ArchiTech</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="flex items-center gap-1">
+                            <div class="w-full h-0.5 bg-violet-500/40"></div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-violet-400 shrink-0"></i>
+                        </div>
+                    </div>
+                    <!-- Gateway -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-violet-500/30">
+                            <i data-lucide="router" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm">Gateway</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest">900MHz → IP</p>
+                    </div>
+                </div>
+                <!-- Second row -->
+                <div class="flex justify-center my-6">
+                    <i data-lucide="arrow-down" class="w-6 h-6 text-violet-400"></i>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4 items-center max-w-3xl mx-auto">
+                    <!-- Network -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-violet-500/30">
+                            <i data-lucide="globe" class="w-8 h-8 text-violet-400"></i>
+                        </div>
+                        <p class="font-bold text-sm">Building Network</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest">Wi-Fi / Ethernet</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="flex items-center gap-1">
+                            <div class="w-full h-0.5 bg-mvpred/40"></div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-mvpred shrink-0"></i>
+                        </div>
+                    </div>
+                    <!-- MVP Cloud -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-mvpred/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border-2 border-mvpred/40">
+                            <i data-lucide="cloud" class="w-8 h-8 text-mvpred"></i>
+                        </div>
+                        <p class="font-bold text-sm text-mvpred">MVP Cloud</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest">Dashboard / API</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Need A BOM?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">We'll Build Your Infrastructure List</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Send us your door count and floor plans — we'll return gateway quantities, expander placement, credential format recommendations, and a complete bill of materials.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-white text-xs">Infrastructure</a>
+                    <a href="deployment.html" class="text-slate-500 hover:text-white text-xs transition-colors">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Credential tab switcher
+        document.querySelectorAll('.infra-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.infra-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.infra-detail').forEach(function(d) { d.classList.remove('active'); });
+                tab.classList.add('active');
+                var credId = 'cred-' + tab.getAttribute('data-cred');
+                document.getElementById(credId).classList.add('active');
+            });
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
