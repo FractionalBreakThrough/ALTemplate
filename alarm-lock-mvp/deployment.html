@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Guide — 4 EZ Steps | MVP Access Ecosystem</title>
+    <meta name="description" content="Deploy MVP Access in 4 steps — site survey, hardware install, Scan2Enroll QR provisioning, and cloud configuration. From box to operational in one day.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mvpred: '#c8102e',
+                        mvpdark: '#1a1a2e',
+                        mvpgray: '#2d2d44',
+                        deploygreen: '#059669',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .gradient-red { background: linear-gradient(135deg, #c8102e, #8b0000); }
+        .gradient-green { background: linear-gradient(135deg, #059669, #047857); }
+        .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+        .step-marker { transition: all 0.3s ease; }
+        .step-marker.active { background: #059669; color: white; box-shadow: 0 0 0 4px rgba(5,150,105,0.2); }
+        .step-marker.done { background: #059669; color: white; }
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .checklist-item { transition: all 0.2s ease; }
+        .checklist-item.checked { opacity: 0.5; text-decoration: line-through; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-mvpdark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full gradient-red flex items-center justify-center">
+                        <span class="text-white font-black text-xs">MVP</span>
+                    </div>
+                    <span class="text-white font-bold text-sm hidden sm:inline">MVP Access Ecosystem</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="index.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Platform</a>
+                <a href="trilogy-networx.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">ArchiTech</a>
+                <a href="marks-usa.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 hover:text-white text-sm font-medium transition-colors">Infrastructure</a>
+                <a href="deployment.html" class="text-white text-sm font-medium">Deployment</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://therepcollective.biz/" target="_blank">
+                    <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective" class="h-6 w-auto object-contain" />
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-white p-1">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-mvpdark border-t border-white/10">
+            <div class="px-4 py-4 flex flex-col gap-3">
+                <a href="index.html" class="text-slate-400 text-sm font-medium py-2">Platform Overview</a>
+                <a href="trilogy-networx.html" class="text-slate-400 text-sm font-medium py-2">Trilogy Networx</a>
+                <a href="architech.html" class="text-slate-400 text-sm font-medium py-2">ArchiTech Series</a>
+                <a href="marks-usa.html" class="text-slate-400 text-sm font-medium py-2">Marks USA</a>
+                <a href="na-panels.html" class="text-slate-400 text-sm font-medium py-2">NA Panels</a>
+                <a href="infrastructure.html" class="text-slate-400 text-sm font-medium py-2">Infrastructure</a>
+                <a href="deployment.html" class="text-white text-sm font-medium py-2">Deployment Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="bg-mvpdark pt-24 pb-14 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-emerald-500 blur-[120px]"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-mvpred blur-[120px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+                <a href="index.html" class="hover:text-white transition-colors">MVP Ecosystem</a>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                <span class="text-white">Deployment Guide</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <p class="text-emerald-400 font-bold uppercase tracking-widest text-[10px] mb-4">4 EZ Steps</p>
+                    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+                        From Box To<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-mvpred">Operational.</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        MVP Access was designed so a single installer can deploy a complete access control system in one day — no programming background, no low-voltage license, no IT department. Four steps. That's it.
+                    </p>
+                    <a href="#steps" class="bg-deploygreen hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition-colors inline-flex items-center gap-2">
+                        <i data-lucide="play-circle" class="w-4 h-4"></i> Walk The 4 Steps
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-emerald-400 text-2xl md:text-3xl font-black">4</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Simple Steps</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-emerald-400 text-2xl md:text-3xl font-black">1 Day</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Typical Deploy</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-emerald-400 text-2xl md:text-3xl font-black">QR</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Scan2Enroll</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur">
+                        <p class="text-emerald-400 text-2xl md:text-3xl font-black">Zero</p>
+                        <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mt-1">Programming Needed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 EZ Steps Interactive Guide -->
+    <section id="steps" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">The Deployment Playbook</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">4 EZ Steps To A Live System</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Click each step to see the full breakdown — what you'll need, what to do, and what to check before moving on.</p>
+            </div>
+
+            <!-- Step Navigation Bar -->
+            <div class="flex items-center justify-center gap-0 mb-12">
+                <button class="step-marker active w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-200 text-slate-600 font-black text-lg flex items-center justify-center shrink-0" onclick="goToStep(1)" data-step="1">1</button>
+                <div class="step-line w-12 md:w-24 h-1 bg-slate-200 rounded" data-line="1"></div>
+                <button class="step-marker w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-200 text-slate-600 font-black text-lg flex items-center justify-center shrink-0" onclick="goToStep(2)" data-step="2">2</button>
+                <div class="step-line w-12 md:w-24 h-1 bg-slate-200 rounded" data-line="2"></div>
+                <button class="step-marker w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-200 text-slate-600 font-black text-lg flex items-center justify-center shrink-0" onclick="goToStep(3)" data-step="3">3</button>
+                <div class="step-line w-12 md:w-24 h-1 bg-slate-200 rounded" data-line="3"></div>
+                <button class="step-marker w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-200 text-slate-600 font-black text-lg flex items-center justify-center shrink-0" onclick="goToStep(4)" data-step="4">4</button>
+            </div>
+
+            <!-- Step 1: Site Survey -->
+            <div class="step-content active" id="step-1">
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 gradient-green rounded-2xl flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px]">Step 1</p>
+                                <h3 class="text-2xl font-black">Site Survey</h3>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">Walk the building with your signal tester. Map every door, identify lock types needed, place gateways, and validate 900MHz coverage. This step prevents 90% of deployment issues.</p>
+                        
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">What You'll Do</h4>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Walk every door and record prep type, thickness, handing, and fire rating</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Identify which doors get wireless locks vs. hardwired NA panels</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Place temporary gateway(s) and test signal strength at every lock position</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Mark expander positions for any dead zones</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Verify network connectivity (Wi-Fi SSID or Ethernet drop) for gateway backhaul</span></li>
+                        </ul>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">What You'll Need</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm">
+                                <i data-lucide="radar" class="w-4 h-4 text-deploygreen shrink-0"></i> Signal tester
+                            </div>
+                            <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm">
+                                <i data-lucide="map" class="w-4 h-4 text-deploygreen shrink-0"></i> Floor plans
+                            </div>
+                            <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm">
+                                <i data-lucide="ruler" class="w-4 h-4 text-deploygreen shrink-0"></i> Tape measure
+                            </div>
+                            <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm">
+                                <i data-lucide="clipboard" class="w-4 h-4 text-deploygreen shrink-0"></i> Door schedule form
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-200">
+                        <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px] mb-4">Pro Tips</p>
+                        <div class="space-y-4">
+                            <div class="flex gap-3">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-700">Test signal with doors <strong>closed</strong> — open doors give false-good readings. Metal fire doors attenuate 900MHz significantly.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-700">Place gateways <strong>above the ceiling grid</strong> when possible — fewer obstructions for the 900MHz signal.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-700">Photograph every door prep during survey — saves a return trip when ordering hardware.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-700">Budget one gateway per floor for standard drywall buildings. Add one expander per floor for concrete/CMU.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Hardware Install -->
+            <div class="step-content" id="step-2">
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 gradient-green rounded-2xl flex items-center justify-center shrink-0">
+                                <i data-lucide="wrench" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px]">Step 2</p>
+                                <h3 class="text-2xl font-black">Hardware Install</h3>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">Mount the locks and gateways. Wireless locks replace existing mechanical hardware using standard ANSI door prep — no new holes, no frame modification. Gateways mount on a wall or ceiling.</p>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">Wireless Locks</h4>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Remove existing mechanical lock from door</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Install Trilogy/ArchiTech lock into the same 2-1/8" cross-bore</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Insert 4 AA batteries — lock powers on</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Verify latch engagement and handing — adjust strike if needed</span></li>
+                        </ul>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">Gateways</h4>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Mount gateway at the location validated during site survey</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Connect PoE Ethernet cable or plug into power + join Wi-Fi</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Wait for solid green LED — gateway is online and connected to MVP</span></li>
+                        </ul>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">NA Panels (if applicable)</h4>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Mount panel in closet or above ceiling</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Wire reader, mag-lock/strike, REX, door contact, and fire alarm input</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Connect PoE or 12VDC power — panel comes online in MVP</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-200">
+                        <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px] mb-4">Time Estimates</p>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-emerald-100">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="lock" class="w-4 h-4 text-deploygreen"></i>
+                                    <span class="text-sm font-medium">Wireless lock swap</span>
+                                </div>
+                                <span class="text-sm font-black text-deploygreen">~15 min</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-emerald-100">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="router" class="w-4 h-4 text-deploygreen"></i>
+                                    <span class="text-sm font-medium">Gateway mount + connect</span>
+                                </div>
+                                <span class="text-sm font-black text-deploygreen">~10 min</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-emerald-100">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="circuit-board" class="w-4 h-4 text-deploygreen"></i>
+                                    <span class="text-sm font-medium">NA panel wire + mount</span>
+                                </div>
+                                <span class="text-sm font-black text-deploygreen">~45 min</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-white rounded-lg border border-emerald-100">
+                            <p class="text-sm font-bold text-slate-900 mb-2">Tools Required</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-slate-100 px-2 py-1 rounded font-medium">Phillips screwdriver</span>
+                                <span class="text-xs bg-slate-100 px-2 py-1 rounded font-medium">Level</span>
+                                <span class="text-xs bg-slate-100 px-2 py-1 rounded font-medium">Wire strippers</span>
+                                <span class="text-xs bg-slate-100 px-2 py-1 rounded font-medium">Drill (if needed)</span>
+                                <span class="text-xs bg-slate-100 px-2 py-1 rounded font-medium">4 AA batteries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Scan2Enroll -->
+            <div class="step-content" id="step-3">
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 gradient-green rounded-2xl flex items-center justify-center shrink-0">
+                                <i data-lucide="qr-code" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px]">Step 3</p>
+                                <h3 class="text-2xl font-black">Scan2Enroll</h3>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">This is the magic step. Every Trilogy Networx lock and NA panel ships with a QR code. Scan it with the MVP app — the device is provisioned, named, and connected to the cloud in under 10 seconds. No IP addresses. No MAC entry. No firewall rules.</p>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">How It Works</h4>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="w-8 h-8 bg-deploygreen text-white rounded-full flex items-center justify-center shrink-0 font-black text-xs">A</div>
+                                <div>
+                                    <p class="font-bold text-sm">Open MVP App</p>
+                                    <p class="text-slate-500 text-xs">Log into your MVP dealer account on your phone or tablet.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="w-8 h-8 bg-deploygreen text-white rounded-full flex items-center justify-center shrink-0 font-black text-xs">B</div>
+                                <div>
+                                    <p class="font-bold text-sm">Tap "Add Device"</p>
+                                    <p class="text-slate-500 text-xs">Camera opens — point at the QR code on the lock or panel.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="w-8 h-8 bg-deploygreen text-white rounded-full flex items-center justify-center shrink-0 font-black text-xs">C</div>
+                                <div>
+                                    <p class="font-bold text-sm">Name &amp; Assign</p>
+                                    <p class="text-slate-500 text-xs">Give the door a name ("Main Lobby," "Suite 200") and assign it to an access group.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                                <div class="w-8 h-8 bg-deploygreen text-white rounded-full flex items-center justify-center shrink-0 font-black text-xs">D</div>
+                                <div>
+                                    <p class="font-bold text-sm">Device Is Live</p>
+                                    <p class="text-slate-500 text-xs">Lock connects to the nearest gateway, downloads its credential table, and begins accepting authorized users immediately.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-mvpdark rounded-2xl p-8 text-white mb-6">
+                            <p class="text-emerald-400 font-bold uppercase tracking-widest text-[10px] mb-4">Why This Matters</p>
+                            <div class="space-y-4">
+                                <div class="flex gap-3">
+                                    <i data-lucide="zap" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-sm">10 Seconds Per Device</p>
+                                        <p class="text-slate-400 text-xs">Traditional access control panels require IP assignment, subnet config, MAC registration, and firewall rules. Scan2Enroll does it all with one QR scan.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <i data-lucide="user-x" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-sm">No IT Department Required</p>
+                                        <p class="text-slate-400 text-xs">The installer doesn't need network credentials, DHCP reservations, or switch port configurations. The gateway handles backhaul.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <p class="font-bold text-sm">Encrypted From Day One</p>
+                                        <p class="text-slate-400 text-xs">QR enrollment establishes an encrypted tunnel between the device and MVP cloud — TLS from the first handshake.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-100 rounded-2xl h-48 flex items-center justify-center border border-slate-200">
+                            <div class="text-center">
+                                <i data-lucide="qr-code" class="w-12 h-12 text-slate-300 mx-auto mb-2"></i>
+                                <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Scan2Enroll Demo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Configure & Commission -->
+            <div class="step-content" id="step-4">
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 gradient-green rounded-2xl flex items-center justify-center shrink-0">
+                                <i data-lucide="settings" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px]">Step 4</p>
+                                <h3 class="text-2xl font-black">Configure &amp; Commission</h3>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">All devices are enrolled — now set up the access logic. Create user groups, assign schedules, configure lockdown behavior, and issue credentials. Everything happens in the MVP cloud dashboard from any browser.</p>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">Configuration Checklist</h4>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Create access groups</strong> — "All Doors," "Suite 200 Only," "After-Hours Staff"</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Set schedules</strong> — business hours auto-unlock, after-hours lock, holiday calendar</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Issue credentials</strong> — assign cards, PINs, or mobile credentials to each user</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Configure lockdown</strong> — designate who can trigger and which doors participate</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Set up notifications</strong> — door-forced, door-held, low-battery, tamper alerts</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span><strong>Test every door</strong> — present credential, verify unlock, check audit log in MVP</span></li>
+                        </ul>
+
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-slate-900 mb-3">Hand-Off To Client</h4>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Create client admin account in MVP</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Walk client through dashboard — adding users, pulling reports, running lockdown</span></li>
+                            <li class="flex gap-3 text-sm text-slate-700"><i data-lucide="check-circle-2" class="w-5 h-5 text-deploygreen shrink-0 mt-0.5"></i><span>Confirm recurring MVP subscription is active</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-200 mb-6">
+                            <p class="text-deploygreen font-bold uppercase tracking-widest text-[10px] mb-4">Launch Day Checklist</p>
+                            <div class="space-y-3" id="launchChecklist">
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">All locks respond to test credential</span>
+                                </div>
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">Schedules fire at correct times</span>
+                                </div>
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">Lockdown engages all designated doors</span>
+                                </div>
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">Door-forced alerts trigger in dashboard</span>
+                                </div>
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">Client admin can add/remove users</span>
+                                </div>
+                                <div class="checklist-item flex items-center gap-3 p-3 bg-white rounded-lg border border-emerald-100 cursor-pointer" onclick="toggleCheck(this)">
+                                    <div class="w-5 h-5 border-2 border-emerald-300 rounded flex items-center justify-center shrink-0 check-box"><i data-lucide="check" class="w-3 h-3 text-emerald-500 hidden check-icon"></i></div>
+                                    <span class="text-sm">MVP subscription confirmed active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-mvpdark rounded-2xl p-6 text-center">
+                            <i data-lucide="party-popper" class="w-12 h-12 text-emerald-400 mx-auto mb-3"></i>
+                            <h4 class="text-white font-black text-xl mb-2">System Is Live!</h4>
+                            <p class="text-slate-400 text-sm">Client is operational. Ongoing management happens in MVP — browser-based, from anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step Navigation Buttons -->
+            <div class="flex items-center justify-center gap-4 mt-10">
+                <button onclick="prevStep()" id="prevBtn" class="bg-white border-2 border-slate-200 hover:border-deploygreen text-slate-700 font-bold px-5 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous Step
+                </button>
+                <span class="text-slate-500 text-sm font-medium">Step <span id="currentStepLabel" class="font-black text-deploygreen">1</span> of 4</span>
+                <button onclick="nextStep()" id="nextBtn" class="bg-deploygreen hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2">
+                    Next Step <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Estimator -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Plan Your Day</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">Deployment Timeline</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">How long does a typical MVP deployment take? Here's a breakdown for a 20-door building — the most common project size.</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-deploygreen text-white">
+                                <th class="text-left px-6 py-4 font-bold text-xs uppercase tracking-wider">Phase</th>
+                                <th class="text-center px-6 py-4 font-bold text-xs uppercase tracking-wider">Duration</th>
+                                <th class="text-left px-6 py-4 font-bold text-xs uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-bold flex items-center gap-2"><span class="w-6 h-6 bg-deploygreen/10 text-deploygreen rounded-full flex items-center justify-center text-xs font-black">1</span> Site Survey</td>
+                                <td class="px-6 py-4 text-center font-bold text-deploygreen">2–3 hours</td>
+                                <td class="px-6 py-4 text-slate-500">Walk all doors, test signal, mark gateway locations. Can be done days before install.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-4 font-bold flex items-center gap-2"><span class="w-6 h-6 bg-deploygreen/10 text-deploygreen rounded-full flex items-center justify-center text-xs font-black">2</span> Hardware Install</td>
+                                <td class="px-6 py-4 text-center font-bold text-deploygreen">3–5 hours</td>
+                                <td class="px-6 py-4 text-slate-500">20 locks × 15 min = ~5 hours. With two installers, cut in half.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold flex items-center gap-2"><span class="w-6 h-6 bg-deploygreen/10 text-deploygreen rounded-full flex items-center justify-center text-xs font-black">3</span> Scan2Enroll</td>
+                                <td class="px-6 py-4 text-center font-bold text-deploygreen">15–20 min</td>
+                                <td class="px-6 py-4 text-slate-500">20 devices × ~10 seconds each. The fastest step.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-6 py-4 font-bold flex items-center gap-2"><span class="w-6 h-6 bg-deploygreen/10 text-deploygreen rounded-full flex items-center justify-center text-xs font-black">4</span> Configure &amp; Test</td>
+                                <td class="px-6 py-4 text-center font-bold text-deploygreen">1–2 hours</td>
+                                <td class="px-6 py-4 text-slate-500">Set up groups, schedules, credentials. Test every door. Walk client through dashboard.</td>
+                            </tr>
+                            <tr class="bg-emerald-50">
+                                <td class="px-6 py-4 font-black text-deploygreen flex items-center gap-2"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Total</td>
+                                <td class="px-6 py-4 text-center font-black text-deploygreen text-lg">~1 Day</td>
+                                <td class="px-6 py-4 text-deploygreen font-medium">One installer, 20 doors, fully operational by end of business.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MVP vs Traditional Comparison -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">The Dealer Advantage</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">MVP vs Traditional Access Control</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">See why dealers are switching to MVP — faster installs, lower labor, recurring revenue.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Traditional -->
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="x" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-400">Traditional Install</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>Run low-voltage wire to every door</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>Install head-end server on-premise</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>Configure IP, DHCP, firewall per device</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>Software licensing + annual renewals</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>3–5 day install for 20 doors</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-500">
+                            <i data-lucide="minus" class="w-4 h-4 text-red-300 shrink-0 mt-0.5"></i>
+                            <span>Truck roll for every programming change</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- MVP -->
+                <div class="bg-emerald-50 rounded-2xl border-2 border-deploygreen p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5 text-deploygreen"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-deploygreen">MVP Access Install</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>Zero wiring</strong> to lock locations — 900MHz wireless</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>No server</strong> — cloud-hosted, always up to date</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>Scan2Enroll QR</strong> — 10 seconds per device</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>Simple subscription</strong> — recurring dealer revenue</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>1-day install</strong> for 20 doors, one installer</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-700">
+                            <i data-lucide="check" class="w-4 h-4 text-deploygreen shrink-0 mt-0.5"></i>
+                            <span><strong>Remote management</strong> — changes from any browser</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Agency -->
+    <section class="bg-white py-16 md:py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-3">Ready To Deploy?</p>
+                <h2 class="text-3xl md:text-4xl font-black mb-4">We'll Walk You Through Your First Install</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Whether you're a seasoned access control integrator or deploying your first system, we provide on-site support, training, and white-glove commissioning.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-2xl bg-mvpdark text-white shadow-xl flex flex-col justify-between border-b-4 border-mvpred relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10">
+                        <i data-lucide="zap" class="w-48 h-48 text-mvpred"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-4">Your Local Partner</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb3cccaaac0f760d7a2808.png" alt="The Rep Collective Logo" class="h-8 w-auto object-contain mb-4" />
+                        <p class="text-slate-300 text-sm font-medium mb-6 leading-relaxed">Contact us for system design, demos, product questions, and technical support.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Support@therepcollective.biz
+                        </div>
+                        <div class="text-[#F47721] flex items-center gap-2 text-sm font-bold w-fit">
+                            <i data-lucide="phone" class="w-4 h-4"></i> 720-594-5081
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-mvpred font-bold uppercase tracking-widest text-[10px] mb-4">Manufactured By</p>
+                        <img src="https://assets.cdn.filesafe.space/A4yuz8jMP1UA7VwDBtIK/media/69bb4b01266293a2732b52c2.png" alt="Alarm Lock / NAPCO Logo" class="h-10 w-auto object-contain mb-4" />
+                        <p class="text-slate-500 text-sm font-medium mb-6 leading-relaxed">NAPCO Security Technologies — the industry leader in cloud-hosted access control and standalone electronic locks.</p>
+                    </div>
+                    <a href="https://napcosecurity.com/products/mvp-access/" target="_blank" class="text-mvpred hover:text-red-800 flex items-center gap-2 text-sm font-bold w-fit">
+                        <i data-lucide="globe" class="w-4 h-4"></i> napcosecurity.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-mvpdark border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em] text-center md:text-left">
+                    &copy; 2026 NAPCO Security Technologies &bull; MVP Access Ecosystem
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="index.html" class="text-slate-500 hover:text-white text-xs transition-colors">Platform</a>
+                    <a href="trilogy-networx.html" class="text-slate-500 hover:text-white text-xs transition-colors">Trilogy</a>
+                    <a href="architech.html" class="text-slate-500 hover:text-white text-xs transition-colors">ArchiTech</a>
+                    <a href="marks-usa.html" class="text-slate-500 hover:text-white text-xs transition-colors">Marks USA</a>
+                    <a href="na-panels.html" class="text-slate-500 hover:text-white text-xs transition-colors">NA Panels</a>
+                    <a href="infrastructure.html" class="text-slate-500 hover:text-white text-xs transition-colors">Infrastructure</a>
+                    <a href="deployment.html" class="text-white text-xs">Deployment</a>
+                </div>
+                <div class="text-slate-500 text-[10px] uppercase tracking-[0.2em]">
+                    Promoted By The Rep Collective
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Step stepper logic
+        var currentStep = 1;
+
+        function goToStep(n) {
+            currentStep = n;
+            // Update step markers
+            document.querySelectorAll('.step-marker').forEach(function(m) {
+                var s = parseInt(m.getAttribute('data-step'));
+                m.classList.remove('active', 'done');
+                if (s < currentStep) m.classList.add('done');
+                if (s === currentStep) m.classList.add('active');
+            });
+            // Update step lines
+            document.querySelectorAll('.step-line').forEach(function(l) {
+                var ln = parseInt(l.getAttribute('data-line'));
+                if (ln < currentStep) {
+                    l.style.background = '#059669';
+                } else {
+                    l.style.background = '#e2e8f0';
+                }
+            });
+            // Show correct content
+            document.querySelectorAll('.step-content').forEach(function(c) { c.classList.remove('active'); });
+            document.getElementById('step-' + currentStep).classList.add('active');
+            // Update label
+            document.getElementById('currentStepLabel').textContent = currentStep;
+            // Update button states
+            document.getElementById('prevBtn').disabled = (currentStep === 1);
+            document.getElementById('nextBtn').disabled = (currentStep === 4);
+            // Re-init icons for newly visible content
+            lucide.createIcons();
+        }
+
+        function nextStep() {
+            if (currentStep < 4) goToStep(currentStep + 1);
+        }
+
+        function prevStep() {
+            if (currentStep > 1) goToStep(currentStep - 1);
+        }
+
+        // Launch checklist toggle
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
+            var icon = el.querySelector('.check-icon');
+            var box = el.querySelector('.check-box');
+            if (el.classList.contains('checked')) {
+                icon.classList.remove('hidden');
+                box.style.background = '#d1fae5';
+                box.style.borderColor = '#059669';
+            } else {
+                icon.classList.add('hidden');
+                box.style.background = '';
+                box.style.borderColor = '';
+            }
+        }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
