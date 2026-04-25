@@ -1,26 +1,33 @@
-/* =====================================================================
-   GoHighLevel — Custom JS Starter
-   ---------------------------------------------------------------------
-   How to install:
-     1. Log in to your GHL Agency account.
-     2. Settings  →  Company  →  "Custom JS / Tracking Code"  (agency-
-        wide), or Sub-Account → Settings → "Custom JS" for one client.
-     3. Paste the contents of this file into the Custom JS field.
-     4. Save and hard-refresh (Ctrl/Cmd + Shift + R).
+<!-- =====================================================================
+     GoHighLevel — Custom JS Starter
+     ---------------------------------------------------------------------
+     How to install:
+       1. Log in to your GHL Agency account.
+       2. Settings  →  Company  →  "Custom JS / Tracking Code"  (agency-
+          wide), or Sub-Account → Settings → "Custom JS" for one client.
+       3. Paste the ENTIRE contents of this file (including the
+          <script> tags below) into the Custom JS field.
+       4. Save and hard-refresh (Ctrl/Cmd + Shift + R).
 
-   What this file does:
-     - Waits for GHL's React UI to mount before touching the DOM.
-     - Uses a MutationObserver so customizations re-apply when GHL
-       re-renders pages (single-page-app navigation).
-     - Provides labelled blocks for the most common tweaks. Comment a
-       block out (or delete it) to disable that tweak.
+     IMPORTANT: GHL's Custom JS field is actually a tracking-code field,
+     so it expects an HTML snippet. JavaScript MUST be wrapped in
+     <script>...</script> tags or the browser will render it as plain
+     text at the bottom of the page.
 
-   Safety:
-     - Wrapped in an IIFE so we don't pollute window globals.
-     - Every selector lookup is null-checked to avoid breaking the UI
-       if GHL renames a class in a future release.
-   ===================================================================== */
+     What this file does:
+       - Waits for GHL's React UI to mount before touching the DOM.
+       - Uses a MutationObserver so customizations re-apply when GHL
+         re-renders pages (single-page-app navigation).
+       - Provides labelled blocks for the most common tweaks. Comment a
+         block out (or delete it) to disable that tweak.
 
+     Safety:
+       - Wrapped in an IIFE so we don't pollute window globals.
+       - Every selector lookup is null-checked to avoid breaking the UI
+         if GHL renames a class in a future release.
+     ===================================================================== -->
+
+<script>
 (function () {
   'use strict';
 
@@ -143,3 +150,4 @@
     });
   });
 })();
+</script>
