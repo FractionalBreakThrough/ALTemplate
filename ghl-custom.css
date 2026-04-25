@@ -149,7 +149,82 @@ button.n-button--primary-type:hover {
 
 
 /* ---------------------------------------------------------------------
-   7. Hide elements you don't want clients to see
+   7. Login page — logo + lightning effect
+   (DOM elements are injected by ghl-custom.js. Styles live here so the
+    effect can be tuned without re-pasting the JS.)
+   --------------------------------------------------------------------- */
+/* Logo above the form */
+#bt-login-logo {
+  display: block;
+  margin: 0 auto 28px;
+  width: auto;
+  height: auto;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 0 24px rgba(48, 188, 255, 0.35));
+}
+
+/* Decorative lightning bolts (positioned via inline styles by JS) */
+.bt-lightning {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  animation: bt-bolt 7s ease-in-out infinite;
+  filter:
+    drop-shadow(0 0 10px rgba(255, 193, 7, 0.85))
+    drop-shadow(0 0 28px rgba(48, 188, 255, 0.6));
+}
+.bt-lightning svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--brand-gold);
+  stroke: var(--brand-accent);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
+@keyframes bt-bolt {
+  0%, 88%, 100% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
+  90%           { opacity: 1; transform: scale(1.08) rotate(0deg); }
+  92%           { opacity: 0.25; }
+  94%           { opacity: 0.95; transform: scale(1) rotate(1deg); }
+  96%           { opacity: 0; }
+}
+
+/* Full-screen "distant lightning" flash overlay */
+#bt-login-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(48, 188, 255, 0.16);
+  opacity: 0;
+  z-index: 0;
+  animation: bt-flash 9s ease-in-out infinite;
+}
+
+@keyframes bt-flash {
+  0%, 84%, 100% { opacity: 0; }
+  85%           { opacity: 0.9; }
+  86%           { opacity: 0.05; }
+  87%           { opacity: 0.55; }
+  89%           { opacity: 0; }
+}
+
+/* Respect users who disable motion */
+@media (prefers-reduced-motion: reduce) {
+  .bt-lightning,
+  #bt-login-flash {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+
+/* ---------------------------------------------------------------------
+   8. Hide elements you don't want clients to see
    (Uncomment any block to activate. Inspect the element first to
     confirm the selector still matches in your account.)
    --------------------------------------------------------------------- */

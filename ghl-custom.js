@@ -53,6 +53,21 @@
       bg: '#0b1a2e',
       color: '#e6f1ff',
     },
+
+    // Login page customizations (logo + lightning effect).
+    login: {
+      logo: {
+        enabled: true,
+        url: 'https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69ece954b0e5e2bb7fae724a.png',
+        alt: 'Breakthrough AI',
+        maxWidth: '340px',
+      },
+      lightning: {
+        enabled: true,
+        bolts: 4,         // number of decorative bolts scattered on the page
+        flashOverlay: true, // briefly brightens the whole screen ("distant lightning")
+      },
+    },
   };
 
 
@@ -140,6 +155,73 @@
 
 
   /* -----------------------------------------------------------------
+     4. Login page: logo + lightning effect
+     ----------------------------------------------------------------- */
+  const LIGHTNING_SVG =
+    '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M13 2 L4 14 h6 l-2 8 L20 10 h-7 l1-8z"/></svg>';
+
+  function isLoginPage() {
+    return /\/(login|auth|sign[-_]?in)/i.test(location.pathname) ||
+           !!document.querySelector('.login-container, .auth-page, form[class*="login"]');
+  }
+
+  function applyLogin() {
+    const onLogin = isLoginPage();
+    document.body.classList.toggle('bt-on-login', onLogin);
+
+    // Clean up if we navigated away from the login page.
+    if (!onLogin) {
+      document.querySelectorAll('#bt-login-logo, .bt-lightning, #bt-login-flash')
+        .forEach(el => el.remove());
+      return;
+    }
+
+    const host = document.querySelector('.login-container, .auth-page, .hl_login') || document.body;
+
+    // Logo
+    if (CONFIG.login.logo.enabled && !document.getElementById('bt-login-logo')) {
+      const img = document.createElement('img');
+      img.id = 'bt-login-logo';
+      img.src = CONFIG.login.logo.url;
+      img.alt = CONFIG.login.logo.alt;
+      img.style.maxWidth = CONFIG.login.logo.maxWidth;
+      const form = host.querySelector('form');
+      if (form && form.parentNode) form.parentNode.insertBefore(img, form);
+      else host.prepend(img);
+    }
+
+    // Lightning bolts — scattered, each on its own random cycle
+    if (CONFIG.login.lightning.enabled &&
+        !document.querySelector('.bt-lightning')) {
+      const safeZones = [
+        { top: '12%', left: '6%'  }, { top: '20%', right: '10%' },
+        { top: '60%', left: '8%'  }, { top: '72%', right: '14%' },
+        { top: '40%', left: '18%' }, { top: '85%', left: '45%'  },
+      ];
+      const count = Math.min(CONFIG.login.lightning.bolts, safeZones.length);
+      for (let i = 0; i < count; i++) {
+        const bolt = document.createElement('div');
+        bolt.className = 'bt-lightning';
+        Object.assign(bolt.style, safeZones[i]);
+        bolt.style.animationDelay = `${(Math.random() * 8).toFixed(2)}s`;
+        bolt.style.animationDuration = `${(6 + Math.random() * 4).toFixed(2)}s`;
+        bolt.innerHTML = LIGHTNING_SVG;
+        document.body.appendChild(bolt);
+      }
+    }
+
+    // Distant-flash overlay
+    if (CONFIG.login.lightning.flashOverlay &&
+        !document.getElementById('bt-login-flash')) {
+      const flash = document.createElement('div');
+      flash.id = 'bt-login-flash';
+      document.body.appendChild(flash);
+    }
+  }
+
+
+  /* -----------------------------------------------------------------
      Boot
      ----------------------------------------------------------------- */
   onReady(() => {
@@ -147,6 +229,7 @@
       applyHideSidebar();
       applyRenameSidebar();
       applyBanner();
+      applyLogin();
     });
   });
 })();
