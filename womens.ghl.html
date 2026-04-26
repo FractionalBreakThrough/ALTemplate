@@ -1,0 +1,609 @@
+<!-- Temecula Hills Christian Fellowship - Women's Ministry page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --rose:#c97b87;--rose-soft:#f4e4e7;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--rose{background:var(--rose);color:#fff;box-shadow:0 8px 20px rgba(201,123,135,.22)}
+.thcf-btn--rose:hover{background:#b3697a;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--gray-800);background:var(--gray-50)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--rose{background:linear-gradient(180deg,#fff 0%,var(--rose-soft) 100%)}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
+.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
+.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding:0 96px 48px;align-items:center}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:0 32px 48px}}
+.thcf-menu-nav a{display:block;font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,color .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold);pointer-events:none}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu-side{color:rgba(255,255,255,.9);opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-side{opacity:1;transform:translateY(0)}
+@media (max-width:768px){.thcf-menu-side{display:none}}
+.thcf-menu-block{border-left:2px solid var(--orange);padding-left:20px;margin-bottom:28px}
+.thcf-menu-block:nth-child(2){border-left-color:var(--teal-light)}
+.thcf-menu-block-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.thcf-menu-block:nth-child(2) .thcf-menu-block-eyebrow{color:var(--teal-light)}
+.thcf-menu-block strong{display:block;font-weight:700;font-size:17px;color:#fff;margin-bottom:2px}
+.thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
+/* === Hero (warm rose gradient instead of teal for distinction) === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,#a85e6c 0%,var(--rose) 60%,#b3697a 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--gold);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-80px;width:340px;height:340px;background:var(--rose-soft);border-radius:50%;filter:blur(90px);opacity:.30;pointer-events:none}
+.thcf-hero-petals{position:absolute;inset:0;pointer-events:none;opacity:.18}
+.thcf-hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.92);color:#a85e6c;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(255,255,255,.92);max-width:660px;margin:0 auto 36px;line-height:1.6}
+.thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* === Heart statement band === */
+.thcf-heart{background:#fff;padding:clamp(48px,6vw,72px) 24px;text-align:center}
+.thcf-heart-inner{max-width:840px;margin:0 auto}
+.thcf-heart .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:14px;color:var(--rose)}
+.thcf-heart .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.6}
+.thcf-heart-quote{font-size:clamp(20px,2.4vw,28px);line-height:1.5;color:var(--gray-800);font-weight:500;margin-bottom:24px}
+.thcf-heart-verse{display:inline-block;padding:18px 26px;border-left:3px solid var(--rose);background:var(--rose-soft);border-radius:0 12px 12px 0;text-align:left;color:var(--gray-700);font-size:15.5px;line-height:1.7;max-width:680px}
+.thcf-heart-verse cite{display:block;font-style:normal;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+
+/* === Featured event (Women's Retreat) === */
+.thcf-featured{max-width:1140px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(168,94,108,.16),0 0 0 1px var(--gray-100);display:grid;grid-template-columns:6fr 5fr;align-items:stretch}
+@media (max-width:900px){.thcf-featured{grid-template-columns:1fr}}
+.thcf-featured-img{position:relative;background:linear-gradient(135deg,#d8a4ad 0%,#a85e6c 100%);min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thcf-featured-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-featured-img-watermark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.85);text-align:center;padding:28px;pointer-events:none}
+.thcf-featured-img-watermark .top{font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;margin-bottom:8px;opacity:.85}
+.thcf-featured-img-watermark .big{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(34px,5vw,52px);line-height:1;font-weight:400;letter-spacing:.02em;margin-bottom:10px}
+.thcf-featured-img-watermark .meta{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.85}
+.thcf-featured-body{padding:clamp(28px,3.6vw,44px);display:flex;flex-direction:column;justify-content:center}
+.thcf-featured-body .badge{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:5px 12px;border-radius:999px;background:var(--rose-soft);color:var(--rose);font-size:11px;font-weight:800;letter-spacing:.18em;margin-bottom:14px;text-transform:uppercase}
+.thcf-featured-body h3{font-size:clamp(24px,3vw,32px);font-weight:800;line-height:1.2;color:var(--gray-800);margin-bottom:10px}
+.thcf-featured-body .when{font-size:14px;font-weight:700;color:var(--rose);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.thcf-featured-body p{color:var(--gray-600);font-size:15.5px;line-height:1.7;margin-bottom:18px}
+.thcf-featured-body .actions{display:flex;gap:10px;flex-wrap:wrap}
+/* === Program detail (2-col image + text, alternating) === */
+.thcf-program{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center}
+@media (max-width:900px){.thcf-program{grid-template-columns:1fr;gap:28px}}
+.thcf-program--reverse{grid-template-columns:7fr 5fr}
+@media (max-width:900px){.thcf-program--reverse{grid-template-columns:1fr}}
+.thcf-program-img{aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#d8a4ad 0%,#a85e6c 100%);position:relative;box-shadow:0 24px 48px rgba(168,94,108,.20);max-width:420px}
+.thcf-program-img-watermark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.92);text-align:center;padding:24px}
+.thcf-program-img-watermark .top{font-size:9px;font-weight:700;letter-spacing:.30em;text-transform:uppercase;margin-bottom:6px;opacity:.85}
+.thcf-program-img-watermark .big{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(28px,4vw,42px);line-height:1.05;font-weight:400;letter-spacing:.02em}
+.thcf-program-img .accent{position:absolute;left:-12px;bottom:-12px;width:60px;height:60px;border-radius:14px;background:var(--accent,var(--gold))}
+.thcf-program-text .thcf-eyebrow{color:var(--accent,var(--rose));position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-program-text .thcf-eyebrow::before{content:"";position:absolute;top:0;left:0;width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+.thcf-program-text h3{font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.2;margin-bottom:14px;color:var(--gray-800)}
+.thcf-program-text .when{font-size:14px;font-weight:700;color:var(--accent,var(--rose));margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.thcf-program-text p{color:var(--gray-600);font-size:16px;line-height:1.75;margin-bottom:14px}
+.thcf-program-text .meta{font-size:13px;color:var(--gray-500);margin-top:6px;font-weight:600}
+.thcf-program-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+/* === Closing verse callout === */
+.thcf-verse{background:#fff;padding:clamp(40px,5vw,60px) 24px}
+.thcf-verse-card{max-width:840px;margin:0 auto;padding:32px 36px;background:var(--rose-soft);border-radius:18px;text-align:center;position:relative;overflow:hidden}
+.thcf-verse-card::before{content:"\201C";position:absolute;top:8px;left:24px;font-family:Georgia,serif;font-size:80px;line-height:1;color:rgba(168,94,108,.20);font-weight:700}
+.thcf-verse-card p{font-size:clamp(16px,1.8vw,19px);font-style:italic;line-height:1.7;color:var(--gray-700);margin-bottom:14px;position:relative;z-index:1}
+.thcf-verse-card cite{display:block;font-style:normal;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rose)}
+
+/* === Contact form === */
+.thcf-contact{position:relative;background:linear-gradient(135deg,var(--rose-soft) 0%,#fff 100%);overflow:hidden}
+.thcf-contact-blob{position:absolute;top:-100px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(201,123,135,.18);pointer-events:none}
+.thcf-contact-blob-2{position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(243,150,21,.10);pointer-events:none}
+.thcf-contact-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.thcf-contact-head{text-align:center;margin-bottom:32px}
+.thcf-contact-head .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:#fff;color:var(--rose);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:14px;box-shadow:0 4px 12px rgba(168,94,108,.15)}
+.thcf-contact-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;line-height:1.18;margin-bottom:12px;color:var(--gray-800)}
+.thcf-contact-head p{color:var(--gray-600);font-size:16px;line-height:1.65;max-width:560px;margin:0 auto}
+.thcf-form-card{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(168,94,108,.14),0 0 0 1px var(--gray-100);padding:clamp(28px,4vw,40px)}
+.thcf-form-row{display:flex;flex-direction:column;margin-bottom:18px}
+.thcf-form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+@media (max-width:560px){.thcf-form-row-2{grid-template-columns:1fr}}
+.thcf-form-card label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);letter-spacing:.04em;margin-bottom:6px}
+.thcf-form-card label .opt{color:var(--gray-500);font-weight:500}
+.thcf-form-card input,.thcf-form-card select,.thcf-form-card textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:15px;font-family:inherit;color:var(--gray-800);background:#fff;transition:border-color .2s,box-shadow .2s}
+.thcf-form-card input:focus,.thcf-form-card select:focus,.thcf-form-card textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px rgba(201,123,135,.18)}
+.thcf-form-card textarea{resize:vertical;min-height:90px}
+.thcf-form-submit{margin-top:8px;width:100%;padding:16px}
+.thcf-form-fineprint{margin-top:14px;text-align:center;font-size:12px;color:var(--gray-500);line-height:1.55}
+.thcf-form-success{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(168,94,108,.14),0 0 0 1px var(--gray-100);padding:48px 32px;text-align:center}
+.thcf-form-success-icon{width:72px;height:72px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.thcf-form-success h3{font-size:22px;font-weight:800;color:var(--gray-800);margin-bottom:10px}
+.thcf-form-success p{color:var(--gray-600);font-size:15px;line-height:1.65}
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-womens">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="/" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      </span>
+      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav">
+      <a href="/">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="im-new.html">I'M NEW</a>
+      <a href="ministries.html" class="is-active">MINISTRIES</a>
+      <a href="/#sermons">SERMONS</a>
+      <a href="give.html">GIVE</a>
+      <a href="#thcf-contact-form" data-thcf-menu-close>CONTACT</a>
+    </nav>
+    <aside class="thcf-menu-side">
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Join Us</div>
+        <strong>Sundays at 10:00 AM</strong>
+        <span class="sub">Wednesdays · Youth 7:00 PM</span>
+      </div>
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Visit</div>
+        <span class="sub">12345 Church Road<br>Temecula, CA 92592</span>
+      </div>
+      <a href="im-new.html" class="thcf-btn thcf-btn--orange" data-thcf-menu-close>Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </aside>
+  </div>
+</div>
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">WOMEN'S MINISTRY</span>
+    <h1>Knit together<br>in love.</h1>
+    <p>Bible studies in living rooms, mornings around scripture, prayer that crosses cities. A community of women here at Temecula Hills, growing together as maturing disciples of Jesus.</p>
+    <div class="thcf-hero-cta">
+      <a href="#thcf-events" class="thcf-btn thcf-btn--rose">See Events
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="#thcf-contact-form" class="thcf-btn thcf-btn--outline-light">Get in Touch</a>
+    </div>
+  </div>
+</section>
+<!-- ============ HEART STATEMENT ============ -->
+<section class="thcf-heart">
+  <div class="thcf-heart-inner thcf-reveal">
+    <span class="thcf-eyebrow">Our Heart for Women</span>
+    <p class="thcf-heart-quote">Our heart for women here at Temecula Hills Christian Fellowship is that as women of God we center our lives around God's Word — so that we might be ever-maturing disciples of Jesus. By design, we gather to study God's Word, to pray, to fellowship, and to worship.</p>
+    <blockquote class="thcf-heart-verse">
+      "Do your best to present yourself to God as one approved, a worker who has no need to be ashamed, rightly handling the word of truth."
+      <cite>2 Timothy 2:15</cite>
+    </blockquote>
+  </div>
+</section>
+<!-- ============ FEATURED EVENT: 2026 RETREAT ============ -->
+<section class="thcf-section thcf-section--rose" id="thcf-events">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--rose)">Women's Events</span>
+    <h2 class="thcf-h2">Save the date.</h2>
+    <p class="thcf-lead">A featured upcoming gathering — and there's more on the horizon.</p>
+  </div>
+  <div class="thcf-featured thcf-reveal">
+    <div class="thcf-featured-img">
+      <!-- TODO: replace with the real Women's Retreat 2026 graphic. The watermark below is a stand-in. -->
+      <div class="thcf-featured-img-watermark" aria-hidden="true">
+        <span class="top">Save The Date</span>
+        <span class="big">Women's<br>Retreat</span>
+        <span class="meta">June 13<sup>th</sup> · Temecula</span>
+      </div>
+    </div>
+    <div class="thcf-featured-body">
+      <span class="badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg>
+        Upcoming
+      </span>
+      <h3>2026 Women's Retreat</h3>
+      <div class="when">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        June 13 · Temecula
+      </div>
+      <p>Save the date for our Women's Day Retreat 2026! Join us on June 13th for a refreshing and encouraging day together in Temecula. More details are coming soon — stay tuned for other special events too.</p>
+      <div class="actions">
+        <!-- TODO: replace href with the real retreat registration / save-the-date URL when available. -->
+        <a class="thcf-btn thcf-btn--rose" href="#thcf-contact-form">I'm Interested
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="thcf-btn thcf-btn--outline-dark" href="#thcf-contact-form">Ask a Question</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ TUESDAY NIGHT BIBLE STUDY ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--rose)">Bible Studies &amp; Programs</span>
+    <h2 class="thcf-h2">Where we gather, study, and grow.</h2>
+    <p class="thcf-lead">Four ongoing rhythms — pick the one that fits your week.</p>
+  </div>
+  <div class="thcf-program">
+    <div class="thcf-reveal">
+      <div class="thcf-program-img" style="--accent:var(--rose)">
+        <!-- TODO: replace with the Tuesday Night Bible Study graphic. -->
+        <div class="thcf-program-img-watermark" aria-hidden="true">
+          <span class="top">Women's Tuesday Night</span>
+          <span class="big">Bible<br>Study</span>
+        </div>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="thcf-program-text thcf-reveal" style="--accent:var(--rose)">
+      <span class="thcf-eyebrow">Tuesday Night Bible Study</span>
+      <h3>Starting January 6 · 6:45–8:15 PM</h3>
+      <div class="when">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Weekly · Tuesday evenings
+      </div>
+      <p>Tuesday Evening Women's Bible Study begins a new study called <strong>"Trustworthy"</strong> — a video study in I and II Kings. Meetings are weekly on Tuesdays from 6:45–8:15 PM at the home of Cami Bruda, and newcomers are warmly welcomed.</p>
+      <p>For more information, please contact <strong>Mary Henderson</strong>.</p>
+      <div class="thcf-program-actions">
+        <!-- TODO: replace href with the Tuesday Night sign-up URL. -->
+        <a class="thcf-btn thcf-btn--rose" href="#thcf-contact-form">Sign Up</a>
+        <a class="thcf-btn thcf-btn--outline-dark" href="#thcf-contact-form">Ask a Question</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOM'S GARDEN ============ -->
+<section class="thcf-section thcf-section--gray">
+  <div class="thcf-program thcf-program--reverse">
+    <div class="thcf-program-text thcf-reveal" style="--accent:var(--gold)">
+      <span class="thcf-eyebrow">Mom's Garden</span>
+      <h3>Spring Semester · 9:00–10:30 AM</h3>
+      <div class="when">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        2nd &amp; 4th Thursdays · Childcare available
+      </div>
+      <p>Our gathering takes place every 2nd and 4th Thursday of the month, located at the church, upstairs class gathering space. Our 90 minutes together include scripture memory, praying for one another, discussing topics that are pertinent to young moms, and enjoying one another's fellowship.</p>
+      <p>Anyone is welcome to jump in at any point — we are not doing a particular study that builds on itself. Going through the book <em>"Why Motherhood Matters"</em>, the gathering dates are Jan 22, Feb 12, Feb 26, Mar 12, Mar 26, Apr 23, and May 14.</p>
+      <p>Questions? Contact <strong>Shelly Conner</strong> · <a href="mailto:shellyconner241@gmail.com" style="color:var(--rose);text-decoration:underline">shellyconner241@gmail.com</a></p>
+      <div class="thcf-program-actions">
+        <!-- TODO: replace href with the Mom's Garden sign-up URL. -->
+        <a class="thcf-btn thcf-btn--rose" href="#thcf-contact-form">Mom's Garden Sign-Up</a>
+      </div>
+    </div>
+    <div class="thcf-reveal">
+      <div class="thcf-program-img" style="--accent:var(--gold)">
+        <!-- TODO: replace with the Mom's Garden graphic. -->
+        <div class="thcf-program-img-watermark" aria-hidden="true">
+          <span class="top">For Young Moms</span>
+          <span class="big">Mom's<br>Garden</span>
+        </div>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ FRIDAY MORNING BIBLE STUDY ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-program">
+    <div class="thcf-reveal">
+      <div class="thcf-program-img" style="--accent:var(--teal-dark)">
+        <!-- TODO: replace with the Friday Morning Bible Study graphic. -->
+        <div class="thcf-program-img-watermark" aria-hidden="true">
+          <span class="top">Women's Friday Morning</span>
+          <span class="big">Bible<br>Study</span>
+        </div>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="thcf-program-text thcf-reveal" style="--accent:var(--teal-dark)">
+      <span class="thcf-eyebrow">Friday Morning Bible Study</span>
+      <h3>Starting January 30 · 9:15–11 AM</h3>
+      <div class="when">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Fridays · 7-week study · Childcare upon request
+      </div>
+      <p><strong>Starts:</strong> Friday, January 30 – March 20 (1st week is the Intro)<br><strong>Where:</strong> THCF upstairs, classroom gathering space<br><strong>What:</strong> A women's Bible study in the book of John.</p>
+      <p>In this 7-week study, we will discover what truths we can apply to our personal lives as we learn what Jesus and His disciples experienced in their relationship with God. We will dig deep into the details of the book of John and discover how God ministered to His people at that time. He will minister to us as we meet, fellowship &amp; study together!</p>
+      <p class="meta"><em>There is childcare upon request.</em></p>
+      <p>Any questions? Reach out to <strong>Marianne Holm</strong> · <a href="mailto:mholm@temeculahills.org" style="color:var(--rose);text-decoration:underline">mholm@temeculahills.org</a></p>
+      <div class="thcf-program-actions">
+        <!-- TODO: replace href with the Friday Morning sign-up URL. -->
+        <a class="thcf-btn thcf-btn--rose" href="#thcf-contact-form">Friday Morning Sign-Up</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOMS IN PRAYER ============ -->
+<section class="thcf-section thcf-section--gray">
+  <div class="thcf-program thcf-program--reverse">
+    <div class="thcf-program-text thcf-reveal" style="--accent:var(--rose)">
+      <span class="thcf-eyebrow">Moms in Prayer</span>
+      <h3>Worldwide prayer for every child &amp; school.</h3>
+      <div class="when">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        Local groups · Worldwide ministry
+      </div>
+      <p>There are many groups in the surrounding areas. You can contact <strong>Sally Burke</strong> at <a href="mailto:sburke@momsinprayer.org" style="color:var(--rose);text-decoration:underline">sburke@momsinprayer.org</a> to be connected to a group nearest you.</p>
+      <p>Please see <a href="https://momsinprayer.org" target="_blank" rel="noopener" style="color:var(--rose);text-decoration:underline">momsinprayer.org</a> to learn more about this rich prayer ministry. This is a worldwide ministry devoted to covering every child and school in prayer.</p>
+      <div class="thcf-program-actions">
+        <a class="thcf-btn thcf-btn--rose" href="https://momsinprayer.org" target="_blank" rel="noopener">Visit Moms In Prayer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+        <a class="thcf-btn thcf-btn--outline-dark" href="#thcf-contact-form">Find a Local Group</a>
+      </div>
+    </div>
+    <div class="thcf-reveal">
+      <div class="thcf-program-img" style="--accent:var(--rose)">
+        <!-- TODO: replace with the Moms in Prayer graphic. -->
+        <div class="thcf-program-img-watermark" aria-hidden="true">
+          <span class="top">Covering Every Child</span>
+          <span class="big">Moms<br>In Prayer</span>
+        </div>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING VERSE ============ -->
+<section class="thcf-verse">
+  <div class="thcf-verse-card thcf-reveal">
+    <p>"…that their hearts may be encouraged, being knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery, which is Christ, in Whom are hidden all the treasures of wisdom and knowledge."</p>
+    <cite>Colossians 2:2–3</cite>
+  </div>
+</section>
+<!-- ============ CONTACT FORM ============ -->
+<section class="thcf-section thcf-contact" id="thcf-contact-form">
+  <div class="thcf-contact-blob" aria-hidden="true"></div>
+  <div class="thcf-contact-blob-2" aria-hidden="true"></div>
+  <div class="thcf-contact-inner">
+    <div class="thcf-contact-head thcf-reveal">
+      <span class="pill">CONTACT</span>
+      <h2>Reach out — we'd love to hear from you.</h2>
+      <p>Questions about a study, want to be connected to a group, or just say hello? Drop a note below and someone from our women's ministry team will follow up personally.</p>
+    </div>
+    <div class="thcf-reveal">
+      <!-- GHL FORM START -->
+      <form class="thcf-form-card" id="thcf-women-form" novalidate>
+        <div class="thcf-form-row">
+          <label for="thcf-wf-name">Your Name</label>
+          <input id="thcf-wf-name" name="name" required type="text" placeholder="Jane Doe" autocomplete="name">
+        </div>
+        <div class="thcf-form-row-2">
+          <div>
+            <label for="thcf-wf-email">Email</label>
+            <input id="thcf-wf-email" name="email" required type="email" placeholder="jane@example.com" autocomplete="email">
+          </div>
+          <div>
+            <label for="thcf-wf-phone">Phone <span class="opt">(optional)</span></label>
+            <input id="thcf-wf-phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+          </div>
+        </div>
+        <div class="thcf-form-row">
+          <label for="thcf-wf-interest">I'm interested in…</label>
+          <select id="thcf-wf-interest" name="interest">
+            <option>General questions</option>
+            <option>2026 Women's Retreat</option>
+            <option>Tuesday Night Bible Study</option>
+            <option>Mom's Garden</option>
+            <option>Friday Morning Bible Study</option>
+            <option>Moms in Prayer</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="thcf-form-row">
+          <label for="thcf-wf-message">Your message <span class="opt">(optional)</span></label>
+          <textarea id="thcf-wf-message" name="message" rows="4" placeholder="Anything we should know? Questions, prayer requests, accessibility needs…"></textarea>
+        </div>
+        <button type="submit" class="thcf-btn thcf-btn--rose thcf-form-submit">Send Message
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <p class="thcf-form-fineprint">We'll never share your info. Expect a personal reply within 24–48 hours.</p>
+      </form>
+      <div class="thcf-form-success" id="thcf-form-success" hidden>
+        <div class="thcf-form-success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <h3>Thank you — message received!</h3>
+        <p>Someone from our women's ministry team will be in touch shortly.</p>
+      </div>
+      <!-- GHL FORM END -->
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--gray-600)">Prefer email? Reach <strong>Marianne Holm</strong> directly at <a href="mailto:mholm@temeculahills.org" style="color:var(--rose);text-decoration:underline">mholm@temeculahills.org</a> with your questions and concerns about women's ministry events and happenings.</p>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <strong>TEMECULA HILLS</strong>
+      </div>
+      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>12345 Church Road<br>Temecula, CA 92592</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 10:00 AM<br>Wednesdays: 7:00 PM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="ministries.html">Ministries</a></li>
+        <li><a href="im-new.html">I'm New</a></li>
+        <li><a href="give.html">Give Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-womens');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Set GHL_FORM_WEBHOOK to the women's-ministry inbound-webhook URL to forward submissions.
+  // Leave empty to just show the success message (good for previewing).
+  var GHL_FORM_WEBHOOK = '';
+  var form = root.querySelector('#thcf-women-form');
+  var success = root.querySelector('#thcf-form-success');
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = Object.fromEntries(new FormData(form).entries());
+      data.ministry = 'Women’s Ministry';
+      var done = function(){
+        form.hidden = true;
+        if (success) { success.hidden = false; success.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      };
+      if (GHL_FORM_WEBHOOK) {
+        fetch(GHL_FORM_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+  }
+})();
+</script>
