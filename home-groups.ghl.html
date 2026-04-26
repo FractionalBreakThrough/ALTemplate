@@ -1,0 +1,673 @@
+<!-- Temecula Hills Christian Fellowship - Home Groups page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --sage:#6f8d6e;--sage-dark:#4f6c4f;--sage-soft:#ebf0e8;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--sage{background:var(--sage);color:#fff;box-shadow:0 8px 20px rgba(79,108,79,.24)}
+.thcf-btn--sage:hover{background:var(--sage-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--gray-800);background:var(--gray-50)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--sage{background:linear-gradient(180deg,#fff 0%,var(--sage-soft) 100%)}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
+.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
+.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding:0 96px 48px;align-items:center}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:0 32px 48px}}
+.thcf-menu-nav a{display:block;font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,color .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold);pointer-events:none}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu-side{color:rgba(255,255,255,.9);opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-side{opacity:1;transform:translateY(0)}
+@media (max-width:768px){.thcf-menu-side{display:none}}
+.thcf-menu-block{border-left:2px solid var(--orange);padding-left:20px;margin-bottom:28px}
+.thcf-menu-block:nth-child(2){border-left-color:var(--teal-light)}
+.thcf-menu-block-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.thcf-menu-block:nth-child(2) .thcf-menu-block-eyebrow{color:var(--teal-light)}
+.thcf-menu-block strong{display:block;font-weight:700;font-size:17px;color:#fff;margin-bottom:2px}
+.thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
+/* === Hero (sage gradient) === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--sage) 0%,var(--sage) 55%,var(--sage-dark) 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--gold);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-80px;width:340px;height:340px;background:var(--orange);border-radius:50%;filter:blur(90px);opacity:.18;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.20;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--sage-dark);font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(235,240,232,.95);max-width:660px;margin:0 auto 36px;line-height:1.6}
+.thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* === Heart statement band === */
+.thcf-heart{background:#fff;padding:clamp(48px,6vw,72px) 24px;text-align:center}
+.thcf-heart-inner{max-width:840px;margin:0 auto}
+.thcf-heart .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:14px;color:var(--sage)}
+.thcf-heart .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.6}
+.thcf-heart-quote{font-size:clamp(20px,2.4vw,28px);line-height:1.5;color:var(--gray-800);font-weight:500;margin-bottom:24px}
+.thcf-heart-verse{display:inline-block;padding:18px 26px;border-left:3px solid var(--sage);background:var(--sage-soft);border-radius:0 12px 12px 0;text-align:left;color:var(--gray-700);font-size:15.5px;line-height:1.7;max-width:680px}
+.thcf-heart-verse cite{display:block;font-style:normal;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+
+/* === How It Works (4-card grid) === */
+.thcf-how-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:900px){.thcf-how-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.thcf-how-grid{grid-template-columns:1fr}}
+.thcf-how-card{background:#fff;border-radius:18px;padding:30px 26px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;text-align:center}
+.thcf-how-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.08),0 0 0 1px var(--gray-200)}
+.thcf-how-icon{width:56px;height:56px;border-radius:14px;background:var(--accent,var(--sage));color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 6px 14px rgba(0,0,0,.10)}
+.thcf-how-card h3{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:8px}
+.thcf-how-card p{color:var(--gray-600);font-size:14px;line-height:1.65}
+/* === Group directory grid === */
+.thcf-directory-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:1024px){.thcf-directory-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.thcf-directory-grid{grid-template-columns:1fr}}
+.thcf-group-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.thcf-group-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
+.thcf-group-photo{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--sage) 0%,var(--sage-dark) 100%);overflow:hidden}
+.thcf-group-photo .ph-watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:24px;letter-spacing:.02em;text-align:center;padding:18px}
+.thcf-group-photo .badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.95);color:var(--sage-dark);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.thcf-group-photo .badge--full{background:var(--gray-800);color:#fff}
+.thcf-group-card-body{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.thcf-group-card h3{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:2px}
+.thcf-group-meta{display:flex;align-items:center;gap:8px;color:var(--sage-dark);font-size:13px;font-weight:700;letter-spacing:.04em}
+.thcf-group-meta svg{flex-shrink:0;color:var(--sage)}
+.thcf-group-card-body p{color:var(--gray-600);font-size:14px;line-height:1.6;margin:6px 0 12px}
+.thcf-group-card-body .host{font-size:12px;color:var(--gray-500);margin-top:auto;padding-top:10px;border-top:1px solid var(--gray-100);font-weight:600;display:flex;align-items:center;gap:6px}
+.thcf-group-card-body .host strong{color:var(--gray-700);font-weight:700}
+.thcf-group-card-actions{padding:0 22px 22px}
+.thcf-group-card-actions a{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;background:var(--sage-soft);color:var(--sage-dark);font-size:13px;font-weight:700;border-radius:8px;transition:background .2s}
+.thcf-group-card-actions a:hover{background:var(--sage);color:#fff}
+
+/* === Host a group block === */
+.thcf-host{max-width:1140px;margin:0 auto;background:linear-gradient(135deg,var(--sage-dark) 0%,var(--sage) 100%);color:#fff;border-radius:24px;padding:clamp(36px,5vw,56px);position:relative;overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center}
+@media (max-width:760px){.thcf-host{grid-template-columns:1fr;gap:24px;text-align:center}}
+.thcf-host::before{content:"";position:absolute;top:-80px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.10);pointer-events:none}
+.thcf-host::after{content:"";position:absolute;bottom:-100px;left:-80px;width:280px;height:280px;border-radius:50%;background:rgba(243,150,21,.12);pointer-events:none}
+.thcf-host-content{position:relative;z-index:2}
+.thcf-host-content .pill{display:inline-block;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.16);font-size:10px;font-weight:800;letter-spacing:.22em;margin-bottom:14px}
+.thcf-host-content h2{font-size:clamp(22px,2.8vw,32px);font-weight:800;line-height:1.2;color:#fff;margin-bottom:12px}
+.thcf-host-content p{color:rgba(255,255,255,.88);font-size:15px;line-height:1.7;margin-bottom:0}
+.thcf-host-cta{position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;justify-content:center}
+@media (max-width:760px){.thcf-host-cta{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+.thcf-host-cta .thcf-btn--white{background:#fff;color:var(--sage-dark);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.thcf-host-cta .thcf-btn--white:hover{background:var(--sage-soft)}
+.thcf-host-cta .thcf-btn--outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+.thcf-host-cta .thcf-btn--outline-white:hover{background:rgba(255,255,255,.12)}
+
+/* === Contact form === */
+.thcf-contact{position:relative;background:linear-gradient(135deg,var(--sage-soft) 0%,#fff 100%);overflow:hidden}
+.thcf-contact-blob{position:absolute;top:-100px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(111,141,110,.16);pointer-events:none}
+.thcf-contact-blob-2{position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(243,150,21,.10);pointer-events:none}
+.thcf-contact-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.thcf-contact-head{text-align:center;margin-bottom:32px}
+.thcf-contact-head .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:#fff;color:var(--sage);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:14px;box-shadow:0 4px 12px rgba(79,108,79,.15)}
+.thcf-contact-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;line-height:1.18;margin-bottom:12px;color:var(--gray-800)}
+.thcf-contact-head p{color:var(--gray-600);font-size:16px;line-height:1.65;max-width:560px;margin:0 auto}
+.thcf-form-card{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(79,108,79,.14),0 0 0 1px var(--gray-100);padding:clamp(28px,4vw,40px)}
+.thcf-form-row{display:flex;flex-direction:column;margin-bottom:18px}
+.thcf-form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+@media (max-width:560px){.thcf-form-row-2{grid-template-columns:1fr}}
+.thcf-form-card label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);letter-spacing:.04em;margin-bottom:6px}
+.thcf-form-card label .opt{color:var(--gray-500);font-weight:500}
+.thcf-form-card input,.thcf-form-card select,.thcf-form-card textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:15px;font-family:inherit;color:var(--gray-800);background:#fff;transition:border-color .2s,box-shadow .2s}
+.thcf-form-card input:focus,.thcf-form-card select:focus,.thcf-form-card textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(111,141,110,.18)}
+.thcf-form-card textarea{resize:vertical;min-height:90px}
+.thcf-form-submit{margin-top:8px;width:100%;padding:16px}
+.thcf-form-fineprint{margin-top:14px;text-align:center;font-size:12px;color:var(--gray-500);line-height:1.55}
+.thcf-form-success{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(79,108,79,.14),0 0 0 1px var(--gray-100);padding:48px 32px;text-align:center}
+.thcf-form-success-icon{width:72px;height:72px;border-radius:50%;background:var(--sage-soft);color:var(--sage);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.thcf-form-success h3{font-size:22px;font-weight:800;color:var(--gray-800);margin-bottom:10px}
+.thcf-form-success p{color:var(--gray-600);font-size:15px;line-height:1.65}
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-home-groups">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="/" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      </span>
+      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav">
+      <a href="/">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="im-new.html">I'M NEW</a>
+      <a href="ministries.html" class="is-active">MINISTRIES</a>
+      <a href="/#sermons">SERMONS</a>
+      <a href="give.html">GIVE</a>
+      <a href="#thcf-contact-form" data-thcf-menu-close>CONTACT</a>
+    </nav>
+    <aside class="thcf-menu-side">
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Join Us</div>
+        <strong>Sundays at 10:00 AM</strong>
+        <span class="sub">Wednesdays · Youth 7:00 PM</span>
+      </div>
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Visit</div>
+        <span class="sub">12345 Church Road<br>Temecula, CA 92592</span>
+      </div>
+      <a href="im-new.html" class="thcf-btn thcf-btn--orange" data-thcf-menu-close>Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </aside>
+  </div>
+</div>
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">HOME GROUPS</span>
+    <h1>Real life happens<br>around a table.</h1>
+    <p>Small groups meeting in homes throughout the Temecula-Murrieta Valley. We gather, eat, open the Bible, and pray for one another. Everyone's welcome — bring your story, bring a friend.</p>
+    <div class="thcf-hero-cta">
+      <a href="#thcf-directory" class="thcf-btn thcf-btn--orange">Find a Group
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="#thcf-contact-form" class="thcf-btn thcf-btn--outline-light">Get in Touch</a>
+    </div>
+  </div>
+</section>
+<!-- ============ HEART STATEMENT ============ -->
+<section class="thcf-heart">
+  <div class="thcf-heart-inner thcf-reveal">
+    <span class="thcf-eyebrow">Why Home Groups</span>
+    <p class="thcf-heart-quote">At Temecula Hills, our purpose is to glorify God by making maturing disciples of Jesus Christ. One of the primary ways this happens is by enjoying biblical community with one another — in homes, around tables, in real relationships that move beyond the superficial.</p>
+    <blockquote class="thcf-heart-verse">
+      "And let us consider how to stir up one another to love and good works, not neglecting to meet together, as is the habit of some, but encouraging one another."
+      <cite>Hebrews 10:24–25</cite>
+    </blockquote>
+  </div>
+</section>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="thcf-section thcf-section--sage">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--sage)">How It Works</span>
+    <h2 class="thcf-h2">Four things every group does.</h2>
+    <p class="thcf-lead">Different homes, different days, different studies — but the rhythm is the same.</p>
+  </div>
+  <div class="thcf-how-grid">
+    <div class="thcf-how-card thcf-reveal" style="--accent:var(--sage)">
+      <div class="thcf-how-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>Gather</h3>
+      <p>10–15 people in a living room every week. Some weeks you'll have lots to say. Some weeks you'll just listen. Both are good.</p>
+    </div>
+    <div class="thcf-how-card thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-how-icon" style="background:var(--orange)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M5 11v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      </div>
+      <h3>Eat</h3>
+      <p>Some groups share a full meal. Some just bring snacks. The food matters less than the table.</p>
+    </div>
+    <div class="thcf-how-card thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-how-icon" style="background:var(--gold)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>Study</h3>
+      <p>We open the Bible together — usually a book of Scripture or a topical study. No experience needed.</p>
+    </div>
+    <div class="thcf-how-card thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-how-icon" style="background:var(--teal-dark)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <h3>Pray</h3>
+      <p>Real prayers, for real things — kids, marriages, jobs, illness, joy. We carry each other in the in-between.</p>
+    </div>
+  </div>
+</section>
+<!-- ============ GROUP DIRECTORY ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-directory">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--sage)">Find Your Group</span>
+    <h2 class="thcf-h2">Currently meeting around the valley.</h2>
+    <p class="thcf-lead">Six groups, different days and neighborhoods. Click into any one to ask the host a question or save a seat.</p>
+  </div>
+  <!-- TODO: replace each card below with real photos, hosts, days, and locations of your active home groups. -->
+  <div class="thcf-directory-grid">
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge">Open</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Wednesdays · 6:30 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Temecula · Redhawk
+        </div>
+        <p>A mixed-ages group walking through the Gospel of Mark. Kids welcome — childcare provided in another room.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">I'm Interested
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge">Open</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Tuesdays · 7:00 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Murrieta · West
+        </div>
+        <p>Young couples + young families digging into Ephesians and praying for one another's marriages and parenting.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">I'm Interested
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge badge--full">Waitlist</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Thursdays · 6:30 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Wildomar
+        </div>
+        <p>Empty-nesters and seasoned saints in a rich season of Bible study. Currently full — join the waitlist for next semester.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">Join the Waitlist
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge">Open</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Sundays · 5:00 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Temecula · Old Town
+        </div>
+        <p>An after-service supper group — meal first, then Bible study with kids included for the first half.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">I'm Interested
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge">Open</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Wednesdays · 7:00 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Murrieta · East
+        </div>
+        <p>Singles and singles-with-kids walking through 1 &amp; 2 Timothy. Light snacks, tea, and lots of prayer.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">I'm Interested
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="thcf-group-card thcf-reveal">
+      <div class="thcf-group-photo">
+        <span class="badge">Open</span>
+        <div class="ph-watermark">The [Last Name]<br>Group</div>
+      </div>
+      <div class="thcf-group-card-body">
+        <h3>The [Last Name] Group</h3>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Fridays · 6:30 PM
+        </div>
+        <div class="thcf-group-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Temecula · Vail Ranch
+        </div>
+        <p>A mixed-ages dinner-and-discussion group reading through John. First Friday is potluck; the rest are dessert-only.</p>
+        <div class="host">Hosted by <strong>[Host Names]</strong></div>
+      </div>
+      <div class="thcf-group-card-actions">
+        <a href="#thcf-contact-form">I'm Interested
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ HOST A GROUP ============ -->
+<section class="thcf-section thcf-section--gray">
+  <div class="thcf-host thcf-reveal">
+    <div class="thcf-host-content">
+      <span class="pill">CONSIDERING HOSTING?</span>
+      <h2>Open your home. We'll help with the rest.</h2>
+      <p>Hosting a Home Group isn't about being the most spiritual person in the room — it's about being willing to make space. We'll provide curriculum, training, and a coach. You bring the table.</p>
+    </div>
+    <div class="thcf-host-cta">
+      <a class="thcf-btn thcf-btn--white" href="#thcf-contact-form">Tell Me More
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a class="thcf-btn thcf-btn--outline-white" href="mailto:groups@temeculahills.org">Email the Team</a>
+    </div>
+  </div>
+</section>
+<!-- ============ CONTACT FORM ============ -->
+<section class="thcf-section thcf-contact" id="thcf-contact-form">
+  <div class="thcf-contact-blob" aria-hidden="true"></div>
+  <div class="thcf-contact-blob-2" aria-hidden="true"></div>
+  <div class="thcf-contact-inner">
+    <div class="thcf-contact-head thcf-reveal">
+      <span class="pill">CONTACT</span>
+      <h2>Let's get you connected.</h2>
+      <p>Tell us a little about what you're looking for and we'll match you with a group, answer your questions, or help you start one.</p>
+    </div>
+    <div class="thcf-reveal">
+      <!-- GHL FORM START -->
+      <form class="thcf-form-card" id="thcf-groups-form" novalidate>
+        <div class="thcf-form-row">
+          <label for="thcf-gf-name">Your Name</label>
+          <input id="thcf-gf-name" name="name" required type="text" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="thcf-form-row-2">
+          <div>
+            <label for="thcf-gf-email">Email</label>
+            <input id="thcf-gf-email" name="email" required type="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div>
+            <label for="thcf-gf-phone">Phone <span class="opt">(optional)</span></label>
+            <input id="thcf-gf-phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+          </div>
+        </div>
+        <div class="thcf-form-row">
+          <label for="thcf-gf-interest">I'm interested in…</label>
+          <select id="thcf-gf-interest" name="interest">
+            <option>Finding a group near me</option>
+            <option>Joining a specific group from the directory</option>
+            <option>Considering hosting a group</option>
+            <option>General questions</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="thcf-form-row-2">
+          <div>
+            <label for="thcf-gf-area">Neighborhood / Area <span class="opt">(optional)</span></label>
+            <input id="thcf-gf-area" name="area" type="text" placeholder="Temecula, Murrieta, Wildomar…">
+          </div>
+          <div>
+            <label for="thcf-gf-day">Best day for me <span class="opt">(optional)</span></label>
+            <select id="thcf-gf-day" name="day">
+              <option>I'm flexible</option>
+              <option>Sunday evenings</option>
+              <option>Tuesday evenings</option>
+              <option>Wednesday evenings</option>
+              <option>Thursday evenings</option>
+              <option>Friday evenings</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="thcf-form-row">
+          <label for="thcf-gf-message">Tell us a little about yourself <span class="opt">(optional)</span></label>
+          <textarea id="thcf-gf-message" name="message" rows="4" placeholder="Family situation, season of life, what you're looking for…"></textarea>
+        </div>
+        <button type="submit" class="thcf-btn thcf-btn--sage thcf-form-submit">Send Message
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <p class="thcf-form-fineprint">We'll never share your info. Expect a personal reply within 24–48 hours.</p>
+      </form>
+      <div class="thcf-form-success" id="thcf-form-success" hidden>
+        <div class="thcf-form-success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>Thanks — message received!</h3>
+        <p>Someone from our Home Groups team will reach out shortly to help you find a group.</p>
+      </div>
+      <!-- GHL FORM END -->
+    </div>
+    <!-- TODO: replace with the real Home Groups team email. -->
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--gray-600)">Prefer email? Reach the Home Groups team at <a href="mailto:groups@temeculahills.org" style="color:var(--sage-dark);text-decoration:underline">groups@temeculahills.org</a>.</p>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <strong>TEMECULA HILLS</strong>
+      </div>
+      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>12345 Church Road<br>Temecula, CA 92592</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 10:00 AM<br>Wednesdays: 7:00 PM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="ministries.html">Ministries</a></li>
+        <li><a href="im-new.html">I'm New</a></li>
+        <li><a href="give.html">Give Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-home-groups');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Set GHL_FORM_WEBHOOK to the home-groups inbound-webhook URL to forward submissions.
+  // Leave empty to just show the success message (good for previewing).
+  var GHL_FORM_WEBHOOK = '';
+  var form = root.querySelector('#thcf-groups-form');
+  var success = root.querySelector('#thcf-form-success');
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = Object.fromEntries(new FormData(form).entries());
+      data.ministry = 'Home Groups';
+      var done = function(){
+        form.hidden = true;
+        if (success) { success.hidden = false; success.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      };
+      if (GHL_FORM_WEBHOOK) {
+        fetch(GHL_FORM_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+  }
+})();
+</script>
