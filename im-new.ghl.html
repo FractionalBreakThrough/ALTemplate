@@ -1,32 +1,4 @@
-<!--
-  Temecula Hills Christian Fellowship — "I'm New" page
-  GHL Custom Code drop-in.
-
-  HOW TO USE IN GHL:
-  1. Edit the GHL page where this should live.
-  2. Drop a "Custom Code" / "Custom JS HTML" element onto the page.
-  3. Paste this entire file's contents into that element.
-  4. Save and preview the page.
-
-  ABOUT THE FORM:
-  The "Plan Your Visit" form near the bottom is a self-contained static form.
-  To send submissions into your GHL CRM, you have two options:
-
-    Option A (recommended) — Replace the static form with a native GHL form widget:
-      • Find the marker <!-- GHL FORM START --> ... <!-- GHL FORM END --> below.
-      • Delete everything between those two markers.
-      • In GHL, drop a Form element BELOW this Custom Code block (or split this
-        block in two and place the form between them).
-
-    Option B — Wire the static form to a GHL inbound webhook:
-      • Build a Workflow in GHL with an "Inbound Webhook" trigger.
-      • Copy the webhook URL.
-      • Find the line:  const GHL_FORM_WEBHOOK = '';  in the script below
-        and paste the URL between the quotes.
-
-  EVERYTHING IS SCOPED to the .thcf class prefix so it cannot collide with
-  GHL's existing Nuxt/Tailwind styles.
--->
+<!-- Temecula Hills Christian Fellowship - "I'm New" page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. See the project README for setup instructions. -->
 
 <style>
 /* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
