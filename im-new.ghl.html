@@ -86,7 +86,7 @@
 .thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
 
 /* === Hero === */
-.thcf-hero{position:relative;padding:140px 24px 110px;background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
 .thcf-hero-bg{position:absolute;top:80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
 .thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.22;pointer-events:none}
 .thcf-hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
@@ -105,12 +105,14 @@
 .thcf-pastor-text p{margin-bottom:16px;font-size:17px;line-height:1.7;color:var(--gray-600)}
 .thcf-pastor-sig{margin-top:20px;font-weight:700;color:var(--gray-800)}
 /* === Section common === */
-.thcf-section{padding:88px 24px}
+.thcf-section{padding:clamp(56px,7vw,80px) 24px}
 .thcf-section--gray{background:var(--gray-50)}
 .thcf-section--white{background:#fff}
 .thcf-section--teal{background:var(--teal-dark);color:#fff;position:relative;overflow:hidden}
 .thcf-section--teal h2{color:#fff}
-.thcf-section-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.thcf-section-head{text-align:center;max-width:680px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
 
 /* === What to expect (4 cards) === */
 .thcf-expect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1140px;margin:0 auto}
@@ -121,12 +123,12 @@
 .thcf-step-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
 .thcf-step-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.08);transition:transform .3s}
 .thcf-step-card:hover .thcf-step-icon{transform:scale(1.1)}
-.thcf-step-num{font-size:46px;font-weight:900;color:var(--gray-100);line-height:1}
+.thcf-step-num{font-size:clamp(56px,5.6vw,72px);font-weight:900;line-height:.95;letter-spacing:-.04em;color:var(--step-color,var(--gray-300));opacity:.85}
 .thcf-step-card h3{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--gray-800)}
 .thcf-step-card p{color:var(--gray-600);line-height:1.65}
 
 /* === Dress code section === */
-.thcf-dress{padding:80px 24px}
+.thcf-dress{padding:clamp(56px,7vw,76px) 24px}
 .thcf-dress-mountains{position:absolute;bottom:0;right:0;width:66%;height:100%;opacity:.10;pointer-events:none}
 .thcf-dress-inner{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:2}
 .thcf-dress-icon{color:var(--gold);margin:0 auto 20px;width:36px;height:36px}
@@ -146,7 +148,7 @@
 .thcf-kid-card h3{font-size:24px;font-weight:700;margin-bottom:10px;color:var(--gray-800)}
 .thcf-kid-card p{color:var(--gray-600);line-height:1.65}
 .thcf-kid-card-bar{height:6px}
-.thcf-kid-note{margin:48px auto 0;max-width:780px;background:var(--gray-50);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 0 0 1px var(--gray-100)}
+.thcf-kid-note{margin:clamp(28px,4vw,40px) auto 0;max-width:780px;background:var(--gray-50);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 0 0 1px var(--gray-100)}
 .thcf-kid-note-icon{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--teal-dark);color:#fff;display:flex;align-items:center;justify-content:center}
 .thcf-kid-note strong{display:block;font-weight:700;color:var(--gray-800);margin-bottom:6px}
 .thcf-kid-note p{color:var(--gray-600);line-height:1.6}
@@ -343,7 +345,7 @@
         <div class="thcf-step-icon" style="background:var(--orange)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <span class="thcf-step-num">01</span>
+        <span class="thcf-step-num" style="--step-color:var(--orange)">01</span>
       </div>
       <h3>Arrive &amp; Park</h3>
       <p>Pull into our main lot and look for the orange "New Here" signs near the entrance. Our parking team will wave you to a guest spot up front.</p>
@@ -353,7 +355,7 @@
         <div class="thcf-step-icon" style="background:var(--teal-dark)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <span class="thcf-step-num">02</span>
+        <span class="thcf-step-num" style="--step-color:var(--teal-dark)">02</span>
       </div>
       <h3>Get Welcomed</h3>
       <p>Stop by the Welcome Tent just inside the front doors. We'll get you a name tag, hand you a gift, and walk you wherever you need to go.</p>
@@ -363,7 +365,7 @@
         <div class="thcf-step-icon" style="background:var(--gold)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
         </div>
-        <span class="thcf-step-num">03</span>
+        <span class="thcf-step-num" style="--step-color:var(--gold)">03</span>
       </div>
       <h3>Grab a Coffee</h3>
       <p>Free coffee, tea, and donuts in the lobby. Plenty of time before service to settle in, meet someone new, or just sit and breathe.</p>
@@ -373,7 +375,7 @@
         <div class="thcf-step-icon" style="background:var(--cyan)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         </div>
-        <span class="thcf-step-num">04</span>
+        <span class="thcf-step-num" style="--step-color:var(--cyan)">04</span>
       </div>
       <h3>Worship Together</h3>
       <p>Service is about 75 minutes — a few worship songs, an announcement or two, and a Bible-based message you can actually take home.</p>
