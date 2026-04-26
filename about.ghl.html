@@ -1,0 +1,615 @@
+<!-- Temecula Hills Christian Fellowship - About page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+/* === Shared utility classes === */
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+
+/* === Section utilities === */
+.thcf-section{padding:clamp(56px,7vw,80px) 24px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--teal{background:var(--teal-dark);color:#fff;position:relative;overflow:hidden}
+.thcf-section--teal h2,.thcf-section--teal h3{color:#fff}
+.thcf-section-head{text-align:center;max-width:680px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+/* === Scroll reveal === */
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.thcf-brand{display:flex;align-items:center;gap:12px}
+.thcf-brand .mark{width:38px;height:38px;border-radius:10px;background:var(--gray-100);display:flex;align-items:center;justify-content:center}
+.thcf-brand-text{font-weight:900;font-size:14px;letter-spacing:.14em;line-height:1.1;color:var(--gray-800)}
+.thcf-brand-text span{display:block;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--gray-500);margin-top:2px}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:999px;border:1px solid var(--gray-200);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--gray-700);transition:all .25s}
+.thcf-menu-btn:hover{border-color:var(--gray-300);background:var(--gray-50)}
+.thcf-menu-btn .dot{width:30px;height:30px;border-radius:50%;background:var(--gray-800);color:#fff;display:flex;align-items:center;justify-content:center}
+
+/* === Fullscreen menu === */
+.thcf-menu{position:fixed;inset:0;background:var(--gray-900);color:#fff;z-index:100;opacity:0;pointer-events:none;transition:opacity .35s ease;overflow-y:auto}
+.thcf-menu.is-open{opacity:1;pointer-events:auto}
+.thcf-menu-close{position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-menu-close:hover{background:rgba(255,255,255,.16)}
+.thcf-menu-inner{max-width:1100px;margin:0 auto;padding:96px 32px 64px;display:grid;gap:48px;grid-template-columns:1.4fr 1fr}
+@media (max-width:768px){.thcf-menu-inner{grid-template-columns:1fr;padding:96px 24px 48px;gap:32px}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,5vw,48px);font-weight:900;letter-spacing:-.02em;padding:10px 0;color:rgba(255,255,255,.78);transition:color .2s,padding .2s}
+.thcf-menu-nav a:hover,.thcf-menu-nav a.is-active{color:#fff;padding-left:8px}
+.thcf-menu-nav a.is-active{color:var(--gold)}
+.thcf-menu-side h4{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.thcf-menu-side .thcf-btn{width:100%;margin-bottom:12px}
+.thcf-menu-side p{color:rgba(255,255,255,.65);font-size:14px;line-height:1.6;margin-bottom:8px}
+
+/* === Hero === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-60px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.22;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(220,255,250,.92);max-width:640px;margin:0 auto 36px;line-height:1.6}
+.thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* === Our Story === */
+.thcf-story-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:5fr 6fr;gap:56px;align-items:center}
+@media (max-width:900px){.thcf-story-grid{grid-template-columns:1fr;gap:40px}}
+.thcf-story-img{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:var(--gray-200);box-shadow:0 30px 60px rgba(0,0,0,.18)}
+.thcf-story-img-placeholder{position:absolute;inset:0;background:var(--dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-story-img-overlay{position:absolute;left:0;bottom:0;right:0;height:55%;background:linear-gradient(to top,rgba(11,107,107,.65),transparent)}
+.thcf-story-text .thcf-eyebrow{color:var(--orange)}
+.thcf-story-text h2{margin-bottom:22px}
+.thcf-story-text p{color:var(--gray-600);font-size:17px;line-height:1.75;margin-bottom:18px}
+.thcf-story-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;padding-top:32px;border-top:1px solid var(--gray-200)}
+@media (max-width:560px){.thcf-story-stats{grid-template-columns:repeat(3,1fr);gap:10px}}
+.thcf-story-stat .num{font-size:clamp(28px,3.4vw,40px);font-weight:900;color:var(--teal-dark);letter-spacing:-.02em;line-height:1}
+.thcf-story-stat .label{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-500);margin-top:8px}
+
+/* === Mission & Vision === */
+.thcf-mv-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+@media (max-width:760px){.thcf-mv-grid{grid-template-columns:1fr}}
+.thcf-mv-card{background:#fff;border-radius:20px;padding:40px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);position:relative;overflow:hidden}
+.thcf-mv-card::after{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:var(--accent,var(--teal-dark));opacity:.06}
+.thcf-mv-icon{width:56px;height:56px;border-radius:14px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:22px;box-shadow:0 8px 20px rgba(0,0,0,.10)}
+.thcf-mv-card .label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent,var(--teal-dark));margin-bottom:8px;display:block}
+.thcf-mv-card h3{font-size:clamp(22px,2.4vw,28px);font-weight:800;color:var(--gray-800);margin-bottom:14px;line-height:1.2}
+.thcf-mv-card p{color:var(--gray-600);font-size:16px;line-height:1.7}
+.thcf-mv-card blockquote{margin-top:18px;padding:14px 18px;background:var(--gray-50);border-left:3px solid var(--accent,var(--teal-dark));font-style:italic;color:var(--gray-700);font-size:14px;line-height:1.6}
+/* === Core Beliefs === */
+.thcf-beliefs-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.thcf-beliefs-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.thcf-beliefs-grid{grid-template-columns:1fr}}
+.thcf-belief{background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s}
+.thcf-belief:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.08),0 0 0 1px var(--gray-200)}
+.thcf-belief-icon{width:46px;height:46px;border-radius:12px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.thcf-belief h3{font-size:19px;font-weight:800;color:var(--gray-800);margin-bottom:8px}
+.thcf-belief p{color:var(--gray-600);font-size:15px;line-height:1.65}
+.thcf-belief .ref{display:block;margin-top:12px;font-size:12px;font-weight:700;letter-spacing:.10em;color:var(--gray-500);text-transform:uppercase}
+
+/* === Leadership === */
+.thcf-leader-feature{max-width:1100px;margin:0 auto clamp(36px,4vw,52px);display:grid;grid-template-columns:5fr 6fr;gap:48px;align-items:center}
+@media (max-width:900px){.thcf-leader-feature{grid-template-columns:1fr;gap:32px}}
+.thcf-leader-photo{aspect-ratio:1/1;border-radius:24px;overflow:hidden;background:var(--dark);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.18);max-width:420px}
+.thcf-leader-photo .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-leader-photo .accent{position:absolute;left:-16px;bottom:-16px;width:72px;height:72px;border-radius:18px;background:var(--gold)}
+.thcf-leader-feature .thcf-eyebrow{color:var(--orange)}
+.thcf-leader-feature h3{font-size:clamp(26px,3vw,36px);font-weight:800;line-height:1.2;color:var(--gray-800);margin-bottom:8px}
+.thcf-leader-feature .role{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--teal-dark);text-transform:uppercase;margin-bottom:20px}
+.thcf-leader-feature p{color:var(--gray-600);font-size:16px;line-height:1.75;margin-bottom:14px}
+.thcf-team-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:900px){.thcf-team-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.thcf-team-grid{grid-template-columns:1fr}}
+.thcf-team-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s}
+.thcf-team-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
+.thcf-team-photo{aspect-ratio:1/1;background:var(--dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-team-card-body{padding:22px}
+.thcf-team-card h4{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.thcf-team-card .role{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.thcf-team-card p{color:var(--gray-600);font-size:14px;line-height:1.6}
+
+/* === Values === */
+.thcf-values-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:1024px){.thcf-values-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.thcf-values-grid{grid-template-columns:1fr}}
+.thcf-value{padding:30px 24px;background:rgba(255,255,255,.06);border-radius:18px;border:1px solid rgba(255,255,255,.10);text-align:center;transition:background .3s,transform .3s}
+.thcf-value:hover{background:rgba(255,255,255,.10);transform:translateY(-3px)}
+.thcf-value-num{font-size:13px;font-weight:800;letter-spacing:.22em;color:rgba(255,255,255,.45);margin-bottom:14px}
+.thcf-value-icon{width:54px;height:54px;border-radius:14px;background:var(--accent,var(--gold));color:#000;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.thcf-value h3{font-size:18px;font-weight:800;color:#fff;margin-bottom:10px}
+.thcf-value p{color:rgba(220,255,250,.78);font-size:14px;line-height:1.65}
+
+/* === Ministries === */
+.thcf-min-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.thcf-min-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.thcf-min-grid{grid-template-columns:1fr}}
+.thcf-min{position:relative;background:#fff;border-radius:16px;padding:26px 24px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);display:flex;gap:16px;align-items:flex-start;transition:transform .3s,box-shadow .3s}
+.thcf-min:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.08),0 0 0 1px var(--gray-200)}
+.thcf-min-icon{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center}
+.thcf-min h3{font-size:17px;font-weight:800;color:var(--gray-800);margin-bottom:6px}
+.thcf-min p{color:var(--gray-600);font-size:14px;line-height:1.6}
+
+/* === CTA === */
+.thcf-cta{position:relative;background:linear-gradient(135deg,var(--orange) 0%,#d04a26 100%);color:#fff;overflow:hidden}
+.thcf-cta::before{content:"";position:absolute;top:-100px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.10);pointer-events:none}
+.thcf-cta::after{content:"";position:absolute;bottom:-120px;left:-100px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.thcf-cta-inner{position:relative;z-index:2;max-width:840px;margin:0 auto;text-align:center;padding:0 8px}
+.thcf-cta .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.18);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:18px}
+.thcf-cta h2{font-size:clamp(28px,4.4vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.15;margin-bottom:18px;color:#fff}
+.thcf-cta p{font-size:clamp(16px,1.6vw,18px);color:rgba(255,255,255,.92);max-width:600px;margin:0 auto 32px;line-height:1.65}
+.thcf-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.thcf-cta .thcf-btn--white{background:#fff;color:var(--orange);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.thcf-cta .thcf-btn--white:hover{background:var(--gray-50);transform:translateY(-1px)}
+.thcf-cta .thcf-btn--outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+.thcf-cta .thcf-btn--outline-white:hover{background:rgba(255,255,255,.12)}
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-about">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a class="thcf-brand" href="/">
+      <span class="mark"><svg viewBox="0 0 100 100" width="22" height="22"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+      <span class="thcf-brand-text">TEMECULA HILLS<span>CHRISTIAN FELLOWSHIP</span></span>
+    </a>
+    <button class="thcf-menu-btn" data-thcf-menu-open type="button" aria-label="Open menu">
+      MENU
+      <span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <button class="thcf-menu-close" data-thcf-menu-close type="button" aria-label="Close menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+  </button>
+  <div class="thcf-menu-inner">
+    <nav class="thcf-menu-nav">
+      <a href="/" data-thcf-menu-close>Home</a>
+      <a href="#" class="is-active">About</a>
+      <a href="im-new.html" data-thcf-menu-close>I'm New</a>
+      <a href="/#sermons" data-thcf-menu-close>Sermons</a>
+      <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-side">
+      <h4>Service Times</h4>
+      <p>Sundays 10:00 AM</p>
+      <p>Wednesdays 7:00 PM (Youth)</p>
+      <h4 style="margin-top:32px">Ready to Visit?</h4>
+      <a class="thcf-btn thcf-btn--orange" href="im-new.html">Plan Your Visit</a>
+      <!-- TODO: replace href with church giving URL when set up. -->
+      <a class="thcf-btn thcf-btn--outline-light" href="#">Give Online</a>
+    </div>
+  </div>
+</div>
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">ABOUT US</span>
+    <h1>A church for<br>everyone, by grace.</h1>
+    <p>We're a community of imperfect people learning to follow Jesus together — in Temecula and beyond. Here's who we are, what we believe, and where we're headed.</p>
+    <div class="thcf-hero-cta">
+      <a href="#thcf-story" class="thcf-btn thcf-btn--orange">Our Story
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+      <a href="#thcf-leadership" class="thcf-btn thcf-btn--outline-light">Meet the Team</a>
+    </div>
+  </div>
+</section>
+<!-- ============ OUR STORY ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-story">
+  <div class="thcf-story-grid">
+    <div class="thcf-reveal">
+      <div class="thcf-story-img">
+        <!-- TODO: replace with real church/community photo (recommended ~1200x1500). -->
+        <div class="thcf-story-img-placeholder">Church Photo</div>
+        <div class="thcf-story-img-overlay"></div>
+      </div>
+    </div>
+    <div class="thcf-story-text thcf-reveal">
+      <span class="thcf-eyebrow">Our Story</span>
+      <h2 class="thcf-h2">A small group with a big calling.</h2>
+      <!-- TODO: replace placeholder narrative with real church history. -->
+      <p>Temecula Hills started in a living room — a handful of families convinced that Jesus had something better for the people of this valley than what we'd been settling for. We prayed, we taught the Bible, we ate a lot of meals together.</p>
+      <p>Years later, we're still small enough to know your name and big enough to walk with you through real life. We're not a perfect church. We're a family of people who have been changed by grace, and we'd love for you to be part of the story.</p>
+      <div class="thcf-story-stats">
+        <!-- TODO: replace with real numbers when you're ready. -->
+        <div class="thcf-story-stat">
+          <span class="num">2014</span>
+          <span class="label">Founded</span>
+        </div>
+        <div class="thcf-story-stat">
+          <span class="num">350+</span>
+          <span class="label">Family Members</span>
+        </div>
+        <div class="thcf-story-stat">
+          <span class="num">12</span>
+          <span class="label">Ministries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ MISSION & VISION ============ -->
+<section class="thcf-section thcf-section--gray">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Why We Exist</span>
+    <h2 class="thcf-h2">Mission &amp; Vision</h2>
+    <p class="thcf-lead">Two short sentences that shape every decision we make as a church.</p>
+  </div>
+  <div class="thcf-mv-grid">
+    <div class="thcf-mv-card thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-mv-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <span class="label">Our Mission</span>
+      <h3>Make disciples of Jesus who love God and love people.</h3>
+      <p>That's it. We don't have a clever slogan or a long list. We want to help people meet Jesus, follow Him, and join the work He's already doing in our city.</p>
+      <blockquote>"Therefore go and make disciples of all nations…" — Matthew 28:19</blockquote>
+    </div>
+    <div class="thcf-mv-card thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-mv-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <span class="label">Our Vision</span>
+      <h3>A Temecula Valley transformed by the love of Jesus.</h3>
+      <p>We dream of homes restored, marriages healed, neighborhoods loved well, and a generation that knows it's known by God. We can't do it alone — but we believe Jesus is doing it through ordinary people like us.</p>
+      <blockquote>"You are the light of the world…" — Matthew 5:14</blockquote>
+    </div>
+  </div>
+</section>
+<!-- ============ CORE BELIEFS ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--teal-dark)">What We Believe</span>
+    <h2 class="thcf-h2">Six things we hold tightly.</h2>
+    <p class="thcf-lead">A short summary of historic Christian faith. We believe a lot more than this, but these are the non-negotiables.</p>
+  </div>
+  <div class="thcf-beliefs-grid">
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>The Bible</h3>
+      <p>The Old and New Testaments are God's inspired Word — true, trustworthy, and our final authority for what we believe and how we live.</p>
+      <span class="ref">2 Timothy 3:16–17</span>
+    </div>
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h3>One God, Three Persons</h3>
+      <p>There is one God, eternally existing in three persons: Father, Son, and Holy Spirit — equal in power and glory, distinct in role.</p>
+      <span class="ref">Matthew 28:19</span>
+    </div>
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M5 9h14"/></svg>
+      </div>
+      <h3>Jesus Christ</h3>
+      <p>Fully God and fully human, Jesus lived a sinless life, died on the cross for our sin, rose bodily from the grave, and is coming again.</p>
+      <span class="ref">John 1:1, 14</span>
+    </div>
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--cyan)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9c-2 0-3.5-1-5-2"/><path d="M3 16v5h5"/></svg>
+      </div>
+      <h3>The Holy Spirit</h3>
+      <p>God lives in every believer through the Holy Spirit, who comforts, convicts, equips, and empowers us to live like Jesus.</p>
+      <span class="ref">John 14:26</span>
+    </div>
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <h3>Salvation by Grace</h3>
+      <p>We're saved by grace through faith in Jesus alone — not by anything we do or earn. It's a gift, freely offered to anyone who asks.</p>
+      <span class="ref">Ephesians 2:8–9</span>
+    </div>
+    <div class="thcf-belief thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-belief-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>The Church</h3>
+      <p>The church is God's family — a global community of believers and a local body of brothers and sisters who worship, serve, and grow together.</p>
+      <span class="ref">Acts 2:42–47</span>
+    </div>
+  </div>
+</section>
+<!-- ============ LEADERSHIP ============ -->
+<section class="thcf-section thcf-section--gray" id="thcf-leadership">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Meet The Team</span>
+    <h2 class="thcf-h2">The people behind the church.</h2>
+    <p class="thcf-lead">A few of the folks who serve, teach, and shepherd at Temecula Hills.</p>
+  </div>
+  <div class="thcf-leader-feature thcf-reveal">
+    <div class="thcf-leader-photo">
+      <!-- TODO: replace with real lead pastor photo (square, ~600x600). -->
+      <div class="ph">Pastor Photo</div>
+      <div class="accent" aria-hidden="true"></div>
+    </div>
+    <div>
+      <span class="thcf-eyebrow">Lead Pastor</span>
+      <!-- TODO: replace with real pastor name + title. -->
+      <h3>Pastor [First Last]</h3>
+      <span class="role">Lead Pastor &amp; Teaching Elder</span>
+      <p>Pastor [Last] has been teaching and shepherding at Temecula Hills since [year]. He's passionate about the Bible, allergic to religious performance, and convinced that ordinary people can change the world when they walk with Jesus.</p>
+      <p>He and his wife [Name] have [N] kids, [N] dogs, and a standing rule that anyone who shows up Sunday gets invited to dinner before the week is out.</p>
+    </div>
+  </div>
+  <div class="thcf-team-grid">
+    <div class="thcf-team-card thcf-reveal">
+      <!-- TODO: replace placeholder with real team member photo (square). -->
+      <div class="thcf-team-photo">Team Photo</div>
+      <div class="thcf-team-card-body">
+        <h4>[Name]</h4>
+        <span class="role">Worship Pastor</span>
+        <p>Leads our worship team and shapes how we sing on Sundays. Plays guitar, drinks too much coffee, raises three kids with [Spouse].</p>
+      </div>
+    </div>
+    <div class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo">Team Photo</div>
+      <div class="thcf-team-card-body">
+        <h4>[Name]</h4>
+        <span class="role">Kids &amp; Family Director</span>
+        <p>Runs the kids' ministry and trains our volunteer team. Believes children's church should be the best hour of a child's week.</p>
+      </div>
+    </div>
+    <div class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo">Team Photo</div>
+      <div class="thcf-team-card-body">
+        <h4>[Name]</h4>
+        <span class="role">Connect &amp; Care</span>
+        <p>The first face most newcomers meet. Helps people find a small group, get prayer, and take next steps. Also makes excellent coffee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ VALUES ============ -->
+<section class="thcf-section thcf-section--teal">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--gold)">How We Do It</span>
+    <h2 class="thcf-h2">Four values that shape us.</h2>
+    <p class="thcf-lead" style="color:rgba(220,255,250,.85)">More than a church mission statement — these are the daily commitments that show up in how we teach, care, and serve.</p>
+  </div>
+  <div class="thcf-values-grid">
+    <div class="thcf-value thcf-reveal">
+      <div class="thcf-value-num">01</div>
+      <div class="thcf-value-icon" style="background:var(--gold)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>Bible First</h3>
+      <p>We let Scripture set the agenda — not culture, not preference, not the latest trend. The Bible is our compass.</p>
+    </div>
+    <div class="thcf-value thcf-reveal">
+      <div class="thcf-value-num">02</div>
+      <div class="thcf-value-icon" style="background:var(--orange);color:#fff">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <h3>Family, Not Audience</h3>
+      <p>You're not a number to us. We pursue real relationships, real meals, and real depth — even as we grow.</p>
+    </div>
+    <div class="thcf-value thcf-reveal">
+      <div class="thcf-value-num">03</div>
+      <div class="thcf-value-icon" style="background:var(--cyan);color:#000">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Everyone Serves</h3>
+      <p>The church isn't a show; it's a body. Every person has a gift, and we'll help you find yours and use it.</p>
+    </div>
+    <div class="thcf-value thcf-reveal">
+      <div class="thcf-value-num">04</div>
+      <div class="thcf-value-icon" style="background:var(--teal-light);color:#000">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <h3>Local &amp; Sent</h3>
+      <p>We love Temecula. We also believe Jesus sends His people — across the street and across the globe — to make disciples.</p>
+    </div>
+  </div>
+</section>
+<!-- ============ MINISTRIES ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Ways To Get Involved</span>
+    <h2 class="thcf-h2">Where life happens between Sundays.</h2>
+    <p class="thcf-lead">A few of the places you can connect, grow, and serve at Temecula Hills.</p>
+  </div>
+  <div class="thcf-min-grid">
+    <div class="thcf-min thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div>
+        <h3>Small Groups</h3>
+        <p>10–15 people meeting weekly in homes around the valley to study the Bible, share life, and pray together.</p>
+      </div>
+    </div>
+    <div class="thcf-min thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+      </div>
+      <div>
+        <h3>Kids &amp; Family</h3>
+        <p>Bible-based programming for ages 0–11 every Sunday, plus family events and parenting workshops year-round.</p>
+      </div>
+    </div>
+    <div class="thcf-min thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+      </div>
+      <div>
+        <h3>Youth</h3>
+        <p>Middle and high schoolers gather Wednesdays at 7 PM for worship, teaching, games, and small groups.</p>
+      </div>
+    </div>
+    <div class="thcf-min thcf-reveal" style="--accent:var(--cyan)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div>
+        <h3>Worship</h3>
+        <p>Musicians, vocalists, and audio/visual volunteers who help us sing and shape Sunday mornings.</p>
+      </div>
+    </div>
+    <div class="thcf-min thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <div>
+        <h3>Care &amp; Prayer</h3>
+        <p>A team of volunteers ready to walk with you through grief, illness, marriage struggles, or any season life brings.</p>
+      </div>
+    </div>
+    <div class="thcf-min thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-min-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div>
+        <h3>Local &amp; Global Outreach</h3>
+        <p>Partnering with non-profits in Temecula and missionaries abroad to serve the under-resourced and share the gospel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ NEXT STEPS CTA ============ -->
+<section class="thcf-section thcf-cta">
+  <div class="thcf-cta-inner thcf-reveal">
+    <span class="pill">YOUR NEXT STEP</span>
+    <h2>Ready to come check us out?</h2>
+    <p>We'd love to meet you. Plan your visit and we'll have a welcome bag with your name on it, a reserved parking spot up front, and a real person to walk you in.</p>
+    <div class="thcf-cta-btns">
+      <a href="im-new.html" class="thcf-btn thcf-btn--white">Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="#thcf-contact" class="thcf-btn thcf-btn--outline-white">Contact Us</a>
+    </div>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <strong>TEMECULA HILLS</strong>
+      </div>
+      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>12345 Church Road<br>Temecula, CA 92592</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 10:00 AM<br>Wednesdays: 7:00 PM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="im-new.html">I'm New</a></li>
+        <li><a href="/#sermons">Sermons</a></li>
+        <!-- TODO: replace with church giving URL. -->
+        <li><a href="#thcf-contact">Give Online</a></li>
+        <li><a href="#thcf-contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-about');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
