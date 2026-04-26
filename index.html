@@ -219,7 +219,7 @@
                     <div className="flex-1 grid md:grid-cols-[1.4fr_1fr] gap-12 px-8 md:px-24 pb-12 relative z-10 items-center">
                         <nav>
                             <NavItem label="HOME" href="#" delay={shouldAnimate ? 300 : 0} onClick={onClose} isOpen={shouldAnimate} />
-                            <NavItem label="I'M NEW" href="#im-new" delay={shouldAnimate ? 400 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            <NavItem label="I'M NEW" href="im-new.html" delay={shouldAnimate ? 400 : 0} onClick={onClose} isOpen={shouldAnimate} />
                             <NavItem label="ABOUT" href="#about" delay={shouldAnimate ? 500 : 0} onClick={onClose} isOpen={shouldAnimate} />
                             <NavItem label="SERMONS" href="#sermons" delay={shouldAnimate ? 600 : 0} onClick={onClose} isOpen={shouldAnimate} />
                             {/* TODO: replace href with church giving URL (Pushpay/Tithe.ly/etc.) when set up. */}
@@ -243,12 +243,13 @@
                                     Temecula, CA 92592
                                 </div>
                             </div>
-                            <button
-                                onClick={() => { onClose(); setTimeout(() => { const el = document.querySelector('#im-new'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 300); }}
+                            <a
+                                href="im-new.html#plan-visit"
+                                onClick={onClose}
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-orange hover:bg-[#c9451f] text-white font-bold rounded-lg transition-all"
                             >
                                 Plan Your Visit <ChevronRight size={18} />
-                            </button>
+                            </a>
                         </aside>
                     </div>
 
@@ -430,9 +431,9 @@
                                 Loving God and loving people in the Temecula Valley. Join us this Sunday.
                             </p>
                             <div className="flex flex-col md:flex-row gap-4 justify-center animate-[slideIn_0.6s_ease-out_forwards]" style={{ animationDelay: '300ms' }}>
-                                <button onClick={() => { const el = document.querySelector('#im-new'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="px-8 py-4 bg-orange text-white font-bold rounded-lg hover:bg-[#c9451f] transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+                                <a href="im-new.html" className="px-8 py-4 bg-orange text-white font-bold rounded-lg hover:bg-[#c9451f] transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
                                     I'm New <ChevronRight size={18} />
-                                </button>
+                                </a>
                                 <button onClick={() => { const el = document.querySelector('#sermons'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white font-bold rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2">
                                     Sermons <PlayCircle size={18} />
                                 </button>
@@ -543,8 +544,7 @@
                                         Whether you have been a Christian for years or are just exploring faith, there is a place for you here at Temecula Hills.
                                     </p>
                                     <a
-                                        href="#im-new"
-                                        onClick={(e) => { e.preventDefault(); const el = document.querySelector('#im-new'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}
+                                        href="im-new.html"
                                         className="text-tealDark font-bold text-lg hover:underline inline-flex items-center gap-2 group"
                                     >
                                         Plan Your First Visit <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -597,12 +597,12 @@
                                             ))}
                                         </div>
                                         <div className="mt-8">
-                                            <button
-                                                onClick={() => { const el = document.querySelector('#contact'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}
+                                            <a
+                                                href="im-new.html#plan-visit"
                                                 className="inline-flex items-center gap-2 px-8 py-4 bg-tealDark text-white font-bold rounded-lg hover:bg-[#095757] transition-all transform hover:scale-105 shadow-lg"
                                             >
                                                 Plan Your First Visit <ChevronRight size={18} />
-                                            </button>
+                                            </a>
                                         </div>
                                     </RevealOnScroll>
 
@@ -695,7 +695,7 @@
                                 <ul className="space-y-3 text-gray-400">
                                     <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
                                     <li><a href="#sermons" className="hover:text-white transition-colors">Sermons</a></li>
-                                    <li><a href="#im-new" className="hover:text-white transition-colors">I'm New</a></li>
+                                    <li><a href="im-new.html" className="hover:text-white transition-colors">I'm New</a></li>
                                     {/* TODO: replace with church giving URL. */}
                                     <li><a href="#contact" className="hover:text-white transition-colors">Give Online</a></li>
                                     <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm New | Temecula Hills Christian Fellowship</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#000000',
+                        white: '#FFFFFF',
+                        dark: '#424242',
+                        tealDark: '#0b6b6b',
+                        tealLight: '#76cdbd',
+                        cyan: '#4ecbcf',
+                        orange: '#e2572e',
+                        gold: '#f39615',
+                    },
+                    animation: {
+                        slideIn: "slideIn 0.6s ease-out forwards",
+                    },
+                    keyframes: {
+                        slideIn: {
+                            "0%": { opacity: "0", transform: "translateY(20px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const IconWrapper = ({ children, size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+                {children}
+            </svg>
+        );
+
+        const Menu = (p) => <IconWrapper {...p}><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></IconWrapper>;
+        const X = (p) => <IconWrapper {...p}><path d="M18 6 6 18" /><path d="m6 6 12 12" /></IconWrapper>;
+        const MapPin = (p) => <IconWrapper {...p}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></IconWrapper>;
+        const Clock = (p) => <IconWrapper {...p}><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></IconWrapper>;
+        const Calendar = (p) => <IconWrapper {...p}><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></IconWrapper>;
+        const ChevronRight = (p) => <IconWrapper {...p}><path d="m9 18 6-6-6-6" /></IconWrapper>;
+        const ChevronDown = (p) => <IconWrapper {...p}><path d="m6 9 6 6 6-6" /></IconWrapper>;
+        const Heart = (p) => <IconWrapper {...p}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></IconWrapper>;
+        const Users = (p) => <IconWrapper {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></IconWrapper>;
+        const Coffee = (p) => <IconWrapper {...p}><path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" /><line x1="6" x2="6" y1="2" y2="4" /><line x1="10" x2="10" y1="2" y2="4" /><line x1="14" x2="14" y1="2" y2="4" /></IconWrapper>;
+        const Music = (p) => <IconWrapper {...p}><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></IconWrapper>;
+        const Baby = (p) => <IconWrapper {...p}><path d="M9 12h.01" /><path d="M15 12h.01" /><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /></IconWrapper>;
+        const Sparkles = (p) => <IconWrapper {...p}><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" /><path d="M5 3v4" /><path d="M19 17v4" /><path d="M3 5h4" /><path d="M17 19h4" /></IconWrapper>;
+
+        const FacebookIcon = ({ size = 18 }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z" /></svg>
+        );
+        const InstagramIcon = ({ size = 18 }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
+        );
+        const YouTubeIcon = ({ size = 18 }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" /></svg>
+        );
+
+        const colors = { black: '#000000', white: '#FFFFFF', dark: '#424242', tealDark: '#0b6b6b', tealLight: '#76cdbd', cyan: '#4ecbcf', orange: '#e2572e', gold: '#f39615' };
+
+        const GeometricMountains = ({ className, tone = "dark" }) => {
+            const fills = tone === "light"
+                ? { back: "rgba(255,255,255,0.08)", mid: "rgba(255,255,255,0.14)", front: "rgba(255,255,255,0.22)" }
+                : { back: "rgba(11,107,107,0.35)", mid: "rgba(66,66,66,0.55)", front: colors.dark };
+            return (
+                <svg viewBox="0 0 1200 300" className={className} preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0,300 L220,140 L420,300 Z" fill={fills.back} />
+                    <path d="M280,300 L520,90 L760,300 Z" fill={fills.back} />
+                    <path d="M640,300 L880,150 L1100,300 Z" fill={fills.back} />
+                    <path d="M120,300 L380,170 L640,300 Z" fill={fills.mid} />
+                    <path d="M520,300 L780,110 L1040,300 Z" fill={fills.mid} />
+                    <path d="M0,300 L260,200 L520,300 Z" fill={fills.front} />
+                    <path d="M460,300 L720,160 L980,300 Z" fill={fills.front} />
+                    <path d="M860,300 L1100,210 L1200,300 L1200,300 Z" fill={fills.front} />
+                </svg>
+            );
+        };
+
+        const Logo = () => (
+            <a href="index.html" className="flex items-center gap-2" aria-label="Temecula Hills Christian Fellowship — Home">
+                <div className="relative w-10 h-10 overflow-hidden rounded-full bg-white border-2 border-gray-800 flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" className="w-8 h-8 mt-2">
+                        <path d="M10,90 L35,40 L60,90 Z" fill={colors.dark} />
+                        <path d="M40,90 L65,30 L90,90 Z" fill={colors.dark} />
+                    </svg>
+                </div>
+                <div className="flex flex-col leading-tight">
+                    <span className="font-bold text-lg tracking-wider text-gray-800">TEMECULA HILLS</span>
+                    <span className="text-xs tracking-widest text-gray-500">CHRISTIAN FELLOWSHIP</span>
+                </div>
+            </a>
+        );
+
+        const NavItem = ({ label, href, delay, onClick, isOpen }) => (
+            <a href={href} onClick={onClick}
+                className={`block text-4xl md:text-6xl font-black text-white hover:text-orange duration-300 transform hover:translate-x-4 mb-6 md:mb-8 transition-all ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${isOpen ? delay : 0}ms`, transitionDuration: '500ms' }}>
+                {label}
+            </a>
+        );
+
+        const FullScreenMenu = ({ isOpen, onClose }) => {
+            const [isRendered, setIsRendered] = useState(isOpen);
+            const [shouldAnimate, setShouldAnimate] = useState(false);
+            useEffect(() => {
+                if (isOpen) { setIsRendered(true); setTimeout(() => setShouldAnimate(true), 50); }
+                else { setShouldAnimate(false); const t = setTimeout(() => setIsRendered(false), 700); return () => clearTimeout(t); }
+            }, [isOpen]);
+            if (!isRendered) return null;
+            return (
+                <div className="fixed inset-0 z-50 flex flex-col bg-dark overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]"
+                    style={{ clipPath: shouldAnimate ? 'circle(150% at calc(100% - 40px) 40px)' : 'circle(0% at calc(100% - 40px) 40px)' }}>
+                    <div className="flex justify-between items-center p-6 md:p-12 relative z-10">
+                        <div className="text-white font-bold tracking-widest text-sm transition-opacity duration-300 delay-300" style={{ opacity: shouldAnimate ? 1 : 0 }}>MENU</div>
+                        <button onClick={onClose} className="text-white hover:text-orange transition-colors" aria-label="Close menu"><X size={32} /></button>
+                    </div>
+                    <div className="flex-1 grid md:grid-cols-[1.4fr_1fr] gap-12 px-8 md:px-24 pb-12 relative z-10 items-center">
+                        <nav>
+                            <NavItem label="HOME" href="index.html" delay={shouldAnimate ? 300 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            <NavItem label="I'M NEW" href="im-new.html" delay={shouldAnimate ? 400 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            <NavItem label="ABOUT" href="index.html#about" delay={shouldAnimate ? 500 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            <NavItem label="SERMONS" href="index.html#sermons" delay={shouldAnimate ? 600 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            {/* TODO: replace href with church giving URL when set up. */}
+                            <NavItem label="GIVE" href="index.html#contact" delay={shouldAnimate ? 700 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                            <NavItem label="CONTACT" href="index.html#contact" delay={shouldAnimate ? 800 : 0} onClick={onClose} isOpen={shouldAnimate} />
+                        </nav>
+                        <aside className="hidden md:block text-white/90 transition-all duration-700"
+                            style={{ opacity: shouldAnimate ? 1 : 0, transform: shouldAnimate ? 'translateY(0)' : 'translateY(20px)', transitionDelay: shouldAnimate ? '600ms' : '0ms' }}>
+                            <div className="border-l-2 border-orange pl-6 mb-8">
+                                <div className="text-gold text-xs font-bold tracking-widest uppercase mb-2">Join Us</div>
+                                <div className="font-bold text-lg leading-snug mb-1">Sundays at 10:00 AM</div>
+                                <div className="text-white/70 text-sm">Wednesdays · Youth 7:00 PM</div>
+                            </div>
+                            <div className="border-l-2 border-tealLight pl-6 mb-8">
+                                <div className="text-tealLight text-xs font-bold tracking-widest uppercase mb-2">Visit</div>
+                                <div className="text-white/85 text-sm leading-relaxed">12345 Church Road<br />Temecula, CA 92592</div>
+                            </div>
+                            <a href="#plan-visit" onClick={onClose} className="inline-flex items-center gap-2 px-6 py-3 bg-orange hover:bg-[#c9451f] text-white font-bold rounded-lg transition-all">
+                                Plan Your Visit <ChevronRight size={18} />
+                            </a>
+                        </aside>
+                    </div>
+                    <div className="absolute bottom-0 right-0 w-full h-32 opacity-30 pointer-events-none transition-opacity duration-500 delay-300" style={{ opacity: shouldAnimate ? 0.3 : 0 }}>
+                        <GeometricMountains className="w-full h-full" tone="light" />
+                    </div>
+                </div>
+            );
+        };
+
+        const SectionHeading = ({ children, color = "text-gray-800" }) => (
+            <h2 className={`text-3xl md:text-5xl font-bold mb-8 tracking-tight leading-tight ${color}`}>{children}</h2>
+        );
+
+        const useOnScreen = (options) => {
+            const [ref, setRef] = useState(null);
+            const [visible, setVisible] = useState(false);
+            useEffect(() => {
+                const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, options);
+                if (ref) obs.observe(ref);
+                return () => { if (ref) obs.unobserve(ref); };
+            }, [ref, options]);
+            return [setRef, visible];
+        };
+
+        const RevealOnScroll = ({ children, delay = 0 }) => {
+            const [setRef, visible] = useOnScreen({ threshold: 0.1 });
+            return (
+                <div ref={setRef}
+                    className={`transition-all duration-1000 transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                    style={{ transitionDelay: `${delay}ms` }}>
+                    {children}
+                </div>
+            );
+        };
+        const ExpectStep = ({ number, icon: Icon, title, body, color }) => (
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 ring-1 ring-gray-100 group h-full">
+                <div className="flex items-start justify-between mb-5">
+                    <div className="p-3 rounded-xl text-white shadow-sm group-hover:scale-110 transition-transform" style={{ backgroundColor: color }}>
+                        <Icon size={22} />
+                    </div>
+                    <span className="text-5xl font-black text-gray-100 leading-none">{String(number).padStart(2, '0')}</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-800">{title}</h3>
+                <p className="text-gray-600 leading-relaxed">{body}</p>
+            </div>
+        );
+
+        const KidsCard = ({ ageRange, title, description, icon: Icon, color }) => (
+            <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 ring-1 ring-gray-100 group">
+                <div className="p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-3 rounded-xl text-white shadow-sm" style={{ backgroundColor: color }}>
+                            <Icon size={22} />
+                        </div>
+                        <span className="text-xs font-bold tracking-widest uppercase text-gray-500">{ageRange}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 text-gray-800">{title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{description}</p>
+                </div>
+                <div className="h-1.5" style={{ backgroundColor: color }}></div>
+            </div>
+        );
+
+        const TimelineItem = ({ time, title, description, isLast }) => (
+            <div className="relative flex gap-6 pb-10 last:pb-0">
+                {!isLast && <div className="absolute left-[19px] top-12 bottom-0 w-0.5 bg-tealLight/40"></div>}
+                <div className="relative shrink-0 w-10 h-10 rounded-full bg-tealDark flex items-center justify-center text-white shadow-md ring-4 ring-white">
+                    <Clock size={16} />
+                </div>
+                <div className="pt-1.5">
+                    <div className="text-tealDark font-bold text-sm tracking-wider uppercase mb-1">{time}</div>
+                    <h4 className="text-lg font-bold text-gray-800 mb-1">{title}</h4>
+                    <p className="text-gray-600 leading-relaxed">{description}</p>
+                </div>
+            </div>
+        );
+
+        const FAQItem = ({ question, answer }) => {
+            const [open, setOpen] = useState(false);
+            return (
+                <div className="border-b border-gray-200 last:border-b-0">
+                    <button
+                        onClick={() => setOpen(!open)}
+                        className="w-full flex items-center justify-between py-5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange/60 rounded"
+                        aria-expanded={open}
+                    >
+                        <span className="font-bold text-lg text-gray-800 group-hover:text-tealDark transition-colors pr-6">{question}</span>
+                        <ChevronDown size={22} className={`shrink-0 text-tealDark transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`grid transition-all duration-300 ease-out ${open ? 'grid-rows-[1fr] opacity-100 pb-5' : 'grid-rows-[0fr] opacity-0'}`}>
+                        <div className="overflow-hidden">
+                            <p className="text-gray-600 leading-relaxed">{answer}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // NOTE: This is a static/prototype form. On GHL, replace this whole block
+        // with a native GHL form widget so submissions land in the CRM and trigger workflows.
+        const VisitForm = () => {
+            const [submitted, setSubmitted] = useState(false);
+            return (
+                <form
+                    onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+                    className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl ring-1 ring-gray-100 space-y-5"
+                >
+                    {submitted ? (
+                        <div className="text-center py-8">
+                            <div className="w-14 h-14 rounded-full bg-tealLight/20 text-tealDark flex items-center justify-center mx-auto mb-4">
+                                <Heart size={28} />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-2">We can't wait to meet you!</h3>
+                            <p className="text-gray-600">Look out for a welcome email shortly with everything you need for Sunday.</p>
+                        </div>
+                    ) : (
+                        <>
+                            <div>
+                                <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-name">Your Name</label>
+                                <input id="vf-name" name="name" required type="text" placeholder="Jane Doe"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition" />
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-email">Email</label>
+                                    <input id="vf-email" name="email" required type="email" placeholder="jane@example.com"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-phone">Phone <span className="text-gray-400 font-normal">(optional)</span></label>
+                                    <input id="vf-phone" name="phone" type="tel" placeholder="(555) 555-5555"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition" />
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-sunday">Which Sunday?</label>
+                                    <select id="vf-sunday" name="sunday"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition bg-white">
+                                        <option>This Sunday</option>
+                                        <option>Next Sunday</option>
+                                        <option>I'm not sure yet</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-kids">Bringing kids?</label>
+                                    <select id="vf-kids" name="kids"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition bg-white">
+                                        <option>Just me / us</option>
+                                        <option>Yes — nursery (0–3)</option>
+                                        <option>Yes — elementary (4–11)</option>
+                                        <option>Yes — youth (12–18)</option>
+                                        <option>Yes — multiple ages</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wide" htmlFor="vf-notes">Anything we should know? <span className="text-gray-400 font-normal">(optional)</span></label>
+                                <textarea id="vf-notes" name="notes" rows="3" placeholder="Questions, accessibility needs, prayer requests…"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-tealDark focus:ring-2 focus:ring-tealDark/20 outline-none transition resize-none"></textarea>
+                            </div>
+                            <button type="submit"
+                                className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-orange hover:bg-[#c9451f] text-white font-bold rounded-lg transition-all transform hover:scale-[1.02] shadow-lg">
+                                Plan My Visit <ChevronRight size={20} />
+                            </button>
+                            <p className="text-xs text-gray-400 text-center">We'll never share your info. Expect a personal welcome email within 24 hours.</p>
+                        </>
+                    )}
+                </form>
+            );
+        };
+        function App() {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <div className="font-sans text-gray-800 bg-gray-50 min-h-screen selection:bg-tealLight selection:text-white">
+                    <FullScreenMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+
+                    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 px-6 flex justify-between items-center ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
+                        <Logo />
+                        <button
+                            onClick={() => setIsMenuOpen(true)}
+                            className={`group flex items-center gap-3 px-4 py-2 rounded-full transition-all ${scrolled ? 'bg-gray-100 hover:bg-gray-200' : 'bg-gray-100/80 hover:bg-gray-200'}`}
+                            aria-label="Open navigation menu"
+                        >
+                            <span className="hidden md:block font-bold text-sm tracking-widest uppercase text-gray-800">Menu</span>
+                            <div className="p-2 bg-dark text-white rounded-full group-hover:bg-orange transition-colors">
+                                <Menu size={20} />
+                            </div>
+                        </button>
+                    </header>
+
+                    {/* --- Hero --- */}
+                    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6 bg-gradient-to-b from-tealDark via-tealDark to-[#085050] text-white overflow-hidden">
+                        <div className="absolute bottom-0 left-0 w-full h-40 opacity-25 pointer-events-none">
+                            <GeometricMountains className="w-full h-full" tone="light" />
+                        </div>
+                        <div className="absolute top-20 -right-20 w-96 h-96 bg-orange rounded-full mix-blend-overlay filter blur-3xl opacity-30 pointer-events-none"></div>
+
+                        <div className="max-w-5xl mx-auto relative z-10 text-center">
+                            <span className="inline-block py-1.5 px-4 rounded-full bg-gold/95 text-black text-xs font-bold tracking-widest mb-6 shadow-md animate-[slideIn_0.6s_ease-out_forwards]">
+                                FIRST TIME? START HERE
+                            </span>
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 animate-[slideIn_0.6s_ease-out_forwards]" style={{ animationDelay: '100ms' }}>
+                                We're so glad <br className="hidden md:block" />you're here.
+                            </h1>
+                            <p className="text-lg md:text-xl text-teal-50/90 max-w-2xl mx-auto mb-10 leading-relaxed animate-[slideIn_0.6s_ease-out_forwards]" style={{ animationDelay: '200ms' }}>
+                                Visiting a new church can feel intimidating. We've put everything you need on this page — what to expect, where to go, and how to make Sunday simple.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-[slideIn_0.6s_ease-out_forwards]" style={{ animationDelay: '300ms' }}>
+                                <a href="#plan-visit" className="px-8 py-4 bg-orange hover:bg-[#c9451f] text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg inline-flex items-center justify-center gap-2">
+                                    Plan Your Visit <ChevronRight size={18} />
+                                </a>
+                                <a href="#expect" className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white font-bold rounded-lg hover:bg-white/20 transition-all inline-flex items-center justify-center gap-2">
+                                    What to Expect
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* --- A Note from the Pastor --- */}
+                    <section className="py-20 md:py-28 px-6 bg-white">
+                        <div className="max-w-5xl mx-auto grid md:grid-cols-[260px_1fr] gap-10 md:gap-14 items-center">
+                            <RevealOnScroll>
+                                <div className="relative aspect-square w-full max-w-[260px] mx-auto rounded-full overflow-hidden bg-gray-200 ring-4 ring-gold/30 shadow-xl">
+                                    {/* TODO: replace with pastor headshot (square, ~600x600). */}
+                                    <div className="absolute inset-0 bg-dark flex items-center justify-center">
+                                        <span className="text-gray-500 text-xs font-bold tracking-widest uppercase text-center px-4">Pastor Photo</span>
+                                    </div>
+                                </div>
+                            </RevealOnScroll>
+                            <RevealOnScroll delay={150}>
+                                <div>
+                                    <span className="text-orange font-bold tracking-widest uppercase text-sm mb-3 block">A Note From Our Pastor</span>
+                                    <SectionHeading>Whoever you are, <br className="hidden md:block" />you belong here.</SectionHeading>
+                                    <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                                        Whether you've followed Jesus your whole life or you've never set foot in a church, our hope is the same — that you'd encounter the love of God and feel like part of the family from the moment you walk in.
+                                    </p>
+                                    <p className="text-gray-600 text-lg leading-relaxed">
+                                        Come as you are. Bring your questions. We'll save you a seat.
+                                    </p>
+                                    {/* TODO: replace with real pastor name + title once finalized. */}
+                                    <div className="mt-6 text-gray-800 font-bold">— Pastor [Name], Lead Pastor</div>
+                                </div>
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+
+                    {/* --- What to Expect --- */}
+                    <section id="expect" className="py-20 md:py-28 px-6 bg-gray-50">
+                        <div className="max-w-6xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center max-w-2xl mx-auto mb-16">
+                                    <span className="text-tealDark font-bold tracking-widest uppercase text-sm mb-3 block">Your Sunday, Step by Step</span>
+                                    <SectionHeading>What to expect when you visit</SectionHeading>
+                                    <p className="text-gray-600 text-lg leading-relaxed">From the parking lot to the closing song, here's how Sunday morning flows.</p>
+                                </div>
+                            </RevealOnScroll>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <RevealOnScroll delay={0}><ExpectStep number={1} icon={MapPin} title="Arrive & Park" body="Pull into our main lot and look for the orange 'New Here' signs near the entrance. Our parking team will wave you to a guest spot up front." color={colors.orange} /></RevealOnScroll>
+                                <RevealOnScroll delay={150}><ExpectStep number={2} icon={Users} title="Get Welcomed" body="Stop by the Welcome Tent just inside the front doors. We'll get you a name tag, hand you a gift, and walk you wherever you need to go." color={colors.tealDark} /></RevealOnScroll>
+                                <RevealOnScroll delay={300}><ExpectStep number={3} icon={Coffee} title="Grab a Coffee" body="Free coffee, tea, and donuts in the lobby. Plenty of time before service to settle in, meet someone new, or just sit and breathe." color={colors.gold} /></RevealOnScroll>
+                                <RevealOnScroll delay={450}><ExpectStep number={4} icon={Music} title="Worship Together" body="Service is about 75 minutes — a few worship songs, an announcement or two, and a Bible-based message you can actually take home." color={colors.cyan} /></RevealOnScroll>
+                            </div>
+                        </div>
+                    </section>
+                    {/* --- What To Wear / Vibe --- */}
+                    <section className="py-20 md:py-24 px-6 bg-tealDark text-white relative overflow-hidden">
+                        <div className="absolute bottom-0 right-0 w-2/3 h-full opacity-10 pointer-events-none">
+                            <GeometricMountains className="w-full h-full" />
+                        </div>
+                        <div className="max-w-4xl mx-auto relative z-10 text-center">
+                            <RevealOnScroll>
+                                <Sparkles size={36} className="text-gold mx-auto mb-6" />
+                                <span className="text-gold font-bold tracking-widest uppercase text-sm mb-3 block">The Most Asked Question</span>
+                                <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">"What should I wear?"</h2>
+                                <p className="text-teal-50/90 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+                                    Honestly — whatever you're comfortable in. You'll see jeans and t-shirts, sundresses, button-downs, and the occasional cowboy boot. There's no dress code. Just come.
+                                </p>
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+
+                    {/* --- Kids & Youth --- */}
+                    <section className="py-20 md:py-28 px-6 bg-white">
+                        <div className="max-w-6xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center max-w-2xl mx-auto mb-16">
+                                    <span className="text-orange font-bold tracking-widest uppercase text-sm mb-3 block">For Your Family</span>
+                                    <SectionHeading>A safe, fun place for every age</SectionHeading>
+                                    <p className="text-gray-600 text-lg leading-relaxed">
+                                        Every kids' room is staffed by background-checked volunteers. Check-in takes about 5 minutes — we'll print you a matching tag so only you can pick them up.
+                                    </p>
+                                </div>
+                            </RevealOnScroll>
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <RevealOnScroll delay={0}>
+                                    <KidsCard ageRange="Ages 0–3" title="Nursery" icon={Baby}
+                                        description="A bright, calm space staffed by trained caregivers. Cribs, snacks, and a check-in system that texts you if your little one needs you."
+                                        color={colors.tealLight} />
+                                </RevealOnScroll>
+                                <RevealOnScroll delay={150}>
+                                    <KidsCard ageRange="Ages 4–11" title="Elementary" icon={Sparkles}
+                                        description="Bible-based lessons that meet kids where they are — with worship, games, small group time, and a memory verse to take home."
+                                        color={colors.orange} />
+                                </RevealOnScroll>
+                                <RevealOnScroll delay={300}>
+                                    <KidsCard ageRange="Ages 12–18" title="Youth" icon={Users}
+                                        description="Middle and high schoolers meet Sundays during service plus Wednesdays at 7 PM for worship, teaching, and small groups."
+                                        color={colors.gold} />
+                                </RevealOnScroll>
+                            </div>
+                            <RevealOnScroll delay={400}>
+                                <div className="mt-12 max-w-3xl mx-auto bg-gray-50 rounded-2xl p-6 md:p-8 ring-1 ring-gray-100 flex items-start gap-4">
+                                    <div className="shrink-0 p-3 rounded-xl bg-tealDark text-white">
+                                        <Heart size={20} />
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-gray-800 mb-1">Have a child with special needs?</div>
+                                        <p className="text-gray-600 leading-relaxed">Mention it on the visit form below or call us ahead — we'll have a buddy ready and a quiet space available if you'd like one.</p>
+                                    </div>
+                                </div>
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+
+                    {/* --- Service Flow Timeline --- */}
+                    <section className="py-20 md:py-28 px-6 bg-gray-50">
+                        <div className="max-w-4xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center max-w-2xl mx-auto mb-14">
+                                    <span className="text-tealDark font-bold tracking-widest uppercase text-sm mb-3 block">75 Minutes</span>
+                                    <SectionHeading>What happens during the service</SectionHeading>
+                                    <p className="text-gray-600 text-lg leading-relaxed">
+                                        Roughly how Sunday morning unfolds. Nothing weird, nothing unexpected — just worship, the Bible, and time to respond.
+                                    </p>
+                                </div>
+                            </RevealOnScroll>
+                            <RevealOnScroll delay={150}>
+                                <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm ring-1 ring-gray-100">
+                                    <TimelineItem time="9:30 AM" title="Doors Open" description="Coffee, donuts, and a chance to meet someone before service. Kids' check-in opens at the same time." />
+                                    <TimelineItem time="10:00 AM" title="Worship Begins" description="3–4 contemporary worship songs led by our band. Sing along, sit, stand — whatever feels right." />
+                                    <TimelineItem time="10:15 AM" title="Welcome & Announcements" description="A quick hello, a few things happening this week, and a moment to greet the people around you." />
+                                    <TimelineItem time="10:25 AM" title="Bible Teaching" description="A 30–35 minute message from one of our pastors, walking through a passage of Scripture and applying it to real life." />
+                                    <TimelineItem time="11:00 AM" title="Closing & Response" description="A final song and a chance to respond — whether that's prayer, communion (first Sunday of the month), or just sitting in stillness." isLast />
+                                </div>
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+                    {/* --- Where & When --- */}
+                    <section className="py-20 md:py-28 px-6 bg-white">
+                        <div className="max-w-6xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center max-w-2xl mx-auto mb-14">
+                                    <span className="text-orange font-bold tracking-widest uppercase text-sm mb-3 block">Find Us</span>
+                                    <SectionHeading>Where &amp; when we meet</SectionHeading>
+                                </div>
+                            </RevealOnScroll>
+                            <div className="grid md:grid-cols-[1fr_1.4fr] gap-8 items-stretch">
+                                <RevealOnScroll>
+                                    <div className="bg-gradient-to-br from-tealDark to-[#085050] text-white rounded-2xl p-8 md:p-10 shadow-xl h-full flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex items-start gap-4 mb-8">
+                                                <div className="shrink-0 p-3 rounded-xl bg-white/15"><MapPin size={22} /></div>
+                                                <div>
+                                                    <div className="text-gold text-xs font-bold tracking-widest uppercase mb-1">Address</div>
+                                                    {/* TODO: replace with real church address. */}
+                                                    <div className="text-lg font-semibold leading-snug">12345 Church Road<br />Temecula, CA 92592</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-4 mb-8">
+                                                <div className="shrink-0 p-3 rounded-xl bg-white/15"><Calendar size={22} /></div>
+                                                <div>
+                                                    <div className="text-gold text-xs font-bold tracking-widest uppercase mb-1">Service Times</div>
+                                                    <div className="text-lg font-semibold leading-snug">Sundays · 10:00 AM<br /><span className="text-white/70 text-base font-normal">Youth · Wednesdays 7:00 PM</span></div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-start gap-4">
+                                                <div className="shrink-0 p-3 rounded-xl bg-white/15"><Coffee size={22} /></div>
+                                                <div>
+                                                    <div className="text-gold text-xs font-bold tracking-widest uppercase mb-1">Doors Open</div>
+                                                    <div className="text-lg font-semibold leading-snug">9:30 AM <span className="text-white/70 text-base font-normal">— grab a coffee</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* TODO: replace href with the church's Google Maps directions link. */}
+                                        <a href="https://maps.google.com/?q=Temecula,+CA" target="_blank" rel="noopener" className="mt-10 inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange hover:bg-[#c9451f] text-white font-bold rounded-lg transition-all">
+                                            Get Directions <ChevronRight size={18} />
+                                        </a>
+                                    </div>
+                                </RevealOnScroll>
+                                <RevealOnScroll delay={150}>
+                                    <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-gray-100 h-full min-h-[400px]">
+                                        {/* TODO: replace src with an embed URL for the real church address (Google Maps → Share → Embed a map). */}
+                                        <iframe
+                                            title="Map to Temecula Hills Christian Fellowship"
+                                            src="https://www.google.com/maps?q=Temecula,+CA&output=embed"
+                                            className="w-full h-full min-h-[400px] border-0"
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                </RevealOnScroll>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* --- Plan Your Visit Form --- */}
+                    <section id="plan-visit" className="py-20 md:py-28 px-6 bg-gray-100 relative overflow-hidden">
+                        <div className="absolute -top-20 -left-20 w-96 h-96 bg-tealLight rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+                        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-orange rounded-full mix-blend-multiply filter blur-3xl opacity-15 pointer-events-none"></div>
+                        <div className="max-w-3xl mx-auto relative z-10">
+                            <RevealOnScroll>
+                                <div className="text-center mb-10">
+                                    <span className="inline-block py-2 px-4 rounded-full bg-tealDark text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-md">Plan Your Visit</span>
+                                    <SectionHeading>Let us know you're coming</SectionHeading>
+                                    <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                                        Fill this out and we'll have a welcome bag with your name on it, a reserved parking spot up front, and a real person to meet you at the door.
+                                    </p>
+                                </div>
+                            </RevealOnScroll>
+                            <RevealOnScroll delay={150}>
+                                <VisitForm />
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+
+                    {/* --- FAQ --- */}
+                    <section className="py-20 md:py-28 px-6 bg-white">
+                        <div className="max-w-3xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center mb-12">
+                                    <span className="text-orange font-bold tracking-widest uppercase text-sm mb-3 block">Still Wondering?</span>
+                                    <SectionHeading>Common questions</SectionHeading>
+                                </div>
+                            </RevealOnScroll>
+                            <RevealOnScroll delay={150}>
+                                <div className="bg-gray-50 rounded-2xl px-6 md:px-10 ring-1 ring-gray-100">
+                                    <FAQItem question="Where do I park?" answer="Pull into the main lot off Church Road. Look for the orange 'New Here' signs — our parking team will wave you to a guest spot up front. There's accessible parking right by the main entrance." />
+                                    <FAQItem question="How long is the service?" answer="About 75 minutes — start to finish. Worship is around 20 minutes, the message is 30–35 minutes, and the rest is welcome, announcements, and a closing song." />
+                                    <FAQItem question="Do you celebrate communion?" answer="Yes — on the first Sunday of every month. It's open to anyone who follows Jesus, and we'll walk you through what to do if it's your first time." />
+                                    <FAQItem question="Is there a dress code?" answer="Nope. Come in whatever you're comfortable in — jeans, dresses, shorts, suits. You'll see all of it." />
+                                    <FAQItem question="What if I have questions about faith?" answer="Bring them. Stop by the Welcome Tent after service or use the form above to let us know — a pastor or Connect team member will follow up personally." />
+                                    <FAQItem question="Can I just observe without being singled out?" answer="Absolutely. We won't ask visitors to stand up, raise hands, or fill anything out unless you want to. Sit, listen, leave — no pressure." />
+                                    <FAQItem question="Is the building accessible?" answer="Yes. Step-free entry from the parking lot, accessible restrooms, and assistive listening available at the sound booth. Mention any specific needs on the visit form and we'll have everything ready." />
+                                </div>
+                            </RevealOnScroll>
+                        </div>
+                    </section>
+
+                    {/* --- Footer --- */}
+                    <footer id="contact" className="bg-[#1a1a1a] text-white pt-20 pb-10">
+                        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
+                            <div className="md:col-span-2">
+                                <div className="flex items-center gap-2 mb-6">
+                                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                                        <svg viewBox="0 0 100 100" className="w-6 h-6">
+                                            <path d="M10,90 L35,40 L60,90 Z" fill={colors.dark} />
+                                            <path d="M40,90 L65,30 L90,90 Z" fill={colors.dark} />
+                                        </svg>
+                                    </div>
+                                    <span className="font-bold text-xl tracking-wider">TEMECULA HILLS</span>
+                                </div>
+                                <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">Making disciples who love God and love people. Join us this week for service.</p>
+                                {/* TODO: replace href values with real church social URLs. */}
+                                <div className="flex gap-3">
+                                    <a href="#" aria-label="Facebook" className="w-10 h-10 bg-gray-800 rounded-full hover:bg-orange transition-colors flex items-center justify-center text-white"><FacebookIcon /></a>
+                                    <a href="#" aria-label="Instagram" className="w-10 h-10 bg-gray-800 rounded-full hover:bg-orange transition-colors flex items-center justify-center text-white"><InstagramIcon /></a>
+                                    <a href="#" aria-label="YouTube" className="w-10 h-10 bg-gray-800 rounded-full hover:bg-orange transition-colors flex items-center justify-center text-white"><YouTubeIcon /></a>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-base mb-5 text-gold tracking-wider uppercase">Visit Us</h4>
+                                <div className="flex items-start gap-3 mb-4 text-gray-400">
+                                    <MapPin size={20} className="shrink-0 mt-1" />
+                                    <span className="leading-relaxed">12345 Church Road<br />Temecula, CA 92592</span>
+                                </div>
+                                <div className="flex items-start gap-3 text-gray-400">
+                                    <Calendar size={20} className="shrink-0 mt-1" />
+                                    <span className="leading-relaxed">Sundays: 10:00 AM<br />Wednesdays: 7:00 PM</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-base mb-5 text-tealLight tracking-wider uppercase">Quick Links</h4>
+                                <ul className="space-y-3 text-gray-400">
+                                    <li><a href="index.html" className="hover:text-white transition-colors">Home</a></li>
+                                    <li><a href="index.html#about" className="hover:text-white transition-colors">About Us</a></li>
+                                    <li><a href="index.html#sermons" className="hover:text-white transition-colors">Sermons</a></li>
+                                    {/* TODO: replace with church giving URL. */}
+                                    <li><a href="index.html#contact" className="hover:text-white transition-colors">Give Online</a></li>
+                                    <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="border-t border-gray-800 pt-8 text-center text-gray-600 text-sm">
+                            <p>&copy; {new Date().getFullYear()} Temecula Hills Christian Fellowship. All rights reserved.</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
