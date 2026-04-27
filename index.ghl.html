@@ -1,0 +1,587 @@
+<!-- Temecula Hills Christian Fellowship - Home page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--gray-800);background:var(--gray-50)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--teal{background:var(--teal-dark);color:#fff;position:relative;overflow:hidden}
+.thcf-section--teal h2,.thcf-section--teal h3{color:#fff}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
+.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
+.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding:0 96px 48px;align-items:center}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:0 32px 48px}}
+.thcf-menu-nav a{display:block;font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,color .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold);pointer-events:none}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.92s}
+.thcf-menu-side{color:rgba(255,255,255,.9);opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-side{opacity:1;transform:translateY(0)}
+@media (max-width:768px){.thcf-menu-side{display:none}}
+.thcf-menu-block{border-left:2px solid var(--orange);padding-left:20px;margin-bottom:28px}
+.thcf-menu-block:nth-child(2){border-left-color:var(--teal-light)}
+.thcf-menu-block-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.thcf-menu-block:nth-child(2) .thcf-menu-block-eyebrow{color:var(--teal-light)}
+.thcf-menu-block strong{display:block;font-weight:700;font-size:17px;color:#fff;margin-bottom:2px}
+.thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
+/* === Hero (full-screen, dark with mountain SVG) === */
+.thcf-hero{position:relative;min-height:88vh;padding:clamp(120px,16vw,180px) 24px clamp(96px,12vw,140px);background:linear-gradient(180deg,#0e3940 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.thcf-hero-blob{position:absolute;top:80px;right:-100px;width:440px;height:440px;background:var(--orange);border-radius:50%;filter:blur(90px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-120px;left:-100px;width:380px;height:380px;background:var(--gold);border-radius:50%;filter:blur(100px);opacity:.22;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:200px;opacity:.30;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:1000px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.18);animation:thcf-fadein .8s ease-out .1s both}
+.thcf-hero h1{font-size:clamp(40px,7.5vw,88px);font-weight:900;letter-spacing:-.025em;line-height:1.02;margin-bottom:24px;color:#fff;animation:thcf-fadein .9s ease-out .2s both}
+.thcf-hero h1 .accent{color:var(--gold);font-style:italic;font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.thcf-hero p{font-size:clamp(17px,2vw,22px);color:rgba(220,255,250,.92);max-width:680px;margin:0 auto 36px;line-height:1.6;animation:thcf-fadein 1s ease-out .3s both}
+.thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:thcf-fadein 1.1s ease-out .45s both}
+@keyframes thcf-fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* === Service Times callout (3 cards, sits at hero/section boundary) === */
+.thcf-service-wrap{background:#fff;padding:0 24px;margin-top:clamp(-72px,-7vw,-90px);position:relative;z-index:5}
+.thcf-service-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.thcf-service-grid{grid-template-columns:1fr;margin-top:-40px}}
+.thcf-service-card{background:#fff;border-radius:20px;padding:32px 28px;box-shadow:0 24px 48px rgba(0,0,0,.10),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;gap:6px}
+.thcf-service-card:hover{transform:translateY(-4px);box-shadow:0 28px 56px rgba(0,0,0,.13)}
+.thcf-service-icon{width:52px;height:52px;border-radius:14px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:10px;box-shadow:0 6px 14px rgba(0,0,0,.10)}
+.thcf-service-card .label{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--accent,var(--teal-dark))}
+.thcf-service-card h3{font-size:22px;font-weight:800;color:var(--gray-800);line-height:1.18}
+.thcf-service-card p{color:var(--gray-600);font-size:14.5px;line-height:1.65}
+/* === About preview (2-col image + text) === */
+.thcf-about-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:5fr 6fr;gap:56px;align-items:center}
+@media (max-width:900px){.thcf-about-grid{grid-template-columns:1fr;gap:40px}}
+.thcf-about-img{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,var(--teal-dark) 0%,#0e3940 100%);box-shadow:0 30px 60px rgba(0,0,0,.18)}
+.thcf-about-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-about-img .accent{position:absolute;left:-16px;bottom:-16px;width:72px;height:72px;border-radius:18px;background:var(--gold)}
+.thcf-about-text .thcf-eyebrow{color:var(--orange);position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-about-text .thcf-eyebrow::before{content:"";position:absolute;top:0;left:0;width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+.thcf-about-text h2{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;margin-bottom:18px}
+.thcf-about-text p{color:var(--gray-600);font-size:17px;line-height:1.75;margin-bottom:16px}
+
+/* === Sermon section === */
+.thcf-sermon{background:linear-gradient(135deg,var(--teal-dark) 0%,#085050 100%);color:#fff;position:relative;overflow:hidden}
+.thcf-sermon::before{content:"";position:absolute;top:-100px;right:-80px;width:340px;height:340px;border-radius:50%;background:var(--orange);filter:blur(80px);opacity:.20;pointer-events:none}
+.thcf-sermon::after{content:"";position:absolute;bottom:-100px;left:-80px;width:280px;height:280px;border-radius:50%;background:var(--gold);filter:blur(80px);opacity:.18;pointer-events:none}
+.thcf-sermon-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto}
+.thcf-sermon-head{text-align:center;margin-bottom:36px}
+.thcf-sermon-head .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:14px}
+.thcf-sermon-head h2{font-size:clamp(28px,4.4vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.15;margin-bottom:14px;color:#fff}
+.thcf-sermon-head p{color:rgba(220,255,250,.85);font-size:16.5px;line-height:1.65;max-width:600px;margin:0 auto}
+.thcf-sermon-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:clamp(24px,3.5vw,40px);backdrop-filter:blur(8px)}
+.thcf-sermon-slot{aspect-ratio:16/9;background:rgba(0,0,0,.40);border:2px dashed rgba(255,255,255,.30);border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:rgba(255,255,255,.75)}
+.thcf-sermon-slot strong{display:block;font-size:14px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.thcf-sermon-slot small{display:block;font-size:13px;line-height:1.6;max-width:480px;margin:6px auto 0}
+.thcf-sermon-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:24px}
+.thcf-sermon-actions .platform{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:13px;font-weight:700;transition:background .2s}
+.thcf-sermon-actions .platform:hover{background:rgba(255,255,255,.18)}
+
+/* === I'm New band === */
+.thcf-imnew{background:var(--gray-50)}
+.thcf-imnew-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+@media (max-width:900px){.thcf-imnew-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-imnew-text .thcf-eyebrow{color:var(--orange);position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-imnew-text .thcf-eyebrow::before{content:"";position:absolute;top:0;left:0;width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+.thcf-imnew-text h2{font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.18;margin-bottom:16px}
+.thcf-imnew-text p{color:var(--gray-600);font-size:17px;line-height:1.75;margin-bottom:18px}
+.thcf-imnew-checks{display:flex;flex-direction:column;gap:10px;margin:18px 0 24px}
+.thcf-imnew-check{display:flex;align-items:flex-start;gap:10px;color:var(--gray-700);font-size:15px;line-height:1.55}
+.thcf-imnew-check svg{flex-shrink:0;color:var(--orange);margin-top:2px}
+.thcf-imnew-card{background:#fff;border-radius:24px;padding:clamp(28px,3.6vw,40px);box-shadow:0 24px 48px rgba(0,0,0,.08),0 0 0 1px var(--gray-100)}
+.thcf-imnew-card-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.thcf-imnew-card-icon{width:46px;height:46px;border-radius:12px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center}
+.thcf-imnew-card h3{font-size:19px;font-weight:800;color:var(--gray-800);line-height:1.2}
+.thcf-imnew-card .row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--gray-100);font-size:14.5px}
+.thcf-imnew-card .row:last-of-type{border-bottom:0}
+.thcf-imnew-card .row .label{color:var(--gray-500);font-weight:600;font-size:11.5px;letter-spacing:.10em;text-transform:uppercase}
+.thcf-imnew-card .row .value{color:var(--gray-800);font-weight:700;text-align:right}
+.thcf-imnew-card .thcf-btn{margin-top:18px;width:100%}
+
+/* === Ministries quick-grid === */
+.thcf-ministries-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:1024px){.thcf-ministries-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.thcf-ministries-grid{grid-template-columns:1fr}}
+.thcf-mini-ministry{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;height:100%}
+.thcf-mini-ministry:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.10)}
+.thcf-mini-ministry-icon{width:42px;height:42px;border-radius:12px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.thcf-mini-ministry h4{font-size:15.5px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.thcf-mini-ministry p{color:var(--gray-600);font-size:13px;line-height:1.55;flex:1}
+.thcf-mini-ministry .more{margin-top:10px;font-size:12px;font-weight:700;color:var(--accent,var(--teal-dark));display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
+.thcf-mini-ministry:hover .more{gap:8px}
+/* === Give preview / closing CTA === */
+.thcf-give{position:relative;background:linear-gradient(135deg,var(--orange) 0%,#d04a26 100%);color:#fff;overflow:hidden}
+.thcf-give::before{content:"";position:absolute;top:-100px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.10);pointer-events:none}
+.thcf-give::after{content:"";position:absolute;bottom:-120px;left:-100px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.thcf-give-inner{position:relative;z-index:2;max-width:840px;margin:0 auto;text-align:center;padding:0 8px}
+.thcf-give .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.18);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:18px}
+.thcf-give h2{font-size:clamp(28px,4.4vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.15;margin-bottom:18px;color:#fff}
+.thcf-give p{font-size:clamp(16px,1.6vw,18px);color:rgba(255,255,255,.92);max-width:600px;margin:0 auto 32px;line-height:1.65}
+.thcf-give-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.thcf-give .thcf-btn--white{background:#fff;color:var(--orange);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.thcf-give .thcf-btn--white:hover{background:var(--gray-50);transform:translateY(-1px)}
+.thcf-give .thcf-btn--outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+.thcf-give .thcf-btn--outline-white:hover{background:rgba(255,255,255,.12)}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-home">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      </span>
+      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav">
+      <a href="#" class="is-active">HOME</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">ABOUT</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
+      <a href="#thcf-sermon" data-thcf-menu-close>SERMONS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+      <a href="#thcf-contact" data-thcf-menu-close>CONTACT</a>
+    </nav>
+    <aside class="thcf-menu-side">
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Join Us</div>
+        <strong>Sundays at 8:45 &amp; 10:30 AM</strong>
+        <span class="sub">Wednesdays · Youth 7:00 PM</span>
+      </div>
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Visit</div>
+        <span class="sub">28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </div>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu" class="thcf-btn thcf-btn--orange" data-thcf-menu-close>Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </aside>
+  </div>
+</div>
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">TEMECULA HILLS · CHRISTIAN FELLOWSHIP</span>
+    <h1>A church for everyone,<br>by <span class="accent">grace</span>.</h1>
+    <p>Whether you've been walking with Jesus for decades or you're just exploring — there's a seat with your name on it. Two services every Sunday morning in the Temecula Valley.</p>
+    <div class="thcf-hero-cta">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu" class="thcf-btn thcf-btn--orange">Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="#thcf-sermon" class="thcf-btn thcf-btn--outline-light">Latest Sermon</a>
+    </div>
+  </div>
+</section>
+<!-- ============ SERVICE TIMES CARDS (overlap hero) ============ -->
+<div class="thcf-service-wrap">
+  <div class="thcf-service-grid">
+    <div class="thcf-service-card thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <span class="label">Sunday Worship</span>
+      <h3>8:45 &amp; 10:30 AM</h3>
+      <p>Two services every Sunday — same teaching, same flow. Mountain Mover Kids ministry runs at both.</p>
+    </div>
+    <div class="thcf-service-card thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <span class="label">Find Us</span>
+      <h3>28780 Single Oak Drive</h3>
+      <p>Temecula, CA 92590. Ample parking, accessible entry, and the orange "New Here" signs to point you in.</p>
+    </div>
+    <div class="thcf-service-card thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <span class="label">First Time?</span>
+      <h3>You're Welcome</h3>
+      <p>No pressure, no awkward icebreakers. Plan your visit and we'll have a welcome bag with your name on it.</p>
+    </div>
+  </div>
+</div>
+<!-- ============ ABOUT PREVIEW ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-about">
+  <div class="thcf-about-grid">
+    <div class="thcf-reveal">
+      <div class="thcf-about-img">
+        <!-- TODO: replace with real church photo (recommended ~1200x1500). -->
+        <div class="ph">Church Photo</div>
+        <div class="accent" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="thcf-about-text thcf-reveal">
+      <span class="thcf-eyebrow">Who We Are</span>
+      <h2>A community on a mission.</h2>
+      <p>We're a community of believers in Temecula, CA, dedicated to knowing Jesus and making Him known. Our church is more than a building — it's a family where everyone is welcome.</p>
+      <p>Whether you've been a Christian for years or you're just exploring faith, there's a place for you here at Temecula Hills.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+        <a class="thcf-btn thcf-btn--teal" href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">Read Our Story
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="thcf-btn thcf-btn--outline-dark" href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">What We Believe</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ SERMON ============ -->
+<section class="thcf-section thcf-sermon" id="thcf-sermon">
+  <div class="thcf-sermon-inner">
+    <div class="thcf-sermon-head thcf-reveal">
+      <span class="pill">LATEST SERMON</span>
+      <h2>Catch up on Sunday's message.</h2>
+      <p>Missed a Sunday? Hear it on the way to work, on a walk, while you cook. New messages drop every week.</p>
+    </div>
+    <div class="thcf-sermon-card thcf-reveal">
+      <!-- SERMON EMBED START -->
+      <!-- Replace the .thcf-sermon-slot block below with your sermon embed code.
+           Common patterns:
+             YouTube  -> <iframe src="https://www.youtube.com/embed/VIDEO_ID" ...></iframe>
+             Vimeo    -> <iframe src="https://player.vimeo.com/video/VIDEO_ID" ...></iframe>
+             Spotify  -> <iframe src="https://open.spotify.com/embed/episode/EPISODE_ID" ...></iframe>
+             Apple    -> <iframe src="https://embed.podcasts.apple.com/..." ...></iframe>
+             Custom   -> <audio> or <video> tag with your hosted file -->
+      <div class="thcf-sermon-slot">
+        <div>
+          <strong>Sermon Embed Goes Here</strong>
+          <small>Paste your YouTube, Vimeo, Spotify, or Apple Podcasts embed in this slot. Until then, the buttons below link out to wherever the church publishes sermons.</small>
+        </div>
+      </div>
+      <!-- SERMON EMBED END -->
+      <div class="thcf-sermon-actions">
+        <!-- TODO: replace href with the church's YouTube channel. -->
+        <a class="platform" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+          Watch on YouTube
+        </a>
+        <!-- TODO: replace href with the church's Spotify show. -->
+        <a class="platform" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.94-.539-.12-.421.18-.78.54-.94 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.342 1.06zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.301.421-1.021.599-1.561.3z"/></svg>
+          Listen on Spotify
+        </a>
+        <!-- TODO: replace href with the church's Apple Podcasts show. -->
+        <a class="platform" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12c0 5.21 3.32 9.64 7.96 11.32-.11-.96-.21-2.43.04-3.48.23-.95 1.49-6.05 1.49-6.05s-.38-.76-.38-1.88c0-1.76 1.02-3.08 2.29-3.08 1.08 0 1.6.81 1.6 1.78 0 1.09-.69 2.71-1.05 4.21-.3 1.26.63 2.28 1.86 2.28 2.24 0 3.96-2.36 3.96-5.77 0-3.02-2.17-5.13-5.27-5.13-3.59 0-5.7 2.69-5.7 5.48 0 1.09.42 2.25.94 2.88.1.13.12.24.09.37-.1.4-.32 1.31-.36 1.49-.06.24-.19.29-.44.18-1.65-.77-2.68-3.18-2.68-5.12 0-4.16 3.03-7.99 8.72-7.99 4.58 0 8.13 3.27 8.13 7.62 0 4.55-2.87 8.21-6.84 8.21-1.34 0-2.6-.7-3.03-1.52l-.83 3.16c-.3 1.16-1.11 2.61-1.65 3.5C9.83 23.9 10.9 24 12 24c6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+          Apple Podcasts
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ I'M NEW PREVIEW ============ -->
+<section class="thcf-section thcf-imnew" id="thcf-imnew">
+  <div class="thcf-imnew-grid">
+    <div class="thcf-imnew-text thcf-reveal">
+      <span class="thcf-eyebrow">First Time?</span>
+      <h2>We've got you covered.</h2>
+      <p>If walking into a new church feels like a lot — we get it. Plan your visit ahead of time and we'll have everything ready when you arrive.</p>
+      <div class="thcf-imnew-checks">
+        <div class="thcf-imnew-check">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A welcome bag with your name on it</span>
+        </div>
+        <div class="thcf-imnew-check">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A reserved guest parking spot up front</span>
+        </div>
+        <div class="thcf-imnew-check">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>A real person to walk you in and answer questions</span>
+        </div>
+        <div class="thcf-imnew-check">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Easy kids check-in, ages birth–5th grade</span>
+        </div>
+      </div>
+      <a class="thcf-btn thcf-btn--orange" href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">Plan My Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+    <div class="thcf-imnew-card thcf-reveal">
+      <div class="thcf-imnew-card-head">
+        <div class="thcf-imnew-card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        </div>
+        <h3>Your First Sunday</h3>
+      </div>
+      <div class="row"><span class="label">Service Times</span><span class="value">8:45 &amp; 10:30 AM</span></div>
+      <div class="row"><span class="label">Service Length</span><span class="value">~75 min</span></div>
+      <div class="row"><span class="label">Doors Open</span><span class="value">15 min early</span></div>
+      <div class="row"><span class="label">Dress Code</span><span class="value">None — be comfortable</span></div>
+      <div class="row"><span class="label">Address</span><span class="value">28780 Single Oak Dr<br>Temecula, CA 92590</span></div>
+      <a class="thcf-btn thcf-btn--teal" href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">See What to Expect</a>
+    </div>
+  </div>
+</section>
+<!-- ============ MINISTRIES PREVIEW ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Ministries</span>
+    <h2 class="thcf-h2">Find your people.</h2>
+    <p class="thcf-lead">From kids on Sunday morning to home groups around dinner tables — here's where life happens between Sundays.</p>
+  </div>
+  <div class="thcf-ministries-grid">
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV" style="--accent:var(--orange)">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h4>Home Groups</h4>
+      <p>Small groups meeting in homes across the valley.</p>
+      <span class="more">Find a group <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql" style="--accent:var(--teal-dark)">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+      </div>
+      <h4>Mountain Mover Kids</h4>
+      <p>Kids ministry, birth–5th grade, both services.</p>
+      <span class="more">Meet the team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U" style="--accent:var(--gold)">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <h4>High School</h4>
+      <p>Tuesdays at 6:30 PM. Winter Camp coming up.</p>
+      <span class="more">See the camp <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q" style="--accent:var(--cyan)">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+      </div>
+      <h4>Middle School</h4>
+      <p>Tuesday nights of games, worship, and small groups.</p>
+      <span class="more">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC" style="--accent:#c97b87">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <h4>Women's Ministry</h4>
+      <p>Bible studies, retreats, and Moms in Prayer.</p>
+      <span class="more">See events <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl" style="--accent:#2c4a6e">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>
+      </div>
+      <h4>Men's Ministry</h4>
+      <p>Monthly breakfast, weekly Bible study, real friendship.</p>
+      <span class="more">Next breakfast <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY" style="--accent:#c8851e">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h4>Equipping Hour</h4>
+      <p>Biblical Christian education, currently on break.</p>
+      <span class="more">Get notified <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+    <a class="thcf-mini-ministry thcf-reveal" href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ" style="--accent:var(--dark)">
+      <div class="thcf-mini-ministry-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h4>All Ministries</h4>
+      <p>See everything happening at Temecula Hills.</p>
+      <span class="more">Browse all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+    </a>
+  </div>
+</section>
+<!-- ============ GIVE PREVIEW / CLOSING CTA ============ -->
+<section class="thcf-section thcf-give">
+  <div class="thcf-give-inner thcf-reveal">
+    <span class="pill">GENEROSITY</span>
+    <h2>Every gift fuels what God is doing here.</h2>
+    <p>Thank you for partnering with us — through worship, presence, and generosity. Give online in two minutes, or learn about all the ways to give.</p>
+    <div class="thcf-give-btns">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN" class="thcf-btn thcf-btn--white">Give Now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN" class="thcf-btn thcf-btn--outline-white">Ways to Give</a>
+    </div>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <strong>TEMECULA HILLS</strong>
+      </div>
+      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 8:45 &amp; 10:30 AM<br>Wednesdays: 7:00 PM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">About</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">What We Believe</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'm New</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">Ministries</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">Give Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-home');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
