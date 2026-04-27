@@ -1,0 +1,542 @@
+<!-- Temecula Hills Christian Fellowship - What We Believe page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--gray-800);background:var(--gray-50)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
+.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
+.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding:0 96px 48px;align-items:center}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:0 32px 48px}}
+.thcf-menu-nav a{display:block;font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,color .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold);pointer-events:none}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu-side{color:rgba(255,255,255,.9);opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-side{opacity:1;transform:translateY(0)}
+@media (max-width:768px){.thcf-menu-side{display:none}}
+.thcf-menu-block{border-left:2px solid var(--orange);padding-left:20px;margin-bottom:28px}
+.thcf-menu-block:nth-child(2){border-left-color:var(--teal-light)}
+.thcf-menu-block-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.thcf-menu-block:nth-child(2) .thcf-menu-block-eyebrow{color:var(--teal-light)}
+.thcf-menu-block strong{display:block;font-weight:700;font-size:17px;color:#fff;margin-bottom:2px}
+.thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
+/* === Hero (default teal-dark to read as foundational/core) === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-80px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.22;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(220,255,250,.92);max-width:660px;margin:0 auto 36px;line-height:1.6}
+.thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* === Intro band (two-documents explainer + PDF download CTA) === */
+.thcf-intro{background:#fff;padding:clamp(48px,6vw,72px) 24px}
+.thcf-intro-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+@media (max-width:760px){.thcf-intro-inner{grid-template-columns:1fr;gap:28px}}
+.thcf-intro-text .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:14px;color:var(--orange)}
+.thcf-intro-text .thcf-eyebrow::before{content:"";position:absolute;top:0;left:0;width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.6}
+.thcf-intro-text h2{font-size:clamp(24px,3.2vw,32px);font-weight:800;line-height:1.2;color:var(--gray-800);margin-bottom:14px}
+.thcf-intro-text p{color:var(--gray-600);font-size:16px;line-height:1.7;margin-bottom:14px}
+.thcf-intro-pdf{background:linear-gradient(135deg,var(--gray-50) 0%,#fff 100%);border:1.5px solid var(--gray-200);border-radius:18px;padding:24px;text-align:center;transition:border-color .25s,transform .25s}
+.thcf-intro-pdf:hover{border-color:var(--teal-dark);transform:translateY(-3px)}
+.thcf-intro-pdf-icon{width:56px;height:56px;border-radius:14px;background:var(--teal-dark);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 8px 20px rgba(11,107,107,.20)}
+.thcf-intro-pdf-label{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-500);margin-bottom:6px}
+.thcf-intro-pdf strong{display:block;font-size:17px;font-weight:800;color:var(--gray-800);margin-bottom:14px;line-height:1.3}
+.thcf-intro-pdf .thcf-btn{width:100%}
+
+/* === Anchor nav (jump to specific doctrine) === */
+.thcf-doctrine-nav{position:sticky;top:74px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-doctrine-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.thcf-doctrine-nav-inner::-webkit-scrollbar{height:4px}
+.thcf-doctrine-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-doctrine-nav a{flex-shrink:0;padding:8px 14px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.thcf-doctrine-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-doctrine-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+/* === Doctrine sections === */
+.thcf-doctrines{background:#fff;padding:clamp(48px,6vw,80px) 24px}
+.thcf-doctrines-inner{max-width:840px;margin:0 auto}
+.thcf-doctrine{padding:clamp(40px,5vw,56px) 0;border-bottom:1px solid var(--gray-100);scroll-margin-top:160px}
+.thcf-doctrine:first-child{padding-top:0}
+.thcf-doctrine:last-child{border-bottom:0}
+.thcf-doctrine-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:22px}
+.thcf-doctrine-num{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:22px;font-weight:400;letter-spacing:.02em;box-shadow:0 6px 14px rgba(0,0,0,.10)}
+.thcf-doctrine-title{flex:1}
+.thcf-doctrine-title .label{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--accent,var(--teal-dark));margin-bottom:6px}
+.thcf-doctrine-title h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;line-height:1.15;color:var(--gray-800);margin:0}
+.thcf-doctrine-body p{color:var(--gray-700);font-size:17px;line-height:1.8;margin-bottom:18px}
+.thcf-doctrine-body p:last-child{margin-bottom:0}
+.thcf-doctrine-body strong{font-weight:700;color:var(--gray-800)}
+.thcf-doctrine-body em{font-style:italic;color:var(--gray-700)}
+.thcf-doctrine-body ul{margin:14px 0 18px}
+.thcf-doctrine-body ul li{padding-left:30px;position:relative;color:var(--gray-700);font-size:16.5px;line-height:1.7;margin-bottom:12px}
+.thcf-doctrine-body ul li::before{content:"";position:absolute;left:6px;top:10px;width:8px;height:8px;border-radius:2px;background:var(--accent,var(--teal-dark));transform:rotate(45deg)}
+
+/* === Scripture references styled subtly === */
+.thcf-doctrine-body .refs{display:inline-block;font-size:14px;color:var(--gray-500);font-style:italic;line-height:1.6}
+.thcf-doctrine-body .refs::before{content:"\2014\00a0";color:var(--gray-400)}
+.thcf-doctrine-refs-block{margin-top:18px;padding:14px 18px;background:var(--gray-50);border-left:3px solid var(--accent,var(--gold));border-radius:0 10px 10px 0;font-size:13.5px;color:var(--gray-600);line-height:1.7;font-style:italic}
+.thcf-doctrine-refs-block strong{display:block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-700);margin-bottom:6px;font-style:normal}
+
+/* === Closing CTA === */
+.thcf-cta{position:relative;background:linear-gradient(135deg,var(--teal-dark) 0%,#085050 100%);color:#fff;overflow:hidden}
+.thcf-cta::before{content:"";position:absolute;top:-100px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(243,150,21,.16);pointer-events:none}
+.thcf-cta::after{content:"";position:absolute;bottom:-120px;left:-100px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.thcf-cta-inner{position:relative;z-index:2;max-width:840px;margin:0 auto;text-align:center;padding:0 8px}
+.thcf-cta .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.18);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:18px}
+.thcf-cta h2{font-size:clamp(28px,4.4vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.15;margin-bottom:18px;color:#fff}
+.thcf-cta p{font-size:clamp(16px,1.6vw,18px);color:rgba(220,255,250,.92);max-width:600px;margin:0 auto 32px;line-height:1.65}
+.thcf-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.thcf-cta .thcf-btn--white{background:#fff;color:var(--teal-dark);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.thcf-cta .thcf-btn--white:hover{background:var(--gray-50);transform:translateY(-1px)}
+.thcf-cta .thcf-btn--outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+.thcf-cta .thcf-btn--outline-white:hover{background:rgba(255,255,255,.12)}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-believe">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="/" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      </span>
+      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav">
+      <a href="/">HOME</a>
+      <a href="about.html" class="is-active">ABOUT</a>
+      <a href="im-new.html">I'M NEW</a>
+      <a href="ministries.html">MINISTRIES</a>
+      <a href="/#sermons">SERMONS</a>
+      <a href="give.html">GIVE</a>
+      <a href="#thcf-contact" data-thcf-menu-close>CONTACT</a>
+    </nav>
+    <aside class="thcf-menu-side">
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Join Us</div>
+        <strong>Sundays at 8:45 &amp; 10:30 AM</strong>
+        <span class="sub">Wednesdays · Youth 7:00 PM</span>
+      </div>
+      <div class="thcf-menu-block">
+        <div class="thcf-menu-block-eyebrow">Visit</div>
+        <span class="sub">28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </div>
+      <a href="im-new.html" class="thcf-btn thcf-btn--orange" data-thcf-menu-close>Plan Your Visit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </aside>
+  </div>
+</div>
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">WHAT WE BELIEVE</span>
+    <h1>Anchored in<br>God's Word.</h1>
+    <p>Eight short statements describing what we believe at Temecula Hills — drawn from the historic Christian faith and grounded in Scripture. Read it, take notes, ask questions.</p>
+    <div class="thcf-hero-cta">
+      <a href="#thcf-doctrines" class="thcf-btn thcf-btn--orange">Read Our Beliefs
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+      <!-- TODO: replace href if you'd prefer a different copy of the detailed doctrinal statement. -->
+      <a href="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/69eedf880d66f2a6657b4d9e.pdf" target="_blank" rel="noopener" class="thcf-btn thcf-btn--outline-light">Download Detailed Statement (PDF)</a>
+    </div>
+  </div>
+</section>
+<!-- ============ INTRO BAND ============ -->
+<section class="thcf-intro">
+  <div class="thcf-intro-inner thcf-reveal">
+    <div class="thcf-intro-text">
+      <span class="thcf-eyebrow">Two Documents</span>
+      <h2>What we hold tightly — and the longer version.</h2>
+      <p>At Temecula Hills, we have <strong>two documents</strong> that describe our doctrinal beliefs.</p>
+      <p>Below is our <strong>"What We Believe"</strong> statement — a general statement of our beliefs intended for our whole church family.</p>
+      <p>For our teaching team, elders, and leaders, we also have a <strong>more detailed statement</strong> that delineates specific positions our church teaches. The full version is available as a PDF.</p>
+    </div>
+    <a class="thcf-intro-pdf" href="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/69eedf880d66f2a6657b4d9e.pdf" target="_blank" rel="noopener">
+      <div class="thcf-intro-pdf-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" x2="12" y1="18" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+      </div>
+      <div class="thcf-intro-pdf-label">For Leaders</div>
+      <strong>Detailed Doctrinal Statement</strong>
+      <span class="thcf-btn thcf-btn--teal">
+        Download PDF
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      </span>
+    </a>
+  </div>
+</section>
+<!-- ============ ANCHOR NAV ============ -->
+<nav class="thcf-doctrine-nav" aria-label="Jump to a doctrine">
+  <div class="thcf-doctrine-nav-inner">
+    <a href="#thcf-d-bible"><span class="num">01</span> The Bible</a>
+    <a href="#thcf-d-god"><span class="num">02</span> God</a>
+    <a href="#thcf-d-jesus"><span class="num">03</span> Jesus Christ</a>
+    <a href="#thcf-d-spirit"><span class="num">04</span> The Holy Spirit</a>
+    <a href="#thcf-d-man"><span class="num">05</span> Man</a>
+    <a href="#thcf-d-church"><span class="num">06</span> The Church</a>
+    <a href="#thcf-d-ordinances"><span class="num">07</span> The Ordinances</a>
+    <a href="#thcf-d-last"><span class="num">08</span> Last Things</a>
+  </div>
+</nav>
+<!-- ============ DOCTRINES (1-4) ============ -->
+<section class="thcf-doctrines" id="thcf-doctrines">
+  <div class="thcf-doctrines-inner">
+
+    <!-- 01 The Bible -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-bible" style="--accent:var(--teal-dark)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">01</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 01</div>
+          <h2>The Bible</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe that the Bible is the Word of God, fully inspired and without error in the original manuscripts, written under the inspiration of the Holy Spirit and that it has supreme authority in all matters of faith and conduct.</p>
+        <p class="refs">2 Timothy 3:16; 2 Peter 1:20–21; Mark 13:31; John 8:31–32; John 20:31; Acts 20:32</p>
+        <p>Nothing is to be added to or taken away from the Scriptures in any way — such as new revelation or traditions of men. It is the standard by which all knowledge is tested.</p>
+        <p class="refs">Deuteronomy 4:7, 12:32; Revelation 22:18–19; Galatians 1:8; Colossians 2:8</p>
+      </div>
+    </article>
+
+    <!-- 02 God -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-god" style="--accent:var(--orange)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">02</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 02</div>
+          <h2>God</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe God, as revealed in the Bible, is the one and only living and true God. He is the holy, sovereign, self-existent and self-sufficient One.</p>
+        <p class="refs">Deuteronomy 6:4; John 5:39; Isaiah 43:10–11; Isaiah 6:3; Psalm 135:6; Exodus 3:14</p>
+        <p>God reveals Himself to us in the Trinity as Father, Son, and Holy Spirit — each equal in His nature, essence, and being, yet each possessing distinct personal characteristics suitable to His person and work.</p>
+        <p class="refs">Matthew 28:19; 2 Corinthians 13:14; 1 Peter 1:2</p>
+      </div>
+    </article>
+
+    <!-- 03 Jesus Christ -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-jesus" style="--accent:var(--gold)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">03</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 03</div>
+          <h2>Jesus Christ</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe in Jesus Christ, God's only begotten Son, conceived by the Holy Spirit. We believe in His virgin birth, sinless life, miracles, and teachings. We believe in His substitutionary atoning death, bodily resurrection, ascension into heaven, perpetual intercession for His people, and personal visible return to earth.</p>
+        <div class="thcf-doctrine-refs-block">
+          <strong>Scripture references</strong>
+          Matthew 1:18–25; Luke 1:26–38; John 1:1; John 20:28; Romans 9:5; Romans 8:46; 2 Corinthians 5:21; 1 Peter 2:21–23; John 20:30–31; Matthew 20:28; Ephesians 1:4; Acts 1:11; Romans 5:6–8; Romans 6:9–10; Hebrews 7:25; Hebrews 9:28; 1 Timothy 3:16
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 The Holy Spirit -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-spirit" style="--accent:var(--cyan)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">04</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 04</div>
+          <h2>The Holy Spirit</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe in the Holy Spirit who came forth from the Father and Son to convict the world of sin, righteousness, and judgment, and to regenerate, sanctify, and empower all who believe in Jesus Christ. We believe that the Holy Spirit indwells every believer in Christ, and that He is an abiding helper, teacher and guide.</p>
+        <p class="refs">John 14:16–17, 14:26, 15:26–27; John 16:9–14; Romans 8:9; 1 Corinthians 3:16, 6:19; Galatians 5:22–26</p>
+        <p>We believe that the Holy Spirit administers spiritual gifts to the church. In this respect, God the Holy Spirit is sovereign in the bestowing of all His gifts for the perfecting of the saints today.</p>
+        <p class="refs">John 16:13–14; Acts 1:8; 1 Corinthians 12:4–11, 13:8–10; 2 Corinthians 3:18, 12:12; Ephesians 4:7–12; Hebrews 2:1–4</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- ============ DOCTRINES (5-8) ============ -->
+<section class="thcf-doctrines" style="background:var(--gray-50)">
+  <div class="thcf-doctrines-inner">
+
+    <!-- 05 Man -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-man" style="--accent:var(--orange)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">05</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 05</div>
+          <h2>Man</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe that man was created by God in His own image; that he sinned and thereby incurred physical, spiritual and eternal death — which is separation from God; that as a consequence, all human beings are born with a sinful nature, are sinners by choice, and are therefore under condemnation and subject to the wrath of God.</p>
+        <p>But God determined, by a covenant of grace, that sinners might receive forgiveness and eternal life through faith in Jesus Christ. <strong>Faith in Christ has always been the only way of salvation.</strong></p>
+        <p>We believe that those who repent and forsake sin and trust Jesus Christ as Savior are regenerated by the Holy Spirit and become new creatures, delivered from condemnation and receive eternal life.</p>
+        <div class="thcf-doctrine-refs-block">
+          <strong>Scripture references</strong>
+          Genesis 1:26, 5:2, 2:17, 3:19; Ecclesiastes 2:11; John 1:13, 3:14, 3:16, 5:24, 5:30, 7:13, 8:12, 10:26; Romans 8:1, 9:22, 3:19, 5:19; 2 Thessalonians 1:9; Revelation 19:3, 19:20, 20:10, 20:14–15, 21:18; Psalm 51:7; Jeremiah 17:9; James 1:14; Proverbs 28:13; 1 John 1:9; 2 Corinthians 5:17
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 The Church -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-church" style="--accent:var(--teal-dark)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">06</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 06</div>
+          <h2>The Church, local and universal</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe that all those who have faith in Jesus Christ as Savior and Lord are united by the indwelling Holy Spirit into one spiritual and physical body called the church, of which Jesus Christ is the head. This church is made manifest in each local church that recognizes Jesus as Lord and Savior and serves Him according to the Scriptures.</p>
+        <p class="refs">1 Corinthians 1:1–2, 12:12–27; Romans 12:5; Ephesians 1:13b–14; Colossians 1:18</p>
+        <p>God's purpose in establishing His church is to glorify Himself by making known His manifold wisdom, which He demonstrated in Jesus Christ. This is accomplished when believers:</p>
+        <ul>
+          <li>Gather together in the power and unity of the Holy Spirit for worship by the proclamation of the Word, praise, prayer, and participation in the ordinances of the church <em>(Hebrews 10:25; Acts 2:42–47)</em>.</li>
+          <li>Mutually exercise the gifts of the Holy Spirit for the edification, equipping, and growth of the members for works of service <em>(Ephesians 3:10–11, 4:11–13; 1 Corinthians 12:4–7; 1 Peter 4:10)</em>.</li>
+          <li>Proclaim the good news of God's saving grace in Jesus Christ to a lost and dying world <em>(Matthew 28:19–20)</em>.</li>
+          <li>Are salt and light in all of our various callings <em>(Matthew 5:13–16)</em>.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 07 The Ordinances -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-ordinances" style="--accent:var(--gold)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">07</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 07</div>
+          <h2>The Ordinances</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe that two ordinances have been committed to the local church: <strong>baptism</strong> and the <strong>Lord's Supper</strong>.</p>
+        <p class="refs">Acts 2:38–42</p>
+        <p>Christian baptism by immersion is the solemn and beautiful testimony of a believer showing forth his faith in the crucified, buried, and risen Savior, and his union with Him in death to sin and resurrection to a new life. It is also a sign of fellowship and identification with the visible Body of Christ.</p>
+        <p class="refs">Acts 8:36–39; Romans 6:1–11; Acts 2:41–42</p>
+        <p>We believe that the Lord's Supper was instituted by Christ for commemoration of His death, which is to be observed regularly to call into remembrance the redemptive work of Jesus Christ on our behalf, until He returns.</p>
+        <p class="refs">Acts 2:38, 2:42; 1 Corinthians 11:23–26</p>
+      </div>
+    </article>
+
+    <!-- 08 Last Things -->
+    <article class="thcf-doctrine thcf-reveal" id="thcf-d-last" style="--accent:var(--cyan)">
+      <div class="thcf-doctrine-head">
+        <div class="thcf-doctrine-num">08</div>
+        <div class="thcf-doctrine-title">
+          <div class="label">Article 08</div>
+          <h2>Last Things</h2>
+        </div>
+      </div>
+      <div class="thcf-doctrine-body">
+        <p>We believe that God has appointed a day when Jesus Christ will bodily return in glory to judge the world in righteousness.</p>
+        <p class="refs">Titus 2:13; John 14:1–3; 1 Corinthians 15:51–53; 1 Thessalonians 4:15–5:11</p>
+        <p>His justice will be displayed in the resurrection to eternal punishment of all unbelievers, who will be cast into Hell to experience separation from God forever. His mercy will be displayed by the gathering of all believers in resurrected and glorified bodies to everlasting life and fullness of joy in the presence of the Lord.</p>
+        <div class="thcf-doctrine-refs-block">
+          <strong>Scripture references</strong>
+          Matthew 24:36, 25:31; John 5:28–29; Revelation 21:3; Mark 13:26–27; 2 Thessalonians 1:7–10; Revelation 19:11–16; Revelation 21:8
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- ============ CLOSING CTA ============ -->
+<section class="thcf-section thcf-cta">
+  <div class="thcf-cta-inner thcf-reveal">
+    <span class="pill">QUESTIONS?</span>
+    <h2>Wrestling with one of these?</h2>
+    <p>Doctrine isn't meant to settle every question — sometimes it stirs them up. If something here raised a question, we'd love to talk. No pressure, no judgment.</p>
+    <div class="thcf-cta-btns">
+      <a href="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/69eedf880d66f2a6657b4d9e.pdf" target="_blank" rel="noopener" class="thcf-btn thcf-btn--white">Download Full PDF
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      </a>
+      <a href="im-new.html" class="thcf-btn thcf-btn--outline-white">Plan a Visit</a>
+    </div>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <strong>TEMECULA HILLS</strong>
+      </div>
+      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 8:45 &amp; 10:30 AM<br>Wednesdays: 7:00 PM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="ministries.html">Ministries</a></li>
+        <li><a href="im-new.html">I'm New</a></li>
+        <li><a href="give.html">Give Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-believe');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
