@@ -1,0 +1,52 @@
+<script>
+(function () {
+  const init = () => {
+    const root = document.querySelector('.cd-wrapper');
+    if (!root) return;
+
+    // Smooth scroll for in-page anchors (scoped to .cd-wrapper)
+    root.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = root.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Lightweight CTA tracking — wires into gtag if present
+    root.querySelectorAll('[data-fb-cta]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const label = el.getAttribute('data-fb-cta');
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'cta_click', {
+            event_category: 'breakthrough_sales_ai_home',
+            event_label: label,
+          });
+        }
+      });
+    });
+
+    // Subtle hover-tilt on agent cards
+    root.querySelectorAll('.fb-agent').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `translateY(-4px) rotateX(${(-y * 3).toFixed(2)}deg) rotateY(${(x * 3).toFixed(2)}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
