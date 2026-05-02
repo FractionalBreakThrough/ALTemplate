@@ -1,0 +1,580 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2F0LB2RFLl"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2F0LB2RFLl');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== Carpe Diem - Resources Page (Pickaxe Embed) ===== */
+.cd-wrapper *, .cd-wrapper *::before, .cd-wrapper *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cd-wrapper {
+    --orange: #e8572a;
+    --orange-light: #f06640;
+    --pink: #e84382;
+    --gradient: linear-gradient(135deg, #e8572a, #e84382);
+    --dark: #1a1a2e;
+    --text: #333;
+    --text-light: #666;
+    --bg-light: #f5f5f5;
+    --bg-white: #fff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg-white);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.cd-wrapper .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.cd-wrapper h1,
+.cd-wrapper h2,
+.cd-wrapper h3,
+.cd-wrapper h4 {
+    line-height: 1.2;
+}
+
+.cd-wrapper a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cd-wrapper ul {
+    list-style: none;
+}
+
+.cd-wrapper img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ===== Buttons ===== */
+.cd-wrapper .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.cd-wrapper .btn-primary {
+    background: var(--gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+.cd-wrapper .btn-primary:hover {
+    opacity: 0.9;
+    border-color: transparent;
+}
+
+.cd-wrapper .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--text);
+}
+
+.cd-wrapper .btn-outline:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.cd-wrapper .btn-outline-white {
+    background: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+
+.cd-wrapper .btn-outline-white:hover {
+    background: #fff;
+    color: var(--orange);
+}
+
+.cd-wrapper .text-orange {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cd-wrapper .badge {
+    display: inline-block;
+    color: var(--orange);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.cd-wrapper .section-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.cd-wrapper .section-subtitle-left {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+/* ===== Top Separator ===== */
+.cd-wrapper .cd-separator {
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--orange) 100%);
+    margin: 0 0 24px;
+}
+
+/* ===== Hero ===== */
+.cd-wrapper .hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 0 72px;
+    background: linear-gradient(180deg, #fff 0%, #f0f4f8 40%, rgba(232,87,42,0.05) 75%, rgba(232,67,130,0.05) 100%);
+    overflow: hidden;
+}
+
+.cd-wrapper .hero h1 {
+    font-size: clamp(2rem, 5.2vw, 3.4rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.cd-wrapper .hero-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+    position: relative;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.cd-wrapper .hero-subtitle strong {
+    display: block;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.cd-wrapper .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+/* ===== Getting Started Steps ===== */
+.cd-wrapper .steps-section {
+    padding: 80px 0;
+    background: var(--bg-white);
+    text-align: center;
+}
+
+.cd-wrapper .steps-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.cd-wrapper .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+    text-align: left;
+}
+
+.cd-wrapper .step-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    transition: box-shadow 0.3s;
+}
+
+.cd-wrapper .step-card:hover {
+    box-shadow: var(--shadow);
+}
+
+.cd-wrapper .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.cd-wrapper .step-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.cd-wrapper .step-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ===== Agent Guide Cards ===== */
+.cd-wrapper .agents-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.cd-wrapper .agents-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.cd-wrapper .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.cd-wrapper .agent-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    border-left: 4px solid var(--orange);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cd-wrapper .agent-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(232,87,42,0.12);
+}
+
+.cd-wrapper .agent-card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+
+.cd-wrapper .agent-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cd-wrapper .agent-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.cd-wrapper .agent-card .agent-tip {
+    font-size: 0.85rem;
+    color: var(--orange);
+    font-weight: 600;
+}
+
+/* ===== Tips Section (Dark) ===== */
+.cd-wrapper .tips-section {
+    padding: 80px 0;
+    background: #111;
+}
+
+.cd-wrapper .tips-section .badge {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.cd-wrapper .tips-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.cd-wrapper .tips-subtitle {
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 48px;
+    max-width: 600px;
+}
+
+.cd-wrapper .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.cd-wrapper .tip-card {
+    background: #1a1a1a;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    border-top: 3px solid var(--orange);
+    transition: transform 0.3s;
+}
+
+.cd-wrapper .tip-card:hover {
+    transform: translateY(-4px);
+}
+
+.cd-wrapper .tip-card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+}
+
+.cd-wrapper .tip-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.cd-wrapper .tip-card p {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* ===== FAQ ===== */
+.cd-wrapper .faq-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.cd-wrapper .faq-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cd-wrapper .faq-list {
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+.cd-wrapper .faq-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.cd-wrapper .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+}
+
+.cd-wrapper .faq-arrow {
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+    line-height: 1;
+}
+
+.cd-wrapper .faq-item.open .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.cd-wrapper .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.cd-wrapper .faq-item.open .faq-answer {
+    max-height: 200px;
+}
+
+.cd-wrapper .faq-answer p {
+    padding-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ===== CTA Section ===== */
+.cd-wrapper .cta-section {
+    padding: 80px 0;
+    background: var(--bg-white);
+    text-align: center;
+}
+
+.cd-wrapper .cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.cd-wrapper .cta-section p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+}
+
+.cd-wrapper .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* ===== Footer ===== */
+.cd-wrapper .footer {
+    background: #fff;
+    color: var(--text-light);
+    padding: 72px 0 24px;
+    border-top: 1px solid #eee;
+}
+
+.cd-wrapper .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.cd-wrapper .footer-brand .logo {
+    margin-bottom: 16px;
+}
+
+.cd-wrapper .footer-brand p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    max-width: 340px;
+}
+
+.cd-wrapper .footer-links h4 {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.cd-wrapper .footer-links li {
+    margin-bottom: 10px;
+}
+
+.cd-wrapper .footer-links a {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    transition: color 0.2s;
+}
+
+.cd-wrapper .footer-links a:hover {
+    color: var(--orange);
+}
+
+.cd-wrapper .footer-bottom {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .cd-wrapper .steps-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cd-wrapper .agents-grid {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cd-wrapper .tips-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cd-wrapper .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .cd-wrapper .hero-subtitle strong {
+        font-size: 1.1rem;
+    }
+
+    .cd-wrapper .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cd-wrapper .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cd-wrapper .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cd-wrapper .steps-section h2,
+    .cd-wrapper .agents-section h2,
+    .cd-wrapper .tips-section h2,
+    .cd-wrapper .faq-section h2,
+    .cd-wrapper .cta-section h2 {
+        font-size: 1.8rem;
+    }
+}
+</style>
