@@ -83,6 +83,19 @@
     filter: brightness(1.05);
   }
   .cd-wrapper .fb-btn .fb-bolt { font-size: 1.1em; line-height: 1; }
+
+  /* Bolt icon image — replaces the ⚡ emoji throughout */
+  .cd-wrapper .fb-bolt-img {
+    display: inline-block;
+    width: 1em;
+    height: 1.15em;
+    vertical-align: -0.18em;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(255,193,7,.45));
+    flex-shrink: 0;
+  }
+  .cd-wrapper .fb-btn .fb-bolt-img { width: 1.1em; height: 1.25em; }
+  .cd-wrapper .fb-eyebrow .fb-bolt-img { width: 0.95em; height: 1.1em; }
   .cd-wrapper .fb-btn--ghost {
     background: transparent;
     color: var(--fb-white);
@@ -143,6 +156,24 @@
   .cd-wrapper .fb-hero h1 .fb-outline {
     color: transparent;
     -webkit-text-stroke: 2px var(--fb-white);
+  }
+  /* Hero wordmark image (replaces text H1 content) */
+  .cd-wrapper .fb-hero__wordmark {
+    display: block;
+    margin: 0 auto 8px;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    filter: drop-shadow(0 12px 40px rgba(48,188,255,.25));
+  }
+  .cd-wrapper .fb-hero__h1--image {
+    margin-bottom: 14px;
+  }
+  .cd-wrapper .fb-hero__h1--image .fb-sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
   .cd-wrapper .fb-hero__sub {
     max-width: 680px;
@@ -246,13 +277,20 @@
     box-shadow: var(--fb-glow);
   }
   .cd-wrapper .fb-agent__icon {
-    width: 56px; height: 56px;
+    width: 64px; height: 64px;
     display: grid; place-items: center;
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(48,188,255,0.18), rgba(255,193,7,0.12));
     border: 1px solid var(--fb-line);
     margin-bottom: 18px;
     font-size: 1.6rem;
+    overflow: hidden;
+  }
+  .cd-wrapper .fb-agent__icon img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(48,188,255,.35));
   }
   .cd-wrapper .fb-agent__tag {
     display: inline-block;
@@ -288,10 +326,14 @@
     font-size: 0.95rem;
   }
   .cd-wrapper .fb-agent__list li::before {
-    content: "⚡";
-    position: absolute; left: 0; top: 0;
-    color: var(--fb-gold);
-    font-size: 0.95rem;
+    content: "";
+    position: absolute; left: 0; top: 4px;
+    width: 14px; height: 16px;
+    background-image: url("https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: drop-shadow(0 1px 3px rgba(255,193,7,.4));
   }
   .cd-wrapper .fb-agent__cta {
     display: inline-flex; align-items: center; gap: 8px;

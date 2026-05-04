@@ -90,6 +90,19 @@
     filter: brightness(1.05);
   }
   .cd-wrapper .fb-btn .fb-bolt { font-size: 1.1em; line-height: 1; }
+
+  /* Bolt icon image — replaces the ⚡ emoji throughout */
+  .cd-wrapper .fb-bolt-img {
+    display: inline-block;
+    width: 1em;
+    height: 1.15em;
+    vertical-align: -0.18em;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(255,193,7,.45));
+    flex-shrink: 0;
+  }
+  .cd-wrapper .fb-btn .fb-bolt-img { width: 1.1em; height: 1.25em; }
+  .cd-wrapper .fb-eyebrow .fb-bolt-img { width: 0.95em; height: 1.1em; }
   .cd-wrapper .fb-btn--ghost {
     background: transparent;
     color: var(--fb-white);
@@ -150,6 +163,24 @@
   .cd-wrapper .fb-hero h1 .fb-outline {
     color: transparent;
     -webkit-text-stroke: 2px var(--fb-white);
+  }
+  /* Hero wordmark image (replaces text H1 content) */
+  .cd-wrapper .fb-hero__wordmark {
+    display: block;
+    margin: 0 auto 8px;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    filter: drop-shadow(0 12px 40px rgba(48,188,255,.25));
+  }
+  .cd-wrapper .fb-hero__h1--image {
+    margin-bottom: 14px;
+  }
+  .cd-wrapper .fb-hero__h1--image .fb-sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
   .cd-wrapper .fb-hero__sub {
     max-width: 680px;
@@ -253,13 +284,20 @@
     box-shadow: var(--fb-glow);
   }
   .cd-wrapper .fb-agent__icon {
-    width: 56px; height: 56px;
+    width: 64px; height: 64px;
     display: grid; place-items: center;
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(48,188,255,0.18), rgba(255,193,7,0.12));
     border: 1px solid var(--fb-line);
     margin-bottom: 18px;
     font-size: 1.6rem;
+    overflow: hidden;
+  }
+  .cd-wrapper .fb-agent__icon img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(48,188,255,.35));
   }
   .cd-wrapper .fb-agent__tag {
     display: inline-block;
@@ -295,10 +333,14 @@
     font-size: 0.95rem;
   }
   .cd-wrapper .fb-agent__list li::before {
-    content: "⚡";
-    position: absolute; left: 0; top: 0;
-    color: var(--fb-gold);
-    font-size: 0.95rem;
+    content: "";
+    position: absolute; left: 0; top: 4px;
+    width: 14px; height: 16px;
+    background-image: url("https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: drop-shadow(0 1px 3px rgba(255,193,7,.4));
   }
   .cd-wrapper .fb-agent__cta {
     display: inline-flex; align-items: center; gap: 8px;
@@ -457,11 +499,14 @@
     <div class="fb-hero__grid"></div>
     <div class="fb-container fb-hero__inner">
       <span class="fb-eyebrow">
-        <span class="fb-bolt">⚡</span> High-Voltage AI Sales Strategy
+        <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+        High-Voltage AI Sales Strategy
       </span>
-      <h1>
-        <span class="fb-blue">Break</span><span class="fb-hero__bolt">⚡</span><span class="fb-outline">through</span><br>
-        <span class="fb-italic">Sales AI</span>
+      <h1 class="fb-hero__h1--image">
+        <img class="fb-hero__wordmark"
+             src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/6843b47f374ef2589decd368.png"
+             alt="Breakthrough Sales AI">
+        <span class="fb-sr-only">Breakthrough Sales AI</span>
       </h1>
       <p class="fb-hero__sub">
         A team of AI agents built to level up sales people — sharper messaging,
@@ -469,7 +514,8 @@
       </p>
       <div class="fb-hero__cta">
         <a href="#start" class="fb-btn" data-fb-cta="hero-primary">
-          <span class="fb-bolt">⚡</span> Start Using Free
+          <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+          Start Using Free
         </a>
         <a href="#agents" class="fb-btn fb-btn--ghost" data-fb-cta="hero-secondary">
           Meet the Agents
@@ -496,7 +542,10 @@
   <section class="fb-section" id="agents">
     <div class="fb-container">
       <div class="fb-section__head">
-        <span class="fb-label">⚡ Meet your AI sales team</span>
+        <span class="fb-label">
+          <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+          Meet your AI sales team
+        </span>
         <h2>Two Agents. <span style="color:var(--fb-blue);">Zero Fluff.</span></h2>
         <p>Each agent is a specialist — focused, fast, and tuned for the moments that move deals forward.</p>
       </div>
@@ -522,7 +571,9 @@
 
         <!-- Sales Simulator -->
         <article class="fb-agent" id="agent-sales-simulator">
-          <div class="fb-agent__icon" aria-hidden="true">🎙️</div>
+          <div class="fb-agent__icon" aria-hidden="true">
+            <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c1213c4b64c69162e69.png" alt="">
+          </div>
           <span class="fb-agent__tag">Practice &amp; Role-Play</span>
           <h3>Sales Simulator</h3>
           <p>
@@ -539,7 +590,9 @@
 
         <!-- Coming Soon -->
         <article class="fb-agent fb-agent--soon" style="grid-column: 1 / -1; text-align: center; opacity: 0.95;">
-          <div class="fb-agent__icon" aria-hidden="true" style="margin-left:auto; margin-right:auto;">⚡</div>
+          <div class="fb-agent__icon" aria-hidden="true" style="margin-left:auto; margin-right:auto;">
+            <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="">
+          </div>
           <span class="fb-agent__tag" style="color: var(--fb-blue);">Coming Soon</span>
           <h3>More Agents on the Way</h3>
           <p style="max-width: 540px; margin: 0 auto 8px;">
@@ -556,7 +609,10 @@
   <section class="fb-section fb-how">
     <div class="fb-container">
       <div class="fb-section__head">
-        <span class="fb-label">⚡ How it works</span>
+        <span class="fb-label">
+          <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+          How it works
+        </span>
         <h2>From <span style="color:var(--fb-blue);">cold</span> to <span class="fb-italic" style="font-style:italic; color: var(--fb-gold);">charged</span> in three steps.</h2>
       </div>
 
@@ -567,7 +623,10 @@
                src="https://placehold.co/400x400/0B1622/30BCFF?text=AI+GUIDE"
                alt="AI Guide mascot"
                data-fb-mascot>
-          <div class="fb-how__mascot-tag">⚡ Your AI Guide</div>
+          <div class="fb-how__mascot-tag">
+            <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+            Your AI Guide
+          </div>
         </div>
 
         <div class="fb-steps">
@@ -604,14 +663,16 @@
         <h2>Ready to <span class="fb-italic">break through?</span></h2>
         <p>Start using Breakthrough Sales AI free. Pick an agent and ship your next sales win.</p>
         <a href="#" class="fb-btn" data-fb-cta="footer-primary">
-          <span class="fb-bolt">⚡</span> Start Using Free
+          <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+          Start Using Free
         </a>
       </div>
     </div>
   </section>
 
   <div class="fb-footnote">
-    <span class="fb-bolt">⚡</span> Powered by <strong>Fractional Breakthrough</strong> — High-Voltage AI Sales Strategy.
+    <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
+    Powered by <strong>Fractional Breakthrough</strong> — High-Voltage AI Sales Strategy.
   </div>
 
 </div>
