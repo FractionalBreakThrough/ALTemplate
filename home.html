@@ -426,6 +426,51 @@
     margin-bottom: 4px;
   }
   .cd-wrapper .fb-step p { color: var(--fb-mute); font-size: 0.95rem; }
+  .cd-wrapper .fb-step p + p { margin-top: 10px; }
+  .cd-wrapper .fb-step__list {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .cd-wrapper .fb-step__list li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--fb-mute);
+    font-size: 0.93rem;
+    line-height: 1.55;
+  }
+  .cd-wrapper .fb-step__list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.65em;
+    width: 10px; height: 1px;
+    background: var(--fb-blue);
+  }
+  .cd-wrapper .fb-step__list li strong {
+    color: var(--fb-white);
+    font-weight: 700;
+  }
+  .cd-wrapper .fb-step__cta-note {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-left: 2px solid var(--fb-gold);
+    background: rgba(255,193,7,0.06);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: var(--fb-white);
+  }
+  .cd-wrapper .fb-step__cta-note code {
+    font-family: 'Courier New', monospace;
+    background: rgba(255,193,7,0.18);
+    color: var(--fb-gold);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
 
   /* ── Final CTA ───────────────────────────────────────────────────── */
   .cd-wrapper .fb-cta {
@@ -552,7 +597,12 @@
 
       <div class="fb-agents">
 
-        <!-- Content Coach -->
+        <!--
+        ===== CONTENT COACH (HIDDEN — restore later) =====
+        To bring back: uncomment this <article> block AND remove the
+        `grid-column: 1 / -1` inline style on the Sales Simulator card
+        below so the two cards share the row again.
+
         <article class="fb-agent" id="agent-content-coach">
           <div class="fb-agent__icon" aria-hidden="true">✍️</div>
           <span class="fb-agent__tag">Outreach &amp; Messaging</span>
@@ -568,9 +618,11 @@
           </ul>
           <a href="https://bot.fractionalbreakthrough.com/guest/33GU7PPOW1" class="fb-agent__cta" data-fb-cta="agent-content-coach" target="_blank" rel="noopener">Open Content Coach</a>
         </article>
+        ===== /CONTENT COACH =====
+        -->
 
         <!-- Sales Simulator -->
-        <article class="fb-agent" id="agent-sales-simulator">
+        <article class="fb-agent" id="agent-sales-simulator" style="grid-column: 1 / -1;">
           <div class="fb-agent__icon" aria-hidden="true">
             <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c1213c4b64c69162e69.png" alt="">
           </div>
@@ -618,10 +670,9 @@
 
       <div class="fb-how__layout">
         <div class="fb-how__mascot">
-          <!-- AI Guide mascot — replace src with hosted asset -->
           <img class="fb-how__mascot-img"
-               src="https://placehold.co/400x400/0B1622/30BCFF?text=AI+GUIDE"
-               alt="AI Guide mascot"
+               src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c1213c4b64c69162e69.png"
+               alt="Sales Simulator AI Guide"
                data-fb-mascot>
           <div class="fb-how__mascot-tag">
             <img class="fb-bolt-img" src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/67ea3c243792947c94ead22d.png" alt="" aria-hidden="true">
@@ -633,22 +684,33 @@
           <div class="fb-step">
             <div class="fb-step__num">1</div>
             <div>
-              <h4>Pick an agent</h4>
-              <p>Open Content Coach to sharpen your messaging, or Sales Simulator to drill the next call.</p>
+              <h4>Set the Stage <span style="font-weight:500; color:var(--fb-mute); text-transform:none; letter-spacing:0;">(Initialization)</span></h4>
+              <p>Provide the background information needed to build your role-play scenario. Your agent needs three things from you:</p>
+              <ul class="fb-step__list">
+                <li><strong>Your Product/Service:</strong> A brief summary of what you are selling.</li>
+                <li><strong>The Buyer Brief:</strong> Who do you want your agent to be? (e.g., a skeptical IT Director, a budget-conscious Procurement Manager)</li>
+                <li><strong>The Scenario:</strong> What specific part of the sales cycle are we practicing? (e.g., a cold call, a discovery session, handling a specific pricing objection, or a closing negotiation).</li>
+              </ul>
             </div>
           </div>
           <div class="fb-step">
             <div class="fb-step__num">2</div>
             <div>
-              <h4>Drop in your context</h4>
-              <p>Paste your draft, your prospect, or the scenario. The agent picks up where you are.</p>
+              <h4>Run the Simulation <span style="font-weight:500; color:var(--fb-mute); text-transform:none; letter-spacing:0;">(Execution)</span></h4>
+              <p>Once you provide the context, you will kick things off with your opening line.</p>
             </div>
           </div>
           <div class="fb-step">
             <div class="fb-step__num">3</div>
             <div>
-              <h4>Apply the spark</h4>
-              <p>Take the rewrite, run the role-play, send the email. Move the deal forward — today.</p>
+              <h4>The Debrief <span style="font-weight:500; color:var(--fb-mute); text-transform:none; letter-spacing:0;">(Evaluation)</span></h4>
+              <p>When you secure a next step, or whenever you want to stop, simply type the command below.</p>
+              <div class="fb-step__cta-note"><code>END SIMULATION</code></div>
+              <p>The agent drops the buyer persona and steps into the role of a Sales Simulation Specialist — delivering a structured, data-backed evaluation:</p>
+              <ul class="fb-step__list">
+                <li><strong>Weighted Scorecard (out of 100%)</strong> — scoring your Opening, Value Communication, Objection Handling, Closing, and Soft Skills.</li>
+                <li><strong>Actionable feedback</strong> — specific strengths plus a concrete action plan for areas of improvement.</li>
+              </ul>
             </div>
           </div>
         </div>
