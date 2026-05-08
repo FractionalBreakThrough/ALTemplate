@@ -127,11 +127,22 @@ img { max-width: 100%; display: block; }
 
 .btn-outline {
     background: transparent;
+    color: var(--text);
+    border-color: var(--text);
+}
+
+.btn-outline:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.btn-outline-white {
+    background: transparent;
     color: #fff;
     border-color: #fff;
 }
 
-.btn-outline:hover {
+.btn-outline-white:hover {
     background: #fff;
     color: var(--red);
 }
@@ -198,11 +209,11 @@ img { max-width: 100%; display: block; }
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(5,206,120,0.15);
-    border: 1px solid rgba(5,206,120,0.4);
+    background: rgba(5,206,120,0.1);
+    border: 1px solid rgba(5,206,120,0.3);
     border-radius: 30px;
     padding: 6px 18px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: var(--kickstarter-green);
     font-size: 0.85rem;
     font-weight: 700;
@@ -219,43 +230,42 @@ img { max-width: 100%; display: block; }
 .hero {
     position: relative;
     text-align: center;
-    padding: 100px 0 80px;
-    background: linear-gradient(180deg, #0a0a18 0%, #14102a 40%, #1a0e22 100%);
+    padding: 80px 0 0;
+    background: #fff;
     overflow: hidden;
 }
 
 .hero::before {
     content: '';
     position: absolute;
-    top: -40%;
-    left: -30%;
-    width: 160%;
-    height: 160%;
-    background: radial-gradient(circle at 25% 35%, rgba(212,46,46,0.14) 0%, transparent 45%),
-                radial-gradient(circle at 75% 55%, rgba(232,67,130,0.12) 0%, transparent 45%),
-                radial-gradient(circle at 50% 80%, rgba(5,206,120,0.06) 0%, transparent 40%);
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(232,87,42,0.06) 0%, rgba(232,67,130,0.04) 30%, transparent 65%);
     pointer-events: none;
 }
 
 .hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 400px;
-    background: radial-gradient(ellipse, rgba(232,87,42,0.08) 0%, transparent 70%);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, #f5f5f5 100%);
     pointer-events: none;
+    z-index: 1;
 }
 
 .hero h1 {
-    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
     font-weight: 900;
-    color: #fff;
-    margin-bottom: 24px;
+    color: var(--text);
+    margin-bottom: 20px;
     position: relative;
-    max-width: 900px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.1;
@@ -264,11 +274,11 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-subtitle {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.15rem;
-    margin-bottom: 36px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
     position: relative;
-    max-width: 640px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.7;
@@ -276,17 +286,17 @@ img { max-width: 100%; display: block; }
 
 .hero-subtitle strong {
     display: block;
-    color: #fff;
+    color: var(--text);
     font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: 12px;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
 }
 
 .hero-buttons {
     display: flex;
     gap: 16px;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     position: relative;
     flex-wrap: wrap;
 }
@@ -296,21 +306,106 @@ img { max-width: 100%; display: block; }
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: rgba(212,46,46,0.15);
-    border: 1px solid rgba(212,46,46,0.3);
+    background: rgba(212,46,46,0.06);
+    border: 1px solid rgba(212,46,46,0.15);
     border-radius: 30px;
-    padding: 10px 24px;
-    color: var(--red-light);
-    font-size: 0.9rem;
+    padding: 8px 20px;
+    color: var(--red);
+    font-size: 0.82rem;
     font-weight: 600;
+    margin-bottom: 48px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .hero-scarcity .dot {
     width: 8px;
     height: 8px;
-    background: var(--red-light);
+    background: var(--red);
     border-radius: 50%;
     animation: pulse-dot 1.5s infinite;
+}
+
+/* ===== Hero App Showcase ===== */
+.hero-showcase {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.hero-screenshot {
+    position: relative;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -8px 60px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.hero-screenshot img {
+    width: 100%;
+    display: block;
+}
+
+/* Glass floating cards */
+.glass-card {
+    position: absolute;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    z-index: 3;
+}
+
+.glass-card-icon {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.glass-card h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+.glass-card p {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.glass-card-left {
+    top: 15%;
+    left: -40px;
+    max-width: 180px;
+    animation: float-left 6s ease-in-out infinite;
+}
+
+.glass-card-right {
+    top: 30%;
+    right: -40px;
+    max-width: 180px;
+    animation: float-right 6s ease-in-out infinite;
+}
+
+.glass-card-bottom {
+    bottom: 15%;
+    left: 8%;
+    max-width: 200px;
+    animation: float-left 5s ease-in-out infinite 1s;
+}
+
+@keyframes float-left {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float-right {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
 
 @keyframes pulse-dot {
@@ -929,7 +1024,7 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 768px) {
     .hero {
-        padding: 60px 0 48px;
+        padding: 56px 0 0;
     }
 
     .hero h1 {
@@ -941,11 +1036,11 @@ img { max-width: 100%; display: block; }
     }
 
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .hero-subtitle strong {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .hero-buttons {
@@ -959,11 +1054,18 @@ img { max-width: 100%; display: block; }
     }
 
     .hero-scarcity {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-        text-align: center;
-        flex-wrap: wrap;
-        justify-content: center;
+        font-size: 0.72rem;
+        padding: 6px 14px;
+        margin-bottom: 32px;
+    }
+
+    .glass-card {
+        display: none;
+    }
+
+    .hero-screenshot {
+        border-radius: 12px 12px 0 0;
+        margin: 0 -8px;
     }
 
     .problem-section,
@@ -1053,11 +1155,6 @@ img { max-width: 100%; display: block; }
         font-size: 1.6rem;
     }
 
-    .hero-scarcity {
-        font-size: 0.75rem;
-        padding: 8px 12px;
-    }
-
     .tier-price {
         font-size: 2rem;
     }
@@ -1087,15 +1184,35 @@ img { max-width: 100%; display: block; }
         <div class="ks-hero-badge">
             <span class="ks-wordmark">Kickstarter</span> Campaign Coming Soon
         </div>
-        <h1>The AI Creative Department<br>Your Business <span class="text-gradient">Deserves</span></h1>
-        <p class="hero-subtitle"><strong>Lifetime Access. Limited Quantity. First Come, First Served.</strong>Carpe Diem Creative Intelligence gives you an entire marketing department powered by specialized AI agents &mdash; strategy, copy, creative direction, and more. Back us on Kickstarter and lock in lifetime access before it's gone.</p>
+        <h1>Stop Choosing Between Bad AI Content and <span class="text-gradient">Expensive Agencies</span></h1>
+        <p class="hero-subtitle"><strong>AI Marketing Specialists That Actually Understand Your Business.</strong>From strategy to copy to creative feedback &mdash; get the full marketing department experience for a fraction of the cost. Back us on Kickstarter and lock in lifetime access.</p>
         <div class="hero-buttons">
             <a href="#get-access" class="btn btn-primary">Get Early Access</a>
             <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
         </div>
         <div class="hero-scarcity">
             <span class="dot"></span>
-            Limited lifetime licenses &mdash; once they're gone, they're gone
+            Limited lifetime licenses &mdash; first come, first served
+        </div>
+    </div>
+    <div class="container hero-showcase">
+        <div class="hero-screenshot">
+            <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d4860d9665a905800b7e65.png" alt="Carpe Diem AI Creative Department">
+        </div>
+        <div class="glass-card glass-card-left">
+            <div class="glass-card-icon">&#127913;</div>
+            <h4>Arthur &mdash; Concierge</h4>
+            <p>Your creative director routes you to the right agent</p>
+        </div>
+        <div class="glass-card glass-card-right">
+            <div class="glass-card-icon">&#9997;&#65039;</div>
+            <h4>8 Specialist Agents</h4>
+            <p>Copy, strategy, social, creative review &amp; more</p>
+        </div>
+        <div class="glass-card glass-card-bottom">
+            <div class="glass-card-icon">&#128161;</div>
+            <h4>Learns Your Brand</h4>
+            <p>Gets smarter with every session you run</p>
         </div>
     </div>
 </section>
