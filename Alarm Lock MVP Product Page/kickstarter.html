@@ -845,21 +845,30 @@ img { max-width: 100%; display: block; }
     .problem-grid {
         grid-template-columns: 1fr;
         max-width: 480px;
-    }
-
-    .kickstarter-stats {
-        grid-template-columns: 1fr;
-        gap: 24px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding: 72px 0 60px;
+        padding: 60px 0 48px;
     }
 
     .hero h1 {
         font-size: clamp(1.8rem, 6vw, 2.4rem);
+    }
+
+    .hero h1 br {
+        display: none;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-subtitle strong {
+        font-size: 1.1rem;
     }
 
     .hero-buttons {
@@ -867,12 +876,81 @@ img { max-width: 100%; display: block; }
         align-items: center;
     }
 
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .hero-scarcity {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .problem-section,
+    .solution-section,
+    .how-section,
+    .tiers-section,
+    .kickstarter-section {
+        padding: 56px 0;
+    }
+
     .problem-section h2,
     .solution-section h2,
     .how-section h2,
     .tiers-section h2,
-    .kickstarter-section h2 {
+    .kickstarter-section h2,
+    .capture-section h2 {
         font-size: 1.8rem;
+    }
+
+    .problem-body,
+    .solution-body {
+        font-size: 0.95rem;
+    }
+
+    .section-subtitle,
+    .kickstarter-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .tier-price {
+        font-size: 2.2rem;
+    }
+
+    .kickstarter-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .ks-stat-number {
+        font-size: 2rem;
+    }
+
+    .ks-stat-label {
+        font-size: 0.75rem;
+    }
+
+    .kickstarter-trust {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px 20px;
+    }
+
+    .kickstarter-trust p {
+        text-align: center;
+    }
+
+    .capture-section {
+        padding: 56px 0;
+    }
+
+    .capture-form-wrapper {
+        padding: 20px;
+        margin-left: 8px;
+        margin-right: 8px;
     }
 
     .announcement-bar {
@@ -880,13 +958,41 @@ img { max-width: 100%; display: block; }
         padding: 8px 16px;
     }
 
-    .kickstarter-trust {
-        flex-direction: column;
-        text-align: center;
+    .announcement-bar span {
+        display: none;
     }
 
-    .kickstarter-trust p {
-        text-align: center;
+    .footer-links-row {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-scarcity {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+    }
+
+    .tier-price {
+        font-size: 2rem;
+    }
+
+    .kickstarter-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
     }
 }
 </style>
