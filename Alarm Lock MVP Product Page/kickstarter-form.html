@@ -1,0 +1,99 @@
+<!--
+  Carpe Diem Kickstarter - GHL Email Capture Form
+  Paste this into GHL's HTML form builder.
+  GHL will handle the form submission automatically.
+-->
+<style>
+.cd-form {
+    font-family: 'Roboto', Arial, sans-serif;
+    max-width: 100%;
+}
+
+.cd-form .form-group {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.cd-form .form-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #f0f0f0;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.cd-form .form-input::placeholder {
+    color: #666;
+}
+
+.cd-form .form-input:focus {
+    border-color: rgba(232, 87, 42, 0.5);
+    box-shadow: 0 0 0 3px rgba(232, 87, 42, 0.12), 0 0 20px rgba(232, 87, 42, 0.08);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.cd-form .form-btn {
+    background: linear-gradient(135deg, #e8572a, #e84382);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 20px rgba(232, 87, 42, 0.2);
+}
+
+.cd-form .form-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(232, 87, 42, 0.35), 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cd-form .form-btn:active {
+    transform: translateY(0);
+}
+
+.cd-form .form-note {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.cd-form .form-note svg {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+@media (max-width: 520px) {
+    .cd-form .form-group {
+        flex-direction: column;
+    }
+
+    .cd-form .form-btn {
+        padding: 14px 24px;
+    }
+}
+</style>
+
+<div class="cd-form">
+    <div class="form-group">
+        <input type="email" name="email" class="form-input" placeholder="Enter your email address" required>
+        <button type="submit" class="form-btn">Notify Me &#8594;</button>
+    </div>
+    <p class="form-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        No spam. Unsubscribe anytime. We respect your inbox.
+    </p>
+</div>
