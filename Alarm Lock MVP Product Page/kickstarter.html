@@ -288,86 +288,19 @@
     line-height: 1.6;
 }
 
-/* ===== Inline Form ===== */
-.cd-wrapper .cd-form {
-    max-width: 100%;
+/* ===== GHL Form Embed ===== */
+.cd-wrapper .ghl-form-wrap {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
-.cd-wrapper .cd-form .form-group {
-    display: flex;
-    gap: 12px;
-    align-items: stretch;
-}
-
-.cd-wrapper .cd-form .form-input {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 30px;
-    padding: 14px 24px;
-    font-size: 1rem;
-    font-family: inherit;
-    color: #f0f0f0;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-
-.cd-wrapper .cd-form .form-input::placeholder {
-    color: #555;
-}
-
-.cd-wrapper .cd-form .form-input:focus {
-    border-color: rgba(232, 87, 42, 0.5);
-    box-shadow: 0 0 0 3px rgba(232, 87, 42, 0.12), 0 0 20px rgba(232, 87, 42, 0.08);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.cd-wrapper .cd-form .form-btn {
-    background: var(--gradient);
-    color: #fff;
+.cd-wrapper .ghl-form-wrap iframe {
+    display: block;
+    width: 100%;
+    min-height: 300px;
     border: none;
-    border-radius: 30px;
-    padding: 14px 32px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 20px var(--glow-orange);
-}
-
-.cd-wrapper .cd-form .form-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(232, 87, 42, 0.35), 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.cd-wrapper .cd-form .form-btn:active {
-    transform: translateY(0);
-}
-
-.cd-wrapper .cd-form .form-note {
-    text-align: center;
-    margin-top: 14px;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.cd-wrapper .cd-form .form-note svg {
-    vertical-align: middle;
-    margin-right: 4px;
-}
-
-@media (max-width: 520px) {
-    .cd-wrapper .cd-form .form-group {
-        flex-direction: column;
-    }
-
-    .cd-wrapper .cd-form .form-btn {
-        padding: 14px 24px;
-    }
+    border-radius: 12px;
 }
 
 /* ===== Trusted Bar ===== */
@@ -1007,15 +940,24 @@
                 <span class="spots-badge">&#128293; Limited Lifetime Licenses Available</span>
                 <h3>Get Early Access</h3>
                 <p>Be first in line when we launch. Early backers get exclusive pricing on lifetime access to the full Creative Intelligence Department.</p>
-                <div class="cd-form">
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-input" placeholder="Enter your email address" required>
-                        <button type="submit" class="form-btn">Notify Me &#8594;</button>
-                    </div>
-                    <p class="form-note">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        No spam. Unsubscribe anytime. We respect your inbox.
-                    </p>
+                <div class="ghl-form-wrap">
+                    <iframe
+                        src="https://site.fractionalbreakthrough.com/widget/form/glHjW9v1B6PKxE2iC3k9"
+                        style="width:100%;height:300px;border:none;border-radius:12px"
+                        id="inline-glHjW9v1B6PKxE2iC3k9"
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="Form 0"
+                        data-height="300"
+                        data-layout-iframe-id="inline-glHjW9v1B6PKxE2iC3k9"
+                        data-form-id="glHjW9v1B6PKxE2iC3k9"
+                        title="Kickstarter Early Access"
+                    ></iframe>
                 </div>
             </div>
         </div>
@@ -1127,15 +1069,24 @@
                 <span class="spots-badge">&#9200; Launching Soon</span>
                 <h3>Reserve Your Spot</h3>
                 <p>Join the waitlist and get notified the moment our Kickstarter goes live. Early backers get the best pricing.</p>
-                <div class="cd-form">
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-input" placeholder="Enter your email address" required>
-                        <button type="submit" class="form-btn">Notify Me &#8594;</button>
-                    </div>
-                    <p class="form-note">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        No spam. Unsubscribe anytime. We respect your inbox.
-                    </p>
+                <div class="ghl-form-wrap">
+                    <iframe
+                        src="https://site.fractionalbreakthrough.com/widget/form/glHjW9v1B6PKxE2iC3k9"
+                        style="width:100%;height:300px;border:none;border-radius:12px"
+                        id="inline-glHjW9v1B6PKxE2iC3k9-2"
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="Form 0"
+                        data-height="300"
+                        data-layout-iframe-id="inline-glHjW9v1B6PKxE2iC3k9-2"
+                        data-form-id="glHjW9v1B6PKxE2iC3k9"
+                        title="Kickstarter Early Access"
+                    ></iframe>
                 </div>
             </div>
         </div>
@@ -1252,5 +1203,6 @@
 })();
 </script>
 
+<script src="https://site.fractionalbreakthrough.com/js/form_embed.js"></script>
 </body>
 </html>
