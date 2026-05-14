@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carpe Diem Creative Intelligence | Kickstarter Launch — Get Lifetime Access</title>
-    <meta name="description" content="Be among the first to back Carpe Diem Creative Intelligence on Kickstarter. Limited lifetime licenses available for early backers.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carpe Diem Creative Intelligence | Kickstarter Launch — Get Early Access</title>
+<meta name="description" content="Be among the first to back Carpe Diem Creative Intelligence on Kickstarter. Sign up for early access and exclusive launch pricing.">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2F0LB2RFLl"></script>
 <script>
@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-/* ===== Carpe Diem - Creative Intelligence Department (Kickstarter Page) ===== */
+/* ===== Carpe Diem - Kickstarter Early Access Page ===== */
 
 .cd-wrapper *, .cd-wrapper *::before, .cd-wrapper *::after {
     margin: 0;
@@ -75,10 +75,10 @@
 /* ===== Buttons ===== */
 .cd-wrapper .btn {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 14px 32px;
     border-radius: 30px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
@@ -92,7 +92,8 @@
 
 .cd-wrapper .btn-primary:hover {
     opacity: 0.9;
-    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232,87,42,0.3);
 }
 
 .cd-wrapper .btn-outline {
@@ -117,11 +118,6 @@
     color: var(--orange);
 }
 
-.cd-wrapper .btn-sm {
-    padding: 8px 20px;
-    font-size: 0.85rem;
-}
-
 .cd-wrapper .text-orange {
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -144,13 +140,6 @@
     text-align: center;
 }
 
-.cd-wrapper .section-subtitle-left {
-    color: var(--text-light);
-    font-size: 1rem;
-    margin-top: 8px;
-    margin-bottom: 24px;
-}
-
 /* ===== Top Separator ===== */
 .cd-wrapper .cd-separator {
     height: 3px;
@@ -166,6 +155,11 @@
     padding: 80px 0 72px;
     background: linear-gradient(180deg, #fff 0%, #f0f4f8 40%, rgba(232,87,42,0.05) 75%, rgba(232,67,130,0.05) 100%);
     overflow: hidden;
+}
+
+.cd-wrapper .hero .badge {
+    font-size: 1rem;
+    letter-spacing: 1px;
 }
 
 .cd-wrapper .hero h1 {
@@ -200,14 +194,6 @@
     margin-bottom: 10px;
 }
 
-.cd-wrapper .hero-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    margin-bottom: 48px;
-    position: relative;
-}
-
 .cd-wrapper .hero-image {
     position: relative;
     max-width: 1100px;
@@ -234,6 +220,62 @@
     box-shadow:
         0 0 30px rgba(232,87,42,0.15),
         0 0 80px rgba(232,67,130,0.1);
+}
+
+/* ===== Early Access CTA Box ===== */
+.cd-wrapper .early-access {
+    max-width: 640px;
+    margin: 40px auto 0;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(232,87,42,0.15);
+    position: relative;
+    z-index: 2;
+}
+
+.cd-wrapper .early-access h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cd-wrapper .early-access p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.cd-wrapper .early-access .spots-badge {
+    display: inline-block;
+    background: rgba(232,87,42,0.1);
+    color: var(--orange);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+/* GHL Form Placeholder */
+.cd-wrapper .ghl-form-placeholder {
+    background: #f8f9fa;
+    border: 2px dashed #ddd;
+    border-radius: var(--radius);
+    padding: 48px 24px;
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.cd-wrapper .ghl-form-placeholder strong {
+    display: block;
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 4px;
 }
 
 /* ===== Trusted Bar ===== */
@@ -265,446 +307,6 @@
     font-weight: 700;
     color: #888;
     white-space: nowrap;
-}
-
-/* ===== Features Section ===== */
-.cd-wrapper .features-section {
-    padding: 80px 0;
-    text-align: center;
-    background: var(--bg-white);
-}
-
-.cd-wrapper .features-section h2 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.cd-wrapper .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 48px;
-}
-
-.cd-wrapper .feature-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: var(--radius);
-    padding: 32px 24px;
-    text-align: left;
-    transition: box-shadow 0.3s;
-}
-
-.cd-wrapper .feature-card:hover {
-    box-shadow: var(--shadow);
-}
-
-.cd-wrapper .feature-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.cd-wrapper .feature-icon.teal { background: #e0f7fa; }
-.cd-wrapper .feature-icon.red { background: #fce4ec; }
-.cd-wrapper .feature-icon.purple { background: #ede7f6; }
-
-.cd-wrapper .feature-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.cd-wrapper .feature-card p {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-/* ===== Integrations ===== */
-.cd-wrapper .integrations-section {
-    padding: 80px 0;
-    background: var(--bg-light);
-    text-align: center;
-}
-
-.cd-wrapper .integrations-section h2 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    margin-bottom: 16px;
-}
-
-.cd-wrapper .integrations-intro {
-    max-width: 720px;
-    margin: 0 auto 48px;
-    color: var(--text-light);
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-.cd-wrapper .integrations-visual {
-    position: relative;
-    max-width: 700px;
-    margin: 24px auto 56px;
-}
-
-.cd-wrapper .integrations-benefits {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 1000px;
-    margin: 0 auto 40px;
-    text-align: left;
-}
-
-.cd-wrapper .integrations-benefit {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cd-wrapper .integrations-benefit:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(232,87,42,0.12);
-}
-
-.cd-wrapper .integrations-benefit-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 1.4rem;
-    margin-bottom: 16px;
-}
-
-.cd-wrapper .integrations-benefit h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text);
-}
-
-.cd-wrapper .integrations-benefit p {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-@media (max-width: 900px) {
-    .cd-wrapper .integrations-benefits {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-    }
-}
-
-.cd-wrapper .center-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px;
-    height: 90px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: var(--orange);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    z-index: 2;
-}
-
-.cd-wrapper .center-icon::before {
-    content: '';
-    position: absolute;
-    width: 440px;
-    height: 440px;
-    border-radius: 50%;
-    border: 2px solid rgba(232, 87, 42, 0.35);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.cd-wrapper .center-icon::after {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 2px solid rgba(232, 67, 130, 0.3);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.cd-wrapper .orbit-icons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    --distance: 195px;
-}
-
-.cd-wrapper .orbit-icon {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #555;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    top: 50%;
-    left: 50%;
-    transform:
-        translate(-50%, -50%)
-        rotate(var(--angle))
-        translateY(calc(-1 * var(--distance)))
-        rotate(calc(-1 * var(--angle)));
-}
-
-/* ===== Pricing ===== */
-.cd-wrapper .pricing-section {
-    padding: 80px 0;
-    background: var(--bg-white);
-}
-
-.cd-wrapper .pricing-section h2 {
-    font-size: 2.4rem;
-    font-weight: 800;
-}
-
-.cd-wrapper .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.cd-wrapper .pricing-card {
-    border: 1px solid #eee;
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-}
-
-.cd-wrapper .pricing-card:hover {
-    box-shadow: var(--shadow);
-}
-
-.cd-wrapper .pricing-header {
-    padding: 32px 24px;
-    text-align: center;
-}
-
-.cd-wrapper .pricing-card h4 {
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
-
-.cd-wrapper .price {
-    font-size: 2.4rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.cd-wrapper .price-period {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-bottom: 20px;
-}
-
-.cd-wrapper .pricing-features {
-    padding: 0 24px 32px;
-}
-
-.cd-wrapper .pricing-features li {
-    padding: 8px 0;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-}
-
-.cd-wrapper .check {
-    font-size: 0.5rem;
-    margin-top: 6px;
-    flex-shrink: 0;
-}
-
-.cd-wrapper .check.orange { color: var(--orange); }
-.cd-wrapper .check.white { color: rgba(255,255,255,0.8); }
-
-.cd-wrapper .pricing-card.popular {
-    background: var(--gradient);
-    color: #fff;
-    border-color: transparent;
-    transform: scale(1.03);
-}
-
-.cd-wrapper .pricing-card.popular h4,
-.cd-wrapper .pricing-card.popular .price span,
-.cd-wrapper .pricing-card.popular .price-period {
-    color: #fff;
-}
-
-.cd-wrapper .pricing-card.popular .pricing-features li {
-    color: rgba(255,255,255,0.9);
-}
-
-/* ===== FAQ ===== */
-.cd-wrapper .faq-section {
-    padding: 80px 0;
-    background: var(--bg-light);
-}
-
-.cd-wrapper .faq-section h2 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.cd-wrapper .faq-list {
-    max-width: 740px;
-    margin: 0 auto;
-}
-
-.cd-wrapper .faq-item {
-    border-bottom: 1px solid #ddd;
-}
-
-.cd-wrapper .faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 20px 0;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text);
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: inherit;
-}
-
-.cd-wrapper .faq-arrow {
-    font-size: 1.4rem;
-    transition: transform 0.3s;
-    line-height: 1;
-}
-
-.cd-wrapper .faq-item.open .faq-arrow {
-    transform: rotate(180deg);
-}
-
-.cd-wrapper .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-}
-
-.cd-wrapper .faq-item.open .faq-answer {
-    max-height: 200px;
-}
-
-.cd-wrapper .faq-answer p {
-    padding-bottom: 20px;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-/* ===== Footer ===== */
-.cd-wrapper .footer {
-    background: #fff;
-    color: var(--text-light);
-    padding: 72px 0 24px;
-    border-top: 1px solid #eee;
-}
-
-.cd-wrapper .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.cd-wrapper .footer-brand .logo {
-    margin-bottom: 16px;
-}
-
-.cd-wrapper .footer-brand p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-light);
-    max-width: 340px;
-}
-
-.cd-wrapper .footer-links h4 {
-    color: var(--text);
-    font-size: 0.95rem;
-    margin-bottom: 16px;
-    font-weight: 700;
-}
-
-.cd-wrapper .footer-links li {
-    margin-bottom: 10px;
-}
-
-.cd-wrapper .footer-links a {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    transition: color 0.2s;
-}
-
-.cd-wrapper .footer-links a:hover {
-    color: var(--orange);
-}
-
-.cd-wrapper .footer-bottom {
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-light);
-}
-
-.cd-wrapper .logo-img {
-    height: 36px;
-    width: auto;
-    display: block;
-}
-
-.cd-wrapper .logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    font-size: 1.2rem;
 }
 
 /* ===== The Problem Section ===== */
@@ -901,24 +503,148 @@
     background-clip: text;
 }
 
+/* ===== Final CTA Section ===== */
+.cd-wrapper .cta-section {
+    padding: 80px 0;
+    background: var(--bg-white);
+    text-align: center;
+}
+
+.cd-wrapper .cta-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.cd-wrapper .cta-section > .container > p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+/* ===== FAQ ===== */
+.cd-wrapper .faq-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.cd-wrapper .faq-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cd-wrapper .faq-list {
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+.cd-wrapper .faq-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.cd-wrapper .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+}
+
+.cd-wrapper .faq-arrow {
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+    line-height: 1;
+}
+
+.cd-wrapper .faq-item.open .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.cd-wrapper .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.cd-wrapper .faq-item.open .faq-answer {
+    max-height: 200px;
+}
+
+.cd-wrapper .faq-answer p {
+    padding-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ===== Footer ===== */
+.cd-wrapper .footer {
+    background: #fff;
+    color: var(--text-light);
+    padding: 48px 0 24px;
+    border-top: 1px solid #eee;
+}
+
+.cd-wrapper .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.cd-wrapper .footer .logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.cd-wrapper .logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
+}
+
+.cd-wrapper .footer-links-inline {
+    display: flex;
+    gap: 24px;
+}
+
+.cd-wrapper .footer-links-inline a {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    transition: color 0.2s;
+}
+
+.cd-wrapper .footer-links-inline a:hover {
+    color: var(--orange);
+}
+
+.cd-wrapper .footer-bottom {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-    .cd-wrapper .features-grid,
-    .cd-wrapper .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .cd-wrapper .pricing-card.popular {
-        transform: none;
-    }
-
-    .cd-wrapper .footer-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
     .cd-wrapper .problem-grid {
         grid-template-columns: 1fr;
         max-width: 480px;
@@ -937,17 +663,17 @@
 }
 
 @media (max-width: 768px) {
+    .cd-wrapper .hero {
+        padding: 60px 0 56px;
+    }
+
     .cd-wrapper .hero-subtitle strong {
         font-size: 1.1rem;
     }
 
-    .cd-wrapper .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .cd-wrapper .section-subtitle br {
-        display: none;
+    .cd-wrapper .early-access {
+        margin: 32px 16px 0;
+        padding: 32px 20px;
     }
 
     .cd-wrapper .logo-scroll {
@@ -958,48 +684,10 @@
         font-size: 0.9rem;
     }
 
-    .cd-wrapper .integrations-visual {
-        max-width: 100%;
-        margin: 32px auto 40px;
-    }
-
-    .cd-wrapper .integrations-visual .orbit-icons {
-        --distance: 125px;
-    }
-
-    .cd-wrapper .integrations-visual .center-icon {
-        width: 76px;
-        height: 76px;
-    }
-
-    .cd-wrapper .integrations-visual .center-icon::before {
-        width: 280px;
-        height: 280px;
-    }
-
-    .cd-wrapper .integrations-visual .center-icon::after {
-        width: 190px;
-        height: 190px;
-    }
-
-    .cd-wrapper .integrations-visual .orbit-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .cd-wrapper .footer-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .cd-wrapper .features-section h2,
-    .cd-wrapper .integrations-section h2,
-    .cd-wrapper .pricing-section h2,
-    .cd-wrapper .faq-section h2 {
-        font-size: 1.8rem;
-    }
-
     .cd-wrapper .problem-section h2,
-    .cd-wrapper .difference-section h2 {
+    .cd-wrapper .difference-section h2,
+    .cd-wrapper .cta-section h2,
+    .cd-wrapper .faq-section h2 {
         font-size: 1.8rem;
     }
 
@@ -1019,6 +707,16 @@
     .cd-wrapper .difference-power p {
         font-size: 1.15rem;
     }
+
+    .cd-wrapper .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cd-wrapper .footer-links-inline {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 </style>
 </head>
@@ -1032,15 +730,24 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <span class="badge">&#10024; The Creative Intelligence Department</span>
-            <h1>Stop Choosing Between Bad AI Content and <span class="text-orange">Expensive Agencies</span></h1>
-            <p class="hero-subtitle"><strong>AI Marketing Specialists That Actually Understand Your Business.</strong>From strategy to copy to creative feedback &mdash; get the full marketing department experience for a fraction of the cost.</p>
-            <div class="hero-buttons">
-                <a href="https://agent.carpediemcreative.agency/guest/IRPE14SDF1?sessionId=02e8d44c-7ac5-4e7b-9a2b-eb4a96f14871" target="_blank" rel="noopener" class="btn btn-primary">Get Started Free</a>
-                <a href="https://agent.carpediemcreative.agency/guest/ai_dept" target="_blank" rel="noopener" class="btn btn-outline">Meet the Agents</a>
-            </div>
+            <span class="badge">&#128640; Coming Soon to Kickstarter</span>
+            <h1>Get <span class="text-orange">Lifetime Access</span> to Your AI Creative Department</h1>
+            <p class="hero-subtitle"><strong>Be the First to Back Carpe Diem Creative Intelligence.</strong>We're launching on Kickstarter with a limited number of lifetime licenses. Sign up now to get notified the moment we go live &mdash; and lock in exclusive early-backer pricing.</p>
             <div class="hero-image">
                 <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d4860d9665a905800b7e65.png" alt="Carpe Diem AI Creative Department" style="width:100%; border-radius:16px; box-shadow: 0 8px 40px rgba(0,0,0,0.12);">
+            </div>
+            <div class="early-access">
+                <span class="spots-badge">&#128293; Limited Lifetime Licenses Available</span>
+                <h3>Get Early Access</h3>
+                <p>Be first in line when we launch. Early backers get exclusive pricing on lifetime access to the full Creative Intelligence Department.</p>
+                <!-- ========================================== -->
+                <!-- GHL FORM EMBED: Paste your GHL form code  -->
+                <!-- below, replacing this placeholder div.     -->
+                <!-- ========================================== -->
+                <div class="ghl-form-placeholder">
+                    <strong>GHL Form Goes Here</strong>
+                    Replace this div with your GHL form embed code
+                </div>
             </div>
         </div>
     </section>
@@ -1142,118 +849,22 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features-section">
+    <!-- Final CTA Section -->
+    <section class="cta-section">
         <div class="container">
-            <span class="badge">&#10024; Meet the Department</span>
-            <h2>Your $200K Marketing Team<br>for the Price of <span class="text-orange">Netflix</span></h2>
-            <p class="section-subtitle">Eight specialists with names, personalities, and real points of view.<br>They collaborate with you and each other &mdash; like a real team.</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon teal">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <h3>Strategy Without the BS</h3>
-                    <p>Meet <strong>Max</strong>, your strategist who skips the 47-slide decks and gets to what matters. Plus <strong>Arthur</strong>, who'll audit your site and actually tell you what to fix first&mdash;not everything at once. They turn "I don't know where to start" into "Here's exactly what we're doing next."</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon red">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                    </div>
-                    <h3>Copy That Doesn't Sound Like Everyone Else's</h3>
-                    <p><strong>Paige</strong> writes ads that make people stop scrolling&mdash;trained on the giants like Ogilvy, not ChatGPT templates. <strong>Casey</strong> crafts content that ranks AND converts (yes, both are possible). They know when to be funny, when to be serious, and when to shut up and let the product speak.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon purple">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M17 14v8"/><path d="M13 18h8"/></svg>
-                    </div>
-                    <h3>Creative Direction Without the Attitude</h3>
-                    <p><strong>Crystal</strong> gives you the design feedback you'd get from a $500/hour creative director&mdash;minus the condescension. <strong>Clara</strong> is your Swiss Army knife, handling everything from competitor research to data analysis. No task too weird.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Integrations Section -->
-    <section class="integrations-section">
-        <div class="container">
-            <span class="badge">&#10024; Powered by Every Model. Made Different by Us.</span>
-            <h2>The Best of Every AI,<br>Shaped by Real Creative Craft</h2>
-            <p class="integrations-intro">Our agents tap into every major AI model available &mdash; GPT, Claude, Gemini, and more &mdash; routing each task to the engine best suited for the job. But the models aren't what make them special. What sets our department apart is the hand-crafted skills, the personality, and how effortlessly anyone on your team can put them to work.</p>
-            <div class="integrations-visual">
-                <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69daddcea4e6aa34cbdeaaf5.png" alt="Powered by every major AI model" style="width:100%; height:auto; display:block;">
-            </div>
-            <div class="integrations-benefits">
-                <div class="integrations-benefit">
-                    <div class="integrations-benefit-icon">&#9889;</div>
-                    <h3>Every Model, One Team</h3>
-                    <p>Our agents draw on all the leading AI models &mdash; GPT, Claude, Gemini, and more &mdash; automatically using the right engine for the right task. You never have to pick, prompt, or juggle.</p>
-                </div>
-                <div class="integrations-benefit">
-                    <div class="integrations-benefit-icon">&#9999;&#65039;</div>
-                    <h3>Hand-Crafted Skills &amp; Personality</h3>
-                    <p>Each agent is built by real creatives with real frameworks, a distinct voice, and a point of view. They don't just generate &mdash; they collaborate, push back, and bring craft to every brief.</p>
-                </div>
-                <div class="integrations-benefit">
-                    <div class="integrations-benefit-icon">&#128172;</div>
-                    <h3>Effortless for Everyone</h3>
-                    <p>No prompt engineering, no onboarding marathon. If you can have a conversation, you can work with the department. Anyone on your team can jump in and get to great work fast.</p>
-                </div>
-            </div>
-            <a href="#" class="btn btn-outline">See How It Works</a>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing-section">
-        <div class="container">
-            <h2><span class="text-orange">Carpe Diem</span>'s Tailored Pricing</h2>
-            <p class="section-subtitle-left">Access the full Creative Intelligence Department. Choose the plan that fits your workflow.</p>
-            <div class="pricing-grid">
-                <!-- Starter -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h4>STARTER</h4>
-                        <div class="price"><span class="text-orange">$30.00</span></div>
-                        <div class="price-period">/user /month</div>
-                        <a href="https://agent.carpediemcreative.agency/guest?action=welcome" target="_blank" rel="noopener" class="btn btn-primary">Purchase Plan</a>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check orange">&#9679;</span> All 8 specialized AI agents</li>
-                        <li><span class="check orange">&#9679;</span> Limited monthly generations</li>
-                        <li><span class="check orange">&#9679;</span> Agent collaboration features</li>
-                        <li><span class="check orange">&#9679;</span> Priority support</li>
-                    </ul>
-                </div>
-                <!-- Pro -->
-                <div class="pricing-card popular">
-                    <div class="pricing-header">
-                        <h4>PRO - Popular</h4>
-                        <div class="price"><span>$100.00</span></div>
-                        <div class="price-period">/user /month</div>
-                        <a href="https://agent.carpediemcreative.agency/guest?action=welcome" target="_blank" rel="noopener" class="btn btn-outline-white">Purchase Plan</a>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check white">&#9679;</span> All 8 specialized AI agents</li>
-                        <li><span class="check white">&#9679;</span> Higher monthly limits</li>
-                        <li><span class="check white">&#9679;</span> Agent collaboration features</li>
-                        <li><span class="check white">&#9679;</span> Priority support</li>
-                    </ul>
-                </div>
-                <!-- Enterprise -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h4>ENTERPRISE</h4>
-                        <div class="price"><span class="text-orange">Custom</span></div>
-                        <div class="price-period">/team /month</div>
-                        <a href="https://agent.carpediemcreative.agency/guest?action=welcome" target="_blank" rel="noopener" class="btn btn-primary">Price Request</a>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check orange">&#9679;</span> Everything in Pro plus custom agents</li>
-                        <li><span class="check orange">&#9679;</span> Dedicated creative account manager</li>
-                        <li><span class="check orange">&#9679;</span> Brand voice training &amp; custom workflows</li>
-                        <li><span class="check orange">&#9679;</span> 24/7 premium support</li>
-                    </ul>
+            <h2>Don't Miss the <span class="text-orange">Launch</span></h2>
+            <p>Lifetime licenses are limited. Sign up now and be the first to know when we go live on Kickstarter.</p>
+            <div class="early-access" style="margin-top: 0;">
+                <span class="spots-badge">&#9200; Launching Soon</span>
+                <h3>Reserve Your Spot</h3>
+                <p>Join the waitlist and get notified the moment our Kickstarter goes live. Early backers get the best pricing.</p>
+                <!-- ========================================== -->
+                <!-- GHL FORM EMBED: Paste your GHL form code  -->
+                <!-- below, replacing this placeholder div.     -->
+                <!-- ========================================== -->
+                <div class="ghl-form-placeholder">
+                    <strong>GHL Form Goes Here</strong>
+                    Replace this div with your GHL form embed code
                 </div>
             </div>
         </div>
@@ -1262,51 +873,51 @@
     <!-- FAQ Section -->
     <section id="faq" class="faq-section">
         <div class="container">
-            <h2>Got Questions?<br>We Have Answers!</h2>
+            <h2>Got Questions?<br>We Have <span class="text-orange">Answers</span></h2>
             <div class="faq-list">
                 <div class="faq-item">
                     <button class="faq-question">
-                        How do I choose the right plan for my team?
+                        What is Carpe Diem Creative Intelligence?
                         <span class="faq-arrow">&#8964;</span>
                     </button>
                     <div class="faq-answer">
-                        <p>If you're a solo freelancer or just getting started, the Starter plan gives you access to core agents. For agencies and teams that need all 8 agents with unlimited output, Pro is the sweet spot. Enterprise is for organizations that want custom-trained agents and dedicated support.</p>
+                        <p>It's your AI-powered creative department &mdash; 8 specialized marketing agents (strategist, copywriter, creative director, and more) that actually learn your brand and collaborate like a real team. Built by a real agency, not a tech company.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        Can I switch plans at any time?
+                        What does "lifetime access" mean?
                         <span class="faq-arrow">&#8964;</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle, and any price differences will be prorated.</p>
+                        <p>Kickstarter backers who claim a lifetime license get permanent access to the Creative Intelligence Department &mdash; no monthly fees, ever. You'll receive all future updates and new agents as we add them.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        What kind of support is included?
+                        How many lifetime licenses are available?
                         <span class="faq-arrow">&#8964;</span>
                     </button>
                     <div class="faq-answer">
-                        <p>All plans include email support. Pro plans get priority email support with faster response times. Enterprise plans include 24/7 premium support with a dedicated account manager.</p>
+                        <p>We're offering a strictly limited number of lifetime licenses through our Kickstarter campaign. Once they're gone, they're gone. Signing up for early access ensures you'll be notified the moment the campaign launches.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        Is there a free trial available?
+                        When does the Kickstarter launch?
                         <span class="faq-arrow">&#8964;</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes! You can get started for free and explore the core agents. No credit card required. Experience the Creative Intelligence Department before committing to a paid plan.</p>
+                        <p>We're finalizing the launch date now. Sign up above to be the first to know &mdash; early access subscribers will get 24-hour advance notice before the campaign goes public.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        How do the AI agents actually work?
+                        Is my email safe? Will I get spammed?
                         <span class="faq-arrow">&#8964;</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Each agent is trained on real creative frameworks &mdash; the same processes used by strategists, copywriters, and art directors. You chat with them like team members. They ask smart questions, understand briefs, and collaborate with each other to deliver polished creative work.</p>
+                        <p>We respect your inbox. You'll only receive Kickstarter launch updates and early-backer exclusive offers. No spam, no selling your info. Unsubscribe anytime.</p>
                     </div>
                 </div>
             </div>
@@ -1314,44 +925,21 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
                 <div class="logo">
                     <img src="https://assets.cdn.filesafe.space/aDyCJfFox0W1sWUghjwp/media/69d9d2b0982fd67a3546ea51.png" alt="Carpe Diem" class="logo-img">
                 </div>
-                <p>AI-powered creative agents built by an agency, for agencies, freelancers, and brands who make things.</p>
+                <div class="footer-links-inline">
+                    <a href="https://carpediemcreative.agency" target="_blank" rel="noopener">Human Department</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#">Meet the Agents</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Integrations</a></li>
-                    <li><a href="#">Try Free</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>&copy; Carpe Diem Creative. All rights reserved.</p>
             </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; Carpe Diem Creative. All rights reserved.</p>
         </div>
     </footer>
 
