@@ -458,6 +458,10 @@ img { max-width: 100%; display: block; }
     grid-column: span 2;
 }
 
+.bento-card.span-full {
+    grid-column: 1 / -1;
+}
+
 .bento-icon {
     width: 48px;
     height: 48px;
@@ -926,7 +930,8 @@ img { max-width: 100%; display: block; }
         grid-template-columns: 1fr 1fr;
     }
 
-    .bento-card.span-2 {
+    .bento-card.span-2,
+    .bento-card.span-full {
         grid-column: span 2;
     }
 
@@ -961,7 +966,8 @@ img { max-width: 100%; display: block; }
         grid-template-columns: 1fr;
     }
 
-    .bento-card.span-2 {
+    .bento-card.span-2,
+    .bento-card.span-full {
         grid-column: span 1;
     }
 
@@ -1061,12 +1067,12 @@ img { max-width: 100%; display: block; }
                 <h3>More Strategy</h3>
                 <p>Your Strategist and Analyst turn scattered ideas into campaign roadmaps, competitive analyses, and data-driven plans you can execute immediately.</p>
             </div>
-            <div class="bento-card reveal">
+            <div class="bento-card span-2 reveal">
                 <div class="bento-icon">&#128225;</div>
                 <h3>Open More Channels</h3>
                 <p>Instagram, LinkedIn, X, TikTok, email, blog, ads &mdash; stop picking which channels to neglect. Your team covers them all, natively optimized for each platform.</p>
             </div>
-            <div class="bento-card span-2 reveal">
+            <div class="bento-card span-full reveal">
                 <div class="bento-icon">&#129309;</div>
                 <h3>Human Backup When You Need It</h3>
                 <p>One click escalates any task to our human creative team. You get the speed of AI with the confidence of real creative professionals reviewing the work. 3am deadline? Your team is still there.</p>
