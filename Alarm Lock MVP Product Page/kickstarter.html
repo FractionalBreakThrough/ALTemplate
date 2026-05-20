@@ -289,14 +289,100 @@
     line-height: 1.6;
 }
 
-/* ===== GHL Form Embed ===== */
-.cd-wrapper .ghl-form-wrap {
-    width: 100%;
-    position: relative;
-    z-index: 5;
+/* ===== Modal Overlay ===== */
+.cd-wrapper .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
 }
 
-.cd-wrapper .ghl-form-wrap iframe {
+.cd-wrapper .modal-overlay.active {
+    display: flex;
+}
+
+.cd-wrapper .modal-box {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px 32px;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.5),
+        0 0 60px var(--glow-orange),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(16px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.cd-wrapper .modal-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.cd-wrapper .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    z-index: 2;
+}
+
+.cd-wrapper .modal-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.cd-wrapper .modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.cd-wrapper .modal-header h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.cd-wrapper .modal-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.cd-wrapper .modal-box iframe {
     display: block !important;
     width: 100% !important;
     min-height: 434px !important;
@@ -943,25 +1029,7 @@
                 <span class="spots-badge">&#128293; Limited Lifetime Licenses Available</span>
                 <h3>Get Early Access</h3>
                 <p>Be first in line when we launch. Early backers get exclusive pricing on lifetime access to the full Creative Intelligence Department.</p>
-                <div class="ghl-form-wrap">
-                    <iframe
-                        src="https://site.fractionalbreakthrough.com/widget/form/glHjW9v1B6PKxE2iC3k9"
-                        style="width:100%;height:100%;border:none;border-radius:8px"
-                        id="inline-glHjW9v1B6PKxE2iC3k9"
-                        data-layout="{'id':'INLINE'}"
-                        data-trigger-type="alwaysShow"
-                        data-trigger-value=""
-                        data-activation-type="alwaysActivated"
-                        data-activation-value=""
-                        data-deactivation-type="neverDeactivate"
-                        data-deactivation-value=""
-                        data-form-name="Form 0"
-                        data-height="434"
-                        data-layout-iframe-id="inline-glHjW9v1B6PKxE2iC3k9"
-                        data-form-id="glHjW9v1B6PKxE2iC3k9"
-                        title="Kickstarter Early Access"
-                    ></iframe>
-                </div>
+                <button class="btn btn-primary modal-trigger">Get Early Access &#8594;</button>
             </div>
         </div>
     </section>
@@ -1072,25 +1140,7 @@
                 <span class="spots-badge">&#9200; Launching Soon</span>
                 <h3>Reserve Your Spot</h3>
                 <p>Join the waitlist and get notified the moment our Kickstarter goes live. Early backers get the best pricing.</p>
-                <div class="ghl-form-wrap">
-                    <iframe
-                        src="https://site.fractionalbreakthrough.com/widget/form/glHjW9v1B6PKxE2iC3k9"
-                        style="width:100%;height:100%;border:none;border-radius:8px"
-                        id="inline-glHjW9v1B6PKxE2iC3k9-2"
-                        data-layout="{'id':'INLINE'}"
-                        data-trigger-type="alwaysShow"
-                        data-trigger-value=""
-                        data-activation-type="alwaysActivated"
-                        data-activation-value=""
-                        data-deactivation-type="neverDeactivate"
-                        data-deactivation-value=""
-                        data-form-name="Form 0"
-                        data-height="434"
-                        data-layout-iframe-id="inline-glHjW9v1B6PKxE2iC3k9-2"
-                        data-form-id="glHjW9v1B6PKxE2iC3k9"
-                        title="Kickstarter Early Access"
-                    ></iframe>
-                </div>
+                <button class="btn btn-primary modal-trigger">Reserve Your Spot &#8594;</button>
             </div>
         </div>
     </section>
@@ -1168,6 +1218,34 @@
         </div>
     </footer>
 
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="formModal">
+        <div class="modal-box">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <h3>Get <span class="text-orange">Early Access</span></h3>
+                <p>Sign up to be first in line when we launch on Kickstarter.</p>
+            </div>
+            <iframe
+                src="https://site.fractionalbreakthrough.com/widget/form/glHjW9v1B6PKxE2iC3k9"
+                style="width:100%;height:100%;border:none;border-radius:8px"
+                id="inline-glHjW9v1B6PKxE2iC3k9"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Form 0"
+                data-height="434"
+                data-layout-iframe-id="inline-glHjW9v1B6PKxE2iC3k9"
+                data-form-id="glHjW9v1B6PKxE2iC3k9"
+                title="Kickstarter Early Access"
+            ></iframe>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -1176,6 +1254,37 @@
         const root = document.querySelector('.cd-wrapper');
         if (!root) return;
 
+        // Modal open/close
+        const modal = root.querySelector('#formModal');
+        const closeBtn = modal.querySelector('.modal-close');
+
+        root.querySelectorAll('.modal-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // FAQ Accordion
         root.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
@@ -1185,6 +1294,7 @@
             });
         });
 
+        // Smooth scroll
         root.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', e => {
                 const href = anchor.getAttribute('href');
