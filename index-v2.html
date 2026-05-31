@@ -359,23 +359,56 @@
       padding: 1px 4px; border-radius: 3px;
     }
 
+    /* ── Mobile: Attribute Accordion (replaces grid <900px) ─ */
+    .cp-compare-mobile { display: none; }
+    .cp-compare-mobile__item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;
+      transition: border-color .2s;
+    }
+    .cp-compare-mobile__item.open { border-color: var(--accent); }
+    .cp-compare-mobile__head {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 18px 20px; text-align: left;
+      font-family: sans-serif; text-transform: uppercase;
+      letter-spacing: 1.3px; font-size: .82rem; font-weight: 700;
+      color: var(--accent); line-height: 1.3;
+    }
+    .cp-compare-mobile__head::after {
+      content: '+'; font-size: 1.4rem; color: var(--accent);
+      flex-shrink: 0; transition: transform .2s;
+    }
+    .cp-compare-mobile__item.open .cp-compare-mobile__head::after { content: '\2212'; }
+    .cp-compare-mobile__body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .cp-compare-mobile__item.open .cp-compare-mobile__body { max-height: 2000px; }
+    .cp-compare-mobile__inner { padding: 0 16px 16px; display: grid; gap: 12px; }
+    .cp-compare-mobile__tradition {
+      background: var(--bg-deep); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px; padding: 14px 16px;
+    }
+    .cp-compare-mobile__tradition-name {
+      font-family: sans-serif; text-transform: uppercase;
+      letter-spacing: 1.2px; font-size: .7rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 6px;
+    }
+    .cp-compare-mobile__tradition-text {
+      font-size: .92rem; line-height: 1.65; color: var(--text);
+    }
+    .cp-compare-mobile__tradition-text em { color: var(--white); font-style: italic; }
+    .cp-compare-wrap.highlight .cp-compare-mobile__tradition-text em,
+    .cp-compare-wrap.highlight .cp-compare-mobile__tradition-text strong {
+      background: rgba(201,168,76,.15);
+      padding: 1px 4px; border-radius: 3px;
+    }
+
     @media (max-width: 900px) {
-      .cp-compare {
-        grid-template-columns: 1fr 1fr;
-        font-size: .85rem;
-      }
-      .cp-compare__cell {
-        border-right: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-      }
-      .cp-compare__cell:nth-child(5n) { border-right: 1px solid var(--border); }
-      .cp-compare__cell:nth-child(2n) { border-right: none; }
-      .cp-compare__corner { display: none; }
-      .cp-compare__attr {
-        grid-column: 1 / -1;
-        justify-content: center;
-        padding: 12px; font-size: .75rem;
-      }
+      .cp-compare { display: none; }
+      .cp-compare-mobile { display: block; }
     }
 
     /* ── Disciplines Grid (Part 3) ──────────────────────── */
@@ -642,7 +675,7 @@
         </button>
       </div>
 
-      <div class="cp-reveal">
+      <div class="cp-reveal cp-compare-wrap" id="cpCompareWrap">
         <div class="cp-compare" id="cpCompare">
           <div class="cp-compare__cell cp-compare__header cp-compare__corner">Compare</div>
           <div class="cp-compare__cell cp-compare__header">Wesleyan / Methodist</div>
@@ -680,6 +713,57 @@
             <div class="cp-compare__cell cp-compare__row-last">A <em>lifelong, gradual process</em> empowered by the Holy Spirit. Perfection is only fully realized in glorification after death.</div>
             <div class="cp-compare__cell cp-compare__row-last">An <em>increase of grace and charity</em>, pursued through the commandments and (for some) the evangelical counsels: poverty, chastity, obedience.</div>
             <div class="cp-compare__cell cp-compare__row-last">Participation in the life of the Church through <em>sacraments (mysteries)</em>, prayer, fasting, and ascetic struggle, empowered by divine grace.</div>
+          </div>
+        </div>
+
+        <!-- Mobile: by-attribute accordion -->
+        <div class="cp-compare-mobile" id="cpCompareMobile">
+          <div class="cp-compare-mobile__item">
+            <button class="cp-compare-mobile__head" aria-expanded="false">Core Definition</button>
+            <div class="cp-compare-mobile__body">
+              <div class="cp-compare-mobile__inner">
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Wesleyan / Methodist</div><div class="cp-compare-mobile__tradition-text">Christian Perfection, or <em>entire sanctification</em> &mdash; purity of intention and perfect love for God and neighbor. Restoration of the image of God.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Reformed / Evangelical</div><div class="cp-compare-mobile__tradition-text">A lifelong, <em>progressive process</em> of increasing in holiness and becoming more like Christ. About spiritual maturity, not sinless perfection.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Roman Catholic</div><div class="cp-compare-mobile__tradition-text">A spiritual <em>union with God</em>, primarily constituted by charity (love). Tied to the practice of love and service.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Eastern Orthodox</div><div class="cp-compare-mobile__tradition-text"><em>Theosis</em> (deification) &mdash; becoming more like God by His grace. A transformation of one's entire being into the divine likeness.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cp-compare-mobile__item">
+            <button class="cp-compare-mobile__head" aria-expanded="false">Attainable in this Life?</button>
+            <div class="cp-compare-mobile__body">
+              <div class="cp-compare-mobile__inner">
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Wesleyan / Methodist</div><div class="cp-compare-mobile__tradition-text"><strong>Qualified Yes.</strong> Wesley believed believers could be freed from <em>intentional, voluntary</em> sin, though involuntary mistakes remain.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Reformed / Evangelical</div><div class="cp-compare-mobile__tradition-text"><strong>No.</strong> Absolute sinless perfection is not possible in this life. Believers still possess a sinful nature until death.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Roman Catholic</div><div class="cp-compare-mobile__tradition-text"><strong>Qualified Yes.</strong> The state can be reached, but coexists with human weakness, rebellious passions, and venial (lesser) sin.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Eastern Orthodox</div><div class="cp-compare-mobile__tradition-text"><strong>Yes &mdash; dynamically.</strong> Theosis is a lifelong journey beginning at baptism and continuing into the afterlife.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cp-compare-mobile__item">
+            <button class="cp-compare-mobile__head" aria-expanded="false">Role of Original Sin</button>
+            <div class="cp-compare-mobile__body">
+              <div class="cp-compare-mobile__inner">
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Wesleyan / Methodist</div><div class="cp-compare-mobile__tradition-text">The <em>carnal nature</em> can be cleansed through a "second work of grace," removing the root of intentional sin.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Reformed / Evangelical</div><div class="cp-compare-mobile__tradition-text"><em>Indwelling sin / depravity</em> remains active throughout life, creating an ongoing internal struggle (Romans 7).</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Roman Catholic</div><div class="cp-compare-mobile__tradition-text">Baptism cleanses from original sin, but <em>concupiscence</em> (the inclination to sin) remains a lifelong struggle.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Eastern Orthodox</div><div class="cp-compare-mobile__tradition-text">Humans were created for theosis, but the <em>ancestral sin</em> of Adam obscured this potential, which is restored in Christ.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cp-compare-mobile__item">
+            <button class="cp-compare-mobile__head" aria-expanded="false">Key Mechanism</button>
+            <div class="cp-compare-mobile__body">
+              <div class="cp-compare-mobile__inner">
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Wesleyan / Methodist</div><div class="cp-compare-mobile__tradition-text">Received by <em>faith</em>. Can be an instantaneous experience (second work of grace) AND part of gradual, lifelong growth.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Reformed / Evangelical</div><div class="cp-compare-mobile__tradition-text">A <em>lifelong, gradual process</em> empowered by the Holy Spirit. Perfection is only fully realized in glorification after death.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Roman Catholic</div><div class="cp-compare-mobile__tradition-text">An <em>increase of grace and charity</em>, pursued through the commandments and (for some) the evangelical counsels: poverty, chastity, obedience.</div></div>
+                <div class="cp-compare-mobile__tradition"><div class="cp-compare-mobile__tradition-name">Eastern Orthodox</div><div class="cp-compare-mobile__tradition-text">Participation in the life of the Church through <em>sacraments (mysteries)</em>, prayer, fasting, and ascetic struggle, empowered by divine grace.</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -930,12 +1014,25 @@
       tabButtons.forEach(function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
       setTab('immutability');
 
+      /* ── Mobile Comparison Accordion ─────────────────── */
+      var compareMobileItems = document.querySelectorAll('.cp-compare-mobile__item');
+      compareMobileItems.forEach(function (item, idx) {
+        var head = item.querySelector('.cp-compare-mobile__head');
+        if (idx === 0) { item.classList.add('open'); head.setAttribute('aria-expanded', 'true'); }
+        head.addEventListener('click', function () {
+          var open = item.classList.toggle('open');
+          head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
       /* ── Comparison Highlight Toggle ─────────────────── */
       var highlightToggle = document.getElementById('cpHighlightToggle');
       var compareGrid = document.getElementById('cpCompare');
-      if (highlightToggle && compareGrid) {
+      var compareWrap = document.getElementById('cpCompareWrap');
+      if (highlightToggle && compareGrid && compareWrap) {
         highlightToggle.addEventListener('click', function () {
           var on = compareGrid.classList.toggle('highlight');
+          compareWrap.classList.toggle('highlight', on);
           highlightToggle.classList.toggle('active', on);
           highlightToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
         });
