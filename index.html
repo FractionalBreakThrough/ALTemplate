@@ -107,14 +107,107 @@
     .cp-text-block p { color: var(--text); font-size: 1rem; }
     .cp-text-block strong { color: var(--white); }
 
-    /* ── Audio + Question of the Day ────────────────────── */
-    .cp-audio-wrap { max-width: 600px; margin: 0 auto; text-align: center; }
-    .cp-audio-wrap .cp-label { margin-bottom: 14px; }
-    audio {
-      width: 100%; border-radius: 50px;
-      background: var(--bg-card);
+    /* ── Custom Audio Player (inline) ───────────────────── */
+    .cp-audio-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+    .cp-audio-wrap .cp-label { margin-bottom: 16px; }
+    .cp-player {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 60px; padding: 12px 22px 12px 12px;
+      transition: border-color .3s, box-shadow .3s;
     }
-    audio::-webkit-media-controls-panel { background-color: var(--bg-card); }
+    .cp-player:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--glow); }
+    .cp-player__btn {
+      flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s, box-shadow .2s;
+    }
+    .cp-player__btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px var(--glow); }
+    .cp-player__btn:active { transform: scale(0.98); }
+    .cp-player__icon-play, .cp-player__icon-pause { width: 18px; height: 18px; fill: #111; }
+    .cp-player__icon-pause { display: none; }
+    .cp-player.playing .cp-player__icon-play { display: none; }
+    .cp-player.playing .cp-player__icon-pause { display: block; }
+    .cp-player__main { flex: 1; min-width: 0; text-align: left; }
+    .cp-player__title {
+      font-family: sans-serif; font-size: .72rem; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+    .cp-player__bar {
+      position: relative; width: 100%; height: 6px;
+      background: var(--bg-deep); border-radius: 3px; cursor: pointer;
+      overflow: hidden;
+    }
+    .cp-player__fill {
+      position: absolute; top: 0; left: 0; height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 3px; transition: width .1s linear;
+    }
+    .cp-player__times {
+      display: flex; justify-content: space-between;
+      font-family: sans-serif; font-size: .72rem;
+      color: var(--text-dim); margin-top: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Sticky Mini Player ─────────────────────────────── */
+    .cp-sticky {
+      position: fixed; bottom: 16px; left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      width: calc(100% - 32px); max-width: 560px;
+      background: rgba(36,36,36,.96); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 60px;
+      padding: 10px 20px 10px 10px; z-index: 90;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+      transition: transform .35s ease, opacity .35s ease, border-color .3s;
+      opacity: 0;
+    }
+    .cp-sticky.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .cp-sticky:hover { border-color: var(--accent); }
+    .cp-sticky__btn {
+      flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s;
+    }
+    .cp-sticky__btn:hover { transform: scale(1.05); }
+    .cp-sticky__btn:active { transform: scale(0.97); }
+    .cp-sticky__btn svg { width: 14px; height: 14px; fill: #111; }
+    .cp-sticky__icon-pause { display: none; }
+    .cp-player.playing ~ .cp-sticky .cp-sticky__icon-play,
+    .cp-sticky.playing .cp-sticky__icon-play { display: none; }
+    .cp-sticky.playing .cp-sticky__icon-pause { display: block; }
+    .cp-sticky__main { flex: 1; min-width: 0; }
+    .cp-sticky__title {
+      font-family: sans-serif; font-size: .68rem; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 1.3px;
+      margin-bottom: 5px;
+    }
+    .cp-sticky__bar {
+      position: relative; width: 100%; height: 4px;
+      background: var(--bg-deep); border-radius: 2px; cursor: pointer;
+      overflow: hidden;
+    }
+    .cp-sticky__fill {
+      position: absolute; top: 0; left: 0; height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; transition: width .1s linear;
+    }
+    .cp-sticky__close {
+      flex-shrink: 0; background: none; border: none; color: var(--text-dim);
+      font-size: 1.2rem; cursor: pointer; padding: 4px 8px;
+      line-height: 1; transition: color .2s;
+    }
+    .cp-sticky__close:hover { color: var(--white); }
+    @media (max-width: 480px) {
+      .cp-player { border-radius: var(--radius); flex-wrap: nowrap; padding: 10px 16px 10px 10px; }
+      .cp-sticky { padding: 8px 14px 8px 8px; }
+    }
 
     .cp-qotd {
       max-width: 680px; margin: 32px auto 0;
@@ -322,15 +415,45 @@
   </header>
 
   <!-- Audio Narration -->
-  <section class="cp-section" style="padding-top: 40px; padding-bottom: 20px;">
+  <!-- To swap the audio file: replace the URL in the data-src attribute below.
+       GHL-hosted files work directly — get the public URL from your Media Library. -->
+  <section class="cp-section" id="audio-section" style="padding-top: 40px; padding-bottom: 20px;">
     <div class="cp-container cp-audio-wrap cp-reveal">
       <p class="cp-label">Listen to This Page</p>
-      <audio controls>
-        <source src="https://storage.googleapis.com/msgsndr/1IjL3UdK0kW3K1KR8vax/media/687c171bda28cf10df796f95.wav" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+      <div class="cp-player" id="cpPlayer">
+        <audio id="cpAudio" preload="metadata" data-src="https://storage.googleapis.com/msgsndr/1IjL3UdK0kW3K1KR8vax/media/687c171bda28cf10df796f95.wav"></audio>
+        <button class="cp-player__btn" id="cpPlayBtn" aria-label="Play narration">
+          <svg class="cp-player__icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="cp-player__icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="cp-player__main">
+          <div class="cp-player__title">Christ Perfect &mdash; Narration</div>
+          <div class="cp-player__bar" id="cpBar">
+            <div class="cp-player__fill" id="cpFill"></div>
+          </div>
+          <div class="cp-player__times">
+            <span id="cpCurrent">0:00</span>
+            <span id="cpDuration">0:00</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- Sticky Mini Player (appears on scroll) -->
+  <div class="cp-sticky" id="cpSticky" aria-hidden="true">
+    <button class="cp-sticky__btn" id="cpStickyBtn" aria-label="Play narration">
+      <svg class="cp-sticky__icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="cp-sticky__icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="cp-sticky__main">
+      <div class="cp-sticky__title">Listening to Christ Perfect</div>
+      <div class="cp-sticky__bar" id="cpStickyBar">
+        <div class="cp-sticky__fill" id="cpStickyFill"></div>
+      </div>
+    </div>
+    <button class="cp-sticky__close" id="cpStickyClose" aria-label="Hide player">&times;</button>
+  </div>
 
   <!-- Question of the Day -->
   <section class="cp-section" style="padding-top: 20px; padding-bottom: 30px;">
@@ -527,6 +650,93 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+      /* ── Audio Player (inline + sticky, shared source) ─ */
+      var audio = document.getElementById('cpAudio');
+      if (audio) {
+        audio.src = audio.dataset.src;
+        var player = document.getElementById('cpPlayer');
+        var playBtn = document.getElementById('cpPlayBtn');
+        var bar = document.getElementById('cpBar');
+        var fill = document.getElementById('cpFill');
+        var curEl = document.getElementById('cpCurrent');
+        var durEl = document.getElementById('cpDuration');
+        var sticky = document.getElementById('cpSticky');
+        var stickyBtn = document.getElementById('cpStickyBtn');
+        var stickyBar = document.getElementById('cpStickyBar');
+        var stickyFill = document.getElementById('cpStickyFill');
+        var stickyClose = document.getElementById('cpStickyClose');
+        var stickyDismissed = false;
+
+        function fmt(s) {
+          if (!isFinite(s)) return '0:00';
+          var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+          return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+        function toggle() { audio.paused ? audio.play() : audio.pause(); }
+        function seek(e, el) {
+          var rect = el.getBoundingClientRect();
+          var pct = (e.clientX - rect.left) / rect.width;
+          if (audio.duration) audio.currentTime = pct * audio.duration;
+        }
+
+        playBtn.addEventListener('click', toggle);
+        stickyBtn.addEventListener('click', toggle);
+        bar.addEventListener('click', function (e) { seek(e, bar); });
+        stickyBar.addEventListener('click', function (e) { seek(e, stickyBar); });
+        stickyClose.addEventListener('click', function () {
+          stickyDismissed = true;
+          sticky.classList.remove('visible');
+        });
+
+        audio.addEventListener('play', function () {
+          player.classList.add('playing');
+          sticky.classList.add('playing');
+        });
+        audio.addEventListener('pause', function () {
+          player.classList.remove('playing');
+          sticky.classList.remove('playing');
+        });
+        audio.addEventListener('loadedmetadata', function () {
+          durEl.textContent = fmt(audio.duration);
+        });
+        audio.addEventListener('timeupdate', function () {
+          var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+          fill.style.width = pct + '%';
+          stickyFill.style.width = pct + '%';
+          curEl.textContent = fmt(audio.currentTime);
+        });
+        audio.addEventListener('ended', function () {
+          player.classList.remove('playing');
+          sticky.classList.remove('playing');
+        });
+
+        // Show sticky when inline player scrolls out of view
+        var audioSection = document.getElementById('audio-section');
+        if (audioSection && 'IntersectionObserver' in window) {
+          var stickyObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (stickyDismissed) return;
+              if (!e.isIntersecting && !audio.paused) {
+                sticky.classList.add('visible');
+                sticky.setAttribute('aria-hidden', 'false');
+              } else if (e.isIntersecting) {
+                sticky.classList.remove('visible');
+                sticky.setAttribute('aria-hidden', 'true');
+              }
+            });
+          }, { threshold: 0 });
+          stickyObs.observe(audioSection);
+
+          audio.addEventListener('play', function () {
+            var rect = audioSection.getBoundingClientRect();
+            if ((rect.bottom < 0 || rect.top > window.innerHeight) && !stickyDismissed) {
+              sticky.classList.add('visible');
+              sticky.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }
+      }
 
       /* ── Question of the Day ─────────────────────────── */
       var questions = [
