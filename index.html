@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christ Perfect &mdash; An Interactive Exploration of Perfection</title>
+  <style>
+    /* ── Reset & Base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #1a1a1a;
+      --bg-card:  #242424;
+      --bg-deep:  #111111;
+      --border:   #333333;
+      --text:     #d4d4d4;
+      --text-dim: #888888;
+      --white:    #f0f0f0;
+      --accent:   #c9a84c;
+      --accent2:  #a07c2a;
+      --glow:     rgba(201,168,76,.15);
+      --radius:   10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--white); }
+    h1, h2, h3, h4 { color: var(--white); font-weight: 700; line-height: 1.3; }
+    img { max-width: 100%; display: block; }
+    .cp-container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .cp-text-center { text-align: center; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    .cp-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(17,17,17,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .cp-nav__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1080px; margin: 0 auto; padding: 0 24px; height: 60px;
+    }
+    .cp-nav__brand { display: flex; align-items: center; gap: 10px; }
+    .cp-nav__brand img { height: 28px; width: 28px; border-radius: 50%; }
+    .cp-nav__logo { font-size: 1.1rem; font-weight: 800; color: var(--white); letter-spacing: .5px; }
+    .cp-nav__logo span { color: var(--accent); }
+    .cp-nav__links { display: flex; gap: 22px; list-style: none; align-items: center; }
+    .cp-nav__links a { color: var(--text); font-size: .75rem; font-weight: 600; font-family: sans-serif; text-transform: uppercase; letter-spacing: 1.2px; }
+    .cp-nav__links a:hover, .cp-nav__links a.active-nav { color: var(--accent); }
+    .cp-nav__toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: pointer; padding: 6px; }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .cp-hero {
+      padding: 80px 24px 60px; text-align: center;
+      position: relative; overflow: visible;
+      background: var(--bg);
+      z-index: 1;
+    }
+    .cp-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 250%; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(201,168,76,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 10%, rgba(160,124,42,.05) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(17,17,17,.6) 0%, transparent 60%);
+    }
+    .cp-hero__content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .cp-hero__logo {
+      width: 130px; height: 130px; margin: 0 auto 24px; display: block;
+      border-radius: 50%; box-shadow: 0 0 40px var(--glow), 0 0 0 1px var(--border);
+    }
+    .cp-hero h1 { font-size: clamp(2rem, 5.5vw, 3rem); margin-bottom: 18px; letter-spacing: -.5px; }
+    .cp-hero h1 span { color: var(--accent); }
+    .cp-hero p.cp-hero__lede { font-size: 1.1rem; color: var(--text); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cp-btn {
+      display: inline-block; padding: 13px 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111; font-weight: 700; font-size: .9rem; font-family: sans-serif;
+      border: none; border-radius: 50px; cursor: pointer;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); color: #111; }
+    .cp-btn--outline {
+      background: transparent; color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .cp-btn--outline:hover { background: var(--accent); color: #111; }
+
+    /* ── Sections ───────────────────────────────────────── */
+    .cp-section { padding: 64px 0; scroll-margin-top: 80px; }
+    .cp-label {
+      text-transform: uppercase; letter-spacing: 3px; font-size: .72rem;
+      color: var(--accent); font-weight: 700; margin-bottom: 12px;
+      font-family: sans-serif;
+    }
+    .cp-title { font-size: clamp(1.6rem, 3.8vw, 2.2rem); margin-bottom: 14px; }
+    .cp-sub { max-width: 680px; margin: 0 auto 32px; color: var(--text-dim); font-size: .98rem; }
+    .cp-text-block { max-width: 720px; margin: 0 auto; }
+    .cp-text-block p + p { margin-top: 16px; }
+    .cp-text-block p { color: var(--text); font-size: 1rem; }
+    .cp-text-block strong { color: var(--white); }
+
+    /* ── Audio + Question of the Day ────────────────────── */
+    .cp-audio-wrap { max-width: 600px; margin: 0 auto; text-align: center; }
+    .cp-audio-wrap .cp-label { margin-bottom: 14px; }
+    audio {
+      width: 100%; border-radius: 50px;
+      background: var(--bg-card);
+    }
+    audio::-webkit-media-controls-panel { background-color: var(--bg-card); }
+
+    .cp-qotd {
+      max-width: 680px; margin: 32px auto 0;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .cp-qotd__label {
+      text-transform: uppercase; letter-spacing: 2px; font-size: .7rem;
+      color: var(--accent); font-weight: 700; font-family: sans-serif;
+      margin-bottom: 10px;
+    }
+    .cp-qotd__text { font-style: italic; color: var(--white); font-size: 1.05rem; line-height: 1.6; }
+
+    /* ── About / Intro Cards ────────────────────────────── */
+    .cp-about__card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+    }
+
+    /* ── Tabs (Part 1) ──────────────────────────────────── */
+    .cp-tabs {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-bottom: 24px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--border);
+    }
+    .cp-tab-btn {
+      padding: 9px 18px; font-size: .82rem; font-weight: 600;
+      font-family: sans-serif; text-transform: uppercase; letter-spacing: .8px;
+      background: var(--bg-card); color: var(--text);
+      border: 1px solid var(--border); border-radius: 50px;
+      cursor: pointer; transition: all .2s;
+    }
+    .cp-tab-btn:hover { border-color: var(--accent); color: var(--white); }
+    .cp-tab-btn.active-tab {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111; border-color: var(--accent);
+    }
+    .cp-tab-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      min-height: 18rem; transition: opacity .3s ease;
+    }
+    .cp-tab-panel h3 { color: var(--accent); font-size: 1.4rem; margin-bottom: 14px; }
+    .cp-tab-panel p { color: var(--text); font-size: 1rem; line-height: 1.75; }
+
+    /* ── Perspective Switcher (Part 2) ──────────────────── */
+    .cp-persp-btns {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-bottom: 28px;
+    }
+    .cp-persp-btn {
+      padding: 9px 20px; font-size: .82rem; font-weight: 600;
+      font-family: sans-serif; text-transform: uppercase; letter-spacing: .8px;
+      background: var(--bg-card); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; transition: all .2s;
+    }
+    .cp-persp-btn:hover { border-color: var(--accent); color: var(--white); }
+    .cp-persp-btn.active {
+      background: var(--white); color: var(--bg-deep);
+      border-color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.4);
+    }
+    .cp-persp-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: opacity .3s ease;
+    }
+    .cp-persp-panel h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 22px; }
+    .cp-persp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .cp-persp-grid h4 { color: var(--white); font-size: 1rem; margin-bottom: 6px; }
+    .cp-persp-grid p { color: var(--text-dim); font-size: .92rem; line-height: 1.7; }
+
+    /* ── Disciplines Grid (Part 3) ──────────────────────── */
+    .cp-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .cp-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 26px;
+      transition: transform .2s, border-color .3s, box-shadow .2s;
+    }
+    .cp-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    }
+    .cp-card__icon {
+      font-size: 1.8rem; margin-bottom: 14px;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(201,168,76,.1); border-radius: 50%;
+    }
+    .cp-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--white); }
+    .cp-card p { font-size: .92rem; color: var(--text-dim); line-height: 1.7; }
+
+    /* ── FAQ ────────────────────────────────────────────── */
+    .cp-faq { max-width: 720px; margin: 0 auto; }
+    .cp-faq__item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+    .cp-faq__item:first-child { border-top: 1px solid var(--border); }
+    .cp-faq__q {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; width: 100%; background: none; border: none;
+      color: var(--white); font-size: 1rem; font-family: Georgia, serif;
+      text-align: left; padding: 0; line-height: 1.5;
+    }
+    .cp-faq__q::after {
+      content: '+'; font-size: 1.4rem; color: var(--accent);
+      flex-shrink: 0; margin-left: 14px; font-family: sans-serif;
+      transition: transform .2s;
+    }
+    .cp-faq__item.open .cp-faq__q::after { content: '\2212'; }
+    .cp-faq__a {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
+      color: var(--text-dim); font-size: .94rem; line-height: 1.75;
+    }
+    .cp-faq__item.open .cp-faq__a { max-height: 500px; padding-top: 12px; }
+
+    /* ── CTA Block ──────────────────────────────────────── */
+    .cp-cta {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 44px 32px;
+      text-align: center; max-width: 720px; margin: 0 auto;
+      position: relative; overflow: hidden;
+    }
+    .cp-cta::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at top, rgba(201,168,76,.08), transparent 60%);
+    }
+    .cp-cta > * { position: relative; }
+    .cp-cta h2 { font-size: 1.7rem; margin-bottom: 14px; }
+    .cp-cta p { color: var(--text-dim); margin-bottom: 24px; }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .cp-footer {
+      padding: 36px 0; text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim); font-size: .82rem; font-family: sans-serif;
+      margin-top: 40px;
+    }
+    .cp-footer p + p { margin-top: 6px; }
+
+    /* ── Scroll Cue ─────────────────────────────────────── */
+    .cp-scroll-cue { text-align: center; margin-top: 36px; color: var(--text-dim); font-size: .8rem; font-family: sans-serif; letter-spacing: 1.5px; text-transform: uppercase; }
+    .cp-scroll-cue svg { margin: 10px auto 0; display: block; animation: cp-bounce 2s infinite; }
+    @keyframes cp-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── Scroll Reveal ──────────────────────────────────── */
+    .cp-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .cp-reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .cp-nav__links {
+        display: none; flex-direction: column; position: absolute;
+        top: 60px; left: 0; width: 100%;
+        background: rgba(17,17,17,.98); padding: 20px; gap: 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      .cp-nav__links.open { display: flex; }
+      .cp-nav__toggle { display: block; }
+      .cp-hero { padding: 60px 20px 50px; }
+      .cp-section { padding: 50px 0; }
+      .cp-tab-panel, .cp-persp-panel, .cp-about__card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="cp-nav" id="cpNav">
+    <div class="cp-nav__inner">
+      <a href="#top" class="cp-nav__brand">
+        <img src="https://storage.googleapis.com/msgsndr/1IjL3UdK0kW3K1KR8vax/media/686e0a39000e730480e3dca8.png" alt="Christ Perfect">
+        <span class="cp-nav__logo">Christ<span>Perfect</span></span>
+      </a>
+      <ul class="cp-nav__links" id="cpNavLinks">
+        <li><a href="#christ-perfection" class="nav-link">Christ's Perfection</a></li>
+        <li><a href="#human-call" class="nav-link">The Human Call</a></li>
+        <li><a href="#the-path" class="nav-link">The Path</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://christ-perfect.buildfastblog.com/" target="_blank" rel="noopener">Blog</a></li>
+        <li><a href="https://christperfect.com/store-home" target="_blank" rel="noopener">Store</a></li>
+        <li><a href="#schedule-interview" class="nav-link">Schedule</a></li>
+      </ul>
+      <button class="cp-nav__toggle" id="cpNavToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="cp-hero" id="top">
+    <div class="cp-hero__content">
+      <img src="https://storage.googleapis.com/msgsndr/1IjL3UdK0kW3K1KR8vax/media/686e0a39000e730480e3dca8.png" alt="Christ Perfect Logo" class="cp-hero__logo">
+      <h1>An Interactive Exploration of <span>Perfection</span></h1>
+      <p class="cp-hero__lede">Was Jesus truly perfect? Are believers called to that same perfection? The Christ Perfect Project gathers pastors and theologians to wrestle with these questions &mdash; honestly, biblically, and together.</p>
+      <a href="#about" class="cp-btn">Begin the Exploration</a>
+    </div>
+  </header>
+
+  <!-- Audio Narration -->
+  <section class="cp-section" style="padding-top: 40px; padding-bottom: 20px;">
+    <div class="cp-container cp-audio-wrap cp-reveal">
+      <p class="cp-label">Listen to This Page</p>
+      <audio controls>
+        <source src="https://storage.googleapis.com/msgsndr/1IjL3UdK0kW3K1KR8vax/media/687c171bda28cf10df796f95.wav" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </section>
+
+  <!-- Question of the Day -->
+  <section class="cp-section" style="padding-top: 20px; padding-bottom: 30px;">
+    <div class="cp-container cp-reveal">
+      <div class="cp-qotd">
+        <p class="cp-qotd__label">Question of the Day</p>
+        <p id="question-of-the-day" class="cp-qotd__text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="cp-section" id="about">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">About</p>
+        <h2 class="cp-title cp-reveal">About the Christ Perfect Project</h2>
+      </div>
+      <div class="cp-about__card cp-reveal">
+        <p>The <strong>Christ Perfect</strong> project aims to explore the multifaceted concept of perfection within Christian theology through a series of interviews with pastors and theologians across the country. Our goal is to gather diverse perspectives on key questions: Was Jesus truly perfect? If so, are believers called to a similar state of perfection? And practically, how can one strive for holiness in their daily lives?</p>
+        <p style="margin-top: 16px;">Through these interviews, we seek to foster a deeper understanding of these profound theological topics, providing valuable insights and encouraging thoughtful discussion within the broader Christian community. This project is designed to be an accessible resource for anyone grappling with these essential questions of faith and spiritual growth.</p>
+      </div>
+      <div class="cp-scroll-cue cp-reveal">
+        Scroll to continue
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="cp-section" id="introduction">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Introduction</p>
+        <h2 class="cp-title cp-reveal">An Enduring Question of Perfection</h2>
+      </div>
+      <div class="cp-text-block cp-reveal">
+        <p>The concept of <strong>"perfection"</strong> in Christian theology is both profound and challenging. It shapes how believers understand God, their identity in Christ, and their spiritual journey. This exploration delves into the perfection of Christ and the corresponding call to holiness for humanity, navigating the tension between an unattainable ideal and a clear biblical command.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 1: Was Jesus Truly Perfect? -->
+  <section class="cp-section" id="christ-perfection">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Part 1</p>
+        <h2 class="cp-title cp-reveal">Was Jesus Truly Perfect?</h2>
+      </div>
+      <div class="cp-text-block cp-reveal" style="margin-bottom: 32px;">
+        <p>A central belief of Christian theology is the sinless perfection of Jesus Christ. Within this framework, theological examination addresses the specific nature of his perfection, resulting in two primary doctrines.</p>
+        <p>The first, known as <strong>peccability</strong>, posits that Christ's full humanity included the capacity to sin. Proponents of this view state that for his temptations to be authentic and for him to serve as a relatable human example, the choice to sin must have been a real possibility which he overcame.</p>
+        <p>The second doctrine, <strong>impeccability</strong>, asserts that it was impossible for Christ to sin. This position is based on the hypostatic union of his divine and human natures, holding that his inherent divine holiness made any act of sin a metaphysical impossibility. Both views operate within the shared affirmation of his actual, lived sinlessness.</p>
+        <p style="margin-top: 18px; color: var(--accent); font-style: italic;">Click the tabs below to learn more about each view.</p>
+      </div>
+
+      <div class="cp-reveal">
+        <div class="cp-tabs">
+          <button class="cp-tab-btn" data-tab="immutability">Immutability of God</button>
+          <button class="cp-tab-btn" data-tab="union">Hypostatic Union</button>
+          <button class="cp-tab-btn" data-tab="humanity">Sin &amp; Humanity</button>
+          <button class="cp-tab-btn" data-tab="temptation">Genuine Temptation</button>
+        </div>
+        <div id="tab-content" class="cp-tab-panel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 2: The Human Call -->
+  <section class="cp-section" id="human-call">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Part 2</p>
+        <h2 class="cp-title cp-reveal">The Human Call to Perfection</h2>
+      </div>
+      <div class="cp-text-block cp-reveal" style="margin-bottom: 32px;">
+        <p>The perfection of Christ, as documented in Scripture, serves as the standard for a corresponding call to His followers. This biblical injunction for believers to be "perfect" is theologically framed as a call to sanctification &mdash; the ongoing process of being made holy and maturing in faith. The interpretation of how this spiritual journey unfolds varies significantly across Christian traditions.</p>
+      </div>
+
+      <div class="cp-reveal">
+        <div class="cp-persp-btns">
+          <button class="cp-persp-btn" data-perspective="wesleyan">Wesleyan / Methodist</button>
+          <button class="cp-persp-btn" data-perspective="reformed">Reformed / Evangelical</button>
+          <button class="cp-persp-btn" data-perspective="catholic">Roman Catholic</button>
+          <button class="cp-persp-btn" data-perspective="orthodox">Eastern Orthodox</button>
+        </div>
+        <div id="perspective-content" class="cp-persp-panel">
+          <h3 id="perspective-title"></h3>
+          <div id="perspective-details" class="cp-persp-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 3: The Path -->
+  <section class="cp-section" id="the-path">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">Part 3</p>
+        <h2 class="cp-title cp-reveal">The Path of Sanctification</h2>
+        <p class="cp-sub cp-reveal">The journey of becoming more like Christ is a partnership between divine grace and human participation, fostered through active spiritual disciplines that open our lives to the transformative work of the Holy Spirit.</p>
+      </div>
+      <div class="cp-grid">
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#128214;</div>
+          <h3>Study of Scripture</h3>
+          <p>Engaging God's Word renews the mind and equips believers to resist temptation, providing the blueprint for a holy life.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#128591;</div>
+          <h3>Constant Prayer</h3>
+          <p>Cultivating a continuous conversation with God deepens the relationship and aligns the heart with His will, in solitude or in company.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#129309;</div>
+          <h3>Community &amp; Accountability</h3>
+          <p>Active participation in a church body provides mutual encouragement, wisdom, and support in the shared journey of growth.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#10084;</div>
+          <h3>Active Service &amp; Love</h3>
+          <p>Living out one's faith through acts of justice, kindness, and humility is the natural outflow of a transformed heart.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#10013;</div>
+          <h3>Imitating Jesus' Example</h3>
+          <p>Jesus' sinless life, patient suffering, and perfect obedience provide the ultimate pattern for believers to follow.</p>
+        </div>
+        <div class="cp-card cp-reveal">
+          <div class="cp-card__icon">&#128167;</div>
+          <h3>Relying on Jesus' Power</h3>
+          <p>More than an example, Christ is the source of our perfection. His atoning work enables our transformation by grace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="cp-section" id="faq">
+    <div class="cp-container">
+      <div class="cp-text-center">
+        <p class="cp-label cp-reveal">FAQ</p>
+        <h2 class="cp-title cp-reveal">Common Questions about Christian Perfection</h2>
+        <p class="cp-sub cp-reveal">Honest answers to the questions that come up most often when wrestling with the doctrine of perfection.</p>
+      </div>
+      <div class="cp-faq">
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">Does the Bible actually command Christians to be perfect?</button>
+          <div class="cp-faq__a">Yes. In Matthew 5:48 Jesus says, "Be perfect, therefore, as your heavenly Father is perfect." The Greek word <em>teleios</em> carries the sense of "complete," "mature," or "reaching the intended goal." How that command is understood &mdash; as an attainable state, an aspirational direction, or a description of our standing in Christ &mdash; varies across traditions, which we explore in Part 2.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">Is sinless perfection possible in this life?</button>
+          <div class="cp-faq__a">Christians disagree. Reformed and most Evangelical traditions hold that indwelling sin remains until glorification. Wesleyan/Methodist theology teaches that believers can be freed from <em>intentional</em> sin through entire sanctification. Roman Catholic and Eastern Orthodox traditions describe a real but ongoing union with God (perfection in charity, or <em>theosis</em>) that coexists with human weakness.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">What's the difference between peccability and impeccability?</button>
+          <div class="cp-faq__a"><strong>Peccability</strong> means Christ <em>could</em> have sinned but didn't. <strong>Impeccability</strong> means it was metaphysically impossible for Him to sin because of His divine nature. Both views affirm that Jesus actually lived a sinless life &mdash; they differ on whether sin was a real possibility for Him.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">If Jesus couldn't sin, how were His temptations real?</button>
+          <div class="cp-faq__a">Hebrews 4:15 says Jesus was "tempted in every way, just as we are &mdash; yet he did not sin." Advocates of impeccability argue His temptations were genuine external pressures and internal struggles against evil, even though they didn't arise from a sinful nature. Because He never gave in, He arguably experienced the full weight of temptation more intensely than any human ever has.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">What is sanctification, in plain terms?</button>
+          <div class="cp-faq__a">Sanctification is the process of being made holy &mdash; becoming, over time, the kind of person Christ has already declared us to be. It's a partnership: God works through His Spirit, and we cooperate through spiritual disciplines, community, obedience, and trust.</div>
+        </div>
+        <div class="cp-faq__item cp-reveal">
+          <button class="cp-faq__q">How do I get involved in the Christ Perfect Project?</button>
+          <div class="cp-faq__a">If you're a pastor, theologian, or church leader interested in being interviewed, head to the <a href="#schedule-interview">Schedule Interview</a> section below. We'd love to hear your perspective and add your voice to the conversation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule Interview -->
+  <section class="cp-section" id="schedule-interview">
+    <div class="cp-container">
+      <div class="cp-cta cp-reveal">
+        <p class="cp-label">Get Involved</p>
+        <h2>Schedule Your Interview</h2>
+        <p>Interested in participating in the Christ Perfect video project? Pick a time on our calendar and share your perspective with the wider community.</p>
+        <a href="https://christperfect.com/schedule-interview" target="_blank" rel="noopener" class="cp-btn">Schedule Interview</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cp-footer">
+    <div class="cp-container">
+      <p>&copy; 2026 Christ Perfect Project. An interactive resource for theological exploration.</p>
+      <p><a href="https://christ-perfect.buildfastblog.com/" target="_blank" rel="noopener">Blog</a> &middot; <a href="https://christperfect.com/store-home" target="_blank" rel="noopener">Store</a> &middot; <a href="https://learn.christperfect.com/" target="_blank" rel="noopener">AI Tools</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      /* ── Question of the Day ─────────────────────────── */
+      var questions = [
+        "Jesus said, “Be perfect, therefore, as your heavenly Father is perfect.” (Matthew 5:48) – How do you interpret and apply this call to perfection in your daily walk with Christ?",
+        "Scripture teaches, “It is God’s will that you should be sanctified.” (1 Thessalonians 4:3) – What does sanctification mean to you in practical, day-to-day terms, and how do you pursue it?",
+        "How do you balance striving for holiness with acknowledging human imperfection?",
+        "In what ways does community support your spiritual growth towards Christlikeness?",
+        "What spiritual discipline has most profoundly impacted your journey towards perfection?",
+        "While the Bible calls us to holiness, it also acknowledges that “we all stumble in many ways” (James 3:2). How do you balance striving for holiness with humbly recognizing your own imperfections and failures?",
+        "If perfection is a journey, what's one step you're focusing on today?",
+        "How does God's grace enable your pursuit of holiness?",
+        "What is the most challenging aspect of striving for Christian perfection?",
+        "How does the concept of 'perfect love' apply in your relationships?",
+        "Paul exhorted Timothy, “Train yourself to be godly.” (1 Timothy 4:7–8) – What spiritual discipline or practice has most profoundly helped you grow in holiness, and how has it impacted your journey toward Christ-like perfection?"
+      ];
+      var qotd = document.getElementById('question-of-the-day');
+      if (qotd) qotd.textContent = questions[Math.floor(Math.random() * questions.length)];
+
+      /* ── Tab data (Part 1) ───────────────────────────── */
+      var tabData = {
+        immutability: {
+          title: 'The Unchanging Nature of God',
+          content: 'A core argument for Christ\'s inability to sin is God\'s unchanging nature (immutability). As the incarnate Son of God, if Jesus could sin, it would imply God\'s holy character could change. This contradicts scripture like Malachi 3:6 ("I, the Lord, do not change") and Hebrews 13:8. Christ\'s impeccability is not just about His actions, but about safeguarding the eternal, unalterable holiness of God Himself. His perfection was an absolute prerequisite for His saving work.'
+        },
+        union: {
+          title: 'The Unified Person of Christ',
+          content: 'The doctrine of the hypostatic union states Christ is one person with two distinct natures: fully divine and fully human. These natures are unmixed but inseparable. Because His personhood is rooted in His divine nature, His human will was always in perfect, willing harmony with His divine will. Sin was impossible because any act of the human nature was an act of the entire God-man, whose person is divine and perfectly holy.'
+        },
+        humanity: {
+          title: 'Sin is Not a Necessity of Humanity',
+          content: 'Some argue that to be truly human, Jesus must have been able to sin. This misunderstands that sin is not an original part of God\'s design for humanity but a defect introduced at the Fall. Jesus experienced genuine human limitations (hunger, pain, weakness) which are natural, but not sin, which is a culpable corruption. His human nature was unfallen and perfectly obedient, just as Adam\'s was before he sinned.'
+        },
+        temptation: {
+          title: 'Reconciling Impeccability with Real Temptation',
+          content: 'Hebrews 4:15 affirms Jesus was "tempted in every way, just as we are—yet he did not sin." His temptations were real external pressures and internal struggles against evil. The key difference is that they did not arise from a sinful nature within Him. He faced the full, unrelenting force of temptation without any internal inclination to yield. Because He never gave in, He arguably experienced the full weight of temptation more intensely than any human, making Him a deeply compassionate High Priest.'
+        }
+      };
+
+      /* ── Perspective data (Part 2) ───────────────────── */
+      var perspectiveData = {
+        wesleyan: {
+          title: 'Wesleyan / Methodist View',
+          details: [
+            { heading: 'Core Definition', text: 'Christian Perfection, or "entire sanctification," is defined as purity of intention and perfect love for God and neighbor. It is a restoration to the image of God.' },
+            { heading: 'Attainable in this Life?', text: 'A qualified "Yes." Wesley believed believers could be freed from <em>intentional, voluntary</em> sin, though involuntary transgressions and mistakes would remain.' },
+            { heading: 'Role of Original Sin', text: 'The carnal nature can be cleansed through a "second work of grace," removing the root of intentional sin.' },
+            { heading: 'Key Mechanism', text: 'Received by faith, it can be an instantaneous experience (the second work of grace) but is also part of a gradual, lifelong process of growth.' }
+          ]
+        },
+        reformed: {
+          title: 'Reformed / Evangelical View',
+          details: [
+            { heading: 'Core Definition', text: 'Sanctification is a lifelong, progressive process of increasing in holiness and becoming more like Christ. It is about spiritual maturity, not sinless perfection.' },
+            { heading: 'Attainable in this Life?', text: 'No. Absolute sinless perfection is not possible in this life. Believers still possess a sinful nature that remains until death.' },
+            { heading: 'Role of Original Sin', text: 'Indwelling sin/depravity remains active throughout a believer\'s life, creating an ongoing internal struggle (Romans 7).' },
+            { heading: 'Key Mechanism', text: 'A lifelong, gradual process empowered by the Holy Spirit. Perfection is only fully realized in glorification after death.' }
+          ]
+        },
+        catholic: {
+          title: 'Roman Catholic View',
+          details: [
+            { heading: 'Core Definition', text: 'Perfection is a spiritual union with God, primarily constituted by charity (love). The degree of perfection is tied to the practice of love and service.' },
+            { heading: 'Attainable in this Life?', text: 'A qualified "Yes." This state can be reached, but it coexists with human weakness, rebellious passions, and venial (lesser) sin.' },
+            { heading: 'Role of Original Sin', text: 'While baptism cleanses from original sin, concupiscence (the inclination to sin) remains a lifelong struggle.' },
+            { heading: 'Key Mechanism', text: 'An increase of grace and charity, pursued through observing the commandments and, for some, the evangelical counsels (poverty, chastity, obedience).' }
+          ]
+        },
+        orthodox: {
+          title: 'Eastern Orthodox View',
+          details: [
+            { heading: 'Core Definition', text: 'Theosis (or deification), a process of becoming more like God by His grace. It is a transformation of one\'s entire being into the divine likeness.' },
+            { heading: 'Attainable in this Life?', text: 'Yes, in a dynamic and ongoing sense. Theosis is a lifelong journey of transformation that begins at baptism and continues into the afterlife.' },
+            { heading: 'Role of Original Sin', text: 'Humans were created for theosis, but the "ancestral sin" of Adam obscured this potential, which is restored in Christ.' },
+            { heading: 'Key Mechanism', text: 'Participation in the life of the Church through sacraments (mysteries), prayer, fasting, and ascetic struggle, all empowered by divine grace.' }
+          ]
+        }
+      };
+
+      /* ── Tabs ────────────────────────────────────────── */
+      var tabButtons = document.querySelectorAll('.cp-tab-btn');
+      var tabContainer = document.getElementById('tab-content');
+      function setTab(key) {
+        var d = tabData[key];
+        tabContainer.style.opacity = 0;
+        setTimeout(function () {
+          tabContainer.innerHTML = '<h3>' + d.title + '</h3><p>' + d.content + '</p>';
+          tabContainer.style.opacity = 1;
+        }, 200);
+        tabButtons.forEach(function (b) {
+          b.classList.toggle('active-tab', b.dataset.tab === key);
+        });
+      }
+      tabButtons.forEach(function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
+      setTab('immutability');
+
+      /* ── Perspectives ────────────────────────────────── */
+      var perspBtns = document.querySelectorAll('.cp-persp-btn');
+      var perspTitle = document.getElementById('perspective-title');
+      var perspDetails = document.getElementById('perspective-details');
+      var perspContainer = document.getElementById('perspective-content');
+      function setPersp(key) {
+        var d = perspectiveData[key];
+        perspContainer.style.opacity = 0;
+        setTimeout(function () {
+          perspTitle.textContent = d.title;
+          perspDetails.innerHTML = d.details.map(function (item) {
+            return '<div><h4>' + item.heading + '</h4><p>' + item.text + '</p></div>';
+          }).join('');
+          perspContainer.style.opacity = 1;
+        }, 200);
+        perspBtns.forEach(function (b) {
+          b.classList.toggle('active', b.dataset.perspective === key);
+        });
+      }
+      perspBtns.forEach(function (b) { b.addEventListener('click', function () { setPersp(b.dataset.perspective); }); });
+      setPersp('wesleyan');
+
+      /* ── Mobile Nav ──────────────────────────────────── */
+      var toggle = document.getElementById('cpNavToggle');
+      var links = document.getElementById('cpNavLinks');
+      if (toggle && links) {
+        toggle.addEventListener('click', function () { links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () { links.classList.remove('open'); });
+        });
+      }
+
+      /* ── FAQ Accordion ───────────────────────────────── */
+      document.querySelectorAll('.cp-faq__q').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var item = btn.parentElement;
+          document.querySelectorAll('.cp-faq__item').forEach(function (i) {
+            if (i !== item) i.classList.remove('open');
+          });
+          item.classList.toggle('open');
+        });
+      });
+
+      /* ── Scroll Reveal ───────────────────────────────── */
+      var reveals = document.querySelectorAll('.cp-reveal');
+      if (reveals.length && 'IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              observer.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { observer.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+      }
+
+      /* ── Scroll Spy ──────────────────────────────────── */
+      var navLinks = document.querySelectorAll('.nav-link');
+      var sections = document.querySelectorAll('section[id], header[id]');
+      window.addEventListener('scroll', function () {
+        var current = '';
+        sections.forEach(function (s) {
+          if (window.pageYOffset >= s.offsetTop - 160) current = s.getAttribute('id');
+        });
+        navLinks.forEach(function (l) {
+          l.classList.toggle('active-nav', l.getAttribute('href') === '#' + current);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
