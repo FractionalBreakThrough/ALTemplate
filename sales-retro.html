@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinylessence™ — Smart LED Slipmat // OS Edition</title>
+  <meta name="description" content="The first Smart LED Slipmat that lights up your vinyl records and reacts to music. Pre-order $99 (reg. $129)." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ───────────── Reset & tokens ───────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #000000;
+      --bg-deep:   #050505;
+      --gold:      #E8C100;
+      --gold-dark: #c2a100;
+      --gold-lite: #fff36e;
+      --text:      #E8C100;
+      --text-mute: #b08c00;
+      --line:      #c2a100;
+      --green:     #58e35e;
+      --red:       #ff3b3b;
+      --pink:      #ff66c4;
+      --blue:      #4d8bff;
+      --cyan:      #38e8ff;
+      --orange:    #ff9a3b;
+      --purple:    #a96bff;
+
+      --mono:      'VT323', 'Courier New', monospace;
+      --pixel:     'Press Start 2P', 'Courier New', monospace;
+    }
+
+    html, body { background: var(--bg); }
+    body {
+      font-family: var(--mono);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 56px;
+      overflow-x: hidden;
+      /* Subtle CRT scanlines overlay */
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(232,193,0,0.04) 0px,
+          rgba(232,193,0,0.04) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='0,0 0,12 4,9 7,15 9,14 6,8 12,8' fill='%23E8C100' stroke='black' stroke-width='1'/></svg>") 0 0, auto;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: var(--text); text-decoration: none; }
+
+    /* ───────────── Top urgency strip ───────────── */
+    .urgency {
+      background: var(--gold);
+      color: #000;
+      font-family: var(--pixel);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      padding: 6px 10px;
+      text-align: center;
+      border-bottom: 2px solid #000;
+      text-transform: uppercase;
+    }
+    .urgency .blink { animation: blink 1s steps(2, end) infinite; }
+    @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0.15; } }
+
+    /* ───────────── Top OS menubar / Nav ───────────── */
+    .menubar {
+      background: var(--gold);
+      color: #000;
+      display: flex;
+      align-items: center;
+      padding: 4px 8px;
+      gap: 8px;
+      border-bottom: 2px solid #000;
+      font-family: var(--mono);
+      font-size: 18px;
+    }
+    .menubar__logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px 8px 2px 2px;
+      font-family: var(--pixel);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .menubar__logo img { height: 28px; width: auto; }
+    .menubar__nav {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .menubar__nav a {
+      background: var(--gold);
+      color: #000;
+      border: 2px outset var(--gold-lite);
+      padding: 3px 14px;
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .menubar__nav a:hover { background: var(--gold-lite); }
+    .menubar__nav a.is-active { border-style: inset; background: #000; color: var(--gold); }
+    .menubar__cart {
+      background: var(--gold);
+      color: #000;
+      border: 2px outset var(--gold-lite);
+      padding: 3px 14px;
+      font-family: var(--mono);
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .menubar__cart:hover { background: var(--gold-lite); }
+
+    /* ───────────── Desktop grid ───────────── */
+    .desktop {
+      max-width: 1200px;
+      margin: 16px auto 0;
+      padding: 0 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .span-2 { grid-column: span 2; }
+    @media (max-width: 820px) {
+      .desktop { grid-template-columns: 1fr; }
+      .span-2 { grid-column: span 1; }
+    }
+
+    /* ───────────── Window component ───────────── */
+    .win {
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      box-shadow:
+        2px 2px 0 var(--gold-dark),
+        4px 4px 0 #000;
+      display: flex;
+      flex-direction: column;
+    }
+    .win__bar {
+      background: linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 30%, var(--gold-dark) 100%);
+      color: #000;
+      padding: 4px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 2px solid #000;
+      font-family: var(--mono);
+      font-size: 17px;
+      line-height: 1;
+      user-select: none;
+    }
+    .win__title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .win__title-icon { font-size: 14px; }
+    .win__controls { display: flex; gap: 3px; flex-shrink: 0; }
+    .win__btn {
+      width: 18px; height: 18px;
+      background: var(--gold);
+      border: 1.5px outset var(--gold-lite);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .win__btn:active { border-style: inset; }
+    .win__body {
+      padding: 14px;
+      flex: 1;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    /* Inset (sunken) panel inside a window */
+    .inset {
+      background: var(--bg-deep);
+      border: 2px inset var(--gold-dark);
+      padding: 10px;
+    }
+
+    /* ───────────── Product Preview window ───────────── */
+    .preview {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .preview__hero {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle at 50% 50%, #2a1f00 0%, #000 70%);
+      border: 2px inset var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .preview__hero img {
+      width: 78%;
+      filter: drop-shadow(0 0 24px rgba(232,193,0,0.4));
+    }
+    .preview__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 36px;
+      background: var(--gold);
+      border: 2px outset var(--gold-lite);
+      color: #000;
+      font-family: var(--mono);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .preview__arrow.l { left: 8px; }
+    .preview__arrow.r { right: 8px; }
+    .preview__thumbs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .preview__thumb {
+      aspect-ratio: 1 / 1;
+      border: 2px outset var(--gold-dark);
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .preview__thumb.is-active { border-style: inset; outline: 2px solid var(--gold); }
+    .preview__thumb--c1 { background: radial-gradient(circle, #ff9a3b 0%, #000 75%); }
+    .preview__thumb--c2 { background: radial-gradient(circle, #38e8ff 0%, #000 75%); }
+    .preview__thumb--c3 { background: radial-gradient(circle, #58e35e 0%, #000 75%); }
+    .preview__thumb--c4 { background: radial-gradient(circle, #a96bff 0%, #000 75%); }
+    .preview__thumb--c5 { background: radial-gradient(circle, #ff66c4 0%, #000 75%); }
+
+    /* ───────────── Vinylessence Player ───────────── */
+    .player__top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .player__visual {
+      aspect-ratio: 1 / 1;
+      border: 2px inset var(--gold-dark);
+      background:
+        radial-gradient(circle at 50% 50%, #000 18%, transparent 19%),
+        radial-gradient(circle, #2a1f00 0%, #000 70%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .player__disc {
+      width: 86%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #E8C100 0%, #c2a100 35%, #000 36%, #000 100%),
+        radial-gradient(circle, rgba(232,193,0,0.45) 0%, transparent 70%);
+      box-shadow: 0 0 32px rgba(232,193,0,0.6), inset 0 0 22px rgba(0,0,0,0.85);
+      position: relative;
+      animation: spin 4s linear infinite;
+    }
+    .player__disc::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,0,0,0.4);
+    }
+    .player__disc::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 12%; height: 12%;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .player__nowplaying {
+      font-family: var(--mono);
+    }
+    .player__nowplaying small {
+      font-family: var(--pixel);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .player__track {
+      font-size: 24px;
+      line-height: 1.1;
+      color: var(--gold-lite);
+      margin-bottom: 2px;
+    }
+    .player__artist { font-size: 18px; color: var(--text-mute); }
+
+    .player__timeline {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--pixel);
+      font-size: 8px;
+      letter-spacing: 0.05em;
+    }
+    .player__bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-deep);
+      border: 2px inset var(--gold-dark);
+      position: relative;
+    }
+    .player__bar > i {
+      position: absolute;
+      inset: 0;
+      width: 34%;
+      background: var(--gold);
+    }
+
+    .player__controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 6px;
+    }
+    .player__ctl {
+      flex: 1;
+      background: var(--gold);
+      color: #000;
+      border: 2px outset var(--gold-lite);
+      padding: 6px 0;
+      font-family: var(--mono);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .player__ctl:active { border-style: inset; }
+
+    .player__eq {
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 36px;
+      padding: 0 4px;
+    }
+    .player__eq span {
+      flex: 1;
+      background: var(--gold);
+      animation: eq 1.2s ease-in-out infinite;
+      transform-origin: bottom;
+    }
+    .player__eq span:nth-child(1)  { animation-delay: 0.0s; }
+    .player__eq span:nth-child(2)  { animation-delay: 0.1s; }
+    .player__eq span:nth-child(3)  { animation-delay: 0.2s; }
+    .player__eq span:nth-child(4)  { animation-delay: 0.3s; }
+    .player__eq span:nth-child(5)  { animation-delay: 0.4s; }
+    .player__eq span:nth-child(6)  { animation-delay: 0.5s; }
+    .player__eq span:nth-child(7)  { animation-delay: 0.6s; }
+    .player__eq span:nth-child(8)  { animation-delay: 0.05s; }
+    .player__eq span:nth-child(9)  { animation-delay: 0.15s; }
+    .player__eq span:nth-child(10) { animation-delay: 0.25s; }
+    .player__eq span:nth-child(11) { animation-delay: 0.35s; }
+    .player__eq span:nth-child(12) { animation-delay: 0.45s; }
+    @keyframes eq {
+      0%, 100% { transform: scaleY(0.15); }
+      50%      { transform: scaleY(1); }
+    }
+
+    .player__colormode {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 16px;
+    }
+    .player__colormode small {
+      font-family: var(--pixel);
+      font-size: 8px;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .player__swatches {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .player__sw {
+      width: 18px; height: 18px;
+      border: 2px outset rgba(255,255,255,0.4);
+      cursor: pointer;
+    }
+    .player__sw.is-active { border-style: inset; outline: 2px solid var(--gold); }
+
+    /* ───────────── Pricing window ───────────── */
+    .price__title {
+      font-family: var(--pixel);
+      font-size: 13px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      color: var(--gold-lite);
+      margin-bottom: 10px;
+    }
+    .price__row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .price__num {
+      font-family: var(--pixel);
+      font-size: 36px;
+      color: var(--gold);
+    }
+    .price__strike {
+      font-family: var(--mono);
+      font-size: 22px;
+      color: var(--text-mute);
+      text-decoration: line-through;
+    }
+    .price__tag {
+      background: var(--green);
+      color: #000;
+      font-family: var(--pixel);
+      font-size: 9px;
+      padding: 4px 8px;
+      border: 2px outset rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+    }
+    .price__qtylabel {
+      font-family: var(--pixel);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--text-mute);
+      margin-bottom: 6px;
+    }
+    .price__qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .price__qtybtn {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border: 2px outset var(--gold-lite);
+      color: #000;
+      font-family: var(--mono);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .price__qtybtn:active { border-style: inset; }
+    .price__qtyinput {
+      width: 54px; height: 36px;
+      text-align: center;
+      background: var(--bg-deep);
+      border: 2px inset var(--gold-dark);
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 18px;
+    }
+    .price__cta {
+      display: block;
+      width: 100%;
+      background: var(--gold);
+      border: 3px outset var(--gold-lite);
+      color: #000;
+      font-family: var(--pixel);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      animation: pulse-border 1.6s ease-in-out infinite;
+    }
+    .price__cta:active { border-style: inset; }
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232,193,0,0.6); }
+      50%      { box-shadow: 0 0 0 8px rgba(232,193,0,0); }
+    }
+
+    /* ───────────── Campaign Status ───────────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 540px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat {
+      border: 2px inset var(--gold-dark);
+      background: var(--bg-deep);
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .stat__icon {
+      font-family: var(--pixel);
+      color: var(--gold-lite);
+      font-size: 12px;
+      margin-bottom: 6px;
+      letter-spacing: 0.1em;
+    }
+    .stat__num {
+      font-family: var(--pixel);
+      font-size: 18px;
+      color: var(--gold);
+      line-height: 1.2;
+      margin: 2px 0 4px;
+    }
+    .stat__label {
+      font-family: var(--pixel);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+    }
+
+    /* ───────────── README text panel ───────────── */
+    .readme__body {
+      background: var(--bg-deep);
+      border: 2px inset var(--gold-dark);
+      padding: 14px;
+      max-height: 240px;
+      overflow-y: auto;
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--gold);
+    }
+    .readme__body p { margin-bottom: 12px; }
+    .readme__body p:last-child { margin-bottom: 0; }
+    .readme__body .blink::after { content: "_"; animation: blink 1s steps(2) infinite; }
+
+    /* Scrollbar styling (WebKit only — gracefully degrades) */
+    .readme__body::-webkit-scrollbar { width: 14px; }
+    .readme__body::-webkit-scrollbar-track {
+      background: var(--bg);
+      border-left: 2px solid var(--gold-dark);
+    }
+    .readme__body::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border: 2px outset var(--gold-lite);
+    }
+    .readme__body::-webkit-scrollbar-button {
+      height: 14px;
+      background: var(--gold);
+      border: 2px outset var(--gold-lite);
+    }
+
+    /* ───────────── Why You'll Love It ───────────── */
+    .why {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 720px) { .why { grid-template-columns: repeat(2, 1fr); } }
+    .why__item {
+      border: 2px outset var(--gold-dark);
+      padding: 14px 8px;
+      text-align: center;
+      background: var(--bg-deep);
+    }
+    .why__icon {
+      width: 44px; height: 44px;
+      margin: 0 auto 8px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--gold);
+    }
+    .why__h {
+      font-family: var(--pixel);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--gold-lite);
+      line-height: 1.4;
+    }
+
+    /* ───────────── Reviews ───────────── */
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 720px) { .reviews { grid-template-columns: 1fr; } }
+    .review {
+      border: 2px inset var(--gold-dark);
+      padding: 12px;
+      background: var(--bg-deep);
+      font-family: var(--mono);
+    }
+    .review__stars {
+      color: var(--gold);
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .review__body {
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--gold-lite);
+      margin-bottom: 8px;
+    }
+    .review__attr {
+      font-family: var(--pixel);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+    }
+
+    /* ───────────── FAQ ───────────── */
+    .faq__list { display: flex; flex-direction: column; gap: 8px; }
+    .faq__item {
+      border: 2px outset var(--gold-dark);
+      background: var(--bg-deep);
+      padding: 0;
+    }
+    .faq__item summary {
+      list-style: none;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--gold-lite);
+    }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after {
+      content: "[+]";
+      font-family: var(--pixel);
+      font-size: 10px;
+      color: var(--gold);
+    }
+    .faq__item[open] summary::after { content: "[—]"; }
+    .faq__item[open] { border-style: inset; }
+    .faq__answer {
+      padding: 0 12px 12px;
+      font-family: var(--mono);
+      font-size: 17px;
+      color: var(--gold);
+      line-height: 1.5;
+    }
+
+    /* ───────────── Live chat ───────────── */
+    .chat__row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 18px;
+    }
+    .chat__avatar {
+      width: 36px; height: 36px;
+      border: 2px outset var(--gold-lite);
+      background: var(--gold);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .chat__online {
+      color: var(--green);
+      font-family: var(--pixel);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .chat__online::before {
+      content: "●";
+      color: var(--green);
+      margin-right: 4px;
+      animation: blink 1.5s infinite;
+    }
+
+    /* ───────────── Footer (above taskbar) ───────────── */
+    .legal {
+      max-width: 1200px;
+      margin: 22px auto 24px;
+      padding: 0 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 16px;
+      color: var(--text-mute);
+    }
+    .legal a { color: var(--text-mute); }
+    .legal a:hover { color: var(--gold); }
+
+    /* ───────────── Taskbar ───────────── */
+    .taskbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 36px;
+      background: linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 30%, var(--gold-dark) 100%);
+      border-top: 2px solid #000;
+      display: flex;
+      align-items: center;
+      padding: 4px 6px;
+      gap: 6px;
+      z-index: 50;
+    }
+    .start {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold);
+      color: #000;
+      border: 2px outset var(--gold-lite);
+      padding: 4px 10px 4px 6px;
+      font-family: var(--pixel);
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .start:active { border-style: inset; }
+    .start__icon {
+      width: 16px; height: 16px;
+      background: #000;
+      border: 1px solid #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+    .taskbar__items { display: flex; gap: 6px; overflow: hidden; flex: 1; }
+    .taskbar__item {
+      background: var(--gold);
+      color: #000;
+      border: 2px inset var(--gold-lite);
+      padding: 4px 10px;
+      font-family: var(--mono);
+      font-size: 15px;
+      flex: 0 0 auto;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+    .taskbar__item:first-child { border-style: outset; }
+    .taskbar__clock {
+      background: var(--gold-dark);
+      color: #000;
+      border: 2px inset var(--gold-lite);
+      padding: 4px 10px;
+      font-family: var(--mono);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .taskbar__items { display: none; }
+    }
+
+    /* ───────────── Misc ───────────── */
+    .hint {
+      font-family: var(--pixel);
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    .pixel-line {
+      font-family: var(--pixel);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--text-mute);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ──────────── Urgency strip ──────────── -->
+  <div class="urgency">
+    <span class="blink">★</span> Kickstarter Sold Out · Limited Pre-Orders Now Live · Save $30
+  </div>
+
+  <!-- ──────────── OS Menubar / Nav ──────────── -->
+  <nav class="menubar">
+    <div class="menubar__logo">
+      <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png" alt="Vinylessence™" />
+      <span>Vinylessence&trade;</span>
+    </div>
+    <div class="menubar__nav">
+      <a href="#home">Home</a>
+      <a href="#product" class="is-active">Product</a>
+      <a href="#faq">FAQ</a>
+      <a href="#reviews">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://vinyl-essence.com/buy-now" class="menubar__cart">🛒 Cart (0)</a>
+  </nav>
+
+  <!-- ──────────── Desktop ──────────── -->
+  <main class="desktop">
+
+    <!-- Product Preview window -->
+    <article class="win" id="product">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">📀</span> Product Preview</div>
+        <div class="win__controls">
+          <button class="win__btn" aria-label="Minimize">_</button>
+          <button class="win__btn" aria-label="Maximize">□</button>
+          <button class="win__btn" aria-label="Close">×</button>
+        </div>
+      </header>
+      <div class="win__body preview">
+        <div class="preview__hero">
+          <button class="preview__arrow l" aria-label="Previous">‹</button>
+          <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/697450acd4fb90af5d7e1a6c.png" alt="Vinylessence™ Smart LED Slipmat" />
+          <button class="preview__arrow r" aria-label="Next">›</button>
+        </div>
+        <div class="preview__thumbs">
+          <button class="preview__thumb is-active" title="Gold">●</button>
+          <button class="preview__thumb preview__thumb--c1" title="Amber"></button>
+          <button class="preview__thumb preview__thumb--c2" title="Cyan"></button>
+          <button class="preview__thumb preview__thumb--c3" title="Green"></button>
+          <button class="preview__thumb preview__thumb--c4" title="Purple"></button>
+        </div>
+        <div class="hint">// Use ← → to cycle. Click swatches to preview color modes.</div>
+      </div>
+    </article>
+
+    <!-- Vinylessence Player window -->
+    <article class="win">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">♪</span> Vinylessence&trade; Player</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="player__top">
+          <div class="player__visual"><div class="player__disc"></div></div>
+          <div>
+            <div class="player__nowplaying">
+              <small>Now Playing</small>
+              <div class="player__track">Night Drive</div>
+              <div class="player__artist">Vinylessence Sessions</div>
+            </div>
+            <div class="player__timeline">
+              <span>01:24</span>
+              <div class="player__bar"><i></i></div>
+              <span>03:47</span>
+            </div>
+            <div class="player__controls">
+              <button class="player__ctl" title="Shuffle">⤭</button>
+              <button class="player__ctl" title="Previous">⏮</button>
+              <button class="player__ctl" title="Pause">❚❚</button>
+              <button class="player__ctl" title="Next">⏭</button>
+              <button class="player__ctl" title="Repeat">⟳</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="player__eq" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="player__colormode">
+          <small>Color Mode</small>
+          <strong style="color:var(--gold-lite);">Cycle</strong>
+          <div class="player__swatches" style="margin-left:auto;">
+            <button class="player__sw is-active" style="background:var(--gold);"></button>
+            <button class="player__sw" style="background:var(--orange);"></button>
+            <button class="player__sw" style="background:var(--green);"></button>
+            <button class="player__sw" style="background:var(--cyan);"></button>
+            <button class="player__sw" style="background:var(--blue);"></button>
+            <button class="player__sw" style="background:var(--purple);"></button>
+            <button class="player__sw" style="background:var(--pink);"></button>
+            <button class="player__sw" style="background:var(--red);"></button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Pricing window -->
+    <article class="win">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">💾</span> Vinylessence&trade; Smart LED Slipmat</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <h1 class="price__title">Vinylessence&trade;<br />Smart LED Slipmat</h1>
+        <div class="price__row">
+          <span class="price__num">$99.00</span>
+          <span class="price__strike">$129.99</span>
+          <span class="price__tag">$30 OFF</span>
+        </div>
+        <div class="price__qtylabel">QUANTITY</div>
+        <div class="price__qty">
+          <button class="price__qtybtn">−</button>
+          <input class="price__qtyinput" type="text" value="1" />
+          <button class="price__qtybtn">+</button>
+        </div>
+        <a href="https://vinyl-essence.com/buy-now" class="price__cta">► PRE-ORDER NOW</a>
+        <div class="hint" style="text-align:center;">30-Day Guarantee · Secure Checkout · Ships Worldwide</div>
+      </div>
+    </article>
+
+    <!-- README window -->
+    <article class="win">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">📄</span> README.TXT — What It Does</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="readme__body">
+          <p>Vinylessence&trade; is a music-reactive, smart LED slipmat/record underglow that replaces your existing slipmat and transforms your turntable into a full visual experience.</p>
+          <p>It's a zero-setup, drop-in upgrade that fits standard turntables. No tools, no modifications, no extra equipment, no complicated install.</p>
+          <p>Just place it on your platter, power it up, and let the music come to life.<span class="blink"></span></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Campaign Status (full width) -->
+    <article class="win span-2">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">📊</span> Campaign Status</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="stats">
+          <div class="stat">
+            <div class="stat__icon">▐ ▐ ▐</div>
+            <div class="stat__num">364%</div>
+            <div class="stat__label">Funded</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">$</div>
+            <div class="stat__num">$36,423</div>
+            <div class="stat__label">Raised</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">♥</div>
+            <div class="stat__num">HUNDREDS</div>
+            <div class="stat__label">Backed</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">✓</div>
+            <div class="stat__num">30-DAY</div>
+            <div class="stat__label">Guarantee</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Why You'll Love It (full width) -->
+    <article class="win span-2">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">★</span> Why You'll Love It</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="why">
+          <div class="why__item">
+            <div class="why__icon">♪</div>
+            <div class="why__h">Music<br />Reactive</div>
+          </div>
+          <div class="why__item">
+            <div class="why__icon">✦</div>
+            <div class="why__h">Vibrant<br />LED Glow</div>
+          </div>
+          <div class="why__item">
+            <div class="why__icon">⚡</div>
+            <div class="why__h">Plug &amp; Play<br />Install</div>
+          </div>
+          <div class="why__item">
+            <div class="why__icon">⌬</div>
+            <div class="why__h">Fits Most<br />Turntables</div>
+          </div>
+          <div class="why__item">
+            <div class="why__icon">⛨</div>
+            <div class="why__h">Built To<br />Last</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Reviews (full width) -->
+    <article class="win span-2" id="reviews">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">✉</span> Notes from the Community</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="reviews">
+          <div class="review">
+            <div class="review__stars">★★★★★</div>
+            <div class="review__body">"Amazing progress! So excited to see Vinylessence thrive!"</div>
+            <div class="review__attr">nickalt · @vinylmeplease</div>
+          </div>
+          <div class="review">
+            <div class="review__stars">★★★★★</div>
+            <div class="review__body">"ohhhhhh my gobbbbbb"</div>
+            <div class="review__attr">Vertigo Vinyl</div>
+          </div>
+          <div class="review">
+            <div class="review__stars">★★★★★</div>
+            <div class="review__body">"Our records would look great on these"</div>
+            <div class="review__attr">A to Z Media Inc.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- FAQ window (full width) -->
+    <article class="win span-2" id="faq">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">?</span> Frequently Asked Questions</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="faq__list">
+          <details class="faq__item"><summary>Does it affect sound quality or playback?</summary>
+            <div class="faq__answer">Nope! The thickness and flatness are designed so it won't interfere with tracking, sound quality, or record wear. In 99% of cases, there's nothing to adjust.</div>
+          </details>
+          <details class="faq__item"><summary>Does it work with all turntables?</summary>
+            <div class="faq__answer">Vinylessence&trade; fits the vast majority of decks that accept a standard 11–12″ slipmat — Audio-Technica, Sony, Victrola, Crosley, Numark, Technics, Pioneer, and more.</div>
+          </details>
+          <details class="faq__item"><summary>Is it safe for my vinyl?</summary>
+            <div class="faq__answer">Yes. The top surface is smooth anti-static acrylic, just like any other acrylic slipmat. All internal electronics are fully enclosed.</div>
+          </details>
+          <details class="faq__item"><summary>How long does the battery last?</summary>
+            <div class="faq__answer">Typical runtimes are 13–16 hours per charge on the 4000mAh cell, depending on color mode and brightness.</div>
+          </details>
+          <details class="faq__item"><summary>When does it ship?</summary>
+            <div class="faq__answer">Pre-orders ship as part of our first production run. First shipments are expected to start as early as August 2026.</div>
+          </details>
+        </div>
+        <p class="pixel-line" style="margin-top:14px;text-align:center;">// Still have questions? Open the Live Chat window in the lower right.</p>
+      </div>
+    </article>
+
+    <!-- Live chat window -->
+    <article class="win" id="contact">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">💬</span> Live Chat</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div class="chat__row">
+          <div class="chat__avatar">☻</div>
+          <div>
+            <div class="chat__online">We're Online</div>
+            <div>Click the chat window in the lower right corner to talk to a real human.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Follow window -->
+    <article class="win">
+      <header class="win__bar">
+        <div class="win__title"><span class="win__title-icon">📡</span> Follow Us</div>
+        <div class="win__controls">
+          <button class="win__btn">_</button>
+          <button class="win__btn">□</button>
+          <button class="win__btn">×</button>
+        </div>
+      </header>
+      <div class="win__body">
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:18px;">
+          <a href="https://www.instagram.com/vinylessenceofficial" style="color:var(--gold-lite);">▸ Instagram &nbsp;·&nbsp; @vinylessenceofficial</a>
+          <a href="https://www.youtube.com/@OfficialVinylessence" style="color:var(--gold-lite);">▸ YouTube &nbsp;·&nbsp; @OfficialVinylessence</a>
+          <a href="https://www.tiktok.com/@vinylessenceofficial" style="color:var(--gold-lite);">▸ TikTok &nbsp;·&nbsp; @vinylessenceofficial</a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- ──────────── Legal ──────────── -->
+  <div class="legal">
+    <span>&copy; 2026 Vinylessence&trade; · A product of Charg3d LLC · All rights reserved</span>
+    <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></span>
+  </div>
+
+  <!-- ──────────── Taskbar ──────────── -->
+  <div class="taskbar">
+    <button class="start">
+      <span class="start__icon">▶</span>
+      Start
+    </button>
+    <div class="taskbar__items">
+      <span class="taskbar__item">📀 Product Preview</span>
+      <span class="taskbar__item">♪ Vinylessence™ Player</span>
+      <span class="taskbar__item">📊 Campaign Status</span>
+    </div>
+    <span class="taskbar__clock" id="clock">9:42 PM</span>
+  </div>
+
+  <script>
+    // Tiny clock for the taskbar — keeps the OS illusion alive.
+    (function () {
+      var el = document.getElementById('clock');
+      function tick () {
+        var d = new Date();
+        var h = d.getHours();
+        var m = String(d.getMinutes()).padStart(2, '0');
+        var ap = h >= 12 ? 'PM' : 'AM';
+        h = h % 12; if (h === 0) h = 12;
+        el.textContent = h + ':' + m + ' ' + ap;
+      }
+      tick();
+      setInterval(tick, 30000);
+    })();
+  </script>
+
+</body>
+</html>
