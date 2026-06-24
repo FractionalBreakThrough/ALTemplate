@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Vinylessence™ — Smart LED Slipmat // OS Edition</title>
   <meta name="description" content="The first Smart LED Slipmat that lights up your vinyl records and reacts to music. Pre-order $99 (reg. $129)." />
 
@@ -39,7 +39,7 @@
       font-family: var(--mono);
       color: var(--text);
       min-height: 100vh;
-      padding: 0 0 56px;
+      padding: 0 0 calc(56px + env(safe-area-inset-bottom, 0px));
       overflow-x: hidden;
       /* Subtle CRT scanlines overlay */
       background-image:
@@ -742,12 +742,12 @@
     .taskbar {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      height: 36px;
+      min-height: 36px;
       background: linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 30%, var(--gold-dark) 100%);
       border-top: 2px solid #000;
       display: flex;
       align-items: center;
-      padding: 4px 6px;
+      padding: 4px 6px calc(4px + env(safe-area-inset-bottom, 0px));
       gap: 6px;
       z-index: 50;
     }
@@ -802,6 +802,40 @@
     }
     @media (max-width: 640px) {
       .taskbar__items { display: none; }
+
+      /* Top menubar: stack to two rows on phones so logo + cart sit on
+         top and the nav buttons drop to their own centered row.
+         Buttons shrink so all five fit edge-to-edge. */
+      .menubar {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 8px;
+      }
+      .menubar__logo {
+        font-size: 10px;
+        gap: 6px;
+      }
+      .menubar__logo img { height: 24px; }
+      .menubar__nav {
+        order: 3;
+        flex-basis: 100%;
+        margin-left: 0;
+        justify-content: center;
+        gap: 4px;
+      }
+      .menubar__nav a {
+        padding: 3px 10px;
+        font-size: 16px;
+      }
+      .menubar__cart {
+        padding: 3px 10px;
+        font-size: 16px;
+      }
+
+      /* Player: stack the spinning disc above the now-playing card so
+         the disc isn't half its visible size on a phone. */
+      .player__top { grid-template-columns: 1fr; }
+      .player__visual { max-width: 220px; margin: 0 auto; }
     }
 
     /* ───────────── Misc ───────────── */
