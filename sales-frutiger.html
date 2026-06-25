@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Vinylessence™ — Smart LED Slipmat // Aero Edition</title>
+  <meta name="description" content="The first Smart LED Slipmat that lights up your vinyl records and reacts to music. Pre-order $99 (reg. $129)." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ───────────── Reset & tokens ───────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-1:        #050402;
+      --bg-2:        #1c1300;
+      --bg-3:        #2a1d00;
+      --ink:         #ffffff;
+      --ink-mute:    rgba(255,255,255,0.7);
+      --ink-dim:     rgba(255,255,255,0.45);
+      --gold:        #E8C100;
+      --gold-lite:   #fff36e;
+      --gold-deep:   #c2a100;
+      --gold-soft:   rgba(232,193,0,0.18);
+      --glass:       rgba(20, 14, 0, 0.35);
+      --glass-hi:    rgba(255, 240, 180, 0.12);
+      --rim-top:     rgba(255, 245, 210, 0.55);
+      --rim-bot:     rgba(0, 0, 0, 0.45);
+      --shadow-md:   0 12px 32px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35);
+      --shadow-lg:   0 24px 60px rgba(0,0,0,0.6), 0 4px 14px rgba(0,0,0,0.45);
+
+      --sans:        'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --disp:        'Quicksand', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    html, body { background: var(--bg-1); }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.55;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ───────────── Atmospheric background ───────────── */
+    .sky {
+      position: fixed; inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(900px 600px at 50% -10%, rgba(232,193,0,0.30) 0%, transparent 60%),
+        radial-gradient(700px 500px at 90% 110%, rgba(232,193,0,0.18) 0%, transparent 55%),
+        radial-gradient(600px 500px at 10% 80%, rgba(232,193,0,0.12) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-1) 100%);
+    }
+    .sky::after {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(2px 2px at 18% 22%, rgba(255,245,200,0.65), transparent 60%),
+        radial-gradient(1.5px 1.5px at 76% 33%, rgba(255,245,200,0.55), transparent 60%),
+        radial-gradient(2.5px 2.5px at 40% 78%, rgba(255,245,200,0.45), transparent 60%),
+        radial-gradient(1px 1px at 88% 60%, rgba(255,245,200,0.55), transparent 60%),
+        radial-gradient(2px 2px at 60% 12%, rgba(255,245,200,0.55), transparent 60%),
+        radial-gradient(1.5px 1.5px at 8% 56%, rgba(255,245,200,0.40), transparent 60%);
+      opacity: 0.7;
+    }
+
+    /* Floating glossy gold bubbles (CSS only) */
+    .bubbles {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -120px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,245,200,0.45) 0%, rgba(232,193,0,0.25) 35%, transparent 70%);
+      box-shadow: inset 0 0 14px rgba(255,255,255,0.15);
+      animation: rise linear infinite;
+      opacity: 0.55;
+    }
+    .bubble::before {
+      content: "";
+      position: absolute;
+      top: 12%; left: 22%;
+      width: 28%; height: 22%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.85), transparent 70%);
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+    @keyframes rise {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+      8%   { opacity: 0.55; }
+      90%  { opacity: 0.4; }
+      100% { transform: translate(var(--dx, 40px), -120vh) scale(1.05); opacity: 0; }
+    }
+    .b1 { left: 6%;  width: 90px;  height: 90px;  animation-duration: 28s; --dx:  40px; }
+    .b2 { left: 18%; width: 60px;  height: 60px;  animation-duration: 22s; animation-delay: -8s;  --dx: -30px; }
+    .b3 { left: 32%; width: 140px; height: 140px; animation-duration: 36s; animation-delay: -14s; --dx:  60px; }
+    .b4 { left: 52%; width: 70px;  height: 70px;  animation-duration: 26s; animation-delay: -5s;  --dx: -50px; }
+    .b5 { left: 68%; width: 110px; height: 110px; animation-duration: 32s; animation-delay: -18s; --dx:  30px; }
+    .b6 { left: 82%; width: 50px;  height: 50px;  animation-duration: 20s; animation-delay: -2s;  --dx: -20px; }
+    .b7 { left: 92%; width: 130px; height: 130px; animation-duration: 38s; animation-delay: -22s; --dx: -70px; }
+    @media (prefers-reduced-motion: reduce) {
+      .bubble { animation: none; opacity: 0.35; }
+    }
+
+    /* ───────────── Top dock ───────────── */
+    .dock {
+      position: sticky; top: 12px;
+      z-index: 40;
+      margin: 12px auto 0;
+      max-width: 1100px;
+      padding: 0 16px;
+    }
+    .dock__inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 10px;
+      background: rgba(15, 10, 0, 0.55);
+      border: 1px solid rgba(232,193,0,0.35);
+      border-radius: 22px;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      box-shadow:
+        inset 0 1px 0 var(--rim-top),
+        inset 0 -1px 0 var(--rim-bot),
+        var(--shadow-md);
+    }
+    .dock__logo {
+      display: flex; align-items: center; gap: 10px;
+      padding: 4px 6px 4px 4px;
+      font-family: var(--disp);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+    .dock__logo img { height: 34px; width: auto; border-radius: 50%; }
+    .dock__nav {
+      display: flex;
+      gap: 4px;
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .dock__nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-mute);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .dock__nav a:hover {
+      color: var(--ink);
+      background: rgba(232,193,0,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* Glossy button — the Frutiger workhorse */
+    .glossy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 14px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      color: #2a1d00;
+      cursor: pointer;
+      border: 1px solid rgba(120,80,0,0.55);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 50%),
+        linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.85),
+        inset 0 -1px 0 rgba(120,80,0,0.4),
+        0 6px 16px rgba(232,193,0,0.35),
+        0 1px 2px rgba(0,0,0,0.4);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .glossy:hover { transform: translateY(-1px); }
+    .glossy:active { transform: translateY(1px); box-shadow: inset 0 2px 6px rgba(120,80,0,0.5), 0 2px 6px rgba(0,0,0,0.4); }
+    .glossy--lg { padding: 16px 32px; font-size: 16px; border-radius: 18px; }
+    .glossy--xl { padding: 20px 44px; font-size: 18px; border-radius: 22px; }
+    .glossy--ghost {
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 50%),
+        rgba(15, 10, 0, 0.45);
+      border: 1px solid rgba(232,193,0,0.45);
+      text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        inset 0 -1px 0 rgba(0,0,0,0.3),
+        0 4px 14px rgba(0,0,0,0.35);
+    }
+    .glossy--ghost:hover { background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 50%), rgba(232,193,0,0.18); }
+
+    /* ───────────── Aero window component ───────────── */
+    .pane {
+      position: relative;
+      background: var(--glass);
+      border: 1px solid rgba(232,193,0,0.35);
+      border-radius: 20px;
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      box-shadow:
+        inset 0 1px 0 var(--rim-top),
+        inset 0 -1px 0 var(--rim-bot),
+        var(--shadow-lg);
+      overflow: hidden;
+    }
+    /* The signature Aero shine highlight along the top edge */
+    .pane::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255,245,210,0.18) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .pane > * { position: relative; z-index: 1; }
+
+    /* Vista-style titlebar variant */
+    .pane--win .pane__bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,245,210,0.06) 50%, rgba(0,0,0,0.18) 100%);
+      border-bottom: 1px solid rgba(232,193,0,0.25);
+      color: var(--ink);
+      font-family: var(--disp);
+      font-weight: 600;
+      font-size: 15px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.45);
+    }
+    .pane__title { display: flex; align-items: center; gap: 8px; }
+    .pane__title-icon {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.7) 0%, transparent 50%),
+        linear-gradient(180deg, var(--gold-lite), var(--gold-deep));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(120,80,0,0.45),
+        0 1px 2px rgba(0,0,0,0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #2a1d00;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pane__controls { display: flex; gap: 6px; }
+    .pane__btn {
+      width: 30px; height: 22px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.45);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, rgba(80,55,0,0.85), rgba(40,28,0,0.85));
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.45),
+        0 1px 2px rgba(0,0,0,0.4);
+    }
+    .pane__btn--close {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #ff7a4d, #c93414);
+    }
+    .pane__body { padding: 22px 26px 26px; }
+    @media (max-width: 560px) { .pane__body { padding: 18px 18px 22px; } }
+
+    /* ───────────── Section spacing ───────────── */
+    section { padding: 56px 0; }
+    @media (max-width: 720px) { section { padding: 40px 0; } }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: var(--disp);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #2a1d00;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, var(--gold-lite), var(--gold));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(120,80,0,0.45),
+        0 6px 18px rgba(232,193,0,0.35);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+    .eyebrow .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #c2a100 60%);
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+    h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.005em; }
+    .h-shine {
+      background: linear-gradient(180deg, #fff 0%, var(--gold-lite) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 12px rgba(232,193,0,0.35));
+    }
+
+    /* ───────────── Hero ───────────── */
+    .hero { padding-top: 36px; }
+    .hero__pane { padding: 36px 32px; }
+    @media (max-width: 720px) { .hero__pane { padding: 26px 20px; } }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 820px) { .hero__grid { grid-template-columns: 1fr; gap: 28px; } }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 16px 0 14px;
+      color: var(--ink);
+    }
+    .hero h1 .h-shine { display: inline; }
+    .hero p.lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-mute);
+      max-width: 50ch;
+      margin-bottom: 24px;
+    }
+    .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* Hero product framed image */
+    .hero__art {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(232,193,0,0.22) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(40,28,0,0.6), rgba(0,0,0,0.85));
+      border: 1px solid rgba(232,193,0,0.45);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(0,0,0,0.4),
+        var(--shadow-lg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero__art::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,245,210,0.18) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero__art img {
+      width: 78%;
+      filter: drop-shadow(0 12px 24px rgba(232,193,0,0.35));
+      position: relative;
+      z-index: 1;
+    }
+    .hero__art-orbit {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 38%, rgba(232,193,0,0.15) 40%, transparent 44%),
+        radial-gradient(circle at 50% 50%, transparent 50%, rgba(232,193,0,0.10) 52%, transparent 56%);
+      animation: orbit 20s linear infinite;
+    }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    /* Hero stat strip */
+    .hero__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .hero__stat {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, rgba(255,245,210,0.15) 0%, rgba(0,0,0,0.18) 100%),
+        rgba(20, 14, 0, 0.45);
+      border: 1px solid rgba(232,193,0,0.25);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        inset 0 -1px 0 rgba(0,0,0,0.3);
+    }
+    .hero__stat .n {
+      font-family: var(--disp);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--gold-lite);
+      line-height: 1;
+      text-shadow: 0 1px 6px rgba(232,193,0,0.4);
+    }
+    .hero__stat .l {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-top: 6px;
+    }
+    @media (max-width: 480px) {
+      .hero__stats { grid-template-columns: 1fr; }
+    }
+
+    /* ───────────── Section heading block ───────────── */
+    .head { text-align: center; max-width: 720px; margin: 0 auto 36px; }
+    .head h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 14px 0 12px;
+      color: var(--ink);
+    }
+    .head p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-mute);
+    }
+
+    /* ───────────── Features grid ───────────── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 820px) { .features { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+    .feature {
+      padding: 22px 20px;
+    }
+    .feature__orb {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      margin-bottom: 14px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #2a1d00;
+      font-size: 26px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.85) 0%, transparent 45%),
+        linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 60%, var(--gold-deep) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(120,80,0,0.5),
+        0 8px 18px rgba(232,193,0,0.35),
+        0 1px 2px rgba(0,0,0,0.4);
+    }
+    .feature h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature p {
+      font-size: 14.5px;
+      color: var(--ink-mute);
+      line-height: 1.6;
+    }
+
+    /* ───────────── How it works ───────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 820px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+    .step {
+      padding: 26px 20px;
+      text-align: center;
+    }
+    .step__num {
+      width: 52px; height: 52px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--disp);
+      font-weight: 700;
+      font-size: 22px;
+      color: #2a1d00;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0%, transparent 50%),
+        linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 60%, var(--gold-deep) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(120,80,0,0.5),
+        0 8px 18px rgba(232,193,0,0.45),
+        0 0 0 4px rgba(232,193,0,0.12);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+    .step h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .step p { font-size: 14px; color: var(--ink-mute); line-height: 1.6; }
+
+    /* ───────────── Specs ribbon ───────────── */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 720px) { .specs-grid { grid-template-columns: 1fr; } }
+    .spec {
+      padding: 18px 20px;
+    }
+    .spec .k {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 4px;
+    }
+    .spec .v {
+      font-family: var(--disp);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--gold-lite);
+    }
+
+    /* ───────────── Pricing ───────────── */
+    .price {
+      max-width: 720px; margin: 0 auto;
+      padding: 36px 32px;
+      text-align: center;
+    }
+    @media (max-width: 560px) { .price { padding: 28px 20px; } }
+    .price__tag {
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .price__row {
+      display: flex; align-items: baseline; justify-content: center; gap: 14px; flex-wrap: wrap;
+      margin: 8px 0 4px;
+    }
+    .price__num {
+      font-family: var(--disp);
+      font-weight: 700;
+      font-size: clamp(56px, 9vw, 88px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .price__num .cents { font-size: 0.45em; vertical-align: top; color: var(--ink-mute); margin-left: 4px; }
+    .price__strike {
+      font-family: var(--disp);
+      font-size: 22px;
+      color: var(--ink-dim);
+      text-decoration: line-through;
+    }
+    .price__save {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #002708;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 50%),
+        linear-gradient(180deg, #79f084, #2db447);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(0,80,30,0.5),
+        0 4px 12px rgba(45,180,71,0.4);
+    }
+    .price__lede {
+      color: var(--ink-mute);
+      max-width: 480px;
+      margin: 16px auto 24px;
+      font-size: 15px;
+    }
+    .trust-row {
+      margin-top: 18px;
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+      font-size: 12.5px;
+      color: var(--ink-dim);
+    }
+    .trust-row span { display: inline-flex; align-items: center; gap: 6px; }
+    .trust-row .pip {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--gold));
+      box-shadow: 0 0 6px rgba(232,193,0,0.6);
+    }
+
+    /* ───────────── Reviews ───────────── */
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 820px) { .reviews { grid-template-columns: 1fr; } }
+    .review { padding: 22px 22px; }
+    .review__stars {
+      color: var(--gold-lite);
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-shadow: 0 1px 6px rgba(232,193,0,0.35);
+    }
+    .review__body {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .review__attr {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .review__avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      color: #2a1d00;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.85) 0%, transparent 50%),
+        linear-gradient(180deg, var(--gold-lite), var(--gold-deep));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(120,80,0,0.45),
+        0 4px 10px rgba(232,193,0,0.35);
+    }
+    .review__who { font-size: 14px; font-weight: 700; line-height: 1.2; }
+    .review__handle { font-size: 12px; color: var(--ink-dim); }
+
+    /* ───────────── FAQ ───────────── */
+    .faq__pane { padding: 20px 24px; }
+    .faq details {
+      border-bottom: 1px solid rgba(232,193,0,0.18);
+      padding: 16px 4px;
+    }
+    .faq details:last-of-type { border-bottom: none; }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      font-family: var(--disp);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800;
+      color: #2a1d00;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.85) 0%, transparent 50%),
+        linear-gradient(180deg, var(--gold-lite), var(--gold-deep));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(120,80,0,0.5),
+        0 3px 8px rgba(232,193,0,0.4);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .faq details[open] summary::after { content: "−"; }
+    .faq .answer {
+      margin-top: 10px;
+      color: var(--ink-mute);
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 60ch;
+    }
+
+    /* ───────────── Final CTA ───────────── */
+    .final {
+      padding: 56px 36px;
+      text-align: center;
+    }
+    @media (max-width: 560px) { .final { padding: 40px 20px; } }
+    .final h2 {
+      font-size: clamp(28px, 4.4vw, 44px);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .final p {
+      color: var(--ink-mute);
+      max-width: 540px;
+      margin: 0 auto 28px;
+      font-size: 16px;
+    }
+
+    /* ───────────── Footer ───────────── */
+    footer {
+      margin-top: 56px;
+      padding: 36px 16px 56px;
+      border-top: 1px solid rgba(232,193,0,0.18);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+    }
+    .foot {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .foot__brand { display: flex; align-items: center; gap: 12px; }
+    .foot__brand img { height: 36px; border-radius: 50%; }
+    .foot__brand .n { font-family: var(--disp); font-weight: 700; font-size: 16px; }
+    .foot__socials { display: flex; gap: 10px; }
+    .social {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      color: #2a1d00;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.85) 0%, transparent 50%),
+        linear-gradient(180deg, var(--gold-lite), var(--gold-deep));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -1px 0 rgba(120,80,0,0.45),
+        0 6px 14px rgba(232,193,0,0.35);
+      transition: transform 0.15s;
+    }
+    .social:hover { transform: translateY(-2px); }
+    .foot__legal {
+      max-width: 1100px; margin: 24px auto 0;
+      text-align: center;
+      color: var(--ink-dim);
+      font-size: 12.5px;
+    }
+
+    /* Sticky mobile menubar fix */
+    @media (max-width: 640px) {
+      .dock__inner { flex-wrap: wrap; gap: 8px; }
+      .dock__nav { order: 3; flex-basis: 100%; justify-content: center; gap: 2px; }
+      .dock__nav a { padding: 6px 10px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ──────────── Atmosphere ──────────── -->
+  <div class="sky" aria-hidden="true"></div>
+  <div class="bubbles" aria-hidden="true">
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
+    <span class="bubble b4"></span>
+    <span class="bubble b5"></span>
+    <span class="bubble b6"></span>
+    <span class="bubble b7"></span>
+  </div>
+
+  <!-- ──────────── Dock ──────────── -->
+  <nav class="dock" aria-label="Primary">
+    <div class="dock__inner">
+      <a href="#" class="dock__logo">
+        <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png" alt="Vinylessence™" />
+        <span>Vinylessence&trade;</span>
+      </a>
+      <div class="dock__nav">
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#specs">Specs</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="#price" class="glossy">Pre-Order $99</a>
+    </div>
+  </nav>
+
+  <!-- ──────────── Hero ──────────── -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="pane hero__pane">
+        <div class="hero__grid">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Pre-Order · Save $30</span>
+            <h1>The first Smart LED Slipmat that makes your <span class="h-shine">vinyl glow</span>.</h1>
+            <p class="lede">A drop-in, app-controlled upgrade for your turntable. Diffused colour and motion that reacts to the music playing on top of it. Built to live with the records you already love.</p>
+            <div class="hero__actions">
+              <a href="https://vinyl-essence.com/buy-now" class="glossy glossy--lg">Reserve Yours →</a>
+              <a href="#how" class="glossy glossy--lg glossy--ghost">See How It Works</a>
+            </div>
+            <div class="hero__stats">
+              <div class="hero__stat"><div class="n">364%</div><div class="l">Funded</div></div>
+              <div class="hero__stat"><div class="n">Hundreds</div><div class="l">Backed</div></div>
+              <div class="hero__stat"><div class="n">Aug '26</div><div class="l">Ships From</div></div>
+            </div>
+          </div>
+          <div class="hero__art">
+            <div class="hero__art-orbit"></div>
+            <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/697450acd4fb90af5d7e1a6c.png" alt="Vinylessence™ Smart LED Slipmat" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── Features ──────────── -->
+  <section id="features">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow"><span class="dot"></span> Features</span>
+        <h2>Not just a light. A whole new way to experience vinyl.</h2>
+        <p>Patent-pending design crafted to deliver smooth, diffused lighting, long battery life, and zero-setup convenience, all within the slim form-factor of a slipmat.</p>
+      </div>
+      <div class="features">
+        <article class="pane feature">
+          <div class="feature__orb">♪</div>
+          <h3>Music Reactive</h3>
+          <p>An on-board sound sensor reads the room and pulses the LEDs in time with whatever's playing on the platter.</p>
+        </article>
+        <article class="pane feature">
+          <div class="feature__orb">✦</div>
+          <h3>Vibrant LED Glow</h3>
+          <p>Multi-layer diffusion spreads light evenly through the vinyl surface and around the edges. No hot spots, just glow.</p>
+        </article>
+        <article class="pane feature">
+          <div class="feature__orb">⚡</div>
+          <h3>Plug &amp; Play</h3>
+          <p>Drop it on the platter, charge over USB-C, control with the app. No tools, no modifications, no extra equipment.</p>
+        </article>
+        <article class="pane feature">
+          <div class="feature__orb">⌬</div>
+          <h3>Fits Most Turntables</h3>
+          <p>Designed for standard 11–12&Prime; platters. Audio-Technica, Sony, Victrola, Crosley, Technics, Pioneer, and more.</p>
+        </article>
+        <article class="pane feature">
+          <div class="feature__orb">⛨</div>
+          <h3>Safe for Your Records</h3>
+          <p>Anti-static acrylic surface, just like any other acrylic slipmat. All internal electronics are fully enclosed.</p>
+        </article>
+        <article class="pane feature">
+          <div class="feature__orb">⌚</div>
+          <h3>13–16 Hour Battery</h3>
+          <p>A 4000 mAh cell charges over USB-C and runs an evening of records on a single top-up.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── How it works ──────────── -->
+  <section id="how">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow"><span class="dot"></span> How It Works</span>
+        <h2>Four steps, no setup.</h2>
+        <p>From the box to the platter in under a minute.</p>
+      </div>
+      <div class="steps">
+        <article class="pane step">
+          <div class="step__num">1</div>
+          <h4>Place</h4>
+          <p>Set the Vinylessence&trade; slipmat on your turntable. Fits standard 12&Prime; platters perfectly.</p>
+        </article>
+        <article class="pane step">
+          <div class="step__num">2</div>
+          <h4>Power</h4>
+          <p>Press the button on the side to power on. The slipmat lights up immediately.</p>
+        </article>
+        <article class="pane step">
+          <div class="step__num">3</div>
+          <h4>Pair</h4>
+          <p>Open the mobile app to pick a colour mode, brightness, or reactive animation.</p>
+        </article>
+        <article class="pane step">
+          <div class="step__num">4</div>
+          <h4>Play</h4>
+          <p>Drop the needle. Watch the record glow and pulse to every beat, up to 16 hours per charge.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── Specs ──────────── -->
+  <section id="specs">
+    <div class="wrap">
+      <article class="pane pane--win">
+        <header class="pane__bar">
+          <div class="pane__title">
+            <span class="pane__title-icon">i</span>
+            Specifications.txt
+          </div>
+          <div class="pane__controls">
+            <button class="pane__btn" aria-label="Minimize">_</button>
+            <button class="pane__btn" aria-label="Maximize">□</button>
+            <button class="pane__btn pane__btn--close" aria-label="Close">×</button>
+          </div>
+        </header>
+        <div class="pane__body">
+          <div class="specs-grid">
+            <div class="pane spec"><div class="k">Form Factor</div><div class="v">11–12&Prime; slipmat · 8.5mm</div></div>
+            <div class="pane spec"><div class="k">Surface</div><div class="v">Anti-static acrylic</div></div>
+            <div class="pane spec"><div class="k">Power</div><div class="v">4000 mAh · USB-C</div></div>
+            <div class="pane spec"><div class="k">Runtime</div><div class="v">13–16 hours</div></div>
+            <div class="pane spec"><div class="k">Control</div><div class="v">Mobile app + sound sensor</div></div>
+            <div class="pane spec"><div class="k">Ships From</div><div class="v">August 2026 · Worldwide</div></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ──────────── Pricing ──────────── -->
+  <section id="price">
+    <div class="wrap">
+      <article class="pane price">
+        <span class="eyebrow price__tag"><span class="dot"></span> Best Value · Pre-Order Bundle</span>
+        <div class="price__row">
+          <span class="price__num h-shine">$99<span class="cents">USD</span></span>
+          <span class="price__strike">$129</span>
+          <span class="price__save">Save $30</span>
+        </div>
+        <p class="price__lede">Pre-order pricing while supplies last. First shipments expected as early as August 2026.</p>
+        <a href="https://vinyl-essence.com/buy-now" class="glossy glossy--xl">Claim Your Pre-Order →</a>
+        <div class="trust-row">
+          <span><span class="pip"></span> 30-Day Guarantee</span>
+          <span><span class="pip"></span> Secure Checkout</span>
+          <span><span class="pip"></span> Ships Worldwide</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ──────────── Reviews ──────────── -->
+  <section id="reviews">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow"><span class="dot"></span> Notes from the Community</span>
+        <h2>Music lovers can't stop talking about it.</h2>
+      </div>
+      <div class="reviews">
+        <article class="pane review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__body">"Amazing progress! So excited to see Vinylessence thrive!"</p>
+          <div class="review__attr">
+            <span class="review__avatar">N</span>
+            <div>
+              <div class="review__who">nickalt</div>
+              <div class="review__handle">@vinylmeplease</div>
+            </div>
+          </div>
+        </article>
+        <article class="pane review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__body">"ohhhhhh my gobbbbbb"</p>
+          <div class="review__attr">
+            <span class="review__avatar">V</span>
+            <div>
+              <div class="review__who">Vertigo Vinyl</div>
+            </div>
+          </div>
+        </article>
+        <article class="pane review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__body">"Our records would look great on these."</p>
+          <div class="review__attr">
+            <span class="review__avatar">A</span>
+            <div>
+              <div class="review__who">A to Z Media Inc.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── FAQ ──────────── -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow"><span class="dot"></span> FAQ</span>
+        <h2>Still have questions?</h2>
+      </div>
+      <article class="pane pane--win">
+        <header class="pane__bar">
+          <div class="pane__title">
+            <span class="pane__title-icon">?</span>
+            Frequently Asked Questions
+          </div>
+          <div class="pane__controls">
+            <button class="pane__btn">_</button>
+            <button class="pane__btn">□</button>
+            <button class="pane__btn pane__btn--close">×</button>
+          </div>
+        </header>
+        <div class="pane__body faq">
+          <details>
+            <summary>Does it affect sound quality or playback?</summary>
+            <p class="answer">Nope. The thickness and flatness are designed so it won't interfere with tracking, sound quality, or record wear. In 99% of cases, there's nothing to adjust.</p>
+          </details>
+          <details>
+            <summary>Does it work with all turntables?</summary>
+            <p class="answer">Vinylessence&trade; is compatible with the vast majority of turntable brands including Audio-Technica, Sony, Victrola, Crosley, Numark, Technics, Pioneer, and more. As long as your turntable uses a standard 11–12&Prime; slipmat and doesn't have an unusually short spindle.</p>
+          </details>
+          <details>
+            <summary>Is it safe for my vinyl?</summary>
+            <p class="answer">Yes. The top surface is smooth anti-static acrylic, just like any other acrylic slipmat. All internal electronics are fully enclosed and protected.</p>
+          </details>
+          <details>
+            <summary>How long does the battery last?</summary>
+            <p class="answer">Typical runtimes are 13–16 hours per charge on the 4000 mAh cell, depending on colour mode and brightness.</p>
+          </details>
+          <details>
+            <summary>When does it ship?</summary>
+            <p class="answer">Pre-orders ship as part of the first production run. First shipments are expected to start as early as August 2026.</p>
+          </details>
+        </div>
+      </article>
+      <p style="text-align:center;color:var(--ink-dim);margin-top:18px;font-size:14px;">
+        Still have questions? Chat with us live using the window in the lower right corner.
+      </p>
+    </div>
+  </section>
+
+  <!-- ──────────── Final CTA ──────────── -->
+  <section>
+    <div class="wrap">
+      <article class="pane final">
+        <span class="eyebrow"><span class="dot"></span> Last Chance for Pre-Order Pricing</span>
+        <h2>Ready to make your vinyl <span class="h-shine">come alive</span>?</h2>
+        <p>Lock in the $99 pre-order price and secure your priority production slot today.</p>
+        <a href="https://vinyl-essence.com/buy-now" class="glossy glossy--xl">Pre-Order Now · $99</a>
+        <div class="trust-row">
+          <span><span class="pip"></span> 30-Day Guarantee</span>
+          <span><span class="pip"></span> Secure Checkout</span>
+          <span><span class="pip"></span> Ships Worldwide</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ──────────── Footer ──────────── -->
+  <footer>
+    <div class="foot">
+      <div class="foot__brand">
+        <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png" alt="Vinylessence™" />
+        <div>
+          <div class="n">Vinylessence&trade;</div>
+          <div style="font-size:12px;color:var(--ink-dim);">A product of Charg3d LLC</div>
+        </div>
+      </div>
+      <div class="foot__socials">
+        <a class="social" href="https://www.instagram.com/vinylessenceofficial" aria-label="Instagram">IG</a>
+        <a class="social" href="https://www.youtube.com/@OfficialVinylessence" aria-label="YouTube">YT</a>
+        <a class="social" href="https://www.tiktok.com/@vinylessenceofficial" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+    <div class="foot__legal">
+      &copy; 2026 Vinylessence&trade; · A product of Charg3d LLC · All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
