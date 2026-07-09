@@ -72,7 +72,7 @@ A 2-column card. Left column = image/graphic. Right column = event copy.
 |---|---|
 | Background | `#FFFFFF` |
 | Border radius | `24px` |
-| Box shadow (see §5b) | X `0` · Y `30` · Blur `60` · Spread `0` · Color `#A85E6C29` (16% alpha) |
+| Box shadow (see §5b) | X `0` · Y `20` · Blur `20` · Spread `0` · Color `#A85E6C40` (25% alpha) |
 | Border | `1px solid #F3F4F6` (this replaces the second CSS shadow layer) |
 | Overflow | Hidden (so the image corners round with the card) |
 | Column split | Left 6 / Right 5 (roughly 55% / 45%) |
@@ -178,17 +178,19 @@ Secondary button — "Ask a Question"
 
 ## 5b. GHL Box-Shadow panel — exact fields
 
-GHL's shadow control has five fields: **X · Y · Blur · Spread · Color**. Set **Outer Shadow** (not inner). Every shadow in this spec translates like this:
+GHL's shadow control has five fields: **X · Y · Blur · Spread · Color**, each capped at **20px max**. Set **Outer Shadow** (not inner). The original CSS used softer 30–60px blurs; capped values below use higher alpha to compensate so the shadow still reads as "elevated" instead of a thin hard drop.
 
 | Element | X | Y | Blur | Spread | Color (with alpha) | Color (fallback if picker won't accept alpha) |
 |---|---|---|---|---|---|---|
-| Featured event card | `0` | `30` | `60` | `0` | `#A85E6C29` | `#E8D5D9` |
-| Secondary event card | `0` | `12` | `30` | `0` | `#A85E6C1A` | `#F0E1E4` |
-| Primary rose button (I'm Interested / Sign Up) | `0` | `8` | `20` | `0` | `#C97B8738` | `#EACFD5` |
-| Orange button (Plan Your Visit) | `0` | `8` | `20` | `0` | `#E2572E40` | `#F5C9BB` |
-| Teal button (if used) | `0` | `8` | `20` | `0` | `#0B6B6B38` | `#B7D4D4` |
-| Form card (contact form) | `0` | `30` | `60` | `0` | `#A85E6C24` | `#EBD9DC` |
+| Featured event card | `0` | `20` | `20` | `0` | `#A85E6C40` (25%) | `#DBB5BC` |
+| Secondary event card | `0` | `12` | `20` | `0` | `#A85E6C29` (16%) | `#E8D5D9` |
+| Primary rose button (I'm Interested / Sign Up) | `0` | `8` | `20` | `0` | `#C97B8738` (22%) | `#EACFD5` |
+| Orange button (Plan Your Visit) | `0` | `8` | `20` | `0` | `#E2572E40` (25%) | `#F5C9BB` |
+| Teal button (if used) | `0` | `8` | `20` | `0` | `#0B6B6B38` (22%) | `#B7D4D4` |
+| Form card (contact form) | `0` | `20` | `20` | `0` | `#A85E6C40` (25%) | `#DBB5BC` |
 | Small pill / badge | none | | | | | |
+
+Buttons already fit within the 20/20 cap (they were designed as Y=8, Blur=20). The two big cards were re-tuned from Y=30, Blur=60 down to the max 20/20 with the alpha nudged up ~9 points so the shadow still reads.
 
 **Two ways to get the color:**
 
