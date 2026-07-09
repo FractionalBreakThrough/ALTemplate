@@ -72,7 +72,8 @@ A 2-column card. Left column = image/graphic. Right column = event copy.
 |---|---|
 | Background | `#FFFFFF` |
 | Border radius | `24px` |
-| Box shadow | `0 30px 60px rgba(168, 94, 108, 0.16)` + `0 0 0 1px #F3F4F6` |
+| Box shadow (see §5b) | X `0` · Y `30` · Blur `60` · Spread `0` · Color `#A85E6C29` (16% alpha) |
+| Border | `1px solid #F3F4F6` (this replaces the second CSS shadow layer) |
 | Overflow | Hidden (so the image corners round with the card) |
 | Column split | Left 6 / Right 5 (roughly 55% / 45%) |
 | Stack on mobile | Yes, at ~900px breakpoint — image on top, text below |
@@ -146,7 +147,7 @@ Primary button — "I'm Interested"
 - Background `#C97B87` · Text `#FFFFFF`
 - Padding `14px 26px` · Border radius `10px`
 - Font size `15px` · Weight `700`
-- Shadow `0 8px 20px rgba(201, 123, 135, 0.22)`
+- Shadow — X `0` · Y `8` · Blur `20` · Spread `0` · Color `#C97B8738` (22% alpha)
 - Link to `#thcf-contact-form` (or the retreat sign-up URL when you have it)
 
 Secondary button — "Ask a Question"
@@ -172,6 +173,33 @@ Secondary button — "Ask a Question"
 | Text muted | `#6B7280` | Meta lines |
 | Border | `#E5E7EB` | Input & card outlines |
 | Border light | `#F3F4F6` | Card ring / hairline |
+
+---
+
+## 5b. GHL Box-Shadow panel — exact fields
+
+GHL's shadow control has five fields: **X · Y · Blur · Spread · Color**. Set **Outer Shadow** (not inner). Every shadow in this spec translates like this:
+
+| Element | X | Y | Blur | Spread | Color (with alpha) | Color (fallback if picker won't accept alpha) |
+|---|---|---|---|---|---|---|
+| Featured event card | `0` | `30` | `60` | `0` | `#A85E6C29` | `#E8D5D9` |
+| Secondary event card | `0` | `12` | `30` | `0` | `#A85E6C1A` | `#F0E1E4` |
+| Primary rose button (I'm Interested / Sign Up) | `0` | `8` | `20` | `0` | `#C97B8738` | `#EACFD5` |
+| Orange button (Plan Your Visit) | `0` | `8` | `20` | `0` | `#E2572E40` | `#F5C9BB` |
+| Teal button (if used) | `0` | `8` | `20` | `0` | `#0B6B6B38` | `#B7D4D4` |
+| Form card (contact form) | `0` | `30` | `60` | `0` | `#A85E6C24` | `#EBD9DC` |
+| Small pill / badge | none | | | | | |
+
+**Two ways to get the color:**
+
+1. **If GHL's color field accepts 8-character hex** (some pickers do — try pasting `#A85E6C29` and see if the last two chars stick): use the *first* Color column. The last two chars are alpha in hex — `29` = 16%, `1A` = 10%, `38` = 22%, `40` = 25%.
+2. **If GHL strips the alpha** (many pickers only take 6-char hex like the `#707070` in your screenshot): use the *fallback* column. Those are the visual color you'd get if the semi-transparent shadow were painted on a white background — a soft tinted grey that reads close enough to the real thing.
+
+Alpha → hex cheat sheet if you want to build others: 10% = `1A`, 15% = `26`, 16% = `29`, 20% = `33`, 22% = `38`, 25% = `40`, 30% = `4D`, 40% = `66`, 50% = `80`.
+
+**Note on the second shadow layer.** In CSS the card had `0 30px 60px …` *and* `0 0 0 1px #F3F4F6` — that second one is a hairline ring around the card. GHL can't stack two shadows in one control, so replicate it with **Border: `1px solid #F3F4F6`** on the card instead. Same visual result.
+
+**Inner Shadow** — leave off. None of the elements in this design use inner shadows.
 
 ---
 
