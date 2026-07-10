@@ -101,6 +101,11 @@
 .thcf-menu-visual{position:relative;display:block;width:100%;max-width:100%;border-radius:16px;overflow:hidden;aspect-ratio:3/4;max-height:70vh;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
 .thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
 .thcf-menu-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
 /* === Hero (full-screen, video bg, geometric mountains) === */
 .thcf-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:#000;overflow:hidden;padding:140px 24px 0}
 .thcf-hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
@@ -263,12 +268,10 @@
       <a href="#">Resources</a>
       <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
     </nav>
-    <picture class="thcf-menu-visual" aria-hidden="true">
-      <!-- Mobile: horizontal 16:9 image -->
-      <source media="(max-width:768px)" srcset="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png">
-      <!-- Desktop: vertical 3:4 image -->
-      <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
-    </picture>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
   </div>
 </div>
 <!-- ============ HERO ============ -->
