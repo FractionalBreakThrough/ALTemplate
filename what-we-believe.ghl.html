@@ -39,7 +39,7 @@
 .thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .thcf-reveal.is-visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
-.thcf-believe{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:hidden}
+.thcf-believe{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip}
 /* === Header === */
 .thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
 .thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
@@ -117,7 +117,7 @@
 .thcf-intro-pdf .thcf-btn{width:100%}
 
 /* === Anchor nav (jump to specific doctrine) === */
-.thcf-doctrine-nav{position:sticky;top:74px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-doctrine-nav{position:sticky;top:88px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
 .thcf-doctrine-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
 .thcf-doctrine-nav-inner::-webkit-scrollbar{height:4px}
 .thcf-doctrine-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
