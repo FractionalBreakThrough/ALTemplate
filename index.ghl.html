@@ -117,7 +117,7 @@
 .thcf-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .thcf-hero-inner{position:relative;z-index:2;max-width:980px;margin:0 auto;padding-bottom:14vh}
 .thcf-hero-pill{display:inline-block;padding:8px 18px;border-radius:999px;background:var(--orange);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px;box-shadow:0 6px 18px rgba(226,87,46,.40);animation:thcf-fadein .7s ease-out .1s both}
-.thcf-hero-headline{font-size:clamp(56px,11vw,148px);font-weight:900;letter-spacing:-.05em;line-height:.92;margin-bottom:32px;color:#fff;text-transform:uppercase;animation:thcf-fadein .8s ease-out .2s both}
+.thcf-hero-headline{font-size:clamp(40px,7.5vw,96px);font-weight:900;letter-spacing:-.03em;line-height:.96;margin-bottom:28px;color:#fff;text-transform:uppercase;animation:thcf-fadein .8s ease-out .2s both}
 .thcf-hero-headline span{display:block;transition:color .8s cubic-bezier(.4,0,.2,1)}
 .thcf-hero-headline span.is-active{color:var(--cyan)}
 .thcf-hero-sub{font-size:clamp(17px,2vw,22px);color:rgba(255,255,255,.92);max-width:620px;margin:0 auto 36px;line-height:1.55;animation:thcf-fadein .9s ease-out .35s both}
@@ -125,7 +125,7 @@
 @keyframes thcf-fadein{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
 /* Colorful geometric mountains at bottom of hero (signature visual) */
-.thcf-hero-mountains{position:absolute;bottom:-1px;left:0;right:0;width:100%;height:clamp(180px,30vh,360px);z-index:1;pointer-events:none;transform-origin:bottom center;will-change:transform}
+.thcf-hero-mountains{position:relative;left:0;right:0;width:100%;height:clamp(180px,30vh,360px);z-index:1;pointer-events:none;transform-origin:bottom center;will-change:transform;margin-top:-1px}
 .thcf-hero-mountains svg{display:block;width:100%;height:100%}
 /* === Service Times cards (overlap the hero/mountains transition) === */
 .thcf-service{background:#fff;padding:0 24px clamp(56px,7vw,80px);position:relative;z-index:5}
@@ -290,12 +290,8 @@
   </div>
   <div class="thcf-hero-inner">
     <span class="thcf-hero-pill">Welcome Home</span>
-    <h1 class="thcf-hero-headline" id="thcf-headline">
-      <span data-word="0" class="is-active">Faith.</span>
-      <span data-word="1">Family.</span>
-      <span data-word="2">Fellowship.</span>
-    </h1>
-    <p class="thcf-hero-sub">Loving God and loving people in the Temecula Valley. Join us this Sunday at 8:45 or 10:30 AM.</p>
+    <h1 class="thcf-hero-headline" id="thcf-headline">Temecula Hills<br>Christian Fellowship</h1>
+    <p class="thcf-hero-sub">Bringing glory to God by making maturing disciples of Jesus.</p>
     <div class="thcf-hero-cta">
       <a class="thcf-btn thcf-btn--orange" href="#thcf-im-new">I'm New
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -305,25 +301,25 @@
       </a>
     </div>
   </div>
-  <!-- Colorful geometric mountains: signature visual that scales on scroll -->
-  <div class="thcf-hero-mountains" id="thcf-mountains" aria-hidden="true">
-    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
-      <!-- Back layer (largest) — left two now gold, right stays teal -->
-      <path d="M0,300 L160,80 L360,300 Z" fill="#f39615"/>
-      <path d="M260,300 L500,40 L740,300 Z" fill="#f39615" opacity="0.85"/>
-      <path d="M620,300 L860,90 L1080,300 Z" fill="rgba(11,107,107,0.85)"/>
-      <!-- Mid layer (orange + amber + teal) -->
-      <path d="M0,300 L240,140 L520,300 Z" fill="#e2572e"/>
-      <path d="M380,300 L640,110 L900,300 Z" fill="#76cdbd"/>
-      <path d="M760,300 L1000,150 L1200,300 Z" fill="#f39615"/>
-      <!-- Front layer (deep teal + cyan accents) -->
-      <path d="M-40,300 L160,200 L380,300 Z" fill="#0b6b6b"/>
-      <path d="M280,300 L500,180 L740,300 Z" fill="#4ecbcf"/>
-      <path d="M640,300 L880,210 L1080,300 Z" fill="#0b6b6b"/>
-      <path d="M960,300 L1140,210 L1240,300 Z" fill="#76cdbd"/>
-    </svg>
-  </div>
 </section>
+<!-- Colorful geometric mountains: signature visual, sits below the hero fold -->
+<div class="thcf-hero-mountains" id="thcf-mountains" aria-hidden="true">
+  <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+    <!-- Back layer (largest) — left two now gold, right stays teal -->
+    <path d="M0,300 L160,80 L360,300 Z" fill="#f39615"/>
+    <path d="M260,300 L500,40 L740,300 Z" fill="#f39615" opacity="0.85"/>
+    <path d="M620,300 L860,90 L1080,300 Z" fill="rgba(11,107,107,0.85)"/>
+    <!-- Mid layer (orange + amber + teal) -->
+    <path d="M0,300 L240,140 L520,300 Z" fill="#e2572e"/>
+    <path d="M380,300 L640,110 L900,300 Z" fill="#76cdbd"/>
+    <path d="M760,300 L1000,150 L1200,300 Z" fill="#f39615"/>
+    <!-- Front layer (deep teal + cyan accents) -->
+    <path d="M-40,300 L160,200 L380,300 Z" fill="#0b6b6b"/>
+    <path d="M280,300 L500,180 L740,300 Z" fill="#4ecbcf"/>
+    <path d="M640,300 L880,210 L1080,300 Z" fill="#0b6b6b"/>
+    <path d="M960,300 L1140,210 L1240,300 Z" fill="#76cdbd"/>
+  </svg>
+</div>
 <!-- ============ SERVICE TIMES CARDS (overlap mountains) ============ -->
 <div class="thcf-service">
   <div class="thcf-service-grid">
