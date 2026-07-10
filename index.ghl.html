@@ -582,18 +582,28 @@
     setInterval(cycle, 1700);
   }
 
-  // --- Header transparency + mountain parallax ---
+  // --- Header transparency: IntersectionObserver on the hero (iframe-safe) ---
   var header = root.querySelector('#thcf-header');
+  var hero = root.querySelector('.thcf-hero');
+  if (header && hero && 'IntersectionObserver' in window) {
+    var heroIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        header.classList.toggle('is-scrolled', !e.isIntersecting);
+      });
+    }, { rootMargin: '-60px 0px 0px 0px', threshold: 0 });
+    heroIo.observe(hero);
+  }
+
+  // --- Mountain parallax (kept on window scroll) ---
   var mountains = root.querySelector('#thcf-mountains');
   var ticking = false;
   var onScroll = function(){
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function(){
-      var y = window.scrollY;
-      if (header) header.classList.toggle('is-scrolled', y > 40);
+      var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (header && !('IntersectionObserver' in window)) header.classList.toggle('is-scrolled', y > 40);
       if (mountains) {
-        // Subtle vertical scale as you scroll the hero
         var scale = 1 + Math.min(y, 600) * 0.0015;
         mountains.style.transform = 'scaleY(' + scale + ')';
       }
