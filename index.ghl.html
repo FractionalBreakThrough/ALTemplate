@@ -127,8 +127,8 @@
 .thcf-hero-mountains svg{display:block;width:100%;height:100%}
 /* === Service Times cards (overlap the hero/mountains transition) === */
 .thcf-service{background:#fff;padding:0 24px clamp(56px,7vw,80px);position:relative;z-index:5}
-.thcf-service-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:clamp(-100px,-9vw,-130px)}
-@media (max-width:900px){.thcf-service-grid{grid-template-columns:1fr;margin-top:-60px}}
+.thcf-service-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:clamp(-70px,-5vw,-40px)}
+@media (max-width:900px){.thcf-service-grid{grid-template-columns:1fr;margin-top:-20px}}
 .thcf-service-card{background:#fff;border-radius:16px;padding:30px 28px;box-shadow:0 24px 48px rgba(0,0,0,.10),0 0 0 1px var(--gray-100);border-top:4px solid var(--accent,var(--orange));transition:transform .3s,box-shadow .3s}
 .thcf-service-card:hover{transform:translateY(-6px);box-shadow:0 32px 64px rgba(0,0,0,.14)}
 .thcf-service-icon{width:52px;height:52px;border-radius:50%;background:var(--accent,var(--orange));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 6px 14px rgba(0,0,0,.12)}
@@ -195,6 +195,7 @@
 .thcf-mission-title .accent{color:var(--teal-dark)}
 .thcf-mission-img{border-radius:20px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.10),0 0 0 1px var(--gray-100);aspect-ratio:16/9;background:var(--dark);position:relative}
 .thcf-mission-img .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+.thcf-mission-img .overlay{position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to top,rgba(226,87,46,.72),transparent);pointer-events:none}
 /* === Footer === */
 .thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
 .thcf-footer-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
@@ -309,9 +310,9 @@
   <!-- Colorful geometric mountains: signature visual that scales on scroll -->
   <div class="thcf-hero-mountains" id="thcf-mountains" aria-hidden="true">
     <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
-      <!-- Back layer (largest, darkest) -->
-      <path d="M0,300 L160,80 L360,300 Z" fill="rgba(0,0,0,0.55)"/>
-      <path d="M260,300 L500,40 L740,300 Z" fill="rgba(0,0,0,0.45)"/>
+      <!-- Back layer (largest) — left two now gold, right stays teal -->
+      <path d="M0,300 L160,80 L360,300 Z" fill="#f39615"/>
+      <path d="M260,300 L500,40 L740,300 Z" fill="#f39615" opacity="0.85"/>
       <path d="M620,300 L860,90 L1080,300 Z" fill="rgba(11,107,107,0.85)"/>
       <!-- Mid layer (orange + amber + teal) -->
       <path d="M0,300 L240,140 L520,300 Z" fill="#e2572e"/>
@@ -383,8 +384,8 @@
   <div class="thcf-sermon-grid">
     <div class="thcf-reveal">
       <span class="thcf-sermon-eyebrow">Latest Message</span>
-      <h2 class="thcf-sermon-title">The Power of Prayer</h2>
-      <p class="thcf-sermon-desc">Join us as we dive deep into what it means to communicate with God. In this series, we explore the biblical foundations of prayer and how it changes our lives.</p>
+      <h2 class="thcf-sermon-title">Watch our latest message</h2>
+      <p class="thcf-sermon-desc">Catch up on Sunday from wherever you are. Every week we open the Word together — teaching that's biblical, honest, and meant to shape everyday life. Press play, listen in, and grow with us.</p>
       <div class="thcf-sermon-actions">
         <a class="thcf-btn thcf-btn--gold" href="#thcf-sermon-player">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
@@ -496,9 +497,8 @@
       <h2 class="thcf-mission-title">Bringing glory to God by making <span class="accent">maturing disciples</span> of Jesus.</h2>
     </div>
     <div class="thcf-reveal">
-      <div class="thcf-mission-img">
-        <!-- TODO: replace with a wide community-gathering photo (recommended ~1600x900). -->
-        <div class="ph">[Community Gathering Photo]</div>
+      <div class="thcf-mission-img" style="background-image:url('https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a504541467229729ef43d22.jpg');background-size:cover;background-position:center">
+        <div class="overlay" aria-hidden="true"></div>
       </div>
     </div>
   </div>
