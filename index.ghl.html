@@ -49,14 +49,10 @@
 .thcf-header.is-scrolled{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .thcf-header-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:14px 28px;max-width:1320px;margin:0 auto}
 .thcf-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:background .35s ease,border-color .35s ease}
-.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
-.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1;transition:color .35s ease}
-.thcf-logo-text strong{font-weight:800;font-size:15px;letter-spacing:.10em;color:#fff;transition:color .35s ease}
-.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.75);transition:color .35s ease}
-.thcf-header.is-scrolled .thcf-logo-text strong{color:var(--gray-800)}
-.thcf-header.is-scrolled .thcf-logo-text span{color:var(--gray-500)}
-.thcf-header.is-scrolled .thcf-logo-mark{background:#fff}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block;filter:brightness(0) invert(1);transition:filter .35s ease}
+.thcf-header.is-scrolled .thcf-logo-mark img{filter:none}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
 
 /* Center nav (desktop only) */
 .thcf-header-nav{display:flex;gap:36px}
@@ -204,7 +200,8 @@
 .thcf-footer-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
 @media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
 .thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
-.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
 .thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
 .thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
 .thcf-footer-socials{display:flex;gap:10px}
@@ -224,10 +221,9 @@
 <header class="thcf-header" id="thcf-header">
   <div class="thcf-header-inner">
     <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
-      <span class="thcf-logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371d48f337357269775c.png" alt="Temecula Hills Christian Fellowship">
       </span>
-      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
     </a>
     <nav class="thcf-header-nav" aria-label="Primary">
       <a href="#thcf-about">Who We Are</a>
@@ -417,9 +413,7 @@
 <section class="thcf-section thcf-section--gray" id="thcf-about">
   <div class="thcf-about-grid">
     <div class="thcf-reveal">
-      <div class="thcf-about-img">
-        <!-- TODO: replace with real church photo (recommended ~1200x1500). -->
-        <div class="ph">[Place Church Photo Here]</div>
+      <div class="thcf-about-img" style="background-image:url('https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a504541a1b7eb60e615312a.jpg');background-size:cover;background-position:center">
         <div class="overlay" aria-hidden="true"></div>
       </div>
     </div>
@@ -481,9 +475,7 @@
       </div>
     </div>
     <div class="thcf-reveal">
-      <div class="thcf-expect-card">
-        <!-- TODO: replace with photo of greeters/welcome team (recommended ~1200x1500). -->
-        <div class="ph">[Place Photo of Greeters/Welcome Team]</div>
+      <div class="thcf-expect-card" style="background-image:url('https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5045419c9b37b5fdea8ef2.jpg');background-size:cover;background-position:center">
         <div class="overlay" aria-hidden="true"></div>
         <div class="thcf-expect-card-body">
           <div class="thcf-expect-card-icon">
@@ -516,8 +508,7 @@
   <div class="thcf-footer-grid">
     <div>
       <div class="thcf-footer-brand">
-        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
-        <strong>TEMECULA HILLS</strong>
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371348f33735726976cb.png" alt="Temecula Hills Christian Fellowship"></span>
       </div>
       <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
       <!-- TODO: replace href values with real church social URLs. -->
@@ -535,7 +526,7 @@
       </p>
       <p>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <span>Sundays: 8:45 &amp; 10:30 AM<br>Wednesdays: 7:00 PM</span>
+        <span>Sundays: 8:45 &amp; 10:30 AM</span>
       </p>
     </div>
     <div class="thcf-footer-col">
