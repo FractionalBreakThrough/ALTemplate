@@ -41,8 +41,8 @@
 .thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
 .thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
 .thcf-logo{display:flex;align-items:center;gap:10px}
-.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:44px;width:auto;display:block}
 .thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
 .thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
 .thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
@@ -141,7 +141,8 @@
 .thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
 @media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
 .thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
-.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
 .thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
 .thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
 .thcf-footer-socials{display:flex;gap:10px}
@@ -229,7 +230,7 @@
   <div class="thcf-footer-grid">
     <div>
       <div class="thcf-footer-brand">
-        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371348f33735726976cb.png" alt=""></span>
         <strong>TEMECULA HILLS</strong>
       </div>
       <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
