@@ -124,7 +124,10 @@
 .thcf-doctrine-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
 .thcf-doctrine-nav a{flex-shrink:0;padding:8px 14px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
 .thcf-doctrine-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-doctrine-nav a.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-doctrine-nav a.is-active:hover{color:#fff}
 .thcf-doctrine-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+.thcf-doctrine-nav a.is-active .num{color:var(--gold)}
 /* === Doctrine sections === */
 .thcf-doctrines{background:#fff;padding:clamp(48px,6vw,80px) 24px}
 .thcf-doctrines-inner{max-width:840px;margin:0 auto}
@@ -537,6 +540,32 @@
     revealEls.forEach(function(el){ io.observe(el); });
   } else {
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // --- Doctrine scroll-spy: highlight active pill + center it in the horizontal nav ---
+  var doctrineNavInner = root.querySelector('.thcf-doctrine-nav-inner');
+  var doctrines = root.querySelectorAll('.thcf-doctrine[id]');
+  var pills = root.querySelectorAll('.thcf-doctrine-nav a[href^="#thcf-d-"]');
+  function setActiveDoctrine(id) {
+    pills.forEach(function(pill){
+      var isTarget = pill.getAttribute('href') === '#' + id;
+      pill.classList.toggle('is-active', isTarget);
+      if (isTarget && doctrineNavInner) {
+        var pillLeft = pill.offsetLeft;
+        var pillWidth = pill.offsetWidth;
+        var navWidth = doctrineNavInner.clientWidth;
+        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+        doctrineNavInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+      }
+    });
+  }
+  if ('IntersectionObserver' in window && doctrines.length && pills.length) {
+    var doctrineSpy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActiveDoctrine(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    doctrines.forEach(function(d){ doctrineSpy.observe(d); });
   }
 })();
 </script>
