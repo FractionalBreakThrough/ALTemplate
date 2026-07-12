@@ -113,7 +113,7 @@
 .thcf-pastor-text p{margin-bottom:16px;font-size:17px;line-height:1.7;color:var(--gray-600)}
 .thcf-pastor-sig{margin-top:20px;font-weight:700;color:var(--gray-800)}
 /* === Section common === */
-.thcf-section{padding:clamp(56px,7vw,80px) 24px}
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:160px}
 .thcf-section--gray{background:var(--gray-50)}
 .thcf-section--white{background:#fff}
 .thcf-section--teal{background:var(--teal-dark);color:#fff;position:relative;overflow:hidden}
@@ -121,6 +121,18 @@
 .thcf-section-head{text-align:center;max-width:680px;margin:0 auto clamp(32px,4vw,44px)}
 .thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
 .thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+/* === Section pill nav (jump-to + scroll-spy) === */
+.thcf-imnew-nav{position:sticky;top:88px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-imnew-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.thcf-imnew-nav-inner::-webkit-scrollbar{height:4px}
+.thcf-imnew-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-imnew-nav a{flex-shrink:0;padding:8px 14px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.thcf-imnew-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-imnew-nav a.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-imnew-nav a.is-active:hover{color:#fff}
+.thcf-imnew-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+.thcf-imnew-nav a.is-active .num{color:var(--gold)}
 
 /* === What to expect (4 cards) === */
 .thcf-expect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1140px;margin:0 auto}
@@ -187,7 +199,7 @@
 .thcf-map iframe{display:block;width:100%;height:100%;min-height:400px;border:0}
 
 /* === Plan-your-visit form === */
-.thcf-plan{padding:88px 24px;background:var(--gray-100);position:relative;overflow:hidden}
+.thcf-plan{padding:88px 24px;background:var(--gray-100);position:relative;overflow:hidden;scroll-margin-top:160px}
 .thcf-plan-blob-1{position:absolute;top:-80px;left:-80px;width:380px;height:380px;background:var(--teal-light);border-radius:50%;filter:blur(80px);opacity:.20;pointer-events:none}
 .thcf-plan-blob-2{position:absolute;bottom:-80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.15;pointer-events:none}
 .thcf-plan-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
@@ -342,6 +354,19 @@
   </div>
 </section>
 
+<!-- ============ SECTION PILL NAV ============ -->
+<nav class="thcf-imnew-nav" aria-label="Jump to a section">
+  <div class="thcf-imnew-nav-inner">
+    <a href="#thcf-expect"><span class="num">01</span> What to Expect</a>
+    <a href="#thcf-dress"><span class="num">02</span> Dress Code</a>
+    <a href="#thcf-kids"><span class="num">03</span> Kids &amp; Youth</a>
+    <a href="#thcf-flow"><span class="num">04</span> Service Flow</a>
+    <a href="#thcf-where"><span class="num">05</span> Where &amp; When</a>
+    <a href="#thcf-plan"><span class="num">06</span> Plan Your Visit</a>
+    <a href="#thcf-faq"><span class="num">07</span> FAQ</a>
+  </div>
+</nav>
+
 <!-- ============ WHAT TO EXPECT ============ -->
 <section class="thcf-section thcf-section--gray" id="thcf-expect">
   <div class="thcf-section-head thcf-reveal">
@@ -394,7 +419,7 @@
 </section>
 
 <!-- ============ DRESS CODE / VIBE ============ -->
-<section class="thcf-section thcf-section--teal thcf-dress">
+<section class="thcf-section thcf-section--teal thcf-dress" id="thcf-dress">
   <svg class="thcf-dress-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,300 L220,140 L420,300 Z" fill="rgba(255,255,255,0.30)"/>
     <path d="M280,300 L520,90 L760,300 Z" fill="rgba(255,255,255,0.30)"/>
@@ -410,7 +435,7 @@
   </div>
 </section>
 <!-- ============ KIDS & YOUTH ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-kids">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">For Your Family</span>
     <h2 class="thcf-h2">A safe, fun place for every age</h2>
@@ -468,7 +493,7 @@
   </div>
 </section>
 <!-- ============ SERVICE FLOW TIMELINE ============ -->
-<section class="thcf-section thcf-section--gray">
+<section class="thcf-section thcf-section--gray" id="thcf-flow">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--teal-dark)">75 Minutes</span>
     <h2 class="thcf-h2">What happens during the service</h2>
@@ -528,7 +553,7 @@
   </div>
 </section>
 <!-- ============ WHERE & WHEN ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-where">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Find Us</span>
     <h2 class="thcf-h2">Where &amp; when we meet</h2>
@@ -642,7 +667,7 @@
   </div>
 </section>
 <!-- ============ FAQ ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-faq">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Still Wondering?</span>
     <h2 class="thcf-h2">Common questions</h2>
@@ -767,6 +792,37 @@
     revealEls.forEach(function(el){ io.observe(el); });
   } else {
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // --- Section scroll-spy: highlight active pill + center it in the horizontal nav ---
+  var imnewNavInner = root.querySelector('.thcf-imnew-nav-inner');
+  var imnewPills = root.querySelectorAll('.thcf-imnew-nav a[href^="#"]');
+  var imnewSections = [];
+  imnewPills.forEach(function(pill){
+    var id = pill.getAttribute('href').slice(1);
+    var section = root.querySelector('#' + id);
+    if (section) imnewSections.push(section);
+  });
+  function setActiveSection(id) {
+    imnewPills.forEach(function(pill){
+      var isTarget = pill.getAttribute('href') === '#' + id;
+      pill.classList.toggle('is-active', isTarget);
+      if (isTarget && imnewNavInner) {
+        var pillLeft = pill.offsetLeft;
+        var pillWidth = pill.offsetWidth;
+        var navWidth = imnewNavInner.clientWidth;
+        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+        imnewNavInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+      }
+    });
+  }
+  if ('IntersectionObserver' in window && imnewSections.length && imnewPills.length) {
+    var sectionSpy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    imnewSections.forEach(function(s){ sectionSpy.observe(s); });
   }
 
   // --- Plan Your Visit form submit ---
