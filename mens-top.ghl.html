@@ -1,0 +1,280 @@
+<!-- THCF Men's Ministry — TOP fragment. Paste into GHL Custom Code block ABOVE the drag-and-drop Events + Programs sections. Self-contained: own style, own wrapper, own script. -->
+
+<style>
+/* === UNIFIED THCF stylesheet — identical block in both top and bottom fragments === */
+/* === so GHL's one-style-block-per-page behavior doesn't strip either fragment.  === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --steel:#2c4a6e;--steel-dark:#1f3550;--steel-soft:#e3ebf3;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+.thcf-mens{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--steel{background:var(--steel);color:#fff;box-shadow:0 8px 20px rgba(44,74,110,.28)}
+.thcf-btn--steel:hover{background:var(--steel-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--gray-800);background:var(--gray-50)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--steel{background:linear-gradient(180deg,#fff 0%,var(--steel-soft) 100%)}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu (3-column: primary / secondary / image) === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr 1.1fr;gap:56px;padding:8px 72px 48px;align-items:center;overflow-y:auto}
+@media (max-width:1100px){.thcf-menu-body{grid-template-columns:1.4fr 1fr;gap:48px;padding:0 64px 48px}.thcf-menu .thcf-menu-visual{display:none}}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:8px 32px 48px;gap:28px;align-items:start}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,4.6vw,56px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .25s,color .12s,padding .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold)}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
+.thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
+.thcf-menu-secondary a{font-size:clamp(17px,1.7vw,20px);font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.01em;transition:color .25s,transform .25s}
+.thcf-menu-secondary a:hover{color:var(--orange);transform:translateX(6px)}
+.thcf-menu-secondary a.is-active{color:var(--gold)}
+.thcf-menu-visual{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;max-height:70vh;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
+.thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
+.thcf-menu-visual img{max-width:100%;max-height:70vh;width:auto;height:auto;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu .thcf-menu-visual{display:flex;max-height:240px}
+  .thcf-menu-visual img{max-height:240px}
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
+
+/* === Hero (steel-blue gradient for masculine distinction) === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--steel) 0%,var(--steel) 55%,var(--steel-dark) 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-80px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
+.thcf-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--steel-dark);font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(227,235,243,.92);max-width:660px;margin:0 auto 36px;line-height:1.6}
+
+/* === Heart statement band === */
+.thcf-heart{background:#fff;padding:clamp(48px,6vw,72px) 24px;text-align:center}
+.thcf-heart-inner{max-width:840px;margin:0 auto}
+.thcf-heart .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:14px;color:var(--steel)}
+.thcf-heart .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.6}
+.thcf-heart-quote{font-size:clamp(20px,2.4vw,28px);line-height:1.5;color:var(--gray-800);font-weight:500;margin-bottom:24px}
+.thcf-heart-verse{display:inline-block;padding:18px 26px;border-left:3px solid var(--steel);background:var(--steel-soft);border-radius:0 12px 12px 0;text-align:left;color:var(--gray-700);font-size:15.5px;line-height:1.7;max-width:680px}
+.thcf-heart-verse cite{display:block;font-style:normal;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+
+/* === Closing verse callout === */
+.thcf-verse{background:#fff;padding:clamp(40px,5vw,60px) 24px}
+.thcf-verse-card{max-width:840px;margin:0 auto;padding:32px 36px;background:var(--steel-soft);border-radius:18px;text-align:center;position:relative;overflow:hidden}
+.thcf-verse-card::before{content:"\201C";position:absolute;top:8px;left:24px;font-family:Georgia,serif;font-size:80px;line-height:1;color:rgba(44,74,110,.20);font-weight:700}
+.thcf-verse-card p{font-size:clamp(16px,1.8vw,19px);font-style:italic;line-height:1.7;color:var(--gray-700);margin-bottom:14px;position:relative;z-index:1}
+.thcf-verse-card cite{display:block;font-style:normal;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+
+/* === Contact form === */
+.thcf-contact{position:relative;background:linear-gradient(135deg,var(--steel-soft) 0%,#fff 100%);overflow:hidden}
+.thcf-contact-blob{position:absolute;top:-100px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(44,74,110,.12);pointer-events:none}
+.thcf-contact-blob-2{position:absolute;bottom:-120px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(243,150,21,.10);pointer-events:none}
+.thcf-contact-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.thcf-contact-head{text-align:center;margin-bottom:32px}
+.thcf-contact-head .pill{display:inline-block;padding:6px 14px;border-radius:999px;background:#fff;color:var(--steel);font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:14px;box-shadow:0 4px 12px rgba(31,53,80,.15)}
+.thcf-contact-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;line-height:1.18;margin-bottom:12px;color:var(--gray-800)}
+.thcf-contact-head p{color:var(--gray-600);font-size:16px;line-height:1.65;max-width:560px;margin:0 auto}
+.thcf-form-card{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(31,53,80,.14),0 0 0 1px var(--gray-100);padding:clamp(28px,4vw,40px)}
+.thcf-form-row{display:flex;flex-direction:column;margin-bottom:18px}
+.thcf-form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+@media (max-width:560px){.thcf-form-row-2{grid-template-columns:1fr}}
+.thcf-form-card label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);letter-spacing:.04em;margin-bottom:6px}
+.thcf-form-card label .opt{color:var(--gray-500);font-weight:500}
+.thcf-form-card input,.thcf-form-card select,.thcf-form-card textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:15px;font-family:inherit;color:var(--gray-800);background:#fff;transition:border-color .2s,box-shadow .2s}
+.thcf-form-card input:focus,.thcf-form-card select:focus,.thcf-form-card textarea:focus{outline:none;border-color:var(--steel);box-shadow:0 0 0 3px rgba(44,74,110,.18)}
+.thcf-form-card textarea{resize:vertical;min-height:90px}
+.thcf-form-submit{margin-top:8px;width:100%;padding:16px}
+.thcf-form-fineprint{margin-top:14px;text-align:center;font-size:12px;color:var(--gray-500);line-height:1.55}
+.thcf-form-success{background:#fff;border-radius:24px;box-shadow:0 30px 60px rgba(31,53,80,.14),0 0 0 1px var(--gray-100);padding:48px 32px;text-align:center}
+.thcf-form-success-icon{width:72px;height:72px;border-radius:50%;background:var(--steel-soft);color:var(--steel);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.thcf-form-success h3{font-size:22px;font-weight:800;color:var(--gray-800);margin-bottom:10px}
+.thcf-form-success p{color:var(--gray-600);font-size:15px;line-height:1.65}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
+.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
+.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.thcf-footer-socials a:hover{background:var(--orange)}
+.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
+.thcf-footer-col ul li{margin-bottom:10px}
+.thcf-footer-col ul a{font-size:14px;transition:color .2s}
+.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-mens" data-thcf-part="top">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371d48f337357269775c.png" alt="Temecula Hills Christian Fellowship">
+      </span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav" aria-label="Primary">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">EVENTS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+    </nav>
+    <nav class="thcf-menu-secondary" aria-label="Secondary">
+      <!-- TODO: replace href once the Meet Our Leadership page exists. -->
+      <a href="#">Meet Our Leadership</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="#" class="is-active">Mens Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Womens Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">Youth</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <!-- TODO: replace href once the Resources page exists. -->
+      <a href="#">Resources</a>
+      <a href="#thcf-contact-form" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-grid" aria-hidden="true"></div>
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">MEN'S MINISTRY</span>
+    <h1>Iron sharpens<br>iron.</h1>
+    <p>Real men, real faith, real friendship. We sharpen one another at the breakfast table, in Scripture, and in the daily grind of work, marriage, and fatherhood. There's a place for you here.</p>
+  </div>
+</section>
+
+<!-- ============ HEART STATEMENT ============ -->
+<section class="thcf-heart">
+  <div class="thcf-heart-inner thcf-reveal">
+    <span class="thcf-eyebrow">Our Heart for Men</span>
+    <p class="thcf-heart-quote">Our heart for the men of Temecula Hills is simple — that we'd be men of Scripture, of prayer, and of one another. Men who carry their families with grit and grace, who don't do faith alone, and who keep showing up for each other when life gets heavy.</p>
+    <blockquote class="thcf-heart-verse">
+      "As iron sharpens iron, so one man sharpens another."
+      <cite>Proverbs 27:17</cite>
+    </blockquote>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-mens[data-thcf-part="top"]');
+  if (!root) return;
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
