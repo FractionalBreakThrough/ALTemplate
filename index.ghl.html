@@ -1,5 +1,10 @@
 <!-- Temecula Hills Christian Fellowship - Home page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
 
+<!-- Fonts for the hero wordmark. cdnfonts.com hosts Big Noodle Titling and GeoSans Light; Google Fonts provides Bebas Neue + Poppins as strong visual fallbacks. -->
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/big-noodle-titling">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/gesosans-light">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400&display=swap">
+
 <style>
 /* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
 .thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
@@ -88,6 +93,7 @@
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
 .thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
 .thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
 .thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
@@ -111,9 +117,9 @@
 .thcf-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.85) 100%);pointer-events:none}
 .thcf-hero-inner{position:relative;z-index:2;max-width:980px;margin:0 auto;padding-bottom:14vh}
 .thcf-hero-pill{display:inline-block;padding:8px 18px;border-radius:999px;background:var(--orange);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px;box-shadow:0 6px 18px rgba(226,87,46,.40);animation:thcf-fadein .7s ease-out .1s both}
-.thcf-hero-headline{font-size:clamp(40px,7.5vw,96px);font-weight:900;letter-spacing:-.03em;line-height:.96;margin-bottom:28px;color:#fff;text-transform:uppercase;animation:thcf-fadein .8s ease-out .2s both}
-.thcf-hero-headline span{display:block;transition:color .8s cubic-bezier(.4,0,.2,1)}
-.thcf-hero-headline span.is-active{color:var(--cyan)}
+.thcf-hero-headline{font-size:clamp(40px,7.5vw,96px);font-weight:400;letter-spacing:.01em;line-height:.96;margin-bottom:28px;color:#fff;text-transform:uppercase;animation:thcf-fadein .8s ease-out .2s both}
+.thcf-hero-headline .thcf-headline-top{display:block;font-family:'big_noodle_titling','Bebas Neue','Oswald','Arial Narrow',sans-serif;font-weight:400;letter-spacing:.02em;line-height:.88}
+.thcf-hero-headline .thcf-headline-bottom{display:block;font-family:'GeosansLight','Poppins','Montserrat',sans-serif;font-weight:300;letter-spacing:.06em;font-size:.55em;line-height:1.2;margin-top:.15em}
 .thcf-hero-sub{font-size:clamp(17px,2vw,22px);color:rgba(255,255,255,.92);max-width:620px;margin:0 auto 36px;line-height:1.55;animation:thcf-fadein .9s ease-out .35s both}
 .thcf-hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:thcf-fadein 1s ease-out .5s both}
 @keyframes thcf-fadein{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -248,22 +254,26 @@
     <nav class="thcf-menu-nav" aria-label="Primary">
       <a href="#thcf-top" class="is-active" data-thcf-menu-close>HOME</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
-      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">EVENTS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
     </nav>
     <nav class="thcf-menu-secondary" aria-label="Secondary">
       <!-- TODO: replace href once the Meet Our Leadership page exists. -->
       <a href="#">Meet Our Leadership</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Mens Ministry</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Womens Ministry</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">Youth</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q">Middle School</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's</a>
       <!-- TODO: replace href once the Resources page exists. -->
       <a href="#">Resources</a>
+      <a href="https://thcf-sermons.s3.amazonaws.com/outlines/Current%20Outline.pdf" target="_blank" rel="noopener">Sermon Notes</a>
       <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
     </nav>
     <div class="thcf-menu-visual" aria-hidden="true">
@@ -283,7 +293,10 @@
   </div>
   <div class="thcf-hero-inner">
     <span class="thcf-hero-pill">Welcome Home</span>
-    <h1 class="thcf-hero-headline" id="thcf-headline">Temecula Hills<br>Christian Fellowship</h1>
+    <h1 class="thcf-hero-headline" id="thcf-headline">
+      <span class="thcf-headline-top">Temecula Hills</span>
+      <span class="thcf-headline-bottom">Christian Fellowship</span>
+    </h1>
     <p class="thcf-hero-sub">Bringing glory to God by making maturing disciples of Jesus.</p>
     <div class="thcf-hero-cta">
       <a class="thcf-btn thcf-btn--orange" href="#thcf-im-new">I'm New
@@ -378,8 +391,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
           Watch Sermon
         </a>
-        <!-- TODO: replace href with the sermon notes URL (PDF or page). -->
-        <a class="thcf-btn thcf-btn--outline-light" href="#">Sermon Notes
+        <a class="thcf-btn thcf-btn--outline-light" href="https://thcf-sermons.s3.amazonaws.com/outlines/Current%20Outline.pdf" target="_blank" rel="noopener">Sermon Notes
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
       </div>
