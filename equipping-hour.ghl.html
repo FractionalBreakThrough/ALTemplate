@@ -80,6 +80,7 @@
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
 .thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
 .thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
 .thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
@@ -197,7 +198,13 @@
 /* === Footer === */
 .thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
 .thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
-@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
 .thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
 .thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
 .thcf-footer-brand .mark img{height:38px;width:auto;display:block}
@@ -221,7 +228,7 @@
   <div class="thcf-header-inner">
     <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
       <span class="thcf-logo-mark">
-        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371d48f337357269775c.png" alt="Temecula Hills Christian Fellowship">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5bdf631a0f048050a32742.png" alt="Temecula Hills Christian Fellowship">
       </span>
     </a>
     <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
@@ -245,20 +252,23 @@
     <nav class="thcf-menu-nav" aria-label="Primary">
       <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
-      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">EVENTS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
     </nav>
     <nav class="thcf-menu-secondary" aria-label="Secondary">
       <!-- TODO: replace href once the Meet Our Leadership page exists. -->
       <a href="#">Meet Our Leadership</a>
-      <a href="#" class="is-active">Equipping Hour</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Mens Ministry</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Womens Ministry</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">Youth</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="#" class="is-active">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q">Middle School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's Ministry</a>
       <!-- TODO: replace href once the Resources page exists. -->
       <a href="#">Resources</a>
       <a href="#thcf-contact-form" data-thcf-menu-close>Contact</a>
@@ -493,7 +503,7 @@
   <div class="thcf-footer-grid">
     <div>
       <div class="thcf-footer-brand">
-        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371348f33735726976cb.png" alt="Temecula Hills Christian Fellowship"></span>
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
       </div>
       <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
       <!-- TODO: replace href values with real church social URLs. -->
