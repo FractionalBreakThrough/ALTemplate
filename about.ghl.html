@@ -29,7 +29,19 @@
 .thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
 
 /* === Section utilities === */
-.thcf-section{padding:clamp(56px,7vw,80px) 24px}
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:160px}
+
+/* === Section pill nav (jump-to + scroll-spy) === */
+.thcf-about-nav{position:sticky;top:88px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-about-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.thcf-about-nav-inner::-webkit-scrollbar{height:4px}
+.thcf-about-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-about-nav a{flex-shrink:0;padding:8px 14px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.thcf-about-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-about-nav a.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-about-nav a.is-active:hover{color:#fff}
+.thcf-about-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+.thcf-about-nav a.is-active .num{color:var(--gold)}
 .thcf-section--gray{background:var(--gray-50)}
 .thcf-section--white{background:#fff}
 .thcf-section--teal{background:var(--teal-dark);color:#fff;position:relative;overflow:hidden}
@@ -297,6 +309,20 @@
     <p>We're a community of imperfect people learning to follow Jesus together — in Temecula and beyond. Here's who we are, what we believe, and where we're headed.</p>
   </div>
 </section>
+
+<!-- ============ SECTION PILL NAV ============ -->
+<nav class="thcf-about-nav" aria-label="Jump to a section">
+  <div class="thcf-about-nav-inner">
+    <a href="#thcf-story"><span class="num">01</span> Our Story</a>
+    <a href="#thcf-mission"><span class="num">02</span> Mission &amp; Vision</a>
+    <a href="#thcf-beliefs"><span class="num">03</span> Core Beliefs</a>
+    <a href="#thcf-leadership"><span class="num">04</span> Leadership</a>
+    <a href="#thcf-values"><span class="num">05</span> Values</a>
+    <a href="#thcf-ministries-list"><span class="num">06</span> Ministries</a>
+    <a href="#thcf-next-steps"><span class="num">07</span> Next Steps</a>
+  </div>
+</nav>
+
 <!-- ============ OUR STORY ============ -->
 <section class="thcf-section thcf-section--white" id="thcf-story">
   <div class="thcf-story-grid">
@@ -332,7 +358,7 @@
   </div>
 </section>
 <!-- ============ MISSION & VISION ============ -->
-<section class="thcf-section thcf-section--gray">
+<section class="thcf-section thcf-section--gray" id="thcf-mission">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Why We Exist</span>
     <h2 class="thcf-h2">Mission &amp; Vision</h2>
@@ -360,7 +386,7 @@
   </div>
 </section>
 <!-- ============ CORE BELIEFS ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-beliefs">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--teal-dark)">What We Believe</span>
     <h2 class="thcf-h2">Six things we hold tightly.</h2>
@@ -474,7 +500,7 @@
   </div>
 </section>
 <!-- ============ VALUES ============ -->
-<section class="thcf-section thcf-section--teal">
+<section class="thcf-section thcf-section--teal" id="thcf-values">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--gold)">How We Do It</span>
     <h2 class="thcf-h2">Four values that shape us.</h2>
@@ -516,7 +542,7 @@
   </div>
 </section>
 <!-- ============ MINISTRIES ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-ministries-list">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Ways To Get Involved</span>
     <h2 class="thcf-h2">Where life happens between Sundays.</h2>
@@ -580,7 +606,7 @@
   </div>
 </section>
 <!-- ============ NEXT STEPS CTA ============ -->
-<section class="thcf-section thcf-cta">
+<section class="thcf-section thcf-cta" id="thcf-next-steps">
   <div class="thcf-cta-inner thcf-reveal">
     <span class="pill">YOUR NEXT STEP</span>
     <h2>Ready to come check us out?</h2>
@@ -664,6 +690,37 @@
     revealEls.forEach(function(el){ io.observe(el); });
   } else {
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // --- Section scroll-spy: highlight active pill + center it in the horizontal nav ---
+  var aboutNavInner = root.querySelector('.thcf-about-nav-inner');
+  var aboutPills = root.querySelectorAll('.thcf-about-nav a[href^="#"]');
+  var aboutSections = [];
+  aboutPills.forEach(function(pill){
+    var id = pill.getAttribute('href').slice(1);
+    var section = root.querySelector('#' + id);
+    if (section) aboutSections.push(section);
+  });
+  function setActiveAboutSection(id) {
+    aboutPills.forEach(function(pill){
+      var isTarget = pill.getAttribute('href') === '#' + id;
+      pill.classList.toggle('is-active', isTarget);
+      if (isTarget && aboutNavInner) {
+        var pillLeft = pill.offsetLeft;
+        var pillWidth = pill.offsetWidth;
+        var navWidth = aboutNavInner.clientWidth;
+        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+        aboutNavInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+      }
+    });
+  }
+  if ('IntersectionObserver' in window && aboutSections.length && aboutPills.length) {
+    var aboutSpy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActiveAboutSection(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    aboutSections.forEach(function(s){ aboutSpy.observe(s); });
   }
 })();
 </script>
