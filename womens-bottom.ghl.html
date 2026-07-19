@@ -77,6 +77,7 @@
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
 .thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
 .thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
 .thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
@@ -148,7 +149,13 @@
 /* === Footer === */
 .thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
 .thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
-@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
 .thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
 .thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
 .thcf-footer-brand .mark img{height:38px;width:auto;display:block}
@@ -230,7 +237,6 @@
         <p>Someone from our women's ministry team will be in touch shortly.</p>
       </div>
     </div>
-    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--gray-600)">Prefer email? Reach <strong>Marianne Holm</strong> directly at <a href="mailto:mholm@temeculahills.org" style="color:var(--rose);text-decoration:underline">mholm@temeculahills.org</a> with your questions and concerns about women's ministry events and happenings.</p>
   </div>
 </section>
 
@@ -239,7 +245,7 @@
   <div class="thcf-footer-grid">
     <div>
       <div class="thcf-footer-brand">
-        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a50371348f33735726976cb.png" alt="Temecula Hills Christian Fellowship"></span>
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
       </div>
       <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
       <div class="thcf-footer-socials">
