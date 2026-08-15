@@ -172,7 +172,8 @@
 @media (max-width:560px){.thcf-team-grid{grid-template-columns:1fr}}
 .thcf-team-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s}
 .thcf-team-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
-.thcf-team-photo{aspect-ratio:1/1;background:var(--dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-team-photo{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.thcf-team-photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(to top,var(--haze,rgba(11,107,107,.65)),transparent);pointer-events:none}
 .thcf-team-card-body{padding:22px}
 .thcf-team-card h4{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
 .thcf-team-card .role{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
@@ -460,7 +461,7 @@
   </div>
   <div class="thcf-team-grid">
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eacf50f900f2dff207.jpg" alt="Nathanael King" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-photo" style="--haze:rgba(243,150,21,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eacf50f900f2dff207.jpg" alt="Nathanael King" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
         <h4>Nathanael King</h4>
         <span class="role">Teaching Pastor</span>
@@ -468,7 +469,7 @@
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a65f8.jpg" alt="Chad Wood" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-photo" style="--haze:rgba(226,87,46,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a65f8.jpg" alt="Chad Wood" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
         <h4>Chad Wood</h4>
         <span class="role">Family Life Pastor</span>
@@ -476,7 +477,7 @@
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eba6a03cda06f57508.jpg" alt="Brett Brewer" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-photo" style="--haze:rgba(11,107,107,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eba6a03cda06f57508.jpg" alt="Brett Brewer" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
         <h4>Brett Brewer</h4>
         <span class="role">Pastor-Elder</span>
@@ -484,7 +485,7 @@
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a6611.jpg" alt="Jeff Conner" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-photo" style="--haze:rgba(78,203,207,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a6611.jpg" alt="Jeff Conner" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
         <h4>Jeff Conner</h4>
         <span class="role">Missions and Outreach Pastor</span>
@@ -492,7 +493,7 @@
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eafe4291bd10a02b6c.jpg" alt="Brian Campbell" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-photo" style="--haze:rgba(201,69,31,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eafe4291bd10a02b6c.jpg" alt="Brian Campbell" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
         <h4>Brian Campbell</h4>
         <span class="role">Pastor/Elder</span>
