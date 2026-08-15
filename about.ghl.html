@@ -164,8 +164,11 @@
 .thcf-leader-feature h3{font-size:clamp(26px,3vw,36px);font-weight:800;line-height:1.2;color:var(--gray-800);margin-bottom:8px}
 .thcf-leader-feature .role{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--teal-dark);text-transform:uppercase;margin-bottom:20px}
 .thcf-leader-feature p{color:var(--gray-600);font-size:16px;line-height:1.75;margin-bottom:14px}
-.thcf-team-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-@media (max-width:900px){.thcf-team-grid{grid-template-columns:repeat(2,1fr)}}
+.thcf-team-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.thcf-team-card{grid-column:span 2}
+.thcf-team-card:nth-child(4){grid-column:2 / span 2}
+.thcf-team-card:nth-child(5){grid-column:4 / span 2}
+@media (max-width:900px){.thcf-team-grid{grid-template-columns:repeat(2,1fr)}.thcf-team-card,.thcf-team-card:nth-child(4),.thcf-team-card:nth-child(5){grid-column:auto}}
 @media (max-width:560px){.thcf-team-grid{grid-template-columns:1fr}}
 .thcf-team-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s}
 .thcf-team-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
@@ -453,56 +456,47 @@
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Meet The Team</span>
     <h2 class="thcf-h2">Our leaders.</h2>
-    <p class="thcf-lead">Six co-equal leaders who serve, teach, and shepherd at Temecula Hills together.</p>
+    <p class="thcf-lead">Five co-equal leaders who serve, teach, and shepherd at Temecula Hills together.</p>
   </div>
   <div class="thcf-team-grid">
     <div class="thcf-team-card thcf-reveal">
-      <!-- TODO: replace placeholder with real leader photo (square, ~600x600). -->
-      <div class="thcf-team-photo">Leader Photo</div>
+      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eacf50f900f2dff207.jpg" alt="Nathanael King" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
+        <h4>Nathanael King</h4>
+        <span class="role">Teaching Pastor</span>
+        <p>Nathanael has been blessed to be married to Melissa since 2006, and together with their children they live in Murrieta. They have four boys, and one little princess: Nehemiah, Elijah, Isaiah, Micaiah, and Charis. Nathanael has lived in the Temecula area since 1996 and he attended Temecula Valley High School.</p>
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo">Leader Photo</div>
+      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a65f8.jpg" alt="Chad Wood" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
+        <h4>Chad Wood</h4>
+        <span class="role">Family Life Pastor</span>
+        <p>Chad and Kristy Wood have been married since 1995 and have lived in Temecula Valley since 2004. Chad has pursued a sales career in industrial electronics since graduating from Pepperdine University in 1992. Kristy began her teaching career in 1990 after graduating from Georgia Southern University and has home schooled all three of their daughters.</p>
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo">Leader Photo</div>
+      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eba6a03cda06f57508.jpg" alt="Brett Brewer" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
+        <h4>Brett Brewer</h4>
+        <span class="role">Pastor-Elder</span>
+        <p>Brett and Melanie have been married since 2012 and have been blessed with 3 sons: Sean, Samuel, and Silas. They both grew up in the Temecula/Murrieta Valley, and moved back to the area in 2014 after graduating from UCSD. Brett graduated in 2012 with a Master&rsquo;s Degree in Structural Engineering.</p>
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo">Leader Photo</div>
+      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a6611.jpg" alt="Jeff Conner" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
+        <h4>Jeff Conner</h4>
+        <span class="role">Missions and Outreach Pastor</span>
+        <p>Jeff and Shelly, college sweethearts, were married in 1984 and have lived in Temecula since 1998. They have four adult children and seven grandchildren and love spending time making memories with family. They have been blessed to be a part of the Temecula Hills family since the beginning.</p>
       </div>
     </div>
     <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo">Leader Photo</div>
+      <div class="thcf-team-photo"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eafe4291bd10a02b6c.jpg" alt="Brian Campbell" style="width:100%;height:100%;object-fit:cover;display:block"></div>
       <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
-      </div>
-    </div>
-    <div class="thcf-team-card thcf-reveal">
-      <div class="thcf-team-photo">Leader Photo</div>
-      <div class="thcf-team-card-body">
-        <h4>[Name]</h4>
-        <span class="role">Elder</span>
-        <p>Short bio — background, family, what he loves about serving at Temecula Hills.</p>
+        <h4>Brian Campbell</h4>
+        <span class="role">Pastor/Elder</span>
+        <p>Brian enjoys leading and mentoring within his role as head of strategy for a mid-sized corporation that designs, manufactures and sells to large retailers throughout the United States. He has had a passion for teaching in Kid&rsquo;s Ministry for decades, and as a current Elder Candidate is overjoyed to be serving the Church. He brings energy, intensity and humor.</p>
       </div>
     </div>
   </div>
