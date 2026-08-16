@@ -1,0 +1,743 @@
+<!-- Temecula Hills Christian Fellowship - Meet Our Leadership page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+/* === Shared utility classes === */
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+
+/* === Section utilities === */
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:160px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+/* === Section pill nav (sticky, jump-to + scroll-spy) === */
+.thcf-leaders-nav{position:sticky;top:88px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-leaders-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;justify-content:center;flex-wrap:wrap}
+.thcf-leaders-nav-inner::-webkit-scrollbar{height:4px}
+.thcf-leaders-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-leaders-nav a{flex-shrink:0;padding:10px 18px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.thcf-leaders-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-leaders-nav a.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-leaders-nav a.is-active:hover{color:#fff}
+.thcf-leaders-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+.thcf-leaders-nav a.is-active .num{color:var(--gold)}
+@media (max-width:640px){
+  .thcf-leaders-nav-inner{justify-content:flex-start;flex-wrap:nowrap}
+  .thcf-leaders-nav a{padding:8px 14px;font-size:12px}
+}
+
+/* === Scroll reveal === */
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+.thcf-leaders{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip}
+
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu (3-column: primary / secondary / image) === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr 1.1fr;gap:56px;padding:8px 72px 48px;align-items:center;overflow-y:auto}
+@media (max-width:1100px){.thcf-menu-body{grid-template-columns:1.4fr 1fr;gap:48px;padding:0 64px 48px}.thcf-menu .thcf-menu-visual{display:none}}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:8px 32px 48px;gap:28px;align-items:start}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,4.6vw,56px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .25s,color .12s,padding .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold)}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
+.thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
+.thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
+.thcf-menu-secondary a{font-size:clamp(17px,1.7vw,20px);font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.01em;transition:color .25s,transform .25s}
+.thcf-menu-secondary a:hover{color:var(--orange);transform:translateX(6px)}
+.thcf-menu-secondary a.is-active{color:var(--gold)}
+.thcf-menu-visual{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;max-height:70vh;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
+.thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
+.thcf-menu-visual img{max-width:100%;max-height:70vh;width:auto;height:auto;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu .thcf-menu-visual{display:flex;max-height:240px}
+  .thcf-menu-visual img{max-height:240px}
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
+
+/* === Hero === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-60px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.22;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(220,255,250,.92);max-width:640px;margin:0 auto 12px;line-height:1.6}
+
+/* === Section intro card (explainer text under the section head) === */
+.thcf-section-intro{max-width:900px;margin:0 auto clamp(36px,4vw,52px);background:#fff;border-radius:16px;padding:clamp(24px,3vw,32px);box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100)}
+.thcf-section--gray .thcf-section-intro{background:#fff}
+.thcf-section--white .thcf-section-intro{background:var(--gray-50)}
+.thcf-section-intro p{color:var(--gray-600);font-size:15.5px;line-height:1.75}
+.thcf-section-intro p + p{margin-top:12px}
+
+/* === Team grid (Pastor Elders + Staff cards, 3-per-row) === */
+.thcf-team-grid{max-width:1140px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.thcf-team-card{width:calc(33.333% - 15px);max-width:360px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.thcf-team-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
+@media (max-width:900px){.thcf-team-card{width:calc(50% - 11px)}}
+@media (max-width:560px){.thcf-team-card{width:100%;max-width:460px}}
+
+.thcf-team-photo{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5)}
+.thcf-team-photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(to top,var(--haze,rgba(11,107,107,.65)),transparent);pointer-events:none}
+.thcf-team-photo--empty{background:linear-gradient(135deg,#e5e7eb 0%,#d1d5db 100%)}
+.thcf-team-photo--empty svg{width:38%;height:38%;color:#9ca3af;opacity:.6}
+
+.thcf-team-card-body{padding:22px;flex:1;display:flex;flex-direction:column}
+.thcf-team-card h4{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.thcf-team-card .role{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.thcf-team-card .bio-short{color:var(--gray-600);font-size:14px;line-height:1.65}
+.thcf-team-card .bio-more{color:var(--gray-600);font-size:14px;line-height:1.65;max-height:0;overflow:hidden;transition:max-height .5s ease}
+.thcf-team-card .bio-more > *{margin-top:10px}
+.thcf-team-card.is-expanded .bio-more{max-height:1400px}
+.thcf-bio-toggle{margin-top:14px;align-self:flex-start;padding:8px 14px;border-radius:8px;background:transparent;color:var(--teal-dark);font-weight:700;font-size:12px;letter-spacing:.10em;text-transform:uppercase;border:1.5px solid var(--gray-200);display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.thcf-bio-toggle:hover{border-color:var(--teal-dark);background:var(--gray-50)}
+.thcf-bio-toggle .arrow{transition:transform .3s}
+.thcf-team-card.is-expanded .thcf-bio-toggle .arrow{transform:rotate(180deg)}
+
+/* === Deacon grid (simpler: photo + name + role, 4-per-row) === */
+.thcf-deacon-grid{max-width:1140px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.thcf-deacon-card{width:calc(25% - 17px);max-width:260px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.thcf-deacon-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.08),0 0 0 1px var(--gray-200)}
+@media (max-width:900px){.thcf-deacon-card{width:calc(33.333% - 15px)}}
+@media (max-width:640px){.thcf-deacon-card{width:calc(50% - 11px)}}
+@media (max-width:400px){.thcf-deacon-card{width:100%;max-width:340px}}
+.thcf-deacon-card .thcf-team-photo{aspect-ratio:1/1}
+.thcf-deacon-card-body{padding:16px 18px 20px;text-align:center}
+.thcf-deacon-card h4{font-size:16px;font-weight:800;color:var(--gray-800);margin-bottom:4px;line-height:1.25}
+.thcf-deacon-card .role{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dark)}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
+.thcf-footer-brand strong{font-size:18px;font-weight:700;letter-spacing:.06em}
+.thcf-footer-tag{color:rgba(255,255,255,.55);max-width:340px;line-height:1.65;margin-bottom:22px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);transition:all .2s}
+.thcf-footer-socials a:hover{background:var(--orange);color:#fff}
+.thcf-footer-col h4{color:#fff;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.thcf-footer-col p{display:flex;gap:10px;color:rgba(255,255,255,.65);font-size:14px;margin-bottom:10px;line-height:1.55}
+.thcf-footer-col p svg{color:var(--teal-light);flex-shrink:0;margin-top:2px}
+.thcf-footer-col ul li{margin-bottom:8px}
+.thcf-footer-col ul li a{color:rgba(255,255,255,.65);font-size:14px;transition:color .2s}
+.thcf-footer-col ul li a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-leaders">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5bdf631a0f048050a32742.png" alt="Temecula Hills Christian Fellowship">
+      </span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav" aria-label="Primary">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+    </nav>
+    <nav class="thcf-menu-secondary" aria-label="Secondary">
+      <a href="#" class="is-active">Meet Our Leadership</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q">Middle School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's Ministry</a>
+      <!-- TODO: replace href once the Resources page exists. -->
+      <a href="#">Resources</a>
+      <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">THE TEAM</span>
+    <h1>Meet our leadership.</h1>
+    <p>The people God has called to serve, teach, and shepherd Temecula Hills together &mdash; from our pastor-elders to the staff, ministry leaders, deacons, and deaconesses who help this church run every week.</p>
+  </div>
+</section>
+
+<!-- ============ SECTION PILL NAV ============ -->
+<nav class="thcf-leaders-nav" aria-label="Jump to a section">
+  <div class="thcf-leaders-nav-inner">
+    <a href="#thcf-pastor-elders"><span class="num">01</span> Pastor Elders</a>
+    <a href="#thcf-staff"><span class="num">02</span> Staff &amp; Ministry Leaders</a>
+    <a href="#thcf-deacons"><span class="num">03</span> Deacons &amp; Deaconesses</a>
+  </div>
+</nav>
+
+<!-- ============ PASTOR ELDERS ============ -->
+<section class="thcf-section thcf-section--gray" id="thcf-pastor-elders">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Section 01</span>
+    <h2 class="thcf-h2">Pastor Elders.</h2>
+    <p class="thcf-lead">Five co-equal leaders who serve, teach, and shepherd at Temecula Hills together.</p>
+  </div>
+  <div class="thcf-section-intro thcf-reveal">
+    <p>Temecula Hills is led by a plurality of pastor-elders (in the New Testament, the words &ldquo;elder&rdquo; and &ldquo;overseer&rdquo; are used interchangeably to describe the local church leaders). Instead of a single (or senior) pastor leading our congregation, we have a group of pastor-elders who share the preaching on Sundays and share most of the day-to-day leadership of the church community.</p>
+    <p>We take this approach for two reasons, one biblical and one pragmatic. Biblically, from what we can tell, every church in the New Testament was led by a team of leaders. Pragmatically, plurality leadership best ensures the spiritual health of both leaders and members in a local church community.</p>
+  </div>
+  <div class="thcf-team-grid">
+    <!-- 1. Nathanael King -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo" style="--haze:rgba(243,150,21,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eacf50f900f2dff207.jpg" alt="Nathanael King" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-card-body">
+        <h4>Nathanael King</h4>
+        <span class="role">Teaching Pastor</span>
+        <p class="bio-short">Nathanael has been blessed to be married to Melissa since 2006, and together with their children they live in Murrieta. They have four boys, and one little princess: Nehemiah, Elijah, Isaiah, Micaiah, and Charis. Nathanael has lived in the Temecula area since 1996 and he attended Temecula Valley High School.</p>
+        <!-- TODO: paste extended bio paragraphs inside .bio-more when ready; the Read more button auto-hides while .bio-more is empty. -->
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 2. Chad Wood -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo" style="--haze:rgba(226,87,46,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a65f8.jpg" alt="Chad Wood" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-card-body">
+        <h4>Chad Wood</h4>
+        <span class="role">Family Life Pastor</span>
+        <p class="bio-short">Chad and Kristy Wood have been married since 1995 and have lived in Temecula Valley since 2004. Chad has pursued a sales career in industrial electronics since graduating from Pepperdine University in 1992. Kristy began her teaching career in 1990 after graduating from Georgia Southern University and has home schooled all three of their daughters.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 3. Brett Brewer -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo" style="--haze:rgba(11,107,107,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eba6a03cda06f57508.jpg" alt="Brett Brewer" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-card-body">
+        <h4>Brett Brewer</h4>
+        <span class="role">Pastor-Elder</span>
+        <p class="bio-short">Brett and Melanie have been married since 2012 and have been blessed with 3 sons: Sean, Samuel, and Silas. They both grew up in the Temecula/Murrieta Valley, and moved back to the area in 2014 after graduating from UCSD. Brett graduated in 2012 with a Master&rsquo;s Degree in Structural Engineering.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 4. Jeff Conner -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo" style="--haze:rgba(78,203,207,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5ea255b571c8e7a6611.jpg" alt="Jeff Conner" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-card-body">
+        <h4>Jeff Conner</h4>
+        <span class="role">Missions and Outreach Pastor</span>
+        <p class="bio-short">Jeff and Shelly, college sweethearts, were married in 1984 and have lived in Temecula since 1998. They have four adult children and seven grandchildren and love spending time making memories with family. They have been blessed to be a part of the Temecula Hills family since the beginning.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 5. Brian Campbell -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo" style="--haze:rgba(201,69,31,.65)"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a80b5eafe4291bd10a02b6c.jpg" alt="Brian Campbell" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="thcf-team-card-body">
+        <h4>Brian Campbell</h4>
+        <span class="role">Pastor/Elder</span>
+        <p class="bio-short">Brian enjoys leading and mentoring within his role as head of strategy for a mid-sized corporation that designs, manufactures and sells to large retailers throughout the United States. He has had a passion for teaching in Kid&rsquo;s Ministry for decades, and as a current Elder Candidate is overjoyed to be serving the Church. He brings energy, intensity and humor.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ STAFF & MINISTRY LEADERS ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-staff">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--teal-dark)">Section 02</span>
+    <h2 class="thcf-h2">Staff &amp; Ministry Leaders.</h2>
+    <p class="thcf-lead">The team that carries the weekly rhythms of Temecula Hills &mdash; teaching, worship, administration, and every ministry in between.</p>
+  </div>
+  <div class="thcf-team-grid">
+    <!-- 1. Johnson (John) Mubiru -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(243,150,21,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Johnson (John) Mubiru</h4>
+        <span class="role">Associate Pastor (Youth/Young Adults)</span>
+        <p class="bio-short">John was born and raised in Luweero, Uganda, East Africa. He has been married to Sami Mubiru since June 24th, 2022. John graduated with a bachelor&rsquo;s degree in biblical studies from The Master&rsquo;s University (TMU) in May 2022 and with M.Div from The Master&rsquo;s Seminary (TMS) in May 2023.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 2. Ashley Hinrichs -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(226,87,46,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Ashley Hinrichs</h4>
+        <span class="role">Office Administrator</span>
+        <p class="bio-short">Ashley serves as an Office Administrator at Temecula Hills. Ashley has been married to Addison Hinrichs since summer of 2016. She graduated from John Brown University with her bachelor&rsquo;s in Business Administration in 2018.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 3. Marianne Holm -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(11,107,107,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Marianne Holm</h4>
+        <span class="role">Business Administrator / Women&rsquo;s Director</span>
+        <p class="bio-short">Marianne is pleased to have the honor of serving here at Temecula Hills in the Office as Business Administrator. She is looking forward to serving God&rsquo;s people and loves being part of a Christ-centered team who desire to bring glory to God by making maturing disciples of Jesus.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 4. Eric Richardson -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(78,203,207,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Eric Richardson</h4>
+        <span class="role">Men&rsquo;s Ministry Director</span>
+        <p class="bio-short">Eric and Ninette have been married since 1990. He also has 2 grown and married children, Josh and Natalie. They have attended Temecula Hills since the beginning.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 5. Travis Buford -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(201,69,31,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Travis Buford</h4>
+        <span class="role">Middle School Director</span>
+        <p class="bio-short">Travis is 23 and has been at Temecula Hills since 2014. He has been serving in several different ministries including teaching in children&rsquo;s ministry as well as Middle School. He is a sales rep at a construction company, along with several other men in the church.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 6. Alex Bruda -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(118,205,189,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Alex Bruda</h4>
+        <span class="role">Children&rsquo;s Ministry Pastor</span>
+        <p class="bio-short">Alex and Cami have been married since 2000, and God blessed them with two boys: Alexandru (2003) and Bogdan (2006). The Brudas have lived in Temecula since August 2016. Both Alex and Cami started serving in children&rsquo;s ministry when they were 16 years old.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 7. Addison Hinrichs -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(243,150,21,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Addison Hinrichs</h4>
+        <span class="role">Worship Director</span>
+        <p class="bio-short">Addison lives in Temecula and has been married to his wife Ashley since the summer of 2016. He has been serving in Worship Ministry since high school. Addison has a heart for thoughtfully guiding the body of Christ in worship and praise.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 8. Cole Criske -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(226,87,46,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Cole Criske</h4>
+        <span class="role">Worship Leader</span>
+        <p class="bio-short">Cole is serving in various worship ministries within Temecula Hills, including Sunday morning services, high school, and college ministries. He is passionate about all things music and desires to use his ability to magnify the Lord.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 9. Deanne Campbell -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(11,107,107,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>Deanne Campbell</h4>
+        <span class="role">Treasurer</span>
+        <p class="bio-short">Deanne has a passion for math, analysis, and numbers. Her degrees are in Business Administration and Sociology and she put them to use as she worked for both public and private companies. Throughout her career she has served as an entry-level analyst, Chief Financial Officer, and currently Chief of Staff.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+    <!-- 10. John Aufhammer -->
+    <article class="thcf-team-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" style="--haze:rgba(78,203,207,.65)" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-team-card-body">
+        <h4>John Aufhammer</h4>
+        <span class="role">Sunday Setup Team Leader</span>
+        <p class="bio-short">Send bio and I&rsquo;ll paste it in here.</p>
+        <div class="bio-more"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DEACONS & DEACONESSES ============ -->
+<section class="thcf-section thcf-section--gray" id="thcf-deacons">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Section 03</span>
+    <h2 class="thcf-h2">Deacons &amp; Deaconesses.</h2>
+    <p class="thcf-lead">The men and women who quietly carry the practical needs of the church &mdash; hospitality, care, benevolence, and countless invisible services every week.</p>
+  </div>
+  <div class="thcf-deacon-grid">
+    <!-- 1. Deanne Campbell -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Deanne Campbell</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+    <!-- 2. Brent Collins -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Brent Collins</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 3. Alex Bruda -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Alex Bruda</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 4. John Mitchell -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>John Mitchell</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 5. Kristen Post -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Kristen Post</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+    <!-- 6. Vicki Hinrichs -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Vicki Hinrichs</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+    <!-- 7. Tom Rones -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Tom Rones</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 8. Shelly Conner -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Shelly Conner</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+    <!-- 9. Paul & Tami Botello -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Paul &amp; Tami Botello</h4>
+        <span class="role">Deacon &amp; Deaconess</span>
+      </div>
+    </article>
+    <!-- 10. Ninette Richardson -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Ninette Richardson</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+    <!-- 11. Dave Soto -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Dave Soto</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 12. John Aufhammer -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>John Aufhammer</h4>
+        <span class="role">Deacon</span>
+      </div>
+    </article>
+    <!-- 13. Donna Mullin -->
+    <article class="thcf-deacon-card thcf-reveal">
+      <div class="thcf-team-photo thcf-team-photo--empty" aria-label="Photo coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="thcf-deacon-card-body">
+        <h4>Donna Mullin</h4>
+        <span class="role">Deaconess</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
+      </div>
+      <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 8:45 & 10:30 AM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">Home</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'm New</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">Sermons</a></li>
+        <!-- TODO: replace with church giving URL. -->
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">Give Online</a></li>
+        <li><a href="#thcf-contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-leaders');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // --- Fullscreen menu open/close ---
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  // --- Scroll reveal ---
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // --- Section pill nav: scroll-spy + auto-center active pill ---
+  var navInner = root.querySelector('.thcf-leaders-nav-inner');
+  var pills = root.querySelectorAll('.thcf-leaders-nav a[href^="#"]');
+  var sections = [];
+  pills.forEach(function(pill){
+    var id = pill.getAttribute('href').slice(1);
+    var section = root.querySelector('#' + id);
+    if (section) sections.push(section);
+  });
+  function setActiveSection(id) {
+    pills.forEach(function(pill){
+      var isTarget = pill.getAttribute('href') === '#' + id;
+      pill.classList.toggle('is-active', isTarget);
+      if (isTarget && navInner) {
+        var pillLeft = pill.offsetLeft;
+        var pillWidth = pill.offsetWidth;
+        var navWidth = navInner.clientWidth;
+        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+        navInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+      }
+    });
+  }
+  if ('IntersectionObserver' in window && sections.length && pills.length) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+
+  // --- Bio "Read more" toggle: auto-injected when a card has non-empty .bio-more content ---
+  root.querySelectorAll('.thcf-team-card').forEach(function(card){
+    var more = card.querySelector('.bio-more');
+    if (!more || !more.innerHTML.trim()) return; // no extended content -> skip
+
+    var body = card.querySelector('.thcf-team-card-body');
+    if (!body) return;
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'thcf-bio-toggle';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="thcf-bio-toggle-label">Read more</span>' +
+      '<svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+    btn.addEventListener('click', function(){
+      var expanded = card.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded', String(expanded));
+      var labelEl = btn.querySelector('.thcf-bio-toggle-label');
+      if (labelEl) labelEl.textContent = expanded ? 'Read less' : 'Read more';
+    });
+    body.appendChild(btn);
+  });
+})();
+</script>
