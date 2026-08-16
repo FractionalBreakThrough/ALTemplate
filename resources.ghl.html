@@ -88,6 +88,7 @@
 
 /* === Hero (compact so the tab bar has the visual weight) === */
 .thcf-hero{position:relative;padding:clamp(72px,10vw,110px) 24px clamp(96px,12vw,132px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+@media (max-width:720px){.thcf-hero{padding:56px 24px 48px}}
 .thcf-hero-blob{position:absolute;top:80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
 .thcf-hero-blob-2{position:absolute;bottom:-100px;left:-60px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
 .thcf-hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto}
@@ -95,17 +96,41 @@
 .thcf-hero h1{font-size:clamp(36px,6vw,68px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px;color:#fff}
 .thcf-hero p{font-size:clamp(16px,1.7vw,20px);color:rgba(220,255,250,.92);max-width:640px;margin:0 auto;line-height:1.55}
 
-/* === Tab bar (floats over the bottom of the hero) === */
-.thcf-res-tabs-wrap{position:relative;z-index:5;margin-top:-64px;padding:0 24px 0}
+/* === Tab bar (floats over the bottom of the hero, sticks to top on scroll) === */
+.thcf-res-tabs-wrap{position:sticky;top:88px;z-index:25;margin-top:-64px;padding:0 24px 0;transition:padding .2s,background .2s}
 .thcf-res-tabs{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media (max-width:720px){.thcf-res-tabs{grid-template-columns:1fr;gap:10px}}
 .thcf-res-tab{padding:24px 20px;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.10);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;border:2px solid transparent;text-decoration:none}
 .thcf-res-tab:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.14)}
 .thcf-res-tab.is-active{border-color:var(--teal-dark);background:linear-gradient(180deg,#fff 0%,var(--gray-50) 100%);transform:translateY(-3px);box-shadow:0 16px 40px rgba(11,107,107,.18)}
-.thcf-res-tab-icon{width:56px;height:56px;border-radius:16px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12)}
-.thcf-res-tab-title{font-size:18px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em}
+.thcf-res-tab-icon{width:56px;height:56px;border-radius:16px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12);transition:width .2s,height .2s,border-radius .2s}
+.thcf-res-tab-icon svg{transition:width .2s,height .2s}
+.thcf-res-tab-title{font-size:18px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em;transition:font-size .2s}
 .thcf-res-tab.is-active .thcf-res-tab-title{color:var(--teal-dark)}
 .thcf-res-tab-desc{font-size:13px;color:var(--gray-500);line-height:1.45}
+
+/* Compact mode: tabs shrink into a slim strip once they stick to the top */
+.thcf-res-tabs-wrap.is-stuck{background:rgba(249,250,251,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-200);padding:8px 16px;margin-top:0;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab{padding:10px 14px;flex-direction:row;gap:8px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.06);text-align:left}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab:hover{transform:none}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab.is-active{transform:none;box-shadow:0 4px 12px rgba(11,107,107,.18)}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab-icon{width:32px;height:32px;border-radius:10px;box-shadow:none;flex-shrink:0}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab-icon svg{width:18px;height:18px}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab-title{font-size:14px}
+.thcf-res-tabs-wrap.is-stuck .thcf-res-tab-desc{display:none}
+
+/* Mobile: always compact, always sticky, horizontal scroll for the tab strip */
+@media (max-width:720px){
+  .thcf-res-tabs-wrap{position:sticky;top:76px;margin-top:0;padding:8px 12px;background:rgba(249,250,251,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-200);box-shadow:0 4px 12px rgba(0,0,0,.04)}
+  .thcf-res-tabs{grid-template-columns:none;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px;max-width:none;scroll-snap-type:x proximity}
+  .thcf-res-tabs::-webkit-scrollbar{display:none}
+  .thcf-res-tab{padding:10px 14px;gap:8px;flex-direction:row;flex-shrink:0;border-radius:12px;text-align:left;scroll-snap-align:center;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  .thcf-res-tab:hover{transform:none}
+  .thcf-res-tab.is-active{transform:none;box-shadow:0 4px 12px rgba(11,107,107,.18)}
+  .thcf-res-tab-icon{width:32px;height:32px;border-radius:10px;box-shadow:none;flex-shrink:0}
+  .thcf-res-tab-icon svg{width:18px;height:18px}
+  .thcf-res-tab-title{font-size:14px}
+  .thcf-res-tab-desc{display:none}
+}
 
 /* === Panels === */
 .thcf-res-panels{padding:clamp(40px,5vw,72px) 24px clamp(64px,7vw,88px)}
@@ -146,9 +171,15 @@
 
 /* === Books panel === */
 .thcf-book-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;max-width:1000px;margin-left:auto;margin-right:auto}
-.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s}
+.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s;flex-shrink:0}
 .thcf-book-chip:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
 .thcf-book-chip.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+/* Mobile: horizontal scroll so chips don't stack into 4+ rows */
+@media (max-width:720px){
+  .thcf-book-chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:4px 16px 12px;scroll-snap-type:x proximity}
+  .thcf-book-chips::-webkit-scrollbar{display:none}
+  .thcf-book-chip{scroll-snap-align:start}
+}
 .thcf-book-groups{display:flex;flex-direction:column;gap:44px}
 .thcf-book-group{scroll-margin-top:180px}
 .thcf-book-group.is-hidden{display:none}
@@ -807,16 +838,22 @@
 
   // --- Top tabs: swap active panel ---
   var tabs = root.querySelectorAll('[data-thcf-tab]');
+  var tabsWrap = root.querySelector('.thcf-res-tabs-wrap');
   var panels = {
     rnm:   root.querySelector('#thcf-panel-rnm'),
     links: root.querySelector('#thcf-panel-links'),
     books: root.querySelector('#thcf-panel-books')
   };
-  function activateTab(key){
+  function activateTab(key, opts){
+    opts = opts || {};
     tabs.forEach(function(t){
       var isActive = t.getAttribute('data-thcf-tab') === key;
       t.classList.toggle('is-active', isActive);
       t.setAttribute('aria-selected', String(isActive));
+      // On mobile, keep the active tab centered in the horizontal scroll strip
+      if (isActive && opts.userClick && window.matchMedia('(max-width:720px)').matches && t.scrollIntoView) {
+        t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     });
     Object.keys(panels).forEach(function(k){
       var p = panels[k];
@@ -826,10 +863,43 @@
     // Re-run reveal on newly visible reveal elements (they had no scroll trigger while hidden)
     var newRevealEls = panels[key] ? panels[key].querySelectorAll('.thcf-reveal:not(.is-visible)') : [];
     newRevealEls.forEach(function(el){ el.classList.add('is-visible'); });
+    // On user click, scroll the new panel to just below the sticky tab bar so
+    // they don't land mid-scroll from the previous panel
+    if (opts.userClick && panels[key] && tabsWrap) {
+      var isMobile = window.matchMedia('(max-width:720px)').matches;
+      var headerH = isMobile ? 76 : 88;
+      var barH = tabsWrap.offsetHeight;
+      var panelTop = panels[key].getBoundingClientRect().top + window.pageYOffset;
+      var target = panelTop - headerH - barH - 8;
+      // Only scroll if we'd actually move up meaningfully (avoid jump when already at top)
+      if (Math.abs(window.pageYOffset - target) > 24) {
+        window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+      }
+    }
   }
   tabs.forEach(function(t){
-    t.addEventListener('click', function(){ activateTab(t.getAttribute('data-thcf-tab')); });
+    t.addEventListener('click', function(){
+      activateTab(t.getAttribute('data-thcf-tab'), { userClick: true });
+    });
   });
+
+  // --- Sticky-state detection for the tab bar: adds .is-stuck when it hits top ---
+  // Sentinel sits just above the tab bar. When the sentinel scrolls out of the viewport
+  // (i.e. above the sticky offset), the bar is stuck -> compact styling kicks in.
+  if (tabsWrap && 'IntersectionObserver' in window && !window.matchMedia('(max-width:720px)').matches) {
+    var sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:0;left:0;right:0;height:1px;pointer-events:none';
+    var sentinelWrap = document.createElement('div');
+    sentinelWrap.style.cssText = 'position:relative;height:0';
+    sentinelWrap.appendChild(sentinel);
+    tabsWrap.parentNode.insertBefore(sentinelWrap, tabsWrap);
+    var stuckObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        tabsWrap.classList.toggle('is-stuck', !entry.isIntersecting);
+      });
+    }, { rootMargin: '-88px 0px 0px 0px', threshold: 0 });
+    stuckObserver.observe(sentinel);
+  }
 
   // --- Book category chip filter ---
   var chips = root.querySelectorAll('[data-thcf-book-filter]');
