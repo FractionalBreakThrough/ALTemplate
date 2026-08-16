@@ -170,19 +170,23 @@
 .thcf-link-list .desc{color:var(--gray-500);font-weight:400;font-size:13px;display:block;margin-top:3px;line-height:1.5}
 
 /* === Books panel === */
-.thcf-book-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;max-width:1000px;margin-left:auto;margin-right:auto}
-.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s;flex-shrink:0}
+/* Pill scroll-nav: sticks below the tab bar and highlights the active category as user scrolls */
+.thcf-book-nav{position:sticky;top:152px;z-index:20;background:rgba(249,250,251,.96);backdrop-filter:blur(10px);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:12px 0;margin:0 -24px 32px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.thcf-book-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:0 24px;max-width:1180px;margin:0 auto}
+.thcf-book-chips::-webkit-scrollbar{height:4px}
+.thcf-book-chips::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 .thcf-book-chip:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
 .thcf-book-chip.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
-/* Mobile: horizontal scroll so chips don't stack into 4+ rows */
+.thcf-book-chip .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.06em}
+.thcf-book-chip.is-active .num{color:var(--gold)}
 @media (max-width:720px){
-  .thcf-book-chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:4px 16px 12px;scroll-snap-type:x proximity}
-  .thcf-book-chips::-webkit-scrollbar{display:none}
-  .thcf-book-chip{scroll-snap-align:start}
+  .thcf-book-nav{top:128px;padding:10px 0;margin:0 -24px 24px}
+  .thcf-book-chips{padding:0 16px}
 }
-.thcf-book-groups{display:flex;flex-direction:column;gap:44px}
-.thcf-book-group{scroll-margin-top:180px}
-.thcf-book-group.is-hidden{display:none}
+.thcf-book-groups{display:flex;flex-direction:column;gap:52px}
+.thcf-book-group{scroll-margin-top:200px}
+@media (max-width:720px){.thcf-book-group{scroll-margin-top:170px}}
 .thcf-book-group-head{margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gray-200)}
 .thcf-book-group-head h3{font-size:22px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em;display:inline-block}
 .thcf-book-group-head .count{color:var(--gray-500);font-size:14px;font-weight:600;margin-left:10px}
@@ -460,21 +464,22 @@
       <p>Some of our favorite references for learning more about the topics below. Click a book to view it on Amazon.</p>
     </div>
 
-    <div class="thcf-book-chips thcf-reveal" role="tablist" aria-label="Filter books by category">
-      <button class="thcf-book-chip is-active" type="button" data-thcf-book-filter="all">All Books</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="bibles">Bibles</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="bible-study">Bible Study</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="doctrine">Essential Doctrine</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="church">The Church</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="apologetics">Apologetics &amp; Philosophy</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="devotionals">Devotionals</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="missions">Missions</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="marriage">Marriage</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="parenting">Parenting</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="children">Children</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="work">Work</button>
-      <button class="thcf-book-chip" type="button" data-thcf-book-filter="money">Money</button>
-    </div>
+    <nav class="thcf-book-nav thcf-reveal" aria-label="Jump to a book category">
+      <div class="thcf-book-chips">
+        <a class="thcf-book-chip is-active" href="#thcf-book-bibles"><span class="num">01</span> Bibles</a>
+        <a class="thcf-book-chip" href="#thcf-book-bible-study"><span class="num">02</span> Bible Study</a>
+        <a class="thcf-book-chip" href="#thcf-book-doctrine"><span class="num">03</span> Essential Doctrine</a>
+        <a class="thcf-book-chip" href="#thcf-book-church"><span class="num">04</span> The Church</a>
+        <a class="thcf-book-chip" href="#thcf-book-apologetics"><span class="num">05</span> Apologetics &amp; Philosophy</a>
+        <a class="thcf-book-chip" href="#thcf-book-devotionals"><span class="num">06</span> Devotionals</a>
+        <a class="thcf-book-chip" href="#thcf-book-missions"><span class="num">07</span> Missions</a>
+        <a class="thcf-book-chip" href="#thcf-book-marriage"><span class="num">08</span> Marriage</a>
+        <a class="thcf-book-chip" href="#thcf-book-parenting"><span class="num">09</span> Parenting</a>
+        <a class="thcf-book-chip" href="#thcf-book-children"><span class="num">10</span> Children</a>
+        <a class="thcf-book-chip" href="#thcf-book-work"><span class="num">11</span> Work</a>
+        <a class="thcf-book-chip" href="#thcf-book-money"><span class="num">12</span> Money</a>
+      </div>
+    </nav>
 
     <!-- TODO: for each book below, replace href="#" with the Amazon product URL and (optionally)
          swap the .thcf-book-cover-title span with an <img> of the cover.
@@ -483,7 +488,7 @@
     <div class="thcf-book-groups">
 
       <!-- ===== Bibles ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="bibles">
+      <div class="thcf-book-group" id="thcf-book-bibles" data-thcf-book-cat="bibles">
         <div class="thcf-book-group-head">
           <h3>Bibles</h3><span class="count">2 books</span>
           <p class="thcf-book-group-note">There are a lot of excellent Bible translations. For the sake of consistency and unity, we generally use the ESV translation at Temecula Hills.</p>
@@ -501,7 +506,7 @@
       </div>
 
       <!-- ===== Bible Study Resources ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="bible-study">
+      <div class="thcf-book-group" id="thcf-book-bible-study" data-thcf-book-cat="bible-study">
         <div class="thcf-book-group-head"><h3>Bible Study Resources</h3><span class="count">2 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2a03f;--accent-dark:#a0721f">
@@ -516,7 +521,7 @@
       </div>
 
       <!-- ===== Essential Doctrine ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="doctrine">
+      <div class="thcf-book-group" id="thcf-book-doctrine" data-thcf-book-cat="doctrine">
         <div class="thcf-book-group-head">
           <h3>Essential Doctrine</h3><span class="count">4 books</span>
           <p class="thcf-book-group-note">Trusted resources on growing in your knowledge of doctrine and theology. Our recommendation of these does not necessarily mean we agree with every position advocated. For details on where we stand as a church doctrinally, see our <em>What We Teach</em> statement.</p>
@@ -542,7 +547,7 @@
       </div>
 
       <!-- ===== The Church ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="church">
+      <div class="thcf-book-group" id="thcf-book-church" data-thcf-book-cat="church">
         <div class="thcf-book-group-head"><h3>The Church</h3><span class="count">9 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#5b7c3a;--accent-dark:#3a5124">
@@ -585,7 +590,7 @@
       </div>
 
       <!-- ===== Apologetics & Philosophy ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="apologetics">
+      <div class="thcf-book-group" id="thcf-book-apologetics" data-thcf-book-cat="apologetics">
         <div class="thcf-book-group-head"><h3>Apologetics &amp; Philosophy</h3><span class="count">6 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#5c2a1e;--accent-dark:#3a1a11">
@@ -616,7 +621,7 @@
       </div>
 
       <!-- ===== Devotionals ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="devotionals">
+      <div class="thcf-book-group" id="thcf-book-devotionals" data-thcf-book-cat="devotionals">
         <div class="thcf-book-group-head"><h3>Devotionals</h3><span class="count">2 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2f5d8a;--accent-dark:#1f3f5c">
@@ -631,7 +636,7 @@
       </div>
 
       <!-- ===== Missions ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="missions">
+      <div class="thcf-book-group" id="thcf-book-missions" data-thcf-book-cat="missions">
         <div class="thcf-book-group-head"><h3>Missions</h3><span class="count">5 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e5e2d7;--accent-dark:#c0bba7">
@@ -658,7 +663,7 @@
       </div>
 
       <!-- ===== Marriage ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="marriage">
+      <div class="thcf-book-group" id="thcf-book-marriage" data-thcf-book-cat="marriage">
         <div class="thcf-book-group-head"><h3>Marriage</h3><span class="count">4 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c1b8a3;--accent-dark:#8e846c">
@@ -681,7 +686,7 @@
       </div>
 
       <!-- ===== Parenting ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="parenting">
+      <div class="thcf-book-group" id="thcf-book-parenting" data-thcf-book-cat="parenting">
         <div class="thcf-book-group-head"><h3>Parenting</h3><span class="count">4 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8ba98e;--accent-dark:#5c7460">
@@ -704,7 +709,7 @@
       </div>
 
       <!-- ===== Children ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="children">
+      <div class="thcf-book-group" id="thcf-book-children" data-thcf-book-cat="children">
         <div class="thcf-book-group-head"><h3>Children</h3><span class="count">5 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2572e;--accent-dark:#a03418">
@@ -731,7 +736,7 @@
       </div>
 
       <!-- ===== Work ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="work">
+      <div class="thcf-book-group" id="thcf-book-work" data-thcf-book-cat="work">
         <div class="thcf-book-group-head"><h3>Work</h3><span class="count">1 book</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
@@ -742,7 +747,7 @@
       </div>
 
       <!-- ===== Money ===== -->
-      <div class="thcf-book-group" data-thcf-book-cat="money">
+      <div class="thcf-book-group" id="thcf-book-money" data-thcf-book-cat="money">
         <div class="thcf-book-group-head"><h3>Money</h3><span class="count">2 books</span></div>
         <div class="thcf-book-grid">
           <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#4a90a4;--accent-dark:#2f5f6e">
@@ -901,20 +906,35 @@
     stuckObserver.observe(sentinel);
   }
 
-  // --- Book category chip filter ---
-  var chips = root.querySelectorAll('[data-thcf-book-filter]');
-  var groups = root.querySelectorAll('[data-thcf-book-cat]');
-  function filterBooks(cat){
-    chips.forEach(function(c){
-      c.classList.toggle('is-active', c.getAttribute('data-thcf-book-filter') === cat);
-    });
-    groups.forEach(function(g){
-      var show = (cat === 'all') || (g.getAttribute('data-thcf-book-cat') === cat);
-      g.classList.toggle('is-hidden', !show);
+  // --- Book category pill scroll-nav (scroll-spy + auto-center active pill) ---
+  var bookChipsInner = root.querySelector('.thcf-book-chips');
+  var bookPills = root.querySelectorAll('.thcf-book-chip[href^="#"]');
+  var bookGroups = [];
+  bookPills.forEach(function(pill){
+    var id = pill.getAttribute('href').slice(1);
+    var group = root.querySelector('#' + id);
+    if (group) bookGroups.push(group);
+  });
+  function setActiveBookCat(id){
+    bookPills.forEach(function(pill){
+      var isTarget = pill.getAttribute('href') === '#' + id;
+      pill.classList.toggle('is-active', isTarget);
+      if (isTarget && bookChipsInner) {
+        var pillLeft = pill.offsetLeft;
+        var pillWidth = pill.offsetWidth;
+        var navWidth = bookChipsInner.clientWidth;
+        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+        bookChipsInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+      }
     });
   }
-  chips.forEach(function(c){
-    c.addEventListener('click', function(){ filterBooks(c.getAttribute('data-thcf-book-filter')); });
-  });
+  if ('IntersectionObserver' in window && bookGroups.length && bookPills.length) {
+    var bookSpy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActiveBookCat(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    bookGroups.forEach(function(g){ bookSpy.observe(g); });
+  }
 })();
 </script>
