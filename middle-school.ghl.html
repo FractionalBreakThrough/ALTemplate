@@ -47,11 +47,9 @@
 .thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
 .thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
 .thcf-logo{display:flex;align-items:center;gap:10px}
-.thcf-logo-mark{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gray-800);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thcf-logo-mark svg{width:28px;height:28px;margin-top:6px}
-.thcf-logo-text{display:flex;flex-direction:column;line-height:1.1}
-.thcf-logo-text strong{font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--gray-800)}
-.thcf-logo-text span{font-size:11px;letter-spacing:.18em;color:var(--gray-500)}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
 .thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
 .thcf-menu-btn:hover{background:var(--gray-200)}
 .thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
@@ -59,7 +57,7 @@
 .thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
 @media (max-width:640px){.thcf-menu-btn-label{display:none}}
 
-/* === Fullscreen menu === */
+/* === Fullscreen menu (3-column: primary / secondary / image) === */
 .thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
 .thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
 .thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
@@ -67,11 +65,12 @@
 .thcf-menu.is-open .thcf-menu-label{opacity:1}
 .thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
 .thcf-menu-close:hover{color:var(--orange)}
-.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding:0 96px 48px;align-items:center}
-@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:0 32px 48px}}
-.thcf-menu-nav a{display:block;font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,color .25s}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr 1.1fr;gap:56px;padding:8px 72px 48px;align-items:center;overflow-y:auto}
+@media (max-width:1100px){.thcf-menu-body{grid-template-columns:1.4fr 1fr;gap:48px;padding:0 64px 48px}.thcf-menu .thcf-menu-visual{display:none}}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:8px 32px 48px;gap:28px;align-items:start}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,4.6vw,56px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .25s,color .12s,padding .25s}
 .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
-.thcf-menu-nav a.is-active{color:var(--gold);pointer-events:none}
+.thcf-menu-nav a.is-active{color:var(--gold)}
 .thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
@@ -80,16 +79,23 @@
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
 .thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
-.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.92s}
-.thcf-menu-side{color:rgba(255,255,255,.9);opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
-.thcf-menu.is-open .thcf-menu-side{opacity:1;transform:translateY(0)}
-@media (max-width:768px){.thcf-menu-side{display:none}}
-.thcf-menu-block{border-left:2px solid var(--orange);padding-left:20px;margin-bottom:28px}
-.thcf-menu-block:nth-child(2){border-left-color:var(--teal-light)}
-.thcf-menu-block-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.thcf-menu-block:nth-child(2) .thcf-menu-block-eyebrow{color:var(--teal-light)}
-.thcf-menu-block strong{display:block;font-weight:700;font-size:17px;color:#fff;margin-bottom:2px}
-.thcf-menu-block .sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.5}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
+.thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
+.thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
+.thcf-menu-secondary a{font-size:clamp(17px,1.7vw,20px);font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.01em;transition:color .25s,transform .25s}
+.thcf-menu-secondary a:hover{color:var(--orange);transform:translateX(6px)}
+.thcf-menu-secondary a.is-active{color:var(--gold)}
+.thcf-menu-visual{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;max-height:70vh;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
+.thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
+.thcf-menu-visual img{max-width:100%;max-height:70vh;width:auto;height:auto;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu .thcf-menu-visual{display:flex;max-height:240px}
+  .thcf-menu-visual img{max-height:240px}
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
 /* === Hero (mint gradient) === */
 .thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--mint) 0%,var(--mint) 55%,var(--mint-dark) 100%);color:#fff;overflow:hidden;text-align:center}
 .thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--gold);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
@@ -174,20 +180,27 @@
 /* === Footer === */
 .thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
 .thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
-@media (max-width:760px){.thcf-footer-grid{grid-template-columns:1fr;gap:32px}}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
 .thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
-.thcf-footer-brand .mark{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center}
-.thcf-footer-brand strong{font-weight:900;font-size:13px;letter-spacing:.18em}
-.thcf-footer-tag{font-size:14px;line-height:1.7;margin-bottom:18px;max-width:380px}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
+.thcf-footer-brand strong{font-size:18px;font-weight:700;letter-spacing:.06em}
+.thcf-footer-tag{color:rgba(255,255,255,.55);max-width:340px;line-height:1.65;margin-bottom:22px}
 .thcf-footer-socials{display:flex;gap:10px}
-.thcf-footer-socials a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
-.thcf-footer-socials a:hover{background:var(--orange)}
-.thcf-footer-col h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
-.thcf-footer-col p{font-size:14px;line-height:1.7;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
-.thcf-footer-col p svg{flex-shrink:0;margin-top:2px;color:var(--orange)}
-.thcf-footer-col ul li{margin-bottom:10px}
-.thcf-footer-col ul a{font-size:14px;transition:color .2s}
-.thcf-footer-col ul a:hover{color:var(--orange)}
+.thcf-footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);transition:all .2s}
+.thcf-footer-socials a:hover{background:var(--orange);color:#fff}
+.thcf-footer-col h4{color:#fff;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.thcf-footer-col p{display:flex;gap:10px;color:rgba(255,255,255,.65);font-size:14px;margin-bottom:10px;line-height:1.55}
+.thcf-footer-col p svg{color:var(--teal-light);flex-shrink:0;margin-top:2px}
+.thcf-footer-col ul li{margin-bottom:8px}
+.thcf-footer-col ul li a{color:rgba(255,255,255,.65);font-size:14px;transition:color .2s}
+.thcf-footer-col ul li a:hover{color:var(--orange)}
 .thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
 </style>
 
@@ -196,10 +209,9 @@
 <header class="thcf-header">
   <div class="thcf-header-inner">
     <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
-      <span class="thcf-logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg>
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5bdf631a0f048050a32742.png" alt="Temecula Hills Christian Fellowship">
       </span>
-      <span class="thcf-logo-text"><strong>TEMECULA HILLS</strong><span>CHRISTIAN FELLOWSHIP</span></span>
     </a>
     <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
       <span class="thcf-menu-btn-label">Menu</span>
@@ -219,30 +231,32 @@
     </button>
   </div>
   <div class="thcf-menu-body">
-    <nav class="thcf-menu-nav">
+    <nav class="thcf-menu-nav" aria-label="Primary">
       <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">ABOUT</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ" class="is-active">MINISTRIES</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
       <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
-      <a href="#thcf-contact-form" data-thcf-menu-close>CONTACT</a>
     </nav>
-    <aside class="thcf-menu-side">
-      <div class="thcf-menu-block">
-        <div class="thcf-menu-block-eyebrow">Join Us</div>
-        <strong>Sundays at 8:45 & 10:30 AM</strong>
-        <span class="sub">Wednesdays · Youth 7:00 PM</span>
-      </div>
-      <div class="thcf-menu-block">
-        <div class="thcf-menu-block-eyebrow">Visit</div>
-        <span class="sub">28780 Single Oak Drive<br>Temecula, CA 92590</span>
-      </div>
-      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu" class="thcf-btn thcf-btn--orange" data-thcf-menu-close>Plan Your Visit
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-    </aside>
+    <nav class="thcf-menu-secondary" aria-label="Secondary">
+      <a href="https://site.fractionalbreakthrough.com/preview/TKsQEOpmBQmmZMw3gwoZ?notrack=true">Meet Our Leadership</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School Ministry</a>
+      <a href="#" class="is-active">Middle School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's Ministry</a>
+      <a href="https://site.fractionalbreakthrough.com/preview/trPqEXYG8envmq2e5XlO?notrack=true">Resources</a>
+      <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
   </div>
 </div>
 <!-- ============ HERO ============ -->
@@ -452,7 +466,6 @@
       </div>
       <!-- GHL FORM END -->
     </div>
-    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--gray-600)">Prefer to reach out directly? Contact <strong>Travis Buford</strong> · <a href="mailto:traviscbuford3@gmail.com" style="color:var(--mint-dark);text-decoration:underline">traviscbuford3@gmail.com</a></p>
   </div>
 </section>
 <!-- ============ FOOTER ============ -->
@@ -460,10 +473,9 @@
   <div class="thcf-footer-grid">
     <div>
       <div class="thcf-footer-brand">
-        <span class="mark"><svg viewBox="0 0 100 100" width="20" height="20"><path d="M10,90 L35,40 L60,90 Z" fill="#424242"/><path d="M40,90 L65,30 L90,90 Z" fill="#424242"/></svg></span>
-        <strong>TEMECULA HILLS</strong>
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
       </div>
-      <p class="thcf-footer-tag">Making disciples who love God and love people. Join us this week for service.</p>
+      <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
       <!-- TODO: replace href values with real church social URLs. -->
       <div class="thcf-footer-socials">
         <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
@@ -486,10 +498,10 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">Home</a></li>
-        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">About</a></li>
-        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">Ministries</a></li>
         <li><a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'm New</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">Sermons</a></li>
         <li><a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">Give Online</a></li>
+        <li><a href="#thcf-contact">Contact</a></li>
       </ul>
     </div>
   </div>
