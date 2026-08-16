@@ -169,24 +169,39 @@
 .thcf-link-list a svg{opacity:.5;flex-shrink:0}
 .thcf-link-list .desc{color:var(--gray-500);font-weight:400;font-size:13px;display:block;margin-top:3px;line-height:1.5}
 
-/* === Books panel === */
-/* Pill scroll-nav: sticks below the tab bar and highlights the active category as user scrolls */
-.thcf-book-nav{position:sticky;top:152px;z-index:20;background:rgba(249,250,251,.96);backdrop-filter:blur(10px);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:12px 0;margin:0 -24px 32px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
-.thcf-book-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:0 24px;max-width:1180px;margin:0 auto}
-.thcf-book-chips::-webkit-scrollbar{height:4px}
-.thcf-book-chips::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
-.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.thcf-book-chip:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
-.thcf-book-chip.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
-.thcf-book-chip .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.06em}
-.thcf-book-chip.is-active .num{color:var(--gold)}
+/* === Panel pill scroll-nav (shared by Books and Links panels) ===
+   Sticks below the tab bar and highlights the active section as user scrolls */
+.thcf-book-nav,
+.thcf-link-nav{position:sticky;top:168px;z-index:22;background:rgba(249,250,251,.98);backdrop-filter:blur(10px);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:12px 0;margin:0 -24px 40px;box-shadow:0 4px 10px rgba(0,0,0,.04)}
+.thcf-book-chips,
+.thcf-link-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:0 24px;max-width:1180px;margin:0 auto}
+.thcf-book-chips::-webkit-scrollbar,
+.thcf-link-chips::-webkit-scrollbar{height:4px}
+.thcf-book-chips::-webkit-scrollbar-thumb,
+.thcf-link-chips::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-book-chip,
+.thcf-link-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.thcf-book-chip:hover,
+.thcf-link-chip:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-book-chip.is-active,
+.thcf-link-chip.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-book-chip .num,
+.thcf-link-chip .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.06em}
+.thcf-book-chip.is-active .num,
+.thcf-link-chip.is-active .num{color:var(--gold)}
 @media (max-width:720px){
-  .thcf-book-nav{top:128px;padding:10px 0;margin:0 -24px 24px}
-  .thcf-book-chips{padding:0 16px}
+  .thcf-book-nav,
+  .thcf-link-nav{top:148px;padding:10px 0;margin:0 -24px 28px}
+  .thcf-book-chips,
+  .thcf-link-chips{padding:0 16px}
 }
 .thcf-book-groups{display:flex;flex-direction:column;gap:52px}
-.thcf-book-group{scroll-margin-top:200px}
-@media (max-width:720px){.thcf-book-group{scroll-margin-top:170px}}
+.thcf-book-group{scroll-margin-top:240px}
+.thcf-link-section{scroll-margin-top:240px}
+@media (max-width:720px){
+  .thcf-book-group,
+  .thcf-link-section{scroll-margin-top:220px}
+}
 .thcf-book-group-head{margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gray-200)}
 .thcf-book-group-head h3{font-size:22px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em;display:inline-block}
 .thcf-book-group-head .count{color:var(--gray-500);font-size:14px;font-weight:600;margin-left:10px}
@@ -367,10 +382,20 @@
       <h2>Links &amp; Tools</h2>
       <p>Resources, books, and materials recommended by our leaders to help you know and follow Jesus more closely.</p>
     </div>
+
+    <nav class="thcf-link-nav thcf-reveal" aria-label="Jump to a link category">
+      <div class="thcf-link-chips">
+        <a class="thcf-link-chip is-active" href="#thcf-link-leadership"><span class="num">01</span> Leadership Documents</a>
+        <a class="thcf-link-chip" href="#thcf-link-tools"><span class="num">02</span> Bible Study Tools</a>
+        <a class="thcf-link-chip" href="#thcf-link-podcasts"><span class="num">03</span> Podcasts</a>
+        <a class="thcf-link-chip" href="#thcf-link-general"><span class="num">04</span> General Interest</a>
+      </div>
+    </nav>
+
     <div class="thcf-link-sections">
 
       <!-- Leadership Documents -->
-      <div class="thcf-link-section thcf-reveal">
+      <div class="thcf-link-section thcf-reveal" id="thcf-link-leadership">
         <h3>Temecula Hills Leadership Documents</h3>
         <p class="thcf-link-section-desc">The doctrinal statements, ministry role descriptions, and feedback forms that shape how we lead as a church.</p>
         <!-- TODO: replace each href="#" with the real document URL (PDF, Google Doc, or GHL page). -->
@@ -384,7 +409,7 @@
       </div>
 
       <!-- Bible Study Tools -->
-      <div class="thcf-link-section thcf-reveal">
+      <div class="thcf-link-section thcf-reveal" id="thcf-link-tools">
         <h3>Bible Study Tools</h3>
         <p class="thcf-link-section-desc">Software and websites that help you dig into Scripture with the original languages, commentary, and cross-references at your fingertips.</p>
 
@@ -408,7 +433,7 @@
       </div>
 
       <!-- Podcasts -->
-      <div class="thcf-link-section thcf-reveal">
+      <div class="thcf-link-section thcf-reveal" id="thcf-link-podcasts">
         <h3>Podcasts of Interest</h3>
         <p class="thcf-link-section-desc">A few of the shows our leaders regularly listen to for teaching and news through a biblical lens.</p>
         <ul class="thcf-link-list">
@@ -419,7 +444,7 @@
       </div>
 
       <!-- General Interest -->
-      <div class="thcf-link-section thcf-reveal">
+      <div class="thcf-link-section thcf-reveal" id="thcf-link-general">
         <h3>General Interest</h3>
         <p class="thcf-link-section-desc">Ministries and websites we&rsquo;ve found trustworthy and edifying over the years.</p>
         <ul class="thcf-link-list">
@@ -906,35 +931,74 @@
     stuckObserver.observe(sentinel);
   }
 
-  // --- Book category pill scroll-nav (scroll-spy + auto-center active pill) ---
-  var bookChipsInner = root.querySelector('.thcf-book-chips');
-  var bookPills = root.querySelectorAll('.thcf-book-chip[href^="#"]');
-  var bookGroups = [];
-  bookPills.forEach(function(pill){
-    var id = pill.getAttribute('href').slice(1);
-    var group = root.querySelector('#' + id);
-    if (group) bookGroups.push(group);
-  });
-  function setActiveBookCat(id){
-    bookPills.forEach(function(pill){
-      var isTarget = pill.getAttribute('href') === '#' + id;
-      pill.classList.toggle('is-active', isTarget);
-      if (isTarget && bookChipsInner) {
-        var pillLeft = pill.offsetLeft;
-        var pillWidth = pill.offsetWidth;
-        var navWidth = bookChipsInner.clientWidth;
-        var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
-        bookChipsInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
-      }
+  // --- Panel pill scroll-nav (Books + Links) ---
+  // Uses a scroll listener rather than IntersectionObserver so the "current"
+  // section is always the top-most one whose top has crossed the sticky
+  // nav line. IntersectionObserver's "isIntersecting" fires on state change
+  // only, which mis-highlights when short sections don't cross a middle-band
+  // trigger (e.g. Bibles with only 2 books never entered the -40%/-55% zone
+  // so it never activated).
+  function makeScrollNav(chipsSelector, panel){
+    var chipsWrap = root.querySelector(chipsSelector);
+    if (!chipsWrap) return null;
+    var pills = chipsWrap.querySelectorAll('a[href^="#"]');
+    var sections = [];
+    pills.forEach(function(pill){
+      var id = pill.getAttribute('href').slice(1);
+      var section = root.querySelector('#' + id);
+      if (section) sections.push(section);
+    });
+    if (!sections.length || !pills.length) return null;
+
+    function setActive(id){
+      pills.forEach(function(pill){
+        var isTarget = pill.getAttribute('href') === '#' + id;
+        pill.classList.toggle('is-active', isTarget);
+        if (isTarget) {
+          var pillLeft = pill.offsetLeft;
+          var pillWidth = pill.offsetWidth;
+          var navWidth = chipsWrap.clientWidth;
+          var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+          chipsWrap.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+        }
+      });
+    }
+
+    function update(){
+      if (!panel || !panel.classList.contains('is-active')) return;
+      var isMobile = window.matchMedia('(max-width:720px)').matches;
+      // Line just below the sticky pill nav (header + tab bar + pill nav + a bit)
+      var line = (isMobile ? 148 : 168) + 60;
+      var current = sections[0];
+      sections.forEach(function(s){
+        var top = s.getBoundingClientRect().top;
+        if (top <= line) current = s;
+      });
+      if (current) setActive(current.id);
+    }
+
+    return { update: update };
+  }
+
+  var bookNav = makeScrollNav('.thcf-book-chips', panels.books);
+  var linkNav = makeScrollNav('.thcf-link-chips', panels.links);
+
+  var spyTicking = false;
+  function runSpy(){
+    if (spyTicking) return;
+    spyTicking = true;
+    requestAnimationFrame(function(){
+      if (bookNav) bookNav.update();
+      if (linkNav) linkNav.update();
+      spyTicking = false;
     });
   }
-  if ('IntersectionObserver' in window && bookGroups.length && bookPills.length) {
-    var bookSpy = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) setActiveBookCat(entry.target.id);
-      });
-    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-    bookGroups.forEach(function(g){ bookSpy.observe(g); });
-  }
+  window.addEventListener('scroll', runSpy, { passive: true });
+  window.addEventListener('resize', runSpy);
+  // Initial run + re-run when tabs switch (after the tab-click scroll settles)
+  runSpy();
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ setTimeout(runSpy, 450); });
+  });
 })();
 </script>
