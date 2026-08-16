@@ -1,0 +1,850 @@
+<!-- Temecula Hills Christian Fellowship - Resources page. GHL Custom Code drop-in. All styles scoped under .thcf prefix.
+     Three top tabs (RightNow Media / Links / Books) swap content in place so the page never becomes a long scroll.
+     Books tab has a second-level chip filter for the 12 book categories. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-dark{background:transparent;color:var(--gray-800);border:2px solid var(--gray-300)}
+.thcf-btn--outline-dark:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+.thcf-resources{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip;background:var(--gray-50)}
+
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu (3-column: primary / secondary / image) === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr 1.1fr;gap:56px;padding:8px 72px 48px;align-items:center;overflow-y:auto}
+@media (max-width:1100px){.thcf-menu-body{grid-template-columns:1.4fr 1fr;gap:48px;padding:0 64px 48px}.thcf-menu .thcf-menu-visual{display:none}}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:8px 32px 48px;gap:28px;align-items:start}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,4.6vw,56px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .25s,color .12s,padding .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold)}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
+.thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
+.thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
+.thcf-menu-secondary a{font-size:clamp(17px,1.7vw,20px);font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.01em;transition:color .25s,transform .25s}
+.thcf-menu-secondary a:hover{color:var(--orange);transform:translateX(6px)}
+.thcf-menu-secondary a.is-active{color:var(--gold)}
+.thcf-menu-visual{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;max-height:70vh;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
+.thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
+.thcf-menu-visual img{max-width:100%;max-height:70vh;width:auto;height:auto;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu .thcf-menu-visual{display:flex;max-height:240px}
+  .thcf-menu-visual img{max-height:240px}
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
+
+/* === Hero (compact so the tab bar has the visual weight) === */
+.thcf-hero{position:relative;padding:clamp(72px,10vw,110px) 24px clamp(96px,12vw,132px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 60%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:80px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-60px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.20;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6vw,68px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.7vw,20px);color:rgba(220,255,250,.92);max-width:640px;margin:0 auto;line-height:1.55}
+
+/* === Tab bar (floats over the bottom of the hero) === */
+.thcf-res-tabs-wrap{position:relative;z-index:5;margin-top:-64px;padding:0 24px 0}
+.thcf-res-tabs{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:720px){.thcf-res-tabs{grid-template-columns:1fr;gap:10px}}
+.thcf-res-tab{padding:24px 20px;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.10);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;border:2px solid transparent;text-decoration:none}
+.thcf-res-tab:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.14)}
+.thcf-res-tab.is-active{border-color:var(--teal-dark);background:linear-gradient(180deg,#fff 0%,var(--gray-50) 100%);transform:translateY(-3px);box-shadow:0 16px 40px rgba(11,107,107,.18)}
+.thcf-res-tab-icon{width:56px;height:56px;border-radius:16px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.thcf-res-tab-title{font-size:18px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em}
+.thcf-res-tab.is-active .thcf-res-tab-title{color:var(--teal-dark)}
+.thcf-res-tab-desc{font-size:13px;color:var(--gray-500);line-height:1.45}
+
+/* === Panels === */
+.thcf-res-panels{padding:clamp(40px,5vw,72px) 24px clamp(64px,7vw,88px)}
+.thcf-res-panel{display:none;max-width:1180px;margin:0 auto}
+.thcf-res-panel.is-active{display:block}
+.thcf-res-panel-head{text-align:center;max-width:720px;margin:0 auto clamp(28px,3.5vw,44px)}
+.thcf-res-panel-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;color:var(--gray-800);margin-bottom:10px;letter-spacing:-.02em}
+.thcf-res-panel-head p{color:var(--gray-600);font-size:16px;line-height:1.65}
+
+/* === RightNow Media panel === */
+.thcf-rnm-video{max-width:960px;margin:0 auto 40px;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.15);aspect-ratio:16/9;background:#0b0b0b;position:relative}
+.thcf-rnm-video iframe{width:100%;height:100%;border:0;display:block}
+.thcf-rnm-video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.7);background:linear-gradient(135deg,#4d1f0e 0%,#c9451f 100%);text-align:center;padding:24px;gap:16px}
+.thcf-rnm-video-placeholder .icon{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.thcf-rnm-video-placeholder h3{color:#fff;font-size:22px;font-weight:800;letter-spacing:.01em}
+.thcf-rnm-video-placeholder p{color:rgba(255,255,255,.75);font-size:14px;max-width:420px;line-height:1.6}
+.thcf-rnm-text{max-width:820px;margin:0 auto 32px;text-align:center;color:var(--gray-700);font-size:16px;line-height:1.75}
+.thcf-rnm-text p+p{margin-top:14px}
+.thcf-rnm-cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* === Links panel === */
+.thcf-link-intro{color:var(--gray-600);font-size:15.5px;line-height:1.7;margin-bottom:36px;max-width:820px;margin-left:auto;margin-right:auto;text-align:center}
+.thcf-link-sections{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.thcf-link-section{background:#fff;border-radius:16px;padding:clamp(24px,3vw,32px);box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100)}
+.thcf-link-section h3{font-size:20px;font-weight:800;color:var(--gray-800);margin-bottom:8px;letter-spacing:-.01em}
+.thcf-link-section-desc{color:var(--gray-500);font-size:14px;line-height:1.6;margin-bottom:20px}
+.thcf-link-subhead{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark);margin:20px 0 12px;display:flex;align-items:center;gap:10px}
+.thcf-link-subhead::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--teal-dark)}
+.thcf-link-subhead:first-of-type{margin-top:0}
+.thcf-link-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:2px 24px}
+@media (max-width:640px){.thcf-link-list{grid-template-columns:1fr}}
+.thcf-link-list li{padding:8px 0;border-bottom:1px solid var(--gray-100)}
+.thcf-link-list li:last-child{border-bottom:0}
+.thcf-link-list a{color:var(--gray-800);font-weight:700;font-size:14.5px;transition:color .2s;display:inline-flex;align-items:center;gap:6px}
+.thcf-link-list a:hover{color:var(--orange)}
+.thcf-link-list a svg{opacity:.5;flex-shrink:0}
+.thcf-link-list .desc{color:var(--gray-500);font-weight:400;font-size:13px;display:block;margin-top:3px;line-height:1.5}
+
+/* === Books panel === */
+.thcf-book-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;max-width:1000px;margin-left:auto;margin-right:auto}
+.thcf-book-chip{padding:8px 16px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.02em;border:1.5px solid var(--gray-200);cursor:pointer;transition:all .2s}
+.thcf-book-chip:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-book-chip.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-book-groups{display:flex;flex-direction:column;gap:44px}
+.thcf-book-group{scroll-margin-top:180px}
+.thcf-book-group.is-hidden{display:none}
+.thcf-book-group-head{margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gray-200)}
+.thcf-book-group-head h3{font-size:22px;font-weight:800;color:var(--gray-800);letter-spacing:-.01em;display:inline-block}
+.thcf-book-group-head .count{color:var(--gray-500);font-size:14px;font-weight:600;margin-left:10px}
+.thcf-book-group-note{color:var(--gray-600);font-size:14px;line-height:1.65;margin-top:8px}
+.thcf-book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(154px,1fr));gap:20px}
+.thcf-book-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05),0 0 0 1px var(--gray-100);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.thcf-book-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.10)}
+.thcf-book-cover{aspect-ratio:2/3;background:linear-gradient(135deg,var(--accent,#5b4d8c) 0%,var(--accent-dark,#3f3567) 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.95);padding:18px;position:relative;overflow:hidden;text-align:center}
+.thcf-book-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.thcf-book-cover-title{position:relative;font-family:Georgia,"Times New Roman",serif;font-size:15px;font-weight:600;line-height:1.25;font-style:italic}
+.thcf-book-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:2px}
+.thcf-book-body h4{font-size:13.5px;font-weight:800;color:var(--gray-800);line-height:1.3}
+.thcf-book-body .author{font-size:12px;color:var(--gray-500);font-weight:600;margin-top:2px}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
+.thcf-footer-brand strong{font-size:18px;font-weight:700;letter-spacing:.06em}
+.thcf-footer-tag{color:rgba(255,255,255,.55);max-width:340px;line-height:1.65;margin-bottom:22px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);transition:all .2s}
+.thcf-footer-socials a:hover{background:var(--orange);color:#fff}
+.thcf-footer-col h4{color:#fff;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.thcf-footer-col p{display:flex;gap:10px;color:rgba(255,255,255,.65);font-size:14px;margin-bottom:10px;line-height:1.55}
+.thcf-footer-col p svg{color:var(--teal-light);flex-shrink:0;margin-top:2px}
+.thcf-footer-col ul li{margin-bottom:8px}
+.thcf-footer-col ul li a{color:rgba(255,255,255,.65);font-size:14px;transition:color .2s}
+.thcf-footer-col ul li a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-resources">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5bdf631a0f048050a32742.png" alt="Temecula Hills Christian Fellowship">
+      </span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav" aria-label="Primary">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+    </nav>
+    <nav class="thcf-menu-secondary" aria-label="Secondary">
+      <a href="https://site.fractionalbreakthrough.com/preview/TKsQEOpmBQmmZMw3gwoZ?notrack=true">Meet Our Leadership</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q">Middle School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's Ministry</a>
+      <a href="#" class="is-active">Resources</a>
+      <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">RESOURCES</span>
+    <h1>Grow deeper in Christ.</h1>
+    <p>Curated videos, tools, and books to help you know Jesus and follow Him more closely. Pick a category to get started.</p>
+  </div>
+</section>
+
+<!-- ============ TAB BAR ============ -->
+<div class="thcf-res-tabs-wrap">
+  <div class="thcf-res-tabs" role="tablist" aria-label="Resource categories">
+    <button class="thcf-res-tab is-active" role="tab" aria-selected="true" aria-controls="thcf-panel-rnm" data-thcf-tab="rnm" style="--accent:var(--orange);--accent-dark:#c9451f" type="button">
+      <span class="thcf-res-tab-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="m10 10 5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="thcf-res-tab-title">RightNow Media</span>
+      <span class="thcf-res-tab-desc">The &ldquo;Netflix of Bible studies&rdquo; &mdash; free for our church family.</span>
+    </button>
+    <button class="thcf-res-tab" role="tab" aria-selected="false" aria-controls="thcf-panel-links" data-thcf-tab="links" style="--accent:var(--teal-dark);--accent-dark:#085050" type="button">
+      <span class="thcf-res-tab-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </span>
+      <span class="thcf-res-tab-title">Links &amp; Tools</span>
+      <span class="thcf-res-tab-desc">Leadership docs, Bible study tools, podcasts, and trusted ministries.</span>
+    </button>
+    <button class="thcf-res-tab" role="tab" aria-selected="false" aria-controls="thcf-panel-books" data-thcf-tab="books" style="--accent:var(--gold);--accent-dark:#c97a0a" type="button">
+      <span class="thcf-res-tab-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </span>
+      <span class="thcf-res-tab-title">Books</span>
+      <span class="thcf-res-tab-desc">Recommended reading across marriage, parenting, doctrine, and more.</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ PANELS ============ -->
+<div class="thcf-res-panels">
+
+  <!-- ============ PANEL: RIGHTNOW MEDIA ============ -->
+  <section class="thcf-res-panel is-active" id="thcf-panel-rnm" role="tabpanel" aria-labelledby="thcf-tab-rnm">
+    <div class="thcf-res-panel-head thcf-reveal">
+      <h2>RightNow Media</h2>
+      <p>Thousands of Bible-based videos for kids, youth, parents, married couples, and more &mdash; free for the Temecula Hills church family.</p>
+    </div>
+    <div class="thcf-rnm-video thcf-reveal">
+      <!-- TODO: paste the Vimeo (or YouTube) embed URL for the RightNow Media promo video below.
+           Then delete the .thcf-rnm-video-placeholder div. Example iframe:
+           <iframe src="https://player.vimeo.com/video/VIDEO_ID?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> -->
+      <div class="thcf-rnm-video-placeholder">
+        <div class="icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><polygon points="9 7 18 12 9 17 9 7"/></svg>
+        </div>
+        <h3>RightNow Media promo video</h3>
+        <p>Paste the video embed URL where marked in the source and this placeholder disappears.</p>
+      </div>
+    </div>
+    <div class="thcf-rnm-text thcf-reveal">
+      <p>At Temecula Hills, our heart is to bring glory to God by making maturing disciples of Jesus. To grow as disciples of Christ, we need to grow deep in understanding and being transformed by His Word.</p>
+      <p>Because of this, we are inviting you to have a <strong>free account</strong> to an exciting video library called RightNow Media. It&rsquo;s essentially the &ldquo;Netflix of Video Bible Studies&rdquo; &mdash; you will have instant access to thousands of great videos for kids, youth, parents, married couples, and more. You can view these videos from your phone, tablet, or computer. You can also view them in a group setting through a Smart TV using Roku, Amazon FireTV, Google Chromecast, or Apple TV. Just search for the RightNow Media app and sign in.</p>
+      <p>We hope you enjoy this as our free gift to you and that it helps you grow as a disciple of Jesus!</p>
+    </div>
+    <div class="thcf-rnm-cta thcf-reveal">
+      <!-- TODO: replace with the church-specific RightNow Media signup and login URLs. -->
+      <a class="thcf-btn thcf-btn--orange" href="https://accounts.rightnowmedia.org/Account/Invitation/temeculahills" target="_blank" rel="noopener">
+        Create a Free Account
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+      <a class="thcf-btn thcf-btn--outline-dark" href="https://www.rightnowmedia.org/Account/SignIn" target="_blank" rel="noopener">
+        Log In to My Account
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: LINKS ============ -->
+  <section class="thcf-res-panel" id="thcf-panel-links" role="tabpanel" aria-labelledby="thcf-tab-links">
+    <div class="thcf-res-panel-head thcf-reveal">
+      <h2>Links &amp; Tools</h2>
+      <p>Resources, books, and materials recommended by our leaders to help you know and follow Jesus more closely.</p>
+    </div>
+    <div class="thcf-link-sections">
+
+      <!-- Leadership Documents -->
+      <div class="thcf-link-section thcf-reveal">
+        <h3>Temecula Hills Leadership Documents</h3>
+        <p class="thcf-link-section-desc">The doctrinal statements, ministry role descriptions, and feedback forms that shape how we lead as a church.</p>
+        <!-- TODO: replace each href="#" with the real document URL (PDF, Google Doc, or GHL page). -->
+        <ul class="thcf-link-list">
+          <li><a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">What We Believe at Temecula Hills Christian Fellowship <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="#">What We Teach at Temecula Hills Christian Fellowship <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="#">Elders: Their Role and Qualifications <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="#">Deacons: Their Role and Qualifications <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="#">Elder Congregation Feedback Form <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+        </ul>
+      </div>
+
+      <!-- Bible Study Tools -->
+      <div class="thcf-link-section thcf-reveal">
+        <h3>Bible Study Tools</h3>
+        <p class="thcf-link-section-desc">Software and websites that help you dig into Scripture with the original languages, commentary, and cross-references at your fingertips.</p>
+
+        <div class="thcf-link-subhead">Paid Tools</div>
+        <p style="color:var(--gray-600);font-size:14px;line-height:1.6;margin-bottom:10px">One of the best Bible study tools available is Logos Bible Software. You can receive 10% off and bonus extras on any base package, or alternatively, you can get a special price on their basic Fundamentals package using either of the links below:</p>
+        <ul class="thcf-link-list">
+          <li><a href="https://www.logos.com/" target="_blank" rel="noopener">Logos Bible Software <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener">Logos Fundamentals <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+        </ul>
+
+        <div class="thcf-link-subhead">Free Tools</div>
+        <ul class="thcf-link-list">
+          <li><a href="https://planobiblechapel.org/tcon/notes/" target="_blank" rel="noopener">Dr. Constable&rsquo;s Expository Notes <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://netbible.org/" target="_blank" rel="noopener">NetBible <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://bibleproject.com/" target="_blank" rel="noopener">The Bible Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://www.biblicaltraining.org/" target="_blank" rel="noopener">BiblicalTraining.org <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://www.biblegateway.com/" target="_blank" rel="noopener">BibleGateway <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://www.navigators.org/resource/discipleship-journal-bible-reading-plan/" target="_blank" rel="noopener">Discipleship Journal Reading Plans <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://biblewebapp.com/" target="_blank" rel="noopener">BibleWebApp <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+        </ul>
+      </div>
+
+      <!-- Podcasts -->
+      <div class="thcf-link-section thcf-reveal">
+        <h3>Podcasts of Interest</h3>
+        <p class="thcf-link-section-desc">A few of the shows our leaders regularly listen to for teaching and news through a biblical lens.</p>
+        <ul class="thcf-link-list">
+          <li><a href="https://www.reasonablefaith.org/podcasts/defenders-podcast/" target="_blank" rel="noopener">Defenders Podcast &mdash; William Lane Craig <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://albertmohler.com/the-briefing" target="_blank" rel="noopener">The Briefing &mdash; Albert Mohler <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+          <li><a href="https://www.str.org/podcasts" target="_blank" rel="noopener">Stand to Reason Weekly Radio Show <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+        </ul>
+      </div>
+
+      <!-- General Interest -->
+      <div class="thcf-link-section thcf-reveal">
+        <h3>General Interest</h3>
+        <p class="thcf-link-section-desc">Ministries and websites we&rsquo;ve found trustworthy and edifying over the years.</p>
+        <ul class="thcf-link-list">
+          <li>
+            <a href="https://www.reasonablefaith.org/" target="_blank" rel="noopener">Reasonable Faith <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">Intelligent, articulate, and gracious Christian perspective on the most important issues concerning the truth of the Christian faith &mdash; the ministry of William Lane Craig.</span>
+          </li>
+          <li>
+            <a href="https://www.thegospelcoalition.org/" target="_blank" rel="noopener">The Gospel Coalition <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">A network of evangelical churches that seeks to serve the local church by providing gospel-centered and Christ-focused content.</span>
+          </li>
+          <li>
+            <a href="https://www.desiringgod.org/" target="_blank" rel="noopener">Desiring God <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">God-centered resources from the ministry of John Piper. In particular, Piper&rsquo;s biographies of Christians in history are excellent.</span>
+          </li>
+          <li>
+            <a href="https://www.gty.org/" target="_blank" rel="noopener">Grace To You <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">The ministry of John MacArthur.</span>
+          </li>
+          <li>
+            <a href="#" target="_blank" rel="noopener">Walking in the Promises <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">The ministry of Marcelo Tolopilo.</span>
+          </li>
+          <li>
+            <a href="#" target="_blank" rel="noopener">Global Church Ministries <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">Ministry of our longtime friend, Craig Poston.</span>
+          </li>
+          <li>
+            <a href="#" target="_blank" rel="noopener">Collaborative Development International <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+            <span class="desc">Ministry of our longtime ministry partner, Rob Foster.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ PANEL: BOOKS ============ -->
+  <section class="thcf-res-panel" id="thcf-panel-books" role="tabpanel" aria-labelledby="thcf-tab-books">
+    <div class="thcf-res-panel-head thcf-reveal">
+      <h2>Recommended Books</h2>
+      <p>Some of our favorite references for learning more about the topics below. Click a book to view it on Amazon.</p>
+    </div>
+
+    <div class="thcf-book-chips thcf-reveal" role="tablist" aria-label="Filter books by category">
+      <button class="thcf-book-chip is-active" type="button" data-thcf-book-filter="all">All Books</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="bibles">Bibles</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="bible-study">Bible Study</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="doctrine">Essential Doctrine</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="church">The Church</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="apologetics">Apologetics &amp; Philosophy</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="devotionals">Devotionals</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="missions">Missions</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="marriage">Marriage</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="parenting">Parenting</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="children">Children</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="work">Work</button>
+      <button class="thcf-book-chip" type="button" data-thcf-book-filter="money">Money</button>
+    </div>
+
+    <!-- TODO: for each book below, replace href="#" with the Amazon product URL and (optionally)
+         swap the .thcf-book-cover-title span with an <img> of the cover.
+         The gradient background palette on each cover uses the --accent/--accent-dark inline vars. -->
+
+    <div class="thcf-book-groups">
+
+      <!-- ===== Bibles ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="bibles">
+        <div class="thcf-book-group-head">
+          <h3>Bibles</h3><span class="count">2 books</span>
+          <p class="thcf-book-group-note">There are a lot of excellent Bible translations. For the sake of consistency and unity, we generally use the ESV translation at Temecula Hills.</p>
+        </div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8b6d3a;--accent-dark:#5c4926">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Gospel<br>Transformation<br>Study Bible</span></div>
+            <div class="thcf-book-body"><h4>Gospel Transformation Study Bible</h4></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">ESV<br>Study Bible</span></div>
+            <div class="thcf-book-body"><h4>ESV Study Bible</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Bible Study Resources ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="bible-study">
+        <div class="thcf-book-group-head"><h3>Bible Study Resources</h3><span class="count">2 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2a03f;--accent-dark:#a0721f">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">How to Read<br>the Bible for<br>All Its Worth</span></div>
+            <div class="thcf-book-body"><h4>How to Read the Bible for All Its Worth</h4><span class="author">Gordon Fee &amp; Douglas Stuart</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#7a2810">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Playing<br>with Fire</span></div>
+            <div class="thcf-book-body"><h4>Playing with Fire</h4><span class="author">Walt Russell</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Essential Doctrine ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="doctrine">
+        <div class="thcf-book-group-head">
+          <h3>Essential Doctrine</h3><span class="count">4 books</span>
+          <p class="thcf-book-group-note">Trusted resources on growing in your knowledge of doctrine and theology. Our recommendation of these does not necessarily mean we agree with every position advocated. For details on where we stand as a church doctrinally, see our <em>What We Teach</em> statement.</p>
+        </div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#3b2a55;--accent-dark:#24193a">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Life&rsquo;s Biggest<br>Questions</span></div>
+            <div class="thcf-book-body"><h4>Life&rsquo;s Biggest Questions</h4><span class="author">Erik Thoennes</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2b4a6e;--accent-dark:#1a2f47">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Systematic<br>Theology</span></div>
+            <div class="thcf-book-body"><h4>Systematic Theology</h4><span class="author">Wayne Grudem</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#556b70;--accent-dark:#3a4a4e">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">A Survey of<br>Bible Doctrine</span></div>
+            <div class="thcf-book-body"><h4>A Survey of Bible Doctrine</h4><span class="author">Charles Ryrie</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8b1a1a;--accent-dark:#5c0f0f">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Great Doctrines<br>of the Bible</span></div>
+            <div class="thcf-book-body"><h4>Great Doctrines of the Bible</h4><span class="author">Martyn Lloyd-Jones</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== The Church ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="church">
+        <div class="thcf-book-group-head"><h3>The Church</h3><span class="count">9 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#5b7c3a;--accent-dark:#3a5124">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Trellis<br>and the Vine</span></div>
+            <div class="thcf-book-body"><h4>The Trellis and the Vine</h4><span class="author">Colin Marshall &amp; Tony Payne</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#0b6b6b;--accent-dark:#085050">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Sustainable<br>Church</span></div>
+            <div class="thcf-book-body"><h4>Sustainable Church</h4><span class="author">Walt Russell</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#6b2a2a;--accent-dark:#421919">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Eldership<br>in Action</span></div>
+            <div class="thcf-book-body"><h4>Eldership in Action</h4><span class="author">Richard Swartley</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2f5d8a;--accent-dark:#1f3f5c">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">40 Questions<br>About Elders<br>&amp; Deacons</span></div>
+            <div class="thcf-book-body"><h4>40 Questions About Elders and Deacons</h4><span class="author">Benjamin Merkle</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Center<br>Church</span></div>
+            <div class="thcf-book-body"><h4>Center Church</h4><span class="author">Timothy Keller</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#6b3fa0;--accent-dark:#472a6b">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Biblical<br>Eldership</span></div>
+            <div class="thcf-book-body"><h4>Biblical Eldership</h4><span class="author">Alexander Strauch</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8b6d3a;--accent-dark:#5c4926">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Embracing<br>Shared Ministry</span></div>
+            <div class="thcf-book-body"><h4>Embracing Shared Ministry</h4><span class="author">Joseph H. Hellerman</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2572e;--accent-dark:#a03418">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Uncomfortable</span></div>
+            <div class="thcf-book-body"><h4>Uncomfortable</h4><span class="author">Brett McCracken</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#3d4a3f;--accent-dark:#26302a">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">When the Church<br>Was a Family</span></div>
+            <div class="thcf-book-body"><h4>When the Church Was a Family</h4><span class="author">Joseph Hellerman</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Apologetics & Philosophy ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="apologetics">
+        <div class="thcf-book-group-head"><h3>Apologetics &amp; Philosophy</h3><span class="count">6 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#5c2a1e;--accent-dark:#3a1a11">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Case<br>for Christ</span></div>
+            <div class="thcf-book-body"><h4>The Case for Christ</h4><span class="author">Lee Strobel</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2e2e2e;--accent-dark:#1a1a1a">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Reason<br>for God</span></div>
+            <div class="thcf-book-body"><h4>The Reason for God</h4><span class="author">Timothy Keller</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#6b3d24;--accent-dark:#442715">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Reasonable<br>Faith</span></div>
+            <div class="thcf-book-body"><h4>Reasonable Faith</h4><span class="author">William Lane Craig</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2a03f;--accent-dark:#a0721f">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Scientism &amp;<br>Secularism</span></div>
+            <div class="thcf-book-body"><h4>Scientism and Secularism</h4><span class="author">J.P. Moreland</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2b4a6e;--accent-dark:#1a2f47">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Philosophical<br>Foundations for a<br>Christian Worldview</span></div>
+            <div class="thcf-book-body"><h4>Philosophical Foundations for a Christian Worldview</h4><span class="author">J.P. Moreland &amp; William Lane Craig</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2f5d8a;--accent-dark:#1f3f5c">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Case<br>for Faith</span></div>
+            <div class="thcf-book-body"><h4>The Case for Faith</h4><span class="author">Lee Strobel</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Devotionals ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="devotionals">
+        <div class="thcf-book-group-head"><h3>Devotionals</h3><span class="count">2 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2f5d8a;--accent-dark:#1f3f5c">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Moments with<br>the Savior</span></div>
+            <div class="thcf-book-body"><h4>Moments with the Savior</h4><span class="author">Ken Gire</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#4a90a4;--accent-dark:#2f5f6e">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">New Morning<br>Mercies</span></div>
+            <div class="thcf-book-body"><h4>New Morning Mercies</h4><span class="author">Paul Tripp</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Missions ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="missions">
+        <div class="thcf-book-group-head"><h3>Missions</h3><span class="count">5 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e5e2d7;--accent-dark:#c0bba7">
+            <div class="thcf-book-cover" style="color:#3a3a3a"><span class="thcf-book-cover-title">What Is the<br>Mission of<br>the Church?</span></div>
+            <div class="thcf-book-body"><h4>What Is the Mission of the Church?</h4><span class="author">Kevin DeYoung &amp; Greg Gilbert</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8b6d3a;--accent-dark:#5c4926">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Missions</span></div>
+            <div class="thcf-book-body"><h4>Missions</h4><span class="author">Andy Johnson</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Operation<br>World</span></div>
+            <div class="thcf-book-body"><h4>Operation World</h4><span class="author">Jason Mandryk</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2f5d8a;--accent-dark:#1f3f5c">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">When Helping<br>Hurts</span></div>
+            <div class="thcf-book-body"><h4>When Helping Hurts</h4><span class="author">Steve Corbett &amp; Brian Fikkert</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#7a8a3d;--accent-dark:#4d5824">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Let the Nations<br>Be Glad!</span></div>
+            <div class="thcf-book-body"><h4>Let the Nations Be Glad!</h4><span class="author">John Piper</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Marriage ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="marriage">
+        <div class="thcf-book-group-head"><h3>Marriage</h3><span class="count">4 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c1b8a3;--accent-dark:#8e846c">
+            <div class="thcf-book-cover" style="color:#3a3a3a"><span class="thcf-book-cover-title">What Did<br>You Expect?</span></div>
+            <div class="thcf-book-body"><h4>What Did You Expect?</h4><span class="author">Paul David Tripp</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Sacred<br>Marriage</span></div>
+            <div class="thcf-book-body"><h4>Sacred Marriage</h4><span class="author">Gary Thomas</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#4a90a4;--accent-dark:#2f5f6e">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">When Sinners<br>Say &ldquo;I Do&rdquo;</span></div>
+            <div class="thcf-book-body"><h4>When Sinners Say &ldquo;I Do&rdquo;</h4><span class="author">Dave Harvey</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8b6d3a;--accent-dark:#5c4926">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Meaning<br>of Marriage</span></div>
+            <div class="thcf-book-body"><h4>The Meaning of Marriage</h4><span class="author">Timothy Keller</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Parenting ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="parenting">
+        <div class="thcf-book-group-head"><h3>Parenting</h3><span class="count">4 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#8ba98e;--accent-dark:#5c7460">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Shepherding<br>a Child&rsquo;s Heart</span></div>
+            <div class="thcf-book-body"><h4>Shepherding a Child&rsquo;s Heart</h4><span class="author">Tedd Tripp</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Instructing a<br>Child&rsquo;s Heart</span></div>
+            <div class="thcf-book-body"><h4>Instructing a Child&rsquo;s Heart</h4><span class="author">Tedd Tripp &amp; Margy Tripp</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2a03f;--accent-dark:#a0721f">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Age of<br>Opportunity</span></div>
+            <div class="thcf-book-body"><h4>Age of Opportunity</h4><span class="author">Paul David Tripp</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e5e2d7;--accent-dark:#c0bba7">
+            <div class="thcf-book-cover" style="color:#3a3a3a"><span class="thcf-book-cover-title">Parenting</span></div>
+            <div class="thcf-book-body"><h4>Parenting</h4><span class="author">Paul Tripp</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Children ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="children">
+        <div class="thcf-book-group-head"><h3>Children</h3><span class="count">5 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#e2572e;--accent-dark:#a03418">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Big Picture<br>Story Bible</span></div>
+            <div class="thcf-book-body"><h4>Big Picture Story Bible</h4><span class="author">David Helm</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#f39615;--accent-dark:#c97a0a">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Jesus<br>Storybook Bible</span></div>
+            <div class="thcf-book-body"><h4>The Jesus Storybook Bible</h4></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Everything a Child<br>Should Know<br>About God</span></div>
+            <div class="thcf-book-body"><h4>Everything a Child Should Know About God</h4><span class="author">Kenneth Taylor</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#2b4a6e;--accent-dark:#1a2f47">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Action<br>Bible</span></div>
+            <div class="thcf-book-body"><h4>The Action Bible</h4></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#5b7c3a;--accent-dark:#3a5124">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Dr. Craig&rsquo;s<br>&ldquo;What Is<br>God Like?&rdquo; Series</span></div>
+            <div class="thcf-book-body"><h4>Dr. Craig&rsquo;s &ldquo;What Is God Like?&rdquo; Series</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Work ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="work">
+        <div class="thcf-book-group-head"><h3>Work</h3><span class="count">1 book</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Every Good<br>Endeavor</span></div>
+            <div class="thcf-book-body"><h4>Every Good Endeavor</h4><span class="author">Timothy Keller</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Money ===== -->
+      <div class="thcf-book-group" data-thcf-book-cat="money">
+        <div class="thcf-book-group-head"><h3>Money</h3><span class="count">2 books</span></div>
+        <div class="thcf-book-grid">
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#4a90a4;--accent-dark:#2f5f6e">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">Redeeming<br>Money</span></div>
+            <div class="thcf-book-body"><h4>Redeeming Money</h4><span class="author">Paul David Tripp</span></div>
+          </a>
+          <a class="thcf-book-card" href="#" target="_blank" rel="noopener" style="--accent:#c9451f;--accent-dark:#8f2e14">
+            <div class="thcf-book-cover"><span class="thcf-book-cover-title">The Treasure<br>Principle</span></div>
+            <div class="thcf-book-body"><h4>The Treasure Principle</h4><span class="author">Randy Alcorn</span></div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
+      </div>
+      <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 8:45 & 10:30 AM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">Home</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'm New</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">Sermons</a></li>
+        <!-- TODO: replace with church giving URL. -->
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">Give Online</a></li>
+        <li><a href="#thcf-contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-resources');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // --- Fullscreen menu open/close ---
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  // --- Scroll reveal ---
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // --- Top tabs: swap active panel ---
+  var tabs = root.querySelectorAll('[data-thcf-tab]');
+  var panels = {
+    rnm:   root.querySelector('#thcf-panel-rnm'),
+    links: root.querySelector('#thcf-panel-links'),
+    books: root.querySelector('#thcf-panel-books')
+  };
+  function activateTab(key){
+    tabs.forEach(function(t){
+      var isActive = t.getAttribute('data-thcf-tab') === key;
+      t.classList.toggle('is-active', isActive);
+      t.setAttribute('aria-selected', String(isActive));
+    });
+    Object.keys(panels).forEach(function(k){
+      var p = panels[k];
+      if (!p) return;
+      p.classList.toggle('is-active', k === key);
+    });
+    // Re-run reveal on newly visible reveal elements (they had no scroll trigger while hidden)
+    var newRevealEls = panels[key] ? panels[key].querySelectorAll('.thcf-reveal:not(.is-visible)') : [];
+    newRevealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ activateTab(t.getAttribute('data-thcf-tab')); });
+  });
+
+  // --- Book category chip filter ---
+  var chips = root.querySelectorAll('[data-thcf-book-filter]');
+  var groups = root.querySelectorAll('[data-thcf-book-cat]');
+  function filterBooks(cat){
+    chips.forEach(function(c){
+      c.classList.toggle('is-active', c.getAttribute('data-thcf-book-filter') === cat);
+    });
+    groups.forEach(function(g){
+      var show = (cat === 'all') || (g.getAttribute('data-thcf-book-cat') === cat);
+      g.classList.toggle('is-hidden', !show);
+    });
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){ filterBooks(c.getAttribute('data-thcf-book-filter')); });
+  });
+})();
+</script>
