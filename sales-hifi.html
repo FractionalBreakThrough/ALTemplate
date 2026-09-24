@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Vinylessence™ — Smart LED Slipmat // Hi-Fi Rack Edition</title>
+  <meta name="description" content="The first Smart LED Slipmat that lights up your vinyl records and reacts to music. Pre-order $99 (reg. $129)." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       TOKENS
+       ═══════════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* Base surfaces */
+      --room:        #050403;                /* the "room" behind the rack */
+      --room-2:      #0d0a08;
+      --wood:        #1a1108;
+      --wood-hi:     #2a1e14;
+
+      /* Metal tones */
+      --alu-hi:      #b4b0aa;
+      --alu:         #6a6560;
+      --alu-lo:      #2f2c28;
+      --alu-shadow:  #0a0908;
+      --steel:       #454340;
+
+      /* Plastic */
+      --plastic:     #141210;
+      --plastic-hi:  #2a2724;
+      --plastic-lo:  #050403;
+
+      /* Screens / LCD */
+      --lcd-bg:      #1a2312;                /* backlit LCD green */
+      --lcd-txt:     #8fff70;
+      --lcd-amber:   #ffb14d;
+      --lcd-face:    #efe6c8;                /* VU meter cream face */
+
+      /* LEDs */
+      --led-red:     #ff3838;
+      --led-green:   #2fd83f;
+      --led-amber:   #ffaa22;
+
+      /* Brand */
+      --gold:        #E8C100;
+      --gold-lite:   #fff36e;
+      --gold-deep:   #a08500;
+
+      /* Text */
+      --ink:         #ede8dd;
+      --ink-mute:    #a9a49a;
+      --ink-dim:     #6b6660;
+
+      /* Type */
+      --sans:        'Inter', system-ui, -apple-system, sans-serif;
+      --mono:        'Space Mono', 'Courier New', monospace;
+      --lcd:         'Share Tech Mono', 'Courier New', monospace;
+      --industrial:  'Bebas Neue', Impact, sans-serif;
+    }
+
+    html, body { background: var(--room); }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      /* Room texture: subtle wood-grain-ish */
+      background:
+        radial-gradient(1400px 800px at 50% -10%, rgba(90,60,20,0.10) 0%, transparent 55%),
+        radial-gradient(900px 700px at 90% 90%, rgba(90,60,20,0.08) 0%, transparent 55%),
+        repeating-linear-gradient(90deg, rgba(60,45,30,0.045) 0 1px, transparent 1px 2px),
+        linear-gradient(180deg, var(--room) 0%, var(--room-2) 100%);
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RACK STRUCTURE
+       ═══════════════════════════════════════════════════════════════ */
+    .rack {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 12px 96px;
+      position: relative;
+    }
+
+    .rack-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 14px 42px;                     /* room for rack rails */
+      background: linear-gradient(90deg, rgba(0,0,0,0.5) 0 40px, transparent 40px calc(100% - 40px), rgba(0,0,0,0.5) calc(100% - 40px) 100%);
+    }
+
+    /* Rack rails on left + right — brushed steel with mounting holes */
+    .rack-inner::before,
+    .rack-inner::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 34px;
+      background:
+        repeating-linear-gradient(180deg,
+          transparent 0 32px,
+          rgba(0,0,0,0.6) 32px 34px,
+          transparent 34px 36px,
+          rgba(255,255,255,0.03) 36px 38px),
+        linear-gradient(90deg, #1c1a17 0%, #2a2825 30%, #3a3733 50%, #2a2825 70%, #1c1a17 100%);
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
+    }
+    .rack-inner::before { left: 4px; }
+    .rack-inner::after  { right: 4px; }
+
+    /* Base "unit" — every piece of gear */
+    .unit {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow:
+        0 2px 0 rgba(255,255,255,0.05),
+        0 6px 16px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* Rack ears — the metal wings that screw the unit into the rack */
+    .unit__ears {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 26px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,255,255,0.05) 0%, transparent 40%),
+        radial-gradient(circle at 50% 78%, rgba(255,255,255,0.05) 0%, transparent 40%),
+        linear-gradient(90deg, #6a6560 0%, #4a4540 40%, #2f2c28 100%);
+      border-right: 1px solid rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 12px 0;
+      z-index: 2;
+    }
+    .unit__ears--r {
+      right: 0;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,255,255,0.05) 0%, transparent 40%),
+        radial-gradient(circle at 50% 78%, rgba(255,255,255,0.05) 0%, transparent 40%),
+        linear-gradient(270deg, #6a6560 0%, #4a4540 40%, #2f2c28 100%);
+      border-right: none;
+      border-left: 1px solid rgba(0,0,0,0.6);
+    }
+    .unit__ears--l { left: 0; }
+
+    /* Screw head */
+    .screw {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #d5d1cb 0%, #6a6560 45%, #2a2825 100%);
+      box-shadow:
+        inset 0 0 2px rgba(0,0,0,0.5),
+        0 1px 1px rgba(0,0,0,0.6);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .screw::before {
+      content: ""; position: absolute;
+      top: 30%; left: 15%; right: 15%; height: 40%;
+      background: #0a0908;
+      border-radius: 1px;
+      transform: rotate(45deg);
+    }
+    .screw--phillips::after {
+      content: ""; position: absolute;
+      top: 15%; left: 30%; right: 30%; height: 70%;
+      background: #0a0908;
+      border-radius: 1px;
+      transform: rotate(45deg);
+    }
+
+    /* Unit face — the interior surface of each component */
+    .unit__face {
+      padding: 22px 46px;                     /* room for the ears */
+      min-height: 100px;
+      position: relative;
+    }
+
+    /* Small utility text elements */
+    .model-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .stencil {
+      font-family: var(--industrial);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .silkscreen {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* LED ─── */
+    .led {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--led-red);
+      box-shadow:
+        inset 0 0 2px rgba(255,255,255,0.5),
+        0 0 6px currentColor;
+      color: var(--led-red);
+    }
+    .led--green  { background: var(--led-green); color: var(--led-green); }
+    .led--amber  { background: var(--led-amber); color: var(--led-amber); }
+    .led--gold   { background: var(--gold);      color: var(--gold);      }
+    .led--pulse  { animation: led-pulse 1.6s ease-in-out infinite; }
+    @keyframes led-pulse {
+      0%, 100% { opacity: 1; box-shadow: inset 0 0 2px rgba(255,255,255,0.5), 0 0 6px currentColor; }
+      50%      { opacity: 0.5; box-shadow: inset 0 0 2px rgba(255,255,255,0.5), 0 0 2px currentColor; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — BRAND PLATE (rack top)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-brand .unit__face {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px),
+        linear-gradient(180deg, #3f3c38 0%, #232120 50%, #1a1815 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      padding: 18px 46px;
+    }
+    .brand-plate {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 22px;
+      border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 2px),
+        linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 45%, var(--gold-deep) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        0 3px 10px rgba(0,0,0,0.5);
+      color: #1a1200;
+    }
+    .brand-plate::before,
+    .brand-plate::after {
+      content: ""; position: absolute; top: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #d5d1cb, #2a2825);
+      transform: translateY(-50%);
+    }
+    .brand-plate::before { left: 5px; }
+    .brand-plate::after  { right: 5px; }
+    .brand-plate .name {
+      font-family: var(--industrial);
+      font-size: 28px;
+      letter-spacing: 0.14em;
+      line-height: 1;
+    }
+    .brand-plate .tm {
+      font-family: var(--mono);
+      font-size: 10px;
+      vertical-align: super;
+    }
+    .brand-plate .sub {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: #6a4d00;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-left: 1px solid rgba(0,0,0,0.4);
+      padding-left: 14px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — TURNTABLE
+       ═══════════════════════════════════════════════════════════════ */
+    .u-turntable .unit__face {
+      background:
+        radial-gradient(1000px 300px at 50% 100%, rgba(232,193,0,0.06) 0%, transparent 60%),
+        linear-gradient(180deg, #1c1a17 0%, #0e0c0a 100%);
+      padding: 34px 60px;
+    }
+    .turntable {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+    @media (max-width: 780px) {
+      .turntable { grid-template-columns: 1fr; }
+      .u-turntable .unit__face { padding: 26px 54px; }
+    }
+    .plinth {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(232,193,0,0.14) 0%, transparent 60%),
+        linear-gradient(180deg, #1a1815 0%, #0a0908 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      aspect-ratio: 1.2 / 1;
+      padding: 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 -2px 6px rgba(0,0,0,0.6);
+    }
+    .platter {
+      position: absolute;
+      inset: 20% 22%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #050403 44%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(232,193,0,0.5) 0%, rgba(232,193,0,0.15) 40%, transparent 70%),
+        conic-gradient(from 0deg, #1a1815, #2a2825, #1a1815, #2a2825, #1a1815);
+      box-shadow:
+        inset 0 0 40px rgba(0,0,0,0.6),
+        0 0 30px rgba(232,193,0,0.3);
+      animation: spin 6s linear infinite;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .platter img {
+      width: 82%;
+      filter: drop-shadow(0 0 18px rgba(232,193,0,0.5));
+    }
+    .platter::after {
+      content: ""; position: absolute;
+      top: 50%; left: 50%;
+      width: 8%; height: 8%;
+      background: var(--gold);
+      border: 2px solid #0a0908;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Tonearm */
+    .tonearm {
+      position: absolute;
+      top: 14%; right: 12%;
+      transform-origin: 90% 10%;
+      transform: rotate(38deg);
+      width: 3px; height: 55%;
+      background: linear-gradient(180deg, #cccac5 0%, #6a6560 100%);
+      border-radius: 2px;
+      z-index: 3;
+    }
+    .tonearm::before {
+      content: ""; position: absolute;
+      top: -8px; right: -12px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #d5d1cb, #6a6560 60%, #2a2825);
+      box-shadow: inset 0 -1px 3px rgba(0,0,0,0.5);
+    }
+    .tonearm::after {
+      content: ""; position: absolute;
+      bottom: -6px; left: -3px;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border: 1px solid #0a0908;
+      box-shadow: 0 0 4px rgba(232,193,0,0.6);
+    }
+
+    /* Turntable controls (right side of the plinth area) */
+    .tt-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: flex-start;
+      justify-content: center;
+      min-width: 210px;
+    }
+    .tt-controls .brand-line {
+      font-family: var(--industrial);
+      font-size: 22px;
+      color: var(--ink);
+      letter-spacing: 0.12em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .tt-controls .brand-line span { color: var(--gold); }
+    .tt-controls .model-num { margin-bottom: 14px; }
+    .tt-buttons { display: flex; gap: 8px; }
+    .tt-btn {
+      background: linear-gradient(180deg, #454340 0%, #232120 100%);
+      color: var(--ink-mute);
+      border: 1px solid rgba(0,0,0,0.7);
+      padding: 6px 14px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(0,0,0,0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tt-btn.is-active { color: var(--gold); }
+    .tt-btn.is-active .led { animation: led-pulse 1.6s ease-in-out infinite; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — AMPLIFIER
+       ═══════════════════════════════════════════════════════════════ */
+    .u-amp .unit__face {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 2px),
+        linear-gradient(180deg, #7a7570 0%, #4a4540 50%, #2a2724 100%);
+      padding: 30px 60px;
+      color: #0a0908;
+    }
+    .amp {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+    @media (max-width: 780px) {
+      .amp { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .amp__pitch .model-num { color: #4a4540; margin-bottom: 8px; }
+    .amp__pitch h2 {
+      font-family: var(--industrial);
+      font-size: clamp(30px, 4.4vw, 48px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #0a0908;
+      margin-bottom: 12px;
+    }
+    .amp__pitch h2 em {
+      font-style: normal;
+      color: #8a6a00;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .amp__pitch p {
+      font-size: 15px;
+      color: #1a1815;
+      line-height: 1.6;
+      max-width: 48ch;
+    }
+    .amp__pitch p strong { color: #0a0908; }
+
+    /* Amp controls: knobs + input selector */
+    .amp__ctrls {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .knob-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+    .knob {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 25%, #cccac5 0%, #6a6560 45%, #2a2825 100%);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,0.35),
+        inset 0 -3px 5px rgba(0,0,0,0.5),
+        0 4px 8px rgba(0,0,0,0.55),
+        0 0 0 4px rgba(0,0,0,0.35);
+    }
+    .knob::before {
+      content: ""; position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 25%, #b4b0aa 0%, #4a4540 60%, #1a1815 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .knob::after {
+      content: ""; position: absolute;
+      top: 8%; left: 50%;
+      width: 4px; height: 32%;
+      background: var(--gold);
+      transform: translateX(-50%);
+      border-radius: 2px;
+      box-shadow: 0 0 6px rgba(232,193,0,0.7);
+    }
+    .knob--sm { width: 58px; height: 58px; }
+    .knob--sm::after { height: 30%; width: 3px; }
+    .knob--vol { transform: rotate(45deg); }        /* pointing to ~75% */
+    .knob--treble { transform: rotate(20deg); }
+    .knob--bass   { transform: rotate(-15deg); }
+    .knob__label {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--industrial);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: #0a0908;
+      text-align: center;
+    }
+    .knob-col + .knob-col { border-left: 1px dashed rgba(0,0,0,0.2); padding-left: 20px; }
+
+    .amp__small {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      justify-items: center;
+      align-content: start;
+    }
+    .amp__standby {
+      grid-column: 1 / -1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .amp__standby .led { width: 10px; height: 10px; }
+    .amp__standby span {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #0a0908;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — CASSETTE DECK
+       ═══════════════════════════════════════════════════════════════ */
+    .u-cassette .unit__face {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 70%),
+        linear-gradient(180deg, #1a1815 0%, #0e0c0a 100%);
+      padding: 26px 60px;
+    }
+    .cassette {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+    @media (max-width: 780px) {
+      .cassette { grid-template-columns: 1fr; }
+    }
+    /* Cassette window */
+    .cassette__window {
+      position: relative;
+      width: 240px;
+      aspect-ratio: 1.55 / 1;
+      padding: 16px 22px;
+      background:
+        linear-gradient(180deg, #2a1408 0%, #1a0a04 100%);
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -2px 6px rgba(0,0,0,0.6),
+        0 3px 8px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cassette__window::after {
+      content: "TYPE II · CrO₂";
+      position: absolute;
+      top: 6px; left: 12px; right: 12px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      color: rgba(255,220,180,0.5);
+    }
+    .cassette__hub {
+      width: 66px; height: 66px;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 50%, #1a1815 22%, transparent 23%),
+        conic-gradient(from 0deg, #6a4a2a 0deg, #4a2a1a 30deg, #6a4a2a 60deg, #4a2a1a 90deg, #6a4a2a 120deg, #4a2a1a 150deg, #6a4a2a 180deg, #4a2a1a 210deg, #6a4a2a 240deg, #4a2a1a 270deg, #6a4a2a 300deg, #4a2a1a 330deg, #6a4a2a 360deg);
+      animation: spin 3s linear infinite;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    }
+    .cassette__hub::before {
+      content: ""; position: absolute;
+      top: 50%; left: 50%;
+      width: 22%; height: 22%;
+      background: #1a1815;
+      border: 1px solid #0a0908;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cassette__hub--r { animation-duration: 4.2s; }  /* different speed for realism */
+    .cassette__label {
+      position: absolute;
+      bottom: 6px; left: 12px; right: 12px;
+      font-family: var(--industrial);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-align: center;
+      color: rgba(255,220,180,0.6);
+    }
+
+    .cassette__side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* LCD tape counter */
+    .lcd-counter {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--lcd-bg);
+      border: 1px solid #050a02;
+      border-radius: 4px;
+      box-shadow:
+        inset 0 0 12px rgba(0,0,0,0.7),
+        inset 0 0 2px rgba(0,0,0,0.9),
+        0 1px 0 rgba(255,255,255,0.06);
+    }
+    .lcd-counter .digits {
+      font-family: var(--lcd);
+      font-size: 26px;
+      color: var(--lcd-txt);
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 6px rgba(143,255,112,0.6);
+    }
+    .lcd-counter .label {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(143,255,112,0.7);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    /* Transport buttons */
+    .transport {
+      display: flex;
+      gap: 6px;
+    }
+    .tbtn {
+      width: 44px; height: 32px;
+      background:
+        linear-gradient(180deg, #55524e 0%, #2a2825 100%);
+      border: 1px solid #0a0908;
+      border-radius: 3px;
+      color: var(--ink-mute);
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        0 2px 3px rgba(0,0,0,0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tbtn.is-active { color: var(--gold); }
+    .tbtn.is-rec { color: var(--led-red); }
+    /* Steps as "track" listing */
+    .cassette__steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 22px;
+      margin-top: 4px;
+    }
+    .cassette__step {
+      counter-increment: step;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .cassette__step::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--lcd);
+      font-size: 14px;
+      color: var(--gold);
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(232,193,0,0.3);
+      padding: 2px 6px;
+      border-radius: 2px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cassette__step h4 {
+      font-family: var(--industrial);
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .cassette__step p {
+      font-size: 12.5px;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — EQUALIZER (features as bands)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-eq .unit__face {
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(232,193,0,0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #050403 0%, #0a0908 100%);
+      padding: 30px 60px;
+    }
+    .eq__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .eq__head h3 {
+      font-family: var(--industrial);
+      font-size: 24px;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+    }
+    .eq__head h3 span { color: var(--gold); }
+    .eq__bands {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 780px) {
+      .eq__bands { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    }
+    @media (max-width: 440px) {
+      .eq__bands { grid-template-columns: repeat(2, 1fr); }
+    }
+    .band {
+      padding: 12px 8px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0));
+      border-radius: 4px;
+      text-align: center;
+    }
+    .band__slot {
+      position: relative;
+      width: 22px;
+      height: 130px;
+      margin: 0 auto 12px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, #0a0908 0%, #050403 100%);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 3px;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.7);
+    }
+    /* Slider tick marks */
+    .band__slot::before {
+      content: "";
+      position: absolute;
+      inset: 6px 0;
+      background:
+        repeating-linear-gradient(180deg,
+          transparent 0 12px,
+          rgba(255,255,255,0.12) 12px 13px);
+    }
+    .band__handle {
+      position: absolute;
+      left: 50%;
+      width: 32px; height: 20px;
+      background:
+        linear-gradient(180deg, #cccac5 0%, #6a6560 45%, #2a2825 100%);
+      border: 1px solid #050403;
+      border-radius: 3px;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        0 2px 4px rgba(0,0,0,0.6);
+    }
+    .band__handle::before {
+      content: ""; position: absolute;
+      top: 50%; left: 15%; right: 15%; height: 2px;
+      background: var(--gold);
+      transform: translateY(-50%);
+      box-shadow: 0 0 4px rgba(232,193,0,0.7);
+    }
+    .band__label {
+      font-family: var(--industrial);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      line-height: 1.15;
+      min-height: 26px;
+    }
+    .band__hz {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink-dim);
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    /* Spec rail underneath */
+    .spec-rail {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: linear-gradient(180deg, #1a1815 0%, #0a0908 100%);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px 22px;
+    }
+    @media (max-width: 640px) { .spec-rail { grid-template-columns: 1fr; } }
+    .spec-rail dt {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .spec-rail dd {
+      font-family: var(--industrial);
+      font-size: 15px;
+      color: var(--ink);
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — VU METERS (stats)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-vu .unit__face {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 60%),
+        linear-gradient(180deg, #232120 0%, #141210 100%);
+      padding: 28px 60px;
+    }
+    .vu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 720px) { .vu-grid { grid-template-columns: repeat(2, 1fr); } }
+    .vu {
+      padding: 12px 12px 14px;
+      background: linear-gradient(180deg, #0e0c0a 0%, #050403 100%);
+      border: 1px solid rgba(0,0,0,0.6);
+      border-radius: 4px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .vu__face {
+      position: relative;
+      aspect-ratio: 2 / 1.2;
+      background:
+        radial-gradient(ellipse at 50% 130%, rgba(255,177,77,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, var(--lcd-face) 0%, #d6cba8 60%, #b8ad8a 100%);
+      border-radius: 4px 4px 60px 60px / 4px 4px 30px 30px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.5);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    }
+    /* VU arc scale — tick marks + red overload zone */
+    .vu__face::before {
+      content: "";
+      position: absolute;
+      inset: 12% 8% 20% 8%;
+      background:
+        /* Red overload zone at right (from ~70%) */
+        conic-gradient(from -60deg at 50% 100%,
+          transparent 0deg 60deg,
+          rgba(255,56,56,0.5) 60deg 105deg,
+          transparent 105deg 360deg),
+        /* Tick marks */
+        conic-gradient(from -60deg at 50% 100%,
+          transparent 0 4deg,
+          #1a1815 4deg 5deg,
+          transparent 5deg 15deg,
+          #1a1815 15deg 16deg,
+          transparent 16deg 30deg,
+          #1a1815 30deg 31deg,
+          transparent 31deg 45deg,
+          #1a1815 45deg 46deg,
+          transparent 46deg 60deg,
+          #1a1815 60deg 61deg,
+          transparent 61deg 75deg,
+          #1a1815 75deg 76deg,
+          transparent 76deg 90deg,
+          #1a1815 90deg 91deg,
+          transparent 91deg 105deg,
+          #1a1815 105deg 106deg,
+          transparent 106deg 120deg,
+          #1a1815 120deg 121deg,
+          transparent 121deg 360deg);
+      mask: radial-gradient(circle at 50% 100%, transparent 62%, #000 63%, #000 88%, transparent 89%);
+    }
+    /* Number scale */
+    .vu__face::after {
+      content: "0    3    7   VU";
+      position: absolute;
+      bottom: 12%; left: 0; right: 0;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 7px;
+      letter-spacing: 0.5em;
+      color: #4a3820;
+    }
+    /* Needle */
+    .vu__needle {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      width: 2px;
+      height: 65%;
+      background: linear-gradient(180deg, #1a1815 0%, #050403 100%);
+      transform-origin: 50% 100%;
+      transform: translateX(-50%) rotate(var(--rot, 0deg));
+      z-index: 2;
+    }
+    .vu__needle::after {
+      content: ""; position: absolute;
+      bottom: -4px; left: 50%;
+      width: 8px; height: 8px;
+      background: #1a1815;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+    /* Rotations for each meter (needle right = higher) */
+    .vu--r45 .vu__needle { --rot: 45deg; }
+    .vu--r55 .vu__needle { --rot: 55deg; }
+    .vu--r20 .vu__needle { --rot: 20deg; }
+    .vu--r35 .vu__needle { --rot: 35deg; }
+
+    .vu__label {
+      margin-top: 8px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink-mute);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .vu__value {
+      display: block;
+      margin-top: 2px;
+      font-family: var(--industrial);
+      font-size: 18px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — REEL-TO-REEL (reviews on tape)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-reel .unit__face {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 2px),
+        linear-gradient(180deg, #4a4744 0%, #2a2724 100%);
+      padding: 32px 60px;
+      color: #f5f0e0;
+    }
+    .reel {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+    }
+    @media (max-width: 780px) {
+      .reel { grid-template-columns: 1fr 1fr; }
+      .reel__tape { grid-column: 1 / -1; order: 3; }
+    }
+    .reel__reel {
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 50%, #1a1815 20%, transparent 21%),
+        radial-gradient(circle at 50% 50%, #050403 12%, transparent 13%),
+        conic-gradient(from 0deg,
+          #cccac5 0deg 22deg,
+          #050403 22deg 68deg,
+          #cccac5 68deg 90deg,
+          #050403 90deg 158deg,
+          #cccac5 158deg 180deg,
+          #050403 180deg 248deg,
+          #cccac5 248deg 270deg,
+          #050403 270deg 338deg,
+          #cccac5 338deg 360deg);
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.7), 0 3px 10px rgba(0,0,0,0.5);
+      animation: spin 8s linear infinite;
+    }
+    .reel__reel::before {
+      content: ""; position: absolute;
+      inset: 32%;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #6a4a2a, #3a2010);
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+    }
+    .reel__reel::after {
+      content: ""; position: absolute;
+      top: 50%; left: 50%;
+      width: 12%; height: 12%;
+      background: var(--gold);
+      border: 2px solid #050403;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .reel__reel--r { animation-duration: 10s; }
+
+    .reel__tape {
+      padding: 20px 24px;
+      background: linear-gradient(180deg, #1a1108 0%, #0a0604 100%);
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.5);
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+    .reel__quote {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .reel__quote .stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .reel__quote p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .reel__quote cite {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-style: normal;
+    }
+    .reel__brand {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(0,0,0,0.5);
+      letter-spacing: 0.3em;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — TUNER (FAQ)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-tuner .unit__face {
+      background:
+        linear-gradient(180deg, #1a1815 0%, #0a0908 100%);
+      padding: 24px 60px 26px;
+    }
+    .tuner__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .tuner__head h3 {
+      font-family: var(--industrial);
+      font-size: 22px;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+    }
+    .tuner__head h3 span { color: var(--gold); }
+    .tuner__band-select { display: flex; gap: 4px; }
+    .tuner__band-select button {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--ink-mute);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .tuner__band-select button.is-active { color: var(--gold); border-color: rgba(232,193,0,0.4); background: rgba(232,193,0,0.08); }
+
+    /* The dial — backlit amber horizontal window */
+    .tuner__dial {
+      position: relative;
+      height: 60px;
+      background:
+        linear-gradient(180deg, rgba(255,177,77,0.35) 0%, rgba(255,177,77,0.1) 100%),
+        #1a0e04;
+      border: 1px solid rgba(0,0,0,0.7);
+      border-radius: 3px;
+      box-shadow:
+        inset 0 2px 6px rgba(0,0,0,0.6),
+        inset 0 0 30px rgba(255,177,77,0.15);
+      overflow: hidden;
+      padding: 8px 16px;
+    }
+    .tuner__ticks {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg,
+        transparent 0 24px,
+        rgba(0,0,0,0.35) 24px 25px,
+        transparent 25px 48px,
+        rgba(0,0,0,0.6) 48px 49px,
+        transparent 49px 72px,
+        rgba(0,0,0,0.35) 72px 73px,
+        transparent 73px 96px,
+        rgba(0,0,0,0.6) 96px 97px,
+        transparent 97px 120px);
+      mix-blend-mode: multiply;
+    }
+    .tuner__stations {
+      position: absolute;
+      inset: auto 16px 6px 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(0,0,0,0.65);
+      letter-spacing: 0.15em;
+    }
+    .tuner__frequency {
+      position: absolute;
+      top: 8px; right: 16px;
+      font-family: var(--lcd);
+      font-size: 22px;
+      color: #1a0e04;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 0 rgba(255,220,180,0.5);
+    }
+    .tuner__now {
+      position: absolute;
+      top: 12px; left: 16px;
+      font-family: var(--industrial);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(0,0,0,0.7);
+    }
+    .tuner__needle {
+      position: absolute;
+      top: 4px; bottom: 4px;
+      left: 50%;
+      width: 2px;
+      background: var(--led-red);
+      box-shadow: 0 0 8px rgba(255,56,56,0.8);
+      z-index: 3;
+    }
+    .tuner__needle::before {
+      content: ""; position: absolute;
+      top: -3px; left: -4px;
+      width: 10px; height: 6px;
+      background: var(--led-red);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+
+    .tuner__stations-list {
+      margin-top: 16px;
+    }
+    .station {
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+      padding: 12px 4px;
+    }
+    .station:last-child { border-bottom: none; }
+    .station summary {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 60px 1fr 22px;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .station summary::-webkit-details-marker { display: none; }
+    .station__freq {
+      font-family: var(--lcd);
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .station__q {
+      font-family: var(--industrial);
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+    }
+    .station__toggle {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 14px;
+      text-align: center;
+    }
+    .station[open] .station__toggle::before { content: "◄"; }
+    .station:not([open]) .station__toggle::before { content: "►"; }
+    .station__a {
+      margin: 10px 0 4px 74px;
+      font-size: 14px;
+      color: var(--ink-mute);
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       UNIT — CD PLAYER (pricing & CTA)
+       ═══════════════════════════════════════════════════════════════ */
+    .u-cd .unit__face {
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(232,193,0,0.06) 0%, transparent 60%),
+        linear-gradient(180deg, #141210 0%, #050403 100%);
+      padding: 30px 60px;
+    }
+    .cd {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+    @media (max-width: 780px) {
+      .cd { grid-template-columns: 1fr; }
+    }
+    /* CD tray drawer */
+    .cd__tray {
+      position: relative;
+      background: linear-gradient(180deg, #1a1815 0%, #050403 100%);
+      border-radius: 3px;
+      padding: 20px 28px;
+      border: 1px solid rgba(0,0,0,0.6);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), inset 0 -1px 0 rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+    }
+    .cd__tray::before {
+      content: "OPEN"; position: absolute;
+      top: 6px; left: 12px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+    }
+    .cd__disc {
+      position: relative;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #050403 18%, transparent 19%),
+        repeating-radial-gradient(circle at 50% 50%, transparent 0 3px, rgba(255,255,255,0.04) 3px 4px),
+        conic-gradient(from 0deg,
+          #E8C100, #fff36e, #E8C100, #a08500, #E8C100, #fff36e, #E8C100, #a08500, #E8C100);
+      box-shadow: 0 0 30px rgba(232,193,0,0.35), inset 0 0 20px rgba(0,0,0,0.6);
+      animation: spin 20s linear infinite;
+    }
+    .cd__disc::after {
+      content: ""; position: absolute;
+      top: 50%; left: 50%;
+      width: 10%; height: 10%;
+      background: #1a1815;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Right column: display + price + transport */
+    .cd__display {
+      background: var(--lcd-bg);
+      border: 1px solid #050a02;
+      border-radius: 3px;
+      padding: 10px 14px;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.7);
+      margin-bottom: 16px;
+    }
+    .cd__display .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--lcd);
+      color: var(--lcd-txt);
+      text-shadow: 0 0 6px rgba(143,255,112,0.5);
+    }
+    .cd__display .row.big {
+      font-size: 22px;
+      letter-spacing: 0.05em;
+    }
+    .cd__display .row.sm {
+      font-size: 11px;
+      color: rgba(143,255,112,0.7);
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    .cd__price {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .cd__price .num {
+      font-family: var(--industrial);
+      font-size: clamp(48px, 8vw, 68px);
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .cd__price .num span { color: var(--gold); }
+    .cd__price .strike {
+      font-family: var(--industrial);
+      font-size: 22px;
+      color: var(--ink-dim);
+      text-decoration: line-through;
+    }
+    .cd__price .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--led-green);
+      color: #001a04;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(47,216,63,0.4);
+    }
+
+    .cd__cta {
+      display: block;
+      padding: 18px 24px;
+      background:
+        linear-gradient(180deg, var(--gold-lite) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+      color: #0a0500;
+      font-family: var(--industrial);
+      font-size: 22px;
+      letter-spacing: 0.14em;
+      text-align: center;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.5);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        inset 0 -1px 0 rgba(0,0,0,0.4),
+        0 4px 14px rgba(232,193,0,0.35);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .cd__cta:hover { transform: translateY(-1px); }
+
+    .cd__trust {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cd__transport {
+      margin-top: 14px;
+      display: flex;
+      gap: 4px;
+      justify-content: flex-end;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER PLATE
+       ═══════════════════════════════════════════════════════════════ */
+    .u-foot .unit__face {
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px),
+        linear-gradient(180deg, #2f2c28 0%, #1a1815 100%);
+      padding: 18px 46px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .foot__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--industrial);
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+    }
+    .foot__brand img { height: 32px; border-radius: 50%; }
+    .foot__legal {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .foot__socials { display: flex; gap: 6px; }
+    .sock {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+    }
+    .sock:hover { color: var(--gold); border-color: rgba(232,193,0,0.35); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MOBILE POLISH
+       ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .rack { padding: 20px 6px 60px; }
+      .rack-inner { padding: 10px 30px; gap: 12px; }
+      .rack-inner::before, .rack-inner::after { width: 26px; }
+      .unit__ears { width: 20px; }
+      .unit__face { padding-left: 32px; padding-right: 32px; }
+      .u-turntable .unit__face,
+      .u-amp .unit__face,
+      .u-cassette .unit__face,
+      .u-eq .unit__face,
+      .u-vu .unit__face,
+      .u-reel .unit__face,
+      .u-tuner .unit__face,
+      .u-cd .unit__face { padding-left: 34px; padding-right: 34px; }
+      .u-foot .unit__face { padding: 16px 32px; }
+      .brand-plate .name { font-size: 22px; }
+      .brand-plate .sub { display: none; }
+      .knob { width: 78px; height: 78px; }
+      .amp__ctrls { grid-template-columns: 1fr; gap: 14px; }
+      .knob-col + .knob-col { border-left: none; padding-left: 0; border-top: 1px dashed rgba(0,0,0,0.2); padding-top: 14px; }
+      .cassette__window { width: 100%; max-width: 240px; margin: 0 auto; }
+      .cassette__steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rack">
+    <div class="rack-inner">
+
+      <!-- ─────────────────────────────────────────────────────
+           BRAND PLATE (top of the rack)
+           ───────────────────────────────────────────────────── -->
+      <div class="unit u-brand">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="brand-plate">
+            <span class="name">VINYLESSENCE<span class="tm">™</span></span>
+            <span class="sub">Smart LED Slipmat · Series 1</span>
+          </div>
+          <span class="led led--gold led--pulse" aria-hidden="true"></span>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           TURNTABLE (hero)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-turntable">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="turntable">
+            <div class="plinth">
+              <div class="platter">
+                <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/697450acd4fb90af5d7e1a6c.png" alt="Vinylessence™ Smart LED Slipmat" />
+              </div>
+              <div class="tonearm" aria-hidden="true"></div>
+            </div>
+            <div class="tt-controls">
+              <div class="brand-line">SLIPMAT · <span>SERIES ONE</span></div>
+              <div class="model-num">MODEL VE-01 · 33⅓ / 45 RPM · 12″</div>
+              <div class="tt-buttons">
+                <button class="tt-btn is-active"><span class="led led--gold"></span> 33</button>
+                <button class="tt-btn"><span class="led"></span> 45</button>
+                <button class="tt-btn"><span class="led led--green"></span> START</button>
+                <button class="tt-btn"><span class="led"></span> STOP</button>
+              </div>
+              <div class="silkscreen">LOAD RECORD · POWER ON · PAIR APP · PLAY</div>
+            </div>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           AMPLIFIER (headline + pitch)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-amp">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="amp">
+            <div class="amp__pitch">
+              <div class="model-num">INTEGRATED PREAMP · MODEL AP-01</div>
+              <h2>Vinyl,<br /><em>illuminated.</em></h2>
+              <p>A <strong>Smart LED slipmat</strong> that drops on your platter, pairs with the app, and reacts to whatever's playing on top of it. Zero setup, zero modifications, no extra equipment. Just place, power on, and play.</p>
+            </div>
+            <div class="amp__ctrls">
+              <div class="knob-col">
+                <div class="knob knob--vol"></div>
+                <span class="knob__label">Volume</span>
+              </div>
+              <div class="amp__small">
+                <div class="knob-col">
+                  <div class="knob knob--sm knob--treble"></div>
+                  <span class="knob__label">Treble</span>
+                </div>
+                <div class="knob-col">
+                  <div class="knob knob--sm knob--bass"></div>
+                  <span class="knob__label">Bass</span>
+                </div>
+                <div class="knob-col">
+                  <div class="knob knob--sm"></div>
+                  <span class="knob__label">Bal</span>
+                </div>
+                <div class="amp__standby">
+                  <span class="led led--gold led--pulse"></span>
+                  <span>Standby · Ready</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           CASSETTE DECK (how it works)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-cassette">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="cassette">
+            <div class="cassette__window">
+              <div class="cassette__hub"></div>
+              <div class="cassette__hub cassette__hub--r"></div>
+              <div class="cassette__label">SIDE A · HOW IT WORKS</div>
+            </div>
+            <div class="cassette__side">
+              <div style="display:flex; gap:14px; align-items:center;">
+                <div class="lcd-counter">
+                  <span class="digits">0004</span>
+                  <span class="label">Steps</span>
+                </div>
+                <div class="transport">
+                  <button class="tbtn" title="Rewind">◀◀</button>
+                  <button class="tbtn is-active" title="Play">▶</button>
+                  <button class="tbtn" title="Stop">■</button>
+                  <button class="tbtn" title="Fast fwd">▶▶</button>
+                  <button class="tbtn is-rec" title="Record">●</button>
+                </div>
+              </div>
+              <div class="cassette__steps">
+                <div class="cassette__step">
+                  <div>
+                    <h4>Place</h4>
+                    <p>Set the slipmat on your turntable.</p>
+                  </div>
+                </div>
+                <div class="cassette__step">
+                  <div>
+                    <h4>Power</h4>
+                    <p>Press the side button to wake it up.</p>
+                  </div>
+                </div>
+                <div class="cassette__step">
+                  <div>
+                    <h4>Pair</h4>
+                    <p>Open the app, pick a mode and color.</p>
+                  </div>
+                </div>
+                <div class="cassette__step">
+                  <div>
+                    <h4>Play</h4>
+                    <p>Drop the needle. Watch it glow.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           EQ (features + specs)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-eq">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="eq__head">
+            <h3>Graphic <span>EQ</span></h3>
+            <span class="model-num">6-Band · Ch. A / B</span>
+          </div>
+          <div class="eq__bands">
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 20%;"></div></div>
+              <div class="band__label">Music<br />Reactive</div>
+              <div class="band__hz">60 Hz</div>
+            </div>
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 30%;"></div></div>
+              <div class="band__label">Vibrant<br />LED Glow</div>
+              <div class="band__hz">250 Hz</div>
+            </div>
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 40%;"></div></div>
+              <div class="band__label">Plug &amp;<br />Play</div>
+              <div class="band__hz">500 Hz</div>
+            </div>
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 22%;"></div></div>
+              <div class="band__label">Fits Most<br />Turntables</div>
+              <div class="band__hz">1 kHz</div>
+            </div>
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 35%;"></div></div>
+              <div class="band__label">Safe for<br />Vinyl</div>
+              <div class="band__hz">4 kHz</div>
+            </div>
+            <div class="band">
+              <div class="band__slot"><div class="band__handle" style="top: 28%;"></div></div>
+              <div class="band__label">13–16 Hr<br />Battery</div>
+              <div class="band__hz">10 kHz</div>
+            </div>
+          </div>
+          <dl class="spec-rail">
+            <div><dt>Form Factor</dt><dd>11–12″ · 8.5 mm</dd></div>
+            <div><dt>Power</dt><dd>4000 mAh · USB-C</dd></div>
+            <div><dt>Control</dt><dd>App + Sound Sensor</dd></div>
+          </dl>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           VU METERS (campaign stats)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-vu">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="vu-grid">
+            <div class="vu vu--r55">
+              <div class="vu__face"><div class="vu__needle"></div></div>
+              <div class="vu__label">Funded</div>
+              <span class="vu__value">364%</span>
+            </div>
+            <div class="vu vu--r45">
+              <div class="vu__face"><div class="vu__needle"></div></div>
+              <div class="vu__label">Raised</div>
+              <span class="vu__value">$36,423</span>
+            </div>
+            <div class="vu vu--r35">
+              <div class="vu__face"><div class="vu__needle"></div></div>
+              <div class="vu__label">Backed</div>
+              <span class="vu__value">Hundreds</span>
+            </div>
+            <div class="vu vu--r20">
+              <div class="vu__face"><div class="vu__needle"></div></div>
+              <div class="vu__label">Guarantee</div>
+              <span class="vu__value">30-Day</span>
+            </div>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           REEL-TO-REEL (reviews on tape)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-reel">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="reel">
+            <div class="reel__reel"></div>
+            <div class="reel__tape">
+              <div class="reel__quote">
+                <span class="stars">★★★★★</span>
+                <p>
+                  "Amazing progress! So excited to see Vinylessence thrive!"
+                  <cite>— nickalt · @vinylmeplease</cite>
+                </p>
+              </div>
+              <div class="reel__quote">
+                <span class="stars">★★★★★</span>
+                <p>
+                  "ohhhhhh my gobbbbbb"
+                  <cite>— Vertigo Vinyl</cite>
+                </p>
+              </div>
+              <div class="reel__quote">
+                <span class="stars">★★★★★</span>
+                <p>
+                  "Our records would look great on these"
+                  <cite>— A to Z Media Inc.</cite>
+                </p>
+              </div>
+            </div>
+            <div class="reel__reel reel__reel--r"></div>
+          </div>
+          <div class="reel__brand">CH. 1 · NOTES FROM THE COMMUNITY · REEL A</div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           TUNER (FAQ)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-tuner">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="tuner__head">
+            <h3>AM/FM <span>Tuner</span></h3>
+            <div class="tuner__band-select">
+              <button class="is-active">FAQ</button>
+              <button>AM</button>
+              <button>FM</button>
+            </div>
+          </div>
+          <div class="tuner__dial">
+            <div class="tuner__ticks"></div>
+            <div class="tuner__now">TUNED</div>
+            <div class="tuner__needle" aria-hidden="true"></div>
+            <div class="tuner__frequency">99.5</div>
+            <div class="tuner__stations">
+              <span>88.5</span><span>92.3</span><span>96.1</span><span>99.5</span><span>103.7</span><span>107.9</span>
+            </div>
+          </div>
+
+          <div class="tuner__stations-list">
+            <details class="station" open>
+              <summary>
+                <span class="station__freq">88.5</span>
+                <span class="station__q">Does it affect sound quality or playback?</span>
+                <span class="station__toggle"></span>
+              </summary>
+              <p class="station__a">Nope. The thickness and flatness are designed so it won't interfere with tracking, sound quality, or record wear. In 99% of cases, there's nothing to adjust.</p>
+            </details>
+            <details class="station">
+              <summary>
+                <span class="station__freq">92.3</span>
+                <span class="station__q">Does it work with all turntables?</span>
+                <span class="station__toggle"></span>
+              </summary>
+              <p class="station__a">Vinylessence™ fits the vast majority of decks that accept a standard 11–12″ slipmat — Audio-Technica, Sony, Victrola, Crosley, Numark, Technics, Pioneer, and more. Unusually short spindles are the exception.</p>
+            </details>
+            <details class="station">
+              <summary>
+                <span class="station__freq">96.1</span>
+                <span class="station__q">Is it safe for my vinyl?</span>
+                <span class="station__toggle"></span>
+              </summary>
+              <p class="station__a">Yes. The top surface is smooth anti-static acrylic, just like any other acrylic slipmat. All internal electronics are fully enclosed.</p>
+            </details>
+            <details class="station">
+              <summary>
+                <span class="station__freq">99.5</span>
+                <span class="station__q">How long does the battery last?</span>
+                <span class="station__toggle"></span>
+              </summary>
+              <p class="station__a">Typical runtimes are 13–16 hours per charge on the 4000 mAh cell, depending on colour mode and brightness.</p>
+            </details>
+            <details class="station">
+              <summary>
+                <span class="station__freq">103.7</span>
+                <span class="station__q">When does it ship?</span>
+                <span class="station__toggle"></span>
+              </summary>
+              <p class="station__a">Pre-orders ship as part of the first production run. First shipments are expected to start as early as August 2026.</p>
+            </details>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           CD PLAYER (pricing + CTA)
+           ───────────────────────────────────────────────────── -->
+      <section class="unit u-cd">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="cd">
+            <div class="cd__tray">
+              <div class="cd__disc"></div>
+            </div>
+            <div>
+              <div class="cd__display">
+                <div class="row big">
+                  <span>PRE-ORDER · $30 OFF</span>
+                  <span>01:00</span>
+                </div>
+                <div class="row sm">
+                  <span>SERIES 1 · TRACK 01</span>
+                  <span>SHIPS AUG '26</span>
+                </div>
+              </div>
+              <div class="cd__price">
+                <span class="num"><span>$99</span></span>
+                <span class="strike">$129</span>
+                <span class="tag">SAVE $30</span>
+              </div>
+              <a href="https://vinyl-essence.com/buy-now" class="cd__cta">PRE-ORDER NOW ▶</a>
+              <div class="cd__trust">
+                <span>30-Day Guarantee</span>
+                <span>Secure Checkout</span>
+                <span>Ships Worldwide</span>
+              </div>
+              <div class="cd__transport">
+                <button class="tbtn">◀◀</button>
+                <button class="tbtn">▶</button>
+                <button class="tbtn">■</button>
+                <button class="tbtn">▶▶</button>
+                <button class="tbtn">⏏</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────────────────────────────────
+           FOOTER PLATE
+           ───────────────────────────────────────────────────── -->
+      <footer class="unit u-foot">
+        <div class="unit__ears unit__ears--l">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+        <div class="unit__face">
+          <div class="foot__brand">
+            <img src="https://storage.googleapis.com/msgsndr/JwLxrWuvdRzEU1cNUL3c/media/69252636e4747c451115d56f.png" alt="Vinylessence™" />
+            <span>VINYLESSENCE&trade;</span>
+          </div>
+          <div class="foot__socials">
+            <a class="sock" href="https://www.instagram.com/vinylessenceofficial"><span class="led led--green" style="width:6px;height:6px;"></span> IG</a>
+            <a class="sock" href="https://www.youtube.com/@OfficialVinylessence"><span class="led led--green" style="width:6px;height:6px;"></span> YT</a>
+            <a class="sock" href="https://www.tiktok.com/@vinylessenceofficial"><span class="led led--green" style="width:6px;height:6px;"></span> TT</a>
+          </div>
+          <div class="foot__legal">© Charg3d LLC · All Rights Reserved</div>
+        </div>
+        <div class="unit__ears unit__ears--r">
+          <span class="screw screw--phillips"></span>
+          <span class="screw screw--phillips"></span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+</body>
+</html>
