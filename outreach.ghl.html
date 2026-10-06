@@ -1,0 +1,573 @@
+<!-- Temecula Hills Christian Fellowship - Outreach ministry page. GHL Custom Code drop-in. All styles scoped under .thcf prefix. -->
+
+<style>
+/* === Base, scoped to .thcf so nothing leaks into GHL's page styles === */
+.thcf,.thcf *{box-sizing:border-box;margin:0;padding:0}
+.thcf{
+  --black:#000;--white:#fff;--dark:#424242;--teal-dark:#0b6b6b;--teal-light:#76cdbd;
+  --cyan:#4ecbcf;--orange:#e2572e;--orange-dark:#c9451f;--gold:#f39615;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;
+  --gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--gray-800);line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.thcf img,.thcf svg{display:block;max-width:100%}
+.thcf a{color:inherit;text-decoration:none}
+.thcf button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.thcf ul{list-style:none}
+
+.thcf-eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.thcf-h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;line-height:1.15;margin-bottom:18px}
+.thcf-lead{font-size:clamp(16px,1.6vw,19px);color:var(--gray-600);line-height:1.65}
+.thcf-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:.01em;transition:all .25s;cursor:pointer;text-align:center}
+.thcf-btn--orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(226,87,46,.25)}
+.thcf-btn--orange:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.thcf-btn--teal{background:var(--teal-dark);color:#fff;box-shadow:0 8px 20px rgba(11,107,107,.22)}
+.thcf-btn--teal:hover{background:#085050;transform:translateY(-1px)}
+.thcf-btn--outline-light{background:rgba(255,255,255,.08);color:#fff;border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px)}
+.thcf-btn--outline-light:hover{background:rgba(255,255,255,.18)}
+
+.thcf-section{padding:clamp(56px,7vw,80px) 24px;scroll-margin-top:80px}
+.thcf-section--gray{background:var(--gray-50)}
+.thcf-section--white{background:#fff}
+.thcf-section--teal{background:linear-gradient(180deg,var(--teal-dark) 0%,#085050 100%);color:#fff;position:relative;overflow:hidden}
+.thcf-section--teal h2,.thcf-section--teal h3{color:#fff}
+.thcf-section-head{text-align:center;max-width:760px;margin:0 auto clamp(32px,4vw,44px)}
+.thcf-section-head .thcf-eyebrow{position:relative;display:inline-block;padding-top:22px;margin-bottom:12px}
+.thcf-section-head .thcf-eyebrow::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:3px;border-radius:2px;background:currentColor;opacity:.55}
+
+.thcf-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.thcf-reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.thcf-reveal{opacity:1;transform:none;transition:none}}
+.thcf-outreach{position:relative;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);overflow-x:clip}
+
+/* === Header === */
+.thcf-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--gray-100)}
+.thcf-header-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.thcf-logo{display:flex;align-items:center;gap:10px}
+.thcf-logo-mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-logo-mark img{height:56px;width:auto;display:block}
+@media (max-width:640px){.thcf-logo-mark img{height:44px}}
+.thcf-menu-btn{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 16px;border-radius:999px;background:var(--gray-100);transition:background .2s}
+.thcf-menu-btn:hover{background:var(--gray-200)}
+.thcf-menu-btn-label{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-800)}
+.thcf-menu-btn-icon{width:36px;height:36px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.thcf-menu-btn:hover .thcf-menu-btn-icon{background:var(--orange)}
+@media (max-width:640px){.thcf-menu-btn-label{display:none}}
+
+/* === Fullscreen menu (3-column: primary / secondary / image) === */
+.thcf-menu{position:fixed;inset:0;z-index:60;background:var(--dark);overflow:hidden;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+.thcf-menu.is-open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.thcf-menu-top{display:flex;justify-content:space-between;align-items:center;padding:24px 28px}
+.thcf-menu-label{color:#fff;font-weight:700;letter-spacing:.18em;font-size:13px;opacity:0;transition:opacity .3s .25s}
+.thcf-menu.is-open .thcf-menu-label{opacity:1}
+.thcf-menu-close{color:#fff;padding:8px;border-radius:6px;transition:color .2s}
+.thcf-menu-close:hover{color:var(--orange)}
+.thcf-menu-body{flex:1;display:grid;grid-template-columns:1.4fr 1fr 1.1fr;gap:56px;padding:8px 72px 48px;align-items:center;overflow-y:auto}
+@media (max-width:1100px){.thcf-menu-body{grid-template-columns:1.4fr 1fr;gap:48px;padding:0 64px 48px}.thcf-menu .thcf-menu-visual{display:none}}
+@media (max-width:768px){.thcf-menu-body{grid-template-columns:1fr;padding:8px 32px 48px;gap:28px;align-items:start}}
+.thcf-menu-nav a{display:block;font-size:clamp(28px,4.6vw,56px);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .25s,color .12s,padding .25s}
+.thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px)}
+.thcf-menu-nav a.is-active{color:var(--gold)}
+.thcf-menu.is-open .thcf-menu-nav a{opacity:1;transform:translateY(0)}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(1){transition-delay:.30s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(2){transition-delay:.36s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(3){transition-delay:.42s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(4){transition-delay:.48s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(5){transition-delay:.54s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(6){transition-delay:.60s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(7){transition-delay:.66s}
+.thcf-menu.is-open .thcf-menu-nav a:nth-child(8){transition-delay:.72s}
+.thcf-menu.is-open .thcf-menu-nav a:hover{color:var(--orange);transform:translateX(12px);transition-delay:0s}
+.thcf-menu-secondary{display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .7s .55s,transform .7s .55s}
+.thcf-menu.is-open .thcf-menu-secondary{opacity:1;transform:translateY(0)}
+.thcf-menu-secondary a{font-size:clamp(17px,1.7vw,20px);font-weight:600;color:rgba(255,255,255,.78);letter-spacing:.01em;transition:color .25s,transform .25s}
+.thcf-menu-secondary a:hover{color:var(--orange);transform:translateX(6px)}
+.thcf-menu-secondary a.is-active{color:var(--gold)}
+.thcf-menu-visual{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;max-height:70vh;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);transition:opacity .7s .65s,transform .7s .65s}
+.thcf-menu.is-open .thcf-menu-visual{opacity:1;transform:translateY(0)}
+.thcf-menu-visual img{max-width:100%;max-height:70vh;width:auto;height:auto;display:block}
+.thcf-menu-visual .thcf-menu-visual-mobile{display:none}
+@media (max-width:768px){
+  .thcf-menu .thcf-menu-visual{display:flex;max-height:240px}
+  .thcf-menu-visual img{max-height:240px}
+  .thcf-menu-visual .thcf-menu-visual-desktop{display:none}
+  .thcf-menu-visual .thcf-menu-visual-mobile{display:block}
+}
+
+/* === Hero === */
+.thcf-hero{position:relative;padding:clamp(96px,12vw,128px) 24px clamp(72px,9vw,96px);background:linear-gradient(180deg,var(--teal-dark) 0%,var(--teal-dark) 55%,#085050 100%);color:#fff;overflow:hidden;text-align:center}
+.thcf-hero-blob{position:absolute;top:60px;right:-80px;width:380px;height:380px;background:var(--orange);border-radius:50%;filter:blur(80px);opacity:.30;mix-blend-mode:overlay;pointer-events:none}
+.thcf-hero-blob-2{position:absolute;bottom:-100px;left:-80px;width:340px;height:340px;background:var(--gold);border-radius:50%;filter:blur(90px);opacity:.22;pointer-events:none}
+.thcf-hero-mountains{position:absolute;bottom:0;left:0;width:100%;height:160px;opacity:.22;pointer-events:none}
+.thcf-hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto}
+.thcf-hero-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:rgba(243,150,21,.95);color:#000;font-size:12px;font-weight:700;letter-spacing:.18em;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.thcf-hero h1{font-size:clamp(36px,6.5vw,76px);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:24px;color:#fff}
+.thcf-hero p{font-size:clamp(16px,1.8vw,21px);color:rgba(220,255,250,.92);max-width:660px;margin:0 auto 36px;line-height:1.6}
+.thcf-hero-stats{display:flex;justify-content:center;gap:clamp(28px,5vw,56px);flex-wrap:wrap;margin-top:12px}
+.thcf-hero-stat{text-align:center}
+.thcf-hero-stat .num{display:block;font-size:clamp(28px,3.6vw,42px);font-weight:900;color:var(--gold);line-height:1}
+.thcf-hero-stat .label{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:8px}
+
+/* === Intro band === */
+.thcf-intro{max-width:900px;margin:0 auto;text-align:center;color:var(--gray-600);font-size:17px;line-height:1.75}
+.thcf-intro p+p{margin-top:16px}
+.thcf-intro strong{color:var(--gray-800);font-weight:700}
+.thcf-intro a{color:var(--teal-dark);font-weight:700;border-bottom:2px solid currentColor}
+.thcf-intro a:hover{color:var(--orange)}
+
+/* === Partners grid === */
+.thcf-partners{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:900px){.thcf-partners{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.thcf-partners{grid-template-columns:1fr;max-width:460px}}
+.thcf-partner{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;position:relative;border-top:4px solid var(--accent,var(--teal-dark))}
+.thcf-partner:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.10),0 0 0 1px var(--gray-200)}
+.thcf-partner-body{padding:26px 26px 22px;flex:1;display:flex;flex-direction:column}
+.thcf-partner-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.thcf-partner-icon{width:44px;height:44px;border-radius:12px;background:var(--accent,var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 14px rgba(0,0,0,.10)}
+.thcf-partner-title{flex:1;min-width:0}
+.thcf-partner-title h3{font-size:18px;font-weight:800;color:var(--gray-800);line-height:1.25;margin-bottom:4px;letter-spacing:-.01em}
+.thcf-partner-location{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--teal-dark))}
+.thcf-partner-location svg{opacity:.85}
+.thcf-partner p{color:var(--gray-600);font-size:14.5px;line-height:1.65;margin-bottom:18px;flex:1}
+.thcf-partner-link{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:8px;background:var(--gray-50);color:var(--gray-800);font-size:13px;font-weight:700;transition:all .2s;align-self:flex-start;margin-top:auto;border:1.5px solid var(--gray-200)}
+.thcf-partner-link:hover{background:var(--accent,var(--teal-dark));color:#fff;border-color:var(--accent,var(--teal-dark));transform:translateX(2px)}
+.thcf-partner-link svg{transition:transform .2s}
+.thcf-partner-link:hover svg{transform:translateX(2px)}
+
+/* === CTA band === */
+.thcf-cta-band{max-width:960px;margin:0 auto;background:#fff;border-radius:20px;padding:clamp(32px,4vw,48px);text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100)}
+.thcf-cta-band h2{color:var(--gray-800);margin-bottom:12px}
+.thcf-cta-band p{color:var(--gray-600);font-size:17px;line-height:1.7;max-width:620px;margin:0 auto 24px}
+
+/* === Footer === */
+.thcf-footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:64px 24px 28px}
+.thcf-footer-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+@media (max-width:760px){
+  .thcf-footer-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .thcf-footer-brand{justify-content:center}
+  .thcf-footer-tag{max-width:none;margin-left:auto;margin-right:auto}
+  .thcf-footer-socials{justify-content:center}
+  .thcf-footer-col p{justify-content:center}
+}
+.thcf-footer-brand{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:14px}
+.thcf-footer-brand .mark{display:flex;align-items:center;justify-content:center;line-height:0}
+.thcf-footer-brand .mark img{height:38px;width:auto;display:block}
+.thcf-footer-brand strong{font-size:18px;font-weight:700;letter-spacing:.06em}
+.thcf-footer-tag{color:rgba(255,255,255,.55);max-width:340px;line-height:1.65;margin-bottom:22px}
+.thcf-footer-socials{display:flex;gap:10px}
+.thcf-footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);transition:all .2s}
+.thcf-footer-socials a:hover{background:var(--orange);color:#fff}
+.thcf-footer-col h4{color:#fff;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.thcf-footer-col p{display:flex;gap:10px;color:rgba(255,255,255,.65);font-size:14px;margin-bottom:10px;line-height:1.55}
+.thcf-footer-col p svg{color:var(--teal-light);flex-shrink:0;margin-top:2px}
+.thcf-footer-col ul li{margin-bottom:8px}
+.thcf-footer-col ul li a{color:rgba(255,255,255,.65);font-size:14px;transition:color .2s}
+.thcf-footer-col ul li a:hover{color:var(--orange)}
+.thcf-footer-bottom{max-width:1140px;margin:0 auto;padding-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+
+<div class="thcf thcf-outreach">
+<!-- ============ HEADER ============ -->
+<header class="thcf-header">
+  <div class="thcf-header-inner">
+    <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true" class="thcf-logo" aria-label="Temecula Hills Christian Fellowship — Home">
+      <span class="thcf-logo-mark">
+        <img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5bdf631a0f048050a32742.png" alt="Temecula Hills Christian Fellowship">
+      </span>
+    </a>
+    <button class="thcf-menu-btn" type="button" data-thcf-menu-open aria-label="Open navigation menu">
+      <span class="thcf-menu-btn-label">Menu</span>
+      <span class="thcf-menu-btn-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="thcf-menu" id="thcf-menu" role="dialog" aria-label="Site menu" aria-modal="true">
+  <div class="thcf-menu-top">
+    <span class="thcf-menu-label">MENU</span>
+    <button class="thcf-menu-close" type="button" data-thcf-menu-close aria-label="Close menu">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="thcf-menu-body">
+    <nav class="thcf-menu-nav" aria-label="Primary">
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">HOME</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'M NEW</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/JWAoLLIJh55hfWb30Cvs">WHO WE ARE</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/pdEI41EZrix7ju0kRGpC">WHAT WE BELIEVE</a>
+      <a href="https://temeculahills.churchcenter.com/registrations/events" target="_blank" rel="noopener">SIGN UP FOR EVENTS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/wYmtlo8Sj2IAeSDvenjZ">MINISTRIES</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">SERMONS</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">GIVE</a>
+    </nav>
+    <nav class="thcf-menu-secondary" aria-label="Secondary">
+      <a href="https://site.fractionalbreakthrough.com/preview/TKsQEOpmBQmmZMw3gwoZ?notrack=true">Meet Our Leadership</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/iaqhdGjOgNnbaSblbzCV">Home Groups</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/vVl7PRV8SjcnQCEc18bY">Equipping Hour</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/n36lmu31pljKpwmYqLjl">Men's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/hqD7GUBE1RVUvljlVnfC">Women's Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/8B0IFhA2H6kZEHzp7r0U">High School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/taHJabVx8s2OMQZTyH1Q">Middle School Ministry</a>
+      <a href="https://app.fractionalbreakthrough.com/v2/preview/7nNDfVt19YF8e2qj2uql">Children's Ministry</a>
+      <a href="#" class="is-active">Outreach</a>
+      <a href="https://site.fractionalbreakthrough.com/preview/trPqEXYG8envmq2e5XlO?notrack=true">Resources</a>
+      <a href="#thcf-contact" data-thcf-menu-close>Contact</a>
+    </nav>
+    <div class="thcf-menu-visual" aria-hidden="true">
+      <img class="thcf-menu-visual-desktop" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86c8fd689c353bd069.png" alt="">
+      <img class="thcf-menu-visual-mobile" src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a506f86eada8c1f45c2550a.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="thcf-hero">
+  <div class="thcf-hero-blob" aria-hidden="true"></div>
+  <div class="thcf-hero-blob-2" aria-hidden="true"></div>
+  <svg class="thcf-hero-mountains" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L150,180 L320,300 Z" fill="rgba(255,255,255,0.30)"/>
+    <path d="M260,300 L480,120 L700,300 Z" fill="rgba(255,255,255,0.40)"/>
+    <path d="M620,300 L840,150 L1080,300 Z" fill="rgba(255,255,255,0.55)"/>
+    <path d="M980,300 L1140,200 L1200,300 Z" fill="rgba(255,255,255,0.70)"/>
+  </svg>
+  <div class="thcf-hero-inner">
+    <span class="thcf-hero-pill">GLOBAL &amp; LOCAL</span>
+    <h1>Outreach.</h1>
+    <p>Building Jesus&rsquo; kingdom at home and abroad. Meet the partners we support &mdash; across the valley and around the world.</p>
+    <div class="thcf-hero-stats">
+      <div class="thcf-hero-stat"><span class="num">11</span><span class="label">Partners</span></div>
+      <div class="thcf-hero-stat"><span class="num">7+</span><span class="label">Countries</span></div>
+      <div class="thcf-hero-stat"><span class="num">1</span><span class="label">Mission</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-intro">
+  <div class="thcf-intro thcf-reveal">
+    <p>As a church, our heart is to build Jesus&rsquo; kingdom both at home and abroad. We place a high value on supporting the work of building Jesus&rsquo; kingdom around the world.</p>
+    <p>Below is a list of our currently supported outreach partners. If you would like to know more about our outreach efforts, please <a href="#thcf-contact">contact us</a>.</p>
+  </div>
+</section>
+
+<!-- ============ PARTNERS GRID ============ -->
+<section class="thcf-section thcf-section--gray" id="thcf-partners">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--teal-dark)">Our Partners</span>
+    <h2 class="thcf-h2">Serving Jesus together.</h2>
+    <p class="thcf-lead">Each partner below is actively advancing the gospel somewhere in the world. Tap any card to visit their site and learn more.</p>
+  </div>
+  <div class="thcf-partners">
+
+    <!-- 1. Adria & Butoto Mahinduzi -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Adria (Hinrichs) &amp; Butoto Mahinduzi</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Democratic Republic of Congo</span>
+          </div>
+        </div>
+        <p>Serving Jesus in the Democratic Republic of Congo by caring for children and families affected by disability.</p>
+        <a class="thcf-partner-link" href="https://www.mesaglobal.co/" target="_blank" rel="noopener">
+          Visit United World Mission
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 2. Alex Bruda -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Alex Bruda</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by partnering with churches around the world to empower and multiply their ministry to children.</p>
+        <a class="thcf-partner-link" href="https://egmworld.org/" target="_blank" rel="noopener">
+          Visit Every Generation Ministries
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 3. Ben Virgo -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M10 21v-5a2 2 0 1 1 4 0v5"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Ben Virgo</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> East London, England</span>
+          </div>
+        </div>
+        <p>Serving Jesus by planting Victoria Park Community Church among Muslims in East London, and spreading the good news through gospel-centered tours.</p>
+        <a class="thcf-partner-link" href="https://christianheritagelondon.org/" target="_blank" rel="noopener">
+          Visit Christian Heritage London
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 4. Erin Mitchell -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--cyan)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Erin Mitchell</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Mozambique</span>
+          </div>
+        </div>
+        <p>Serving Jesus by caring for the physical, emotional, and spiritual healing of orphans in Mozambique.</p>
+        <a class="thcf-partner-link" href="http://www.caringfororphans.com/home/home.aspx" target="_blank" rel="noopener">
+          Visit Caring For Orphans
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 5. J&L -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--orange-dark)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>J&amp;L</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Exeter, England &amp; East Asia</span>
+          </div>
+        </div>
+        <p>Serving Jesus in Exeter, England, reaching students from around the world. Also working toward serving Jesus in a closed country in East Asia with Pioneers Missions (names withheld for security).</p>
+        <a class="thcf-partner-link" href="https://www.friendsinternational.uk/" target="_blank" rel="noopener">
+          Visit Friends International
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 6. John Barry Van Hoogen -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--teal-light)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>John Barry Van Hoogen</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by partnering with churches worldwide to see believers equipped, encouraged, and engaged in evangelism and disciple-making.</p>
+        <a class="thcf-partner-link" href="https://www.traincpe.org/" target="_blank" rel="noopener">
+          Visit Church Partnership Evangelism
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 7. Joseph & Sarah Ryan -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--orange)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M5 9h14"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Joseph &amp; Sarah Ryan</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by proclaiming the Gospel to the Jew first and also to the Gentile.</p>
+        <a class="thcf-partner-link" href="https://chosenpeople.com/" target="_blank" rel="noopener">
+          Visit Chosen People Ministries
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 8. Rob Foster -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--teal-dark)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Rob Foster</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by building strategic partnerships that strengthen the global church.</p>
+        <a class="thcf-partner-link" href="https://collabdev.org/" target="_blank" rel="noopener">
+          Visit Collaborative Development International
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 9. Sally Burke -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--gold)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Sally Burke</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by impacting children and schools worldwide for Christ, gathering mothers to pray for their kids and the next generation.</p>
+        <a class="thcf-partner-link" href="https://momsinprayer.org/" target="_blank" rel="noopener">
+          Visit Moms in Prayer International
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 10. Birth Choice -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--cyan)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Birth Choice Centers</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Southern California</span>
+          </div>
+        </div>
+        <p>Serving Jesus by supporting people facing pregnancy, parenting, and reproductive health concerns with compassionate, Christ-centered care.</p>
+        <a class="thcf-partner-link" href="https://birthchoicecenters.org/" target="_blank" rel="noopener">
+          Visit Birth Choice Centers
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 11. Center for Apologetics Research -->
+    <article class="thcf-partner thcf-reveal" style="--accent:var(--orange-dark)">
+      <div class="thcf-partner-body">
+        <div class="thcf-partner-header">
+          <div class="thcf-partner-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="thcf-partner-title">
+            <h3>Center for Apologetics Research</h3>
+            <span class="thcf-partner-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Worldwide</span>
+          </div>
+        </div>
+        <p>Serving Jesus by equipping people across borders and cultures for discernment, the defense of the faith, and cult evangelism.</p>
+        <a class="thcf-partner-link" href="https://thecenters.org/" target="_blank" rel="noopener">
+          Visit the Center for Apologetics Research
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="thcf-section thcf-section--white">
+  <div class="thcf-cta-band thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--orange)">Get Involved</span>
+    <h2 class="thcf-h2">Want to support outreach?</h2>
+    <p>If you&rsquo;d like to know more about any of our partners, pray for the work they&rsquo;re doing, or get involved personally, we&rsquo;d love to talk.</p>
+    <a class="thcf-btn thcf-btn--teal" href="#thcf-contact">Contact Us
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="thcf-footer" id="thcf-contact">
+  <div class="thcf-footer-grid">
+    <div>
+      <div class="thcf-footer-brand">
+        <span class="mark"><img src="https://assets.cdn.filesafe.space/IlZpRJ5JsT3Sz0nLKays/media/6a5be1c2baf5f6da409f3f0f.png" alt="Temecula Hills Christian Fellowship"></span>
+      </div>
+      <p class="thcf-footer-tag">Bringing glory to God by making maturing disciples of Jesus.</p>
+      <!-- TODO: replace href values with real church social URLs. -->
+      <div class="thcf-footer-socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Visit Us</h4>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>28780 Single Oak Drive<br>Temecula, CA 92590</span>
+      </p>
+      <p>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Sundays: 8:45 &amp; 10:30 AM</span>
+      </p>
+    </div>
+    <div class="thcf-footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/fjgy27cqVKfcp7ghkJpL?notrack=true">Home</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/toMqthywNSf6lqZfclqu">I'm New</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/Obd37fCSlx5dARpEDbZY">Sermons</a></li>
+        <li><a href="https://app.fractionalbreakthrough.com/v2/preview/YKZ4VpmeeKppXkQSGdVN">Give Online</a></li>
+        <li><a href="#thcf-contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="thcf-footer-bottom">
+    <p>&copy; <span id="thcf-year"></span> Temecula Hills Christian Fellowship. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.thcf-outreach');
+  if (!root) return;
+
+  var yearEl = root.querySelector('#thcf-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var menu = root.querySelector('#thcf-menu');
+  var openBtns = root.querySelectorAll('[data-thcf-menu-open]');
+  var closeEls = root.querySelectorAll('[data-thcf-menu-close]');
+  function openMenu(){ if (menu) { menu.classList.add('is-open'); document.body.style.overflow = 'hidden'; } }
+  function closeMenu(){ if (menu) { menu.classList.remove('is-open'); document.body.style.overflow = ''; } }
+  openBtns.forEach(function(b){ b.addEventListener('click', openMenu); });
+  closeEls.forEach(function(b){ b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  var revealEls = root.querySelectorAll('.thcf-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
