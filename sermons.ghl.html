@@ -124,19 +124,15 @@
 .thcf-latest-actions{display:flex;gap:10px;flex-wrap:wrap}
 
 /* Sheet-driven latest-sermon enhancements */
-.thcf-latest-head{display:grid;grid-template-columns:120px 1fr;gap:20px;margin:4px 0 20px;align-items:center}
-@media (max-width:640px){.thcf-latest-head{grid-template-columns:1fr;gap:14px;text-align:center;justify-items:center}}
-.thcf-latest-graphic{width:120px;height:120px;border-radius:14px;overflow:hidden;background:var(--gray-100);box-shadow:0 6px 18px rgba(0,0,0,.10)}
+.thcf-latest-head{display:flex;gap:16px;align-items:center;margin:4px 0 20px;flex-wrap:wrap}
+.thcf-latest-graphic{width:96px;height:96px;border-radius:12px;overflow:hidden;background:var(--gray-100);box-shadow:0 6px 18px rgba(0,0,0,.10);flex-shrink:0}
 .thcf-latest-graphic img{width:100%;height:100%;object-fit:cover;display:block}
-.thcf-latest-head-text{min-width:0}
-.thcf-latest-series{display:inline-block;padding:4px 12px;border-radius:999px;background:var(--teal-dark);color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
-.thcf-latest-title{font-size:clamp(22px,2.6vw,30px);font-weight:800;color:var(--gray-800);line-height:1.2;margin-bottom:8px;letter-spacing:-.01em}
-.thcf-latest-sub{display:flex;flex-wrap:wrap;gap:4px 18px;color:var(--gray-600);font-size:14.5px;font-weight:600;align-items:center;justify-content:flex-start}
-@media (max-width:640px){.thcf-latest-sub{justify-content:center}}
+.thcf-latest-head-text{flex:1 1 220px;min-width:0}
+.thcf-latest-series{display:inline-block;padding:4px 12px;border-radius:999px;background:var(--teal-dark);color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;white-space:nowrap}
+.thcf-latest-title{font-size:clamp(20px,2.4vw,28px);font-weight:800;color:var(--gray-800);line-height:1.2;margin-bottom:10px;letter-spacing:-.01em;overflow-wrap:break-word;word-break:normal;hyphens:none}
+.thcf-latest-sub{display:flex;flex-direction:column;gap:4px;color:var(--gray-600);font-size:14.5px;font-weight:600}
 .thcf-latest-sub > span:empty{display:none}
 .thcf-latest-sub .thcf-latest-ref{color:var(--teal-dark);font-weight:700}
-.thcf-latest-sub > span:not(:empty) ~ span:not(:empty){position:relative;padding-left:18px}
-.thcf-latest-sub > span:not(:empty) ~ span:not(:empty)::before{content:"";position:absolute;left:4px;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--gray-300)}
 
 .thcf-latest-passage{margin-top:28px;padding-top:28px;border-top:1px solid var(--gray-200)}
 .thcf-latest-passage-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
