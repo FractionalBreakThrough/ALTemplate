@@ -426,8 +426,68 @@
     </div>
   </div>
 </section>
+<!-- ============ SERMON LIBRARY (sheet-driven, filterable) ============ -->
+<section class="thcf-section thcf-section--gray" id="thcf-library">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--teal-dark)">Sermon Library</span>
+    <h2 class="thcf-h2">Browse all sermons.</h2>
+    <p class="thcf-lead">Search by speaker, series, book of the Bible, or title.</p>
+  </div>
+
+  <div class="thcf-library thcf-reveal">
+    <div class="thcf-library-controls">
+      <div class="thcf-library-row">
+        <label class="thcf-library-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Search title, speaker, scripture, or series&hellip;" data-thcf-lib-search autocomplete="off">
+        </label>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-sort aria-label="Sort order">
+            <option value="date-desc">Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="title-asc">Title A&ndash;Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="thcf-library-row thcf-library-row--filters">
+        <div class="thcf-library-select">
+          <select data-thcf-lib-speaker aria-label="Filter by speaker">
+            <option value="">All speakers</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-series aria-label="Filter by series">
+            <option value="">All series</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-book aria-label="Filter by book of the Bible">
+            <option value="">All books</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-year aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="thcf-library-count">
+      <span data-thcf-lib-count>Loading sermons&hellip;</span>
+      <button type="button" class="thcf-library-clear" data-thcf-lib-clear hidden>Clear filters</button>
+    </div>
+
+    <div class="thcf-library-list" data-thcf-lib-list></div>
+
+    <div class="thcf-library-empty" data-thcf-lib-empty hidden>
+      <strong>No sermons match these filters.</strong>
+      <p>Try widening your search or clearing a filter.</p>
+    </div>
+  </div>
+</section>
 <!-- ============ SERMON SERIES ============ -->
-<section class="thcf-section thcf-section--gray">
+<section class="thcf-section thcf-section--white">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Sermon Series</span>
     <h2 class="thcf-h2">Walk through Scripture, one series at a time.</h2>
@@ -578,66 +638,6 @@
         </div>
       </div>
     </article>
-  </div>
-</section>
-<!-- ============ SERMON LIBRARY (sheet-driven, filterable) ============ -->
-<section class="thcf-section thcf-section--white" id="thcf-library">
-  <div class="thcf-section-head thcf-reveal">
-    <span class="thcf-eyebrow" style="color:var(--teal-dark)">Sermon Library</span>
-    <h2 class="thcf-h2">Browse all sermons.</h2>
-    <p class="thcf-lead">Search by speaker, series, book of the Bible, or title.</p>
-  </div>
-
-  <div class="thcf-library thcf-reveal">
-    <div class="thcf-library-controls">
-      <div class="thcf-library-row">
-        <label class="thcf-library-search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input type="search" placeholder="Search title, speaker, scripture, or series&hellip;" data-thcf-lib-search autocomplete="off">
-        </label>
-        <div class="thcf-library-select">
-          <select data-thcf-lib-sort aria-label="Sort order">
-            <option value="date-desc">Newest first</option>
-            <option value="date-asc">Oldest first</option>
-            <option value="title-asc">Title A&ndash;Z</option>
-          </select>
-        </div>
-      </div>
-      <div class="thcf-library-row thcf-library-row--filters">
-        <div class="thcf-library-select">
-          <select data-thcf-lib-speaker aria-label="Filter by speaker">
-            <option value="">All speakers</option>
-          </select>
-        </div>
-        <div class="thcf-library-select">
-          <select data-thcf-lib-series aria-label="Filter by series">
-            <option value="">All series</option>
-          </select>
-        </div>
-        <div class="thcf-library-select">
-          <select data-thcf-lib-book aria-label="Filter by book of the Bible">
-            <option value="">All books</option>
-          </select>
-        </div>
-        <div class="thcf-library-select">
-          <select data-thcf-lib-year aria-label="Filter by year">
-            <option value="">All years</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="thcf-library-count">
-      <span data-thcf-lib-count>Loading sermons&hellip;</span>
-      <button type="button" class="thcf-library-clear" data-thcf-lib-clear hidden>Clear filters</button>
-    </div>
-
-    <div class="thcf-library-list" data-thcf-lib-list></div>
-
-    <div class="thcf-library-empty" data-thcf-lib-empty hidden>
-      <strong>No sermons match these filters.</strong>
-      <p>Try widening your search or clearing a filter.</p>
-    </div>
   </div>
 </section>
 <!-- ============ SUBSCRIBE / FOLLOW ============ -->
