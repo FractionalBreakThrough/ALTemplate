@@ -103,9 +103,26 @@
 .thcf-hero h1{font-size:clamp(40px,7vw,84px);font-weight:900;letter-spacing:-.025em;line-height:1.02;margin-bottom:20px;color:#fff}
 .thcf-hero p{font-size:clamp(16px,1.7vw,20px);color:rgba(220,255,250,.92);max-width:620px;margin:0 auto 32px;line-height:1.6}
 
+/* Sticky pill nav — jump to Latest / Browse / Series */
+.thcf-sermons-nav{position:sticky;top:88px;z-index:30;background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:14px 24px}
+.thcf-sermons-nav-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;justify-content:center;flex-wrap:wrap}
+.thcf-sermons-nav-inner::-webkit-scrollbar{height:4px}
+.thcf-sermons-nav-inner::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:2px}
+.thcf-sermons-nav a{flex-shrink:0;padding:10px 18px;border-radius:999px;background:#fff;color:var(--gray-700);font-size:13px;font-weight:700;letter-spacing:.04em;border:1.5px solid var(--gray-200);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.thcf-sermons-nav a:hover{border-color:var(--teal-dark);color:var(--teal-dark)}
+.thcf-sermons-nav a.is-active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 4px 12px rgba(11,107,107,.25)}
+.thcf-sermons-nav a .num{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:.10em}
+.thcf-sermons-nav a.is-active .num{color:var(--gold)}
+@media (max-width:640px){
+  .thcf-sermons-nav-inner{justify-content:flex-start;flex-wrap:nowrap}
+  .thcf-sermons-nav a{padding:8px 14px;font-size:12px}
+}
+/* Scroll-margin so sticky header + nav don't hide a jumped-to section */
+#thcf-latest-section,#thcf-library,#thcf-series{scroll-margin-top:160px}
+
 /* === Latest sermon player section === */
-.thcf-latest{background:#fff;padding:0 24px clamp(56px,7vw,80px);position:relative;z-index:5}
-.thcf-latest-inner{max-width:1100px;margin:0 auto;margin-top:clamp(-72px,-7vw,-90px)}
+.thcf-latest{background:#fff;padding:clamp(40px,5vw,56px) 24px clamp(56px,7vw,80px);position:relative;z-index:5}
+.thcf-latest-inner{max-width:1100px;margin:0 auto}
 .thcf-latest-card{background:#fff;border-radius:24px;padding:clamp(20px,2.4vw,28px);box-shadow:0 30px 60px rgba(0,0,0,.14),0 0 0 1px var(--gray-100)}
 .thcf-latest-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .thcf-latest-meta .live{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:var(--orange);color:#fff;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
@@ -349,11 +366,19 @@
     <p>Every week's message — plus all the series we've walked through. The latest sermon is queued up below.</p>
   </div>
 </section>
+<!-- ============ SECTION PILL NAV ============ -->
+<nav class="thcf-sermons-nav" aria-label="Jump to a section">
+  <div class="thcf-sermons-nav-inner">
+    <a href="#thcf-latest-section"><span class="num">01</span> Latest Message</a>
+    <a href="#thcf-library"><span class="num">02</span> Browse Sermons</a>
+    <a href="#thcf-series"><span class="num">03</span> Sermon Series</a>
+  </div>
+</nav>
 <!-- ============ LATEST SERMON (sheet-driven) ============
      Populated at runtime from the church Google Sheet; see
      the <script> block below for SHEET_ID / SHEET_TAB config.
      If the fetch fails, the fallback playlist embed stays visible. -->
-<section class="thcf-latest">
+<section class="thcf-latest" id="thcf-latest-section">
   <div class="thcf-latest-inner">
     <div class="thcf-latest-card thcf-reveal">
       <div class="thcf-latest-meta">
@@ -492,7 +517,7 @@
   </div>
 </section>
 <!-- ============ SERMON SERIES ============ -->
-<section class="thcf-section thcf-section--white">
+<section class="thcf-section thcf-section--white" id="thcf-series">
   <div class="thcf-section-head thcf-reveal">
     <span class="thcf-eyebrow" style="color:var(--orange)">Sermon Series</span>
     <h2 class="thcf-h2">Walk through Scripture, one series at a time.</h2>
@@ -743,6 +768,40 @@
   } else {
     revealEls.forEach(function(el){ el.classList.add('is-visible'); });
   }
+
+  // --- Section pill nav: scroll-spy + auto-center active pill ---
+  (function setupSermonNav(){
+    var navInner = root.querySelector('.thcf-sermons-nav-inner');
+    var pills = root.querySelectorAll('.thcf-sermons-nav a[href^="#"]');
+    var sections = [];
+    pills.forEach(function(pill){
+      var id = pill.getAttribute('href').slice(1);
+      var section = root.querySelector('#' + id);
+      if (section) sections.push(section);
+    });
+    if (!navInner || !pills.length || !sections.length) return;
+    function setActive(id){
+      pills.forEach(function(pill){
+        var isTarget = pill.getAttribute('href') === '#' + id;
+        pill.classList.toggle('is-active', isTarget);
+        if (isTarget) {
+          var pillLeft = pill.offsetLeft;
+          var pillWidth = pill.offsetWidth;
+          var navWidth = navInner.clientWidth;
+          var scrollTarget = pillLeft - (navWidth - pillWidth) / 2;
+          navInner.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+        }
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function(s){ spy.observe(s); });
+    }
+  })();
 
   // =========================================================
   // LATEST SERMON — pulled from Google Sheet (and ESV API)
@@ -1092,15 +1151,14 @@
         var emptyTitle = emptyEl.querySelector('[data-thcf-lib-empty-title]');
         var emptyBody  = emptyEl.querySelector('[data-thcf-lib-empty-body]');
 
-        // Idle state: no filter active -> keep the list hidden and show
-        // a friendly prompt. Visitors have to opt-in to browsing.
+        // Idle state: no filter active -> show the 5 most recent sermons
+        // and invite the user to filter/search for older ones.
         if (!hasFilter) {
-          listEl.innerHTML = '';
-          listEl.hidden    = true;
-          emptyEl.hidden   = false;
-          if (emptyTitle) emptyTitle.textContent = 'Browse the sermon library';
-          if (emptyBody)  emptyBody.textContent  = 'Pick a speaker, series, book of the Bible, or year above — or type a keyword in the search box — to see sermons.';
-          countEl.textContent = total + ' sermon' + (total === 1 ? '' : 's') + ' in the library';
+          var recent = sermons.slice(0, 5);
+          listEl.innerHTML = recent.map(sermonRowHtml).join('');
+          listEl.hidden    = false;
+          emptyEl.hidden   = true;
+          countEl.textContent = 'Last ' + recent.length + ' weeks · Use the filters above to find older sermons';
           clearEl.hidden = true;
           return;
         }
