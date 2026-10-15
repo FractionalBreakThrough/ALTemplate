@@ -480,9 +480,9 @@
 
     <div class="thcf-library-list" data-thcf-lib-list></div>
 
-    <div class="thcf-library-empty" data-thcf-lib-empty hidden>
-      <strong>No sermons match these filters.</strong>
-      <p>Try widening your search or clearing a filter.</p>
+    <div class="thcf-library-empty" data-thcf-lib-empty>
+      <strong data-thcf-lib-empty-title>Browse the sermon library</strong>
+      <p data-thcf-lib-empty-body>Pick a speaker, series, book of the Bible, or year above &mdash; or type a keyword in the search box &mdash; to see sermons.</p>
     </div>
   </div>
 </section>
@@ -1041,7 +1041,26 @@
         var book      = bookEl.value;
         var year      = yearEl.value;
         var sort      = sortEl.value;
+        var hasFilter = !!(q || speaker || series || book || year);
+        var total     = sermons.length;
 
+        var emptyTitle = emptyEl.querySelector('[data-thcf-lib-empty-title]');
+        var emptyBody  = emptyEl.querySelector('[data-thcf-lib-empty-body]');
+
+        // Idle state: no filter active -> keep the list hidden and show
+        // a friendly prompt. Visitors have to opt-in to browsing.
+        if (!hasFilter) {
+          listEl.innerHTML = '';
+          listEl.hidden    = true;
+          emptyEl.hidden   = false;
+          if (emptyTitle) emptyTitle.textContent = 'Browse the sermon library';
+          if (emptyBody)  emptyBody.textContent  = 'Pick a speaker, series, book of the Bible, or year above — or type a keyword in the search box — to see sermons.';
+          countEl.textContent = total + ' sermon' + (total === 1 ? '' : 's') + ' in the library';
+          clearEl.hidden = true;
+          return;
+        }
+
+        // Filter active -> compute matches and render results (or empty state).
         var filtered = sermons.filter(function(s){
           if (speaker && s.teacher !== speaker) return false;
           if (series  && s.series  !== series)  return false;
@@ -1054,21 +1073,24 @@
           return true;
         });
 
-        if (sort === 'date-asc')  filtered.sort(function(a,b){ return a.date - b.date; });
+        if (sort === 'date-asc')       filtered.sort(function(a,b){ return a.date - b.date; });
         else if (sort === 'title-asc') filtered.sort(function(a,b){ return a.title.localeCompare(b.title); });
-        else                      filtered.sort(function(a,b){ return b.date - a.date; });
+        else                           filtered.sort(function(a,b){ return b.date - a.date; });
 
-        listEl.innerHTML = filtered.map(sermonRowHtml).join('');
-        emptyEl.hidden = filtered.length !== 0;
-        listEl.hidden  = filtered.length === 0;
+        if (filtered.length === 0) {
+          listEl.innerHTML = '';
+          listEl.hidden    = true;
+          emptyEl.hidden   = false;
+          if (emptyTitle) emptyTitle.textContent = 'No sermons match these filters.';
+          if (emptyBody)  emptyBody.textContent  = 'Try widening your search or clearing a filter.';
+        } else {
+          listEl.innerHTML = filtered.map(sermonRowHtml).join('');
+          listEl.hidden    = false;
+          emptyEl.hidden   = true;
+        }
 
-        var total = sermons.length;
-        countEl.textContent = filtered.length === total
-          ? 'Showing all ' + total + ' sermon' + (total === 1 ? '' : 's')
-          : 'Showing ' + filtered.length + ' of ' + total + ' sermons';
-
-        var hasFilter = !!(q || speaker || series || book || year);
-        clearEl.hidden = !hasFilter;
+        countEl.textContent = 'Showing ' + filtered.length + ' of ' + total + ' sermon' + (total === 1 ? '' : 's');
+        clearEl.hidden = false;
       }
 
       function sermonRowHtml(s){
