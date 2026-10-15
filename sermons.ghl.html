@@ -168,11 +168,11 @@
 .thcf-library-controls{background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);margin-bottom:28px}
 .thcf-library-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:12px}
 .thcf-library-row:last-child{margin-bottom:0}
-.thcf-library-row--filters{grid-template-columns:repeat(4,1fr)}
-@media (max-width:900px){.thcf-library-row--filters{grid-template-columns:repeat(2,1fr)}}
+.thcf-library-row--filters{display:flex;flex-wrap:wrap;gap:12px}
+.thcf-library-row--filters > .thcf-library-select{flex:1 1 160px;min-width:0}
 @media (max-width:560px){
   .thcf-library-row{grid-template-columns:1fr}
-  .thcf-library-row--filters{grid-template-columns:1fr}
+  .thcf-library-row--filters > .thcf-library-select{flex:1 1 100%}
 }
 .thcf-library-search{position:relative;display:flex;align-items:center}
 .thcf-library-search svg{position:absolute;left:14px;color:var(--gray-500);pointer-events:none}
@@ -463,6 +463,11 @@
         <div class="thcf-library-select">
           <select data-thcf-lib-book aria-label="Filter by book of the Bible">
             <option value="">All books</option>
+          </select>
+        </div>
+        <div class="thcf-library-select" data-thcf-lib-chapter-wrap hidden>
+          <select data-thcf-lib-chapter aria-label="Filter by chapter">
+            <option value="">All chapters</option>
           </select>
         </div>
         <div class="thcf-library-select">
@@ -798,6 +803,7 @@
             title:     cellStr(row.c[2]),
             series:    cellStr(row.c[3]),
             reference: cellStr(row.c[4]),
+            chapter:   cellStr(row.c[6]),
             youtube:   cellStr(row.c[11]),
             audio:     cellStr(row.c[12]),
             notes:     cellStr(row.c[13]),
@@ -988,16 +994,18 @@
     }
 
     function setupLibrary(sermons){
-      var searchEl  = root.querySelector('[data-thcf-lib-search]');
-      var sortEl    = root.querySelector('[data-thcf-lib-sort]');
-      var speakerEl = root.querySelector('[data-thcf-lib-speaker]');
-      var seriesEl  = root.querySelector('[data-thcf-lib-series]');
-      var bookEl    = root.querySelector('[data-thcf-lib-book]');
-      var yearEl    = root.querySelector('[data-thcf-lib-year]');
-      var listEl    = root.querySelector('[data-thcf-lib-list]');
-      var emptyEl   = root.querySelector('[data-thcf-lib-empty]');
-      var countEl   = root.querySelector('[data-thcf-lib-count]');
-      var clearEl   = root.querySelector('[data-thcf-lib-clear]');
+      var searchEl   = root.querySelector('[data-thcf-lib-search]');
+      var sortEl     = root.querySelector('[data-thcf-lib-sort]');
+      var speakerEl  = root.querySelector('[data-thcf-lib-speaker]');
+      var seriesEl   = root.querySelector('[data-thcf-lib-series]');
+      var bookEl     = root.querySelector('[data-thcf-lib-book]');
+      var yearEl     = root.querySelector('[data-thcf-lib-year]');
+      var chapterEl  = root.querySelector('[data-thcf-lib-chapter]');
+      var chapterWrap = root.querySelector('[data-thcf-lib-chapter-wrap]');
+      var listEl     = root.querySelector('[data-thcf-lib-list]');
+      var emptyEl    = root.querySelector('[data-thcf-lib-empty]');
+      var countEl    = root.querySelector('[data-thcf-lib-count]');
+      var clearEl    = root.querySelector('[data-thcf-lib-clear]');
       if (!listEl) return;
 
       // Populate filter dropdowns from unique values in the data.
@@ -1013,6 +1021,42 @@
         o.value = book; o.textContent = book;
         bookEl.appendChild(o);
       });
+
+      // Rebuild the Chapter dropdown with just the chapters that have
+      // sermons for the currently-selected book. Called whenever the
+      // book filter changes.
+      function refreshChapterOptions(){
+        var book = bookEl.value;
+        // Reset chapter dropdown
+        chapterEl.innerHTML = '<option value="">All chapters</option>';
+        chapterEl.value = '';
+        if (!book) {
+          chapterWrap.hidden = true;
+          return;
+        }
+        var chapters = [];
+        var seen = {};
+        sermons.forEach(function(s){
+          if (!s.chapter) return;
+          if (!refStartsWithBook(s.reference, book)) return;
+          var key = s.chapter;
+          if (seen[key]) return;
+          seen[key] = true;
+          chapters.push(s.chapter);
+        });
+        // Sort numerically where possible, then lexically.
+        chapters.sort(function(a, b){
+          var na = parseInt(a, 10), nb = parseInt(b, 10);
+          if (!isNaN(na) && !isNaN(nb) && String(na) === a.trim() && String(nb) === b.trim()) return na - nb;
+          return String(a).localeCompare(String(b), undefined, { numeric: true });
+        });
+        chapters.forEach(function(c){
+          var o = document.createElement('option');
+          o.value = c; o.textContent = 'Chapter ' + c;
+          chapterEl.appendChild(o);
+        });
+        chapterWrap.hidden = chapters.length === 0;
+      }
 
       function populateUnique(selectEl, values, opts){
         opts = opts || {};
@@ -1039,9 +1083,10 @@
         var speaker   = speakerEl.value;
         var series    = seriesEl.value;
         var book      = bookEl.value;
+        var chapter   = chapterEl.value;
         var year      = yearEl.value;
         var sort      = sortEl.value;
-        var hasFilter = !!(q || speaker || series || book || year);
+        var hasFilter = !!(q || speaker || series || book || chapter || year);
         var total     = sermons.length;
 
         var emptyTitle = emptyEl.querySelector('[data-thcf-lib-empty-title]');
@@ -1066,6 +1111,7 @@
           if (series  && s.series  !== series)  return false;
           if (year    && String(s.date.getFullYear()) !== year) return false;
           if (book    && !refStartsWithBook(s.reference, book)) return false;
+          if (chapter && String(s.chapter) !== chapter) return false;
           if (q) {
             var hay = (s.title + ' ' + s.teacher + ' ' + s.reference + ' ' + s.series).toLowerCase();
             if (hay.indexOf(q) < 0) return false;
@@ -1134,16 +1180,24 @@
         clearTimeout(searchTimer);
         searchTimer = setTimeout(render, 120);
       });
-      [sortEl, speakerEl, seriesEl, bookEl, yearEl].forEach(function(el){
+      [sortEl, speakerEl, seriesEl, yearEl, chapterEl].forEach(function(el){
         el.addEventListener('change', render);
+      });
+      // Book change also rebuilds the chapter options (chapters are
+      // only meaningful within the context of a selected book).
+      bookEl.addEventListener('change', function(){
+        refreshChapterOptions();
+        render();
       });
       clearEl.addEventListener('click', function(){
         searchEl.value = '';
         speakerEl.value = seriesEl.value = bookEl.value = yearEl.value = '';
+        refreshChapterOptions(); // resets + hides chapter dropdown
         sortEl.value = 'date-desc';
         render();
       });
 
+      refreshChapterOptions();
       render();
     }
   })();
