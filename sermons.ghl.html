@@ -162,6 +162,61 @@
   .thcf-latest-audio-label{justify-content:center}
   .thcf-latest-audio audio{width:100%}
 }
+
+/* === Sermon Library (filterable archive) === */
+.thcf-library{max-width:1180px;margin:0 auto}
+.thcf-library-controls{background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);margin-bottom:28px}
+.thcf-library-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:12px}
+.thcf-library-row:last-child{margin-bottom:0}
+.thcf-library-row--filters{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.thcf-library-row--filters{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){
+  .thcf-library-row{grid-template-columns:1fr}
+  .thcf-library-row--filters{grid-template-columns:1fr}
+}
+.thcf-library-search{position:relative;display:flex;align-items:center}
+.thcf-library-search svg{position:absolute;left:14px;color:var(--gray-500);pointer-events:none}
+.thcf-library-search input{width:100%;padding:11px 14px 11px 40px;border-radius:10px;border:1.5px solid var(--gray-200);font-size:14.5px;background:var(--gray-50);transition:all .2s;color:var(--gray-800);font-family:inherit}
+.thcf-library-search input:focus{outline:0;border-color:var(--teal-dark);background:#fff;box-shadow:0 0 0 3px rgba(11,107,107,.10)}
+.thcf-library-select{position:relative}
+.thcf-library-select select{appearance:none;-webkit-appearance:none;width:100%;padding:11px 36px 11px 14px;border-radius:10px;border:1.5px solid var(--gray-200);font-size:14px;background:var(--gray-50);color:var(--gray-800);cursor:pointer;transition:all .2s;font-weight:600;font-family:inherit}
+.thcf-library-select select:focus{outline:0;border-color:var(--teal-dark);background:#fff;box-shadow:0 0 0 3px rgba(11,107,107,.10)}
+.thcf-library-select::after{content:"";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--gray-500);pointer-events:none}
+.thcf-library-count{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px;color:var(--gray-600);font-size:13px;font-weight:600}
+.thcf-library-count .thcf-library-clear{color:var(--teal-dark);background:transparent;border:0;padding:4px 8px;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;transition:color .2s}
+.thcf-library-count .thcf-library-clear:hover{color:var(--orange)}
+.thcf-library-count .thcf-library-clear[hidden]{display:none}
+
+.thcf-library-list{display:flex;flex-direction:column;gap:10px}
+.thcf-library-row-item{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100);display:grid;grid-template-columns:92px 1fr auto;gap:18px;align-items:center;transition:transform .15s,box-shadow .15s}
+.thcf-library-row-item:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08),0 0 0 1px var(--gray-200)}
+@media (max-width:720px){
+  .thcf-library-row-item{grid-template-columns:1fr;gap:10px;padding:14px 16px}
+}
+.thcf-library-date{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);line-height:1.3}
+.thcf-library-date .d-month{display:block;color:var(--gray-500);font-size:11px}
+.thcf-library-date .d-day{display:block;font-size:22px;font-weight:900;color:var(--gray-800);letter-spacing:-.02em}
+@media (max-width:720px){
+  .thcf-library-date{display:flex;align-items:baseline;gap:8px;font-size:12px}
+  .thcf-library-date .d-day{font-size:14px;color:var(--teal-dark);font-weight:800}
+}
+.thcf-library-main{min-width:0}
+.thcf-library-main h4{font-size:16px;font-weight:800;color:var(--gray-800);line-height:1.35;margin-bottom:4px;letter-spacing:-.01em;overflow-wrap:break-word}
+.thcf-library-meta{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--gray-600);font-size:13px;font-weight:600}
+.thcf-library-meta > span:empty{display:none}
+.thcf-library-meta .ref{color:var(--teal-dark);font-weight:700}
+.thcf-library-meta .series{display:inline-flex;align-items:center;gap:5px}
+.thcf-library-meta .series::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.thcf-library-actions{display:flex;gap:6px;flex-shrink:0}
+@media (max-width:720px){.thcf-library-actions{justify-content:flex-start}}
+.thcf-library-actions a{width:34px;height:34px;border-radius:8px;background:var(--gray-50);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;color:var(--gray-700);transition:all .2s}
+.thcf-library-actions a:hover{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);transform:translateY(-1px)}
+.thcf-library-actions a[hidden]{display:none}
+
+.thcf-library-empty{background:#fff;border-radius:12px;padding:48px 20px;text-align:center;color:var(--gray-500);box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px var(--gray-100)}
+.thcf-library-empty strong{display:block;color:var(--gray-700);font-size:16px;font-weight:700;margin-bottom:6px}
+.thcf-library-empty p{font-size:14px;line-height:1.6}
+
 /* === Series grid (playlist cards) === */
 .thcf-series-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media (max-width:900px){.thcf-series-grid{grid-template-columns:repeat(2,1fr)}}
@@ -525,6 +580,66 @@
     </article>
   </div>
 </section>
+<!-- ============ SERMON LIBRARY (sheet-driven, filterable) ============ -->
+<section class="thcf-section thcf-section--white" id="thcf-library">
+  <div class="thcf-section-head thcf-reveal">
+    <span class="thcf-eyebrow" style="color:var(--teal-dark)">Sermon Library</span>
+    <h2 class="thcf-h2">Browse all sermons.</h2>
+    <p class="thcf-lead">Search by speaker, series, book of the Bible, or title.</p>
+  </div>
+
+  <div class="thcf-library thcf-reveal">
+    <div class="thcf-library-controls">
+      <div class="thcf-library-row">
+        <label class="thcf-library-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Search title, speaker, scripture, or series&hellip;" data-thcf-lib-search autocomplete="off">
+        </label>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-sort aria-label="Sort order">
+            <option value="date-desc">Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="title-asc">Title A&ndash;Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="thcf-library-row thcf-library-row--filters">
+        <div class="thcf-library-select">
+          <select data-thcf-lib-speaker aria-label="Filter by speaker">
+            <option value="">All speakers</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-series aria-label="Filter by series">
+            <option value="">All series</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-book aria-label="Filter by book of the Bible">
+            <option value="">All books</option>
+          </select>
+        </div>
+        <div class="thcf-library-select">
+          <select data-thcf-lib-year aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="thcf-library-count">
+      <span data-thcf-lib-count>Loading sermons&hellip;</span>
+      <button type="button" class="thcf-library-clear" data-thcf-lib-clear hidden>Clear filters</button>
+    </div>
+
+    <div class="thcf-library-list" data-thcf-lib-list></div>
+
+    <div class="thcf-library-empty" data-thcf-lib-empty hidden>
+      <strong>No sermons match these filters.</strong>
+      <p>Try widening your search or clearing a filter.</p>
+    </div>
+  </div>
+</section>
 <!-- ============ SUBSCRIBE / FOLLOW ============ -->
 <section class="thcf-subscribe">
   <div class="thcf-subscribe-inner thcf-reveal">
@@ -668,32 +783,34 @@
         var jsonEnd   = text.lastIndexOf('}');
         if (jsonStart < 0 || jsonEnd < 0) throw new Error('Unexpected gviz response');
         var json = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
-        var rows = (json.table && json.table.rows) || [];
-        if (!rows.length) throw new Error('Sheet has no rows');
+        var rawRows = (json.table && json.table.rows) || [];
+        if (!rawRows.length) throw new Error('Sheet has no rows');
 
-        // Find the row with the most recent date in column A (index 0).
-        var latest = null, latestTime = -Infinity;
-        rows.forEach(function(row){
+        // Parse every row into a structured sermon object (skip rows without a date).
+        var sermons = [];
+        rawRows.forEach(function(row){
           if (!row || !row.c) return;
           var d = parseGvizDate(row.c[0]);
           if (!d) return;
-          var t = d.getTime();
-          if (t > latestTime) { latestTime = t; latest = row; }
+          sermons.push({
+            date:      d,
+            teacher:   cellStr(row.c[1]),
+            title:     cellStr(row.c[2]),
+            series:    cellStr(row.c[3]),
+            reference: cellStr(row.c[4]),
+            youtube:   cellStr(row.c[11]),
+            audio:     cellStr(row.c[12]),
+            notes:     cellStr(row.c[13]),
+            graphic:   cellStr(row.c[14]),
+            passage:   cellStr(row.c[15])
+          });
         });
-        if (!latest) throw new Error('No usable date rows');
+        if (!sermons.length) throw new Error('No usable date rows');
 
-        var data = {
-          date:      parseGvizDate(latest.c[0]),
-          teacher:   cellStr(latest.c[1]),
-          title:     cellStr(latest.c[2]),
-          series:    cellStr(latest.c[3]),
-          reference: cellStr(latest.c[4]),
-          youtube:   cellStr(latest.c[11]),
-          audio:     cellStr(latest.c[12]),
-          notes:     cellStr(latest.c[13]),
-          graphic:   cellStr(latest.c[14]),
-          passage:   cellStr(latest.c[15])
-        };
+        // Newest first — the top sermon is "latest".
+        sermons.sort(function(a, b){ return b.date - a.date; });
+
+        var data = sermons[0];
         renderSermon(data);
 
         // Scripture passage: use column P if present; otherwise try ESV API.
@@ -706,10 +823,15 @@
             })
             .catch(function(){ /* silently fall back to no passage */ });
         }
+
+        // Build the Sermon Library (filters + list) from all parsed rows.
+        setupLibrary(sermons);
       })
       .catch(function(err){
         if (window.console && console.warn) console.warn('[THCF] Sermon sheet load failed:', err);
         if (statusEl) statusEl.textContent = 'Showing most recent sermons from YouTube';
+        var libCount = root.querySelector('[data-thcf-lib-count]');
+        if (libCount) libCount.textContent = 'Sermon library temporarily unavailable';
       });
 
     // ----- helpers --------------------------------------------------
@@ -838,6 +960,170 @@
     }
 
     function attr(s){ return String(s == null ? '' : s).replace(/"/g, '&quot;'); }
+
+    // ------------- Sermon Library (filterable archive) ----------
+
+    // Canonical 66-book list, in order, so dropdown stays Bible-order
+    // regardless of what the sheet contains. Each entry has a `match`
+    // callback that returns true for scripture references that start
+    // with that book (handling leading-digit books like "1 Timothy").
+    var BIBLE_BOOKS = [
+      'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
+      '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah',
+      'Esther','Job','Psalms','Psalm','Proverbs','Ecclesiastes','Song of Solomon','Isaiah',
+      'Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah',
+      'Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi',
+      'Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians',
+      'Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians',
+      '1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter',
+      '1 John','2 John','3 John','Jude','Revelation'
+    ];
+
+    function refStartsWithBook(reference, book){
+      if (!reference) return false;
+      var r = reference.trim();
+      if (r.toLowerCase().indexOf(book.toLowerCase()) !== 0) return false;
+      var next = r.charAt(book.length);
+      return next === '' || next === ' ' || next === ':' || next === '.' || next === ',';
+    }
+
+    function setupLibrary(sermons){
+      var searchEl  = root.querySelector('[data-thcf-lib-search]');
+      var sortEl    = root.querySelector('[data-thcf-lib-sort]');
+      var speakerEl = root.querySelector('[data-thcf-lib-speaker]');
+      var seriesEl  = root.querySelector('[data-thcf-lib-series]');
+      var bookEl    = root.querySelector('[data-thcf-lib-book]');
+      var yearEl    = root.querySelector('[data-thcf-lib-year]');
+      var listEl    = root.querySelector('[data-thcf-lib-list]');
+      var emptyEl   = root.querySelector('[data-thcf-lib-empty]');
+      var countEl   = root.querySelector('[data-thcf-lib-count]');
+      var clearEl   = root.querySelector('[data-thcf-lib-clear]');
+      if (!listEl) return;
+
+      // Populate filter dropdowns from unique values in the data.
+      populateUnique(speakerEl, sermons.map(function(s){ return s.teacher; }));
+      populateUnique(seriesEl,  sermons.map(function(s){ return s.series; }));
+      populateUnique(yearEl,    sermons.map(function(s){ return s.date.getFullYear(); }), { sort: 'desc' });
+      // Books: only show books that have at least one sermon.
+      var presentBooks = BIBLE_BOOKS.filter(function(book){
+        return sermons.some(function(s){ return refStartsWithBook(s.reference, book); });
+      });
+      presentBooks.forEach(function(book){
+        var o = document.createElement('option');
+        o.value = book; o.textContent = book;
+        bookEl.appendChild(o);
+      });
+
+      function populateUnique(selectEl, values, opts){
+        opts = opts || {};
+        var seen = {};
+        var unique = [];
+        values.forEach(function(v){
+          if (v === null || v === undefined || v === '') return;
+          var k = String(v);
+          if (seen[k]) return;
+          seen[k] = true;
+          unique.push(k);
+        });
+        if (opts.sort === 'desc') unique.sort(function(a,b){ return b.localeCompare(a, undefined, {numeric:true}); });
+        else                      unique.sort(function(a,b){ return a.localeCompare(b, undefined, {numeric:true}); });
+        unique.forEach(function(v){
+          var o = document.createElement('option');
+          o.value = v; o.textContent = v;
+          selectEl.appendChild(o);
+        });
+      }
+
+      function render(){
+        var q         = (searchEl.value || '').trim().toLowerCase();
+        var speaker   = speakerEl.value;
+        var series    = seriesEl.value;
+        var book      = bookEl.value;
+        var year      = yearEl.value;
+        var sort      = sortEl.value;
+
+        var filtered = sermons.filter(function(s){
+          if (speaker && s.teacher !== speaker) return false;
+          if (series  && s.series  !== series)  return false;
+          if (year    && String(s.date.getFullYear()) !== year) return false;
+          if (book    && !refStartsWithBook(s.reference, book)) return false;
+          if (q) {
+            var hay = (s.title + ' ' + s.teacher + ' ' + s.reference + ' ' + s.series).toLowerCase();
+            if (hay.indexOf(q) < 0) return false;
+          }
+          return true;
+        });
+
+        if (sort === 'date-asc')  filtered.sort(function(a,b){ return a.date - b.date; });
+        else if (sort === 'title-asc') filtered.sort(function(a,b){ return a.title.localeCompare(b.title); });
+        else                      filtered.sort(function(a,b){ return b.date - a.date; });
+
+        listEl.innerHTML = filtered.map(sermonRowHtml).join('');
+        emptyEl.hidden = filtered.length !== 0;
+        listEl.hidden  = filtered.length === 0;
+
+        var total = sermons.length;
+        countEl.textContent = filtered.length === total
+          ? 'Showing all ' + total + ' sermon' + (total === 1 ? '' : 's')
+          : 'Showing ' + filtered.length + ' of ' + total + ' sermons';
+
+        var hasFilter = !!(q || speaker || series || book || year);
+        clearEl.hidden = !hasFilter;
+      }
+
+      function sermonRowHtml(s){
+        var monthShort = s.date.toLocaleDateString('en-US', { month: 'short' });
+        var day        = s.date.getDate();
+        var year       = s.date.getFullYear();
+        var fullDate   = s.date.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+        var actions = '';
+        if (s.youtube) actions += '<a href="' + attr(s.youtube) + '" target="_blank" rel="noopener" aria-label="Watch on YouTube: ' + attr(s.title) + '" title="Watch on YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 5 19 12 7 19 7 5"/></svg></a>';
+        if (s.notes)   actions += '<a href="' + attr(s.notes)   + '" target="_blank" rel="noopener" aria-label="Download notes: '  + attr(s.title) + '" title="Download notes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>';
+        if (s.audio)   actions += '<a href="' + attr(s.audio)   + '" target="_blank" rel="noopener" aria-label="Listen: ' + attr(s.title) + '" title="Listen to audio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>';
+
+        var seriesBadge = s.series ? '<span class="series">' + esc(s.series) + '</span>' : '';
+        var teacherEl   = s.teacher ? '<span>' + esc(s.teacher) + '</span>' : '';
+        var refEl       = s.reference ? '<span class="ref">' + esc(s.reference) + '</span>' : '';
+
+        return '<article class="thcf-library-row-item">' +
+          '<div class="thcf-library-date" title="' + attr(fullDate) + '">' +
+            '<span class="d-month">' + esc(monthShort) + '</span>' +
+            '<span class="d-day">' + day + '</span>' +
+            '<span>' + year + '</span>' +
+          '</div>' +
+          '<div class="thcf-library-main">' +
+            '<h4>' + esc(s.title || 'Untitled') + '</h4>' +
+            '<div class="thcf-library-meta">' + teacherEl + refEl + seriesBadge + '</div>' +
+          '</div>' +
+          '<div class="thcf-library-actions">' + actions + '</div>' +
+        '</article>';
+      }
+
+      function esc(s){
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      // Wire inputs — rerender on any change. search is debounced.
+      var searchTimer;
+      searchEl.addEventListener('input', function(){
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(render, 120);
+      });
+      [sortEl, speakerEl, seriesEl, bookEl, yearEl].forEach(function(el){
+        el.addEventListener('change', render);
+      });
+      clearEl.addEventListener('click', function(){
+        searchEl.value = '';
+        speakerEl.value = seriesEl.value = bookEl.value = yearEl.value = '';
+        sortEl.value = 'date-desc';
+        render();
+      });
+
+      render();
+    }
   })();
 })();
 </script>
